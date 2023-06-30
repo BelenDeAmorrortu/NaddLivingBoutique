@@ -20,8 +20,6 @@ export default function Carousel({ images }: Props) {
 
   return (
     <>
-      {/* <div>
-        <span className="swiper-button-prev" onClick={() => {}} /> */}
       <Swiper
         loop={true}
         spaceBetween={10}
@@ -38,19 +36,19 @@ export default function Carousel({ images }: Props) {
                 key={index}
                 className="flex justify-center items-center"
               >
-                <Image
-                  src={image}
-                  alt="Imagen ilustrativa del producto"
-                  width={1000}
-                  height={1000}
-                  className=" h-full w-auto"
-                />
+                <div className="w-[450px] h-[450px] flex justify-center items-center">
+                  <Image
+                    src={image}
+                    alt="Imagen ilustrativa del producto"
+                    width={1000}
+                    height={1000}
+                    className="object-contain object-center"
+                  />
+                </div>
               </SwiperSlide>
             );
           })}
       </Swiper>
-      {/* <span className="swiper-button-next" />
-      </div> */}
       <Swiper
         onSwiper={setActiveThumb}
         loop={true}
@@ -71,7 +69,7 @@ export default function Carousel({ images }: Props) {
                   alt="Imagen ilustrativa del producto"
                   width={1000}
                   height={1000}
-                  className=" h-14 md:h-16 lg:h-20 w-auto"
+                  className=" h-14 md:h-16 w-auto"
                 />
               </SwiperSlide>
             );
