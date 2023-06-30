@@ -2,7 +2,6 @@ import {
   ArrowSmallRightIcon,
   ArrowSmallLeftIcon,
 } from "@heroicons/react/24/outline";
-import { SetStateAction, useEffect } from "react";
 
 type Props = {
   products: number;
@@ -27,7 +26,7 @@ export default function Pagination({
   return (
     <div className="flex space-x-5">
       <ArrowSmallLeftIcon
-        onClick={() => setCurrent((cur: number) => (cur !== 1 ? cur - 1 : cur))}
+        onClick={() => setCurrent(current !== 1 ? current - 1 : current)}
         className="stroke-black hover:stroke-black-hover w-5 h-5"
       />
       {pages.map((p) => (
@@ -43,7 +42,7 @@ export default function Pagination({
       ))}
       <ArrowSmallRightIcon
         onClick={() =>
-          setCurrent((cur: number) => (cur !== pages.length ? cur + 1 : cur))
+          setCurrent(current !== pages.length ? current + 1 : current)
         }
         className="stroke-black hover:stroke-black-hover w-5 h-5"
       />
