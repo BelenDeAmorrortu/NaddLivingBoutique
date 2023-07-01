@@ -18,6 +18,18 @@
         @apply font-primary font-regular tracking-[1.5px] bg-white text-black scroll-smooth
     }
 
+    .footer ul{
+        @apply flex flex-col items-start
+    }
+
+    .footer ul li{
+        @apply flex-row-center text-grey hover:text-white transition-all cursor-pointer
+    }
+
+    .footer h4 {
+        @apply title-3 text-white mb-2
+    }
+
 }
 
 ::-webkit-scrollbar{
@@ -63,6 +75,14 @@
     @apply text-black hover:text-black-hover transition-colors duration-75 scale-75 lg:scale-100 drop-shadow-[0_5px_5px_#ffff]
 }
 
+.swiper-button-next{
+    @apply right-0
+}
+
+.swiper-button-prev{
+    @apply left-0
+}
+
 /* -- Custom Classes ------------------------------------------------------- */
 
 @layer components {
@@ -106,5 +126,16 @@
         /*  w-36 */
     }
 
+    .second-image{
+        transition: opacity 0.3s linear;
+    }
+
+    .footer-icon{
+        @apply w-4 h-4 mr-3 fill-grey group-hover:fill-white
+    }
+
+    .card-image{
+        @apply w-[160px] md:w-[200px] lg:w-[280px] aspect-[3/2] overflow-hidden justify-center items-center flex
+    }
 }
 

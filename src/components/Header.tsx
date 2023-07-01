@@ -1,5 +1,5 @@
 "use client";
-import { Banner, Logo } from "@/assets/images";
+import { Banner } from "@/assets/images";
 import Image from "next/image";
 import UseAnimations from "react-useanimations";
 import instagram from "react-useanimations/lib/instagram";
@@ -8,14 +8,6 @@ import arrowDown from "react-useanimations/lib/arrowDown";
 export default function Header() {
   return (
     <div className="w-screen max-w-[100vw] h-screen flex-center">
-      {/* <video
-        src="/mockup.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="w-full h-screen object-cover -z-10 absolute left-0 brightness-50"
-      /> */}
       <Image
         src={Banner}
         alt="Imagén sillón París"
