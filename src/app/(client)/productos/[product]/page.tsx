@@ -36,8 +36,8 @@ export default async function page({ params }: Props) {
   const { name, images, category, description } = await getProduct(slug);
 
   return (
-    <div className="flex flex-col md:flex-row h-fit py-10 justify-around items-center mt-[5.5rem]">
-      <div className="w-[80vw] md:w-[42vw]">
+    <div className="flex flex-col md:flex-row h-fit py-10 justify-around items-center mt-[4rem] md:mt-[5.5rem]">
+      <div className="mb-12 w-[95vw] sm:mb-0 md:w-[50vw] min-[1243px]:w-[47vw]">
         <Carousel images={images} />
       </div>
       <div className="w-[90vw] md:w-[40vw] flex flex-col justify-center space-y-5">
