@@ -6,6 +6,7 @@ import menu2 from "react-useanimations/lib/menu2";
 import Link from "next/link";
 import { Search } from ".";
 import { useState } from "react";
+import { navigation } from "@/utils/navigation";
 
 export default function NavMd() {
   const [open, setOpen] = useState(false);
@@ -18,7 +19,7 @@ export default function NavMd() {
   return (
     <div className="flex flex-col lg:hidden w-full">
       <div className="flex flex-row justify-between items-center px-4 py-2 w-full">
-        <Link href="/">
+        <Link href={navigation.home}>
           <Image src={Logo} alt="NADD Logo" className="w-28" />
         </Link>
         <div className="flex space-x-3">
@@ -45,34 +46,30 @@ export default function NavMd() {
             onClick={itemClick}
             className="title-3 text-white border-t-2 border-grey-hover py-2 w-[80vw] md:w-[50vw] hover:text-white-hover cursor-pointer"
           >
-            <Link href="/">Home</Link>
+            <Link href={navigation.home}>Home</Link>
           </li>
           <li
             onClick={itemClick}
             className=" w-[80vw] md:w-[50vw] space-y-10 mb-10"
           >
             <Link
-              href="/productos"
+              href={navigation.productos}
               className="title-3 text-white border-y-2 border-grey-hover text-center block py-2 hover:text-white-hover cursor-pointer"
             >
               Productos
             </Link>
             <ul className="space-y-10">
               <li className="nav-item">
-                <Link href="/productos">Ver Todo</Link>
+                <Link href={navigation.productos}>Ver Todo</Link>
               </li>
               <li className="nav-item">
-                <Link href="/productos?filter=sillas&filter=sillones">
-                  Sillas y Sillones
-                </Link>
+                <Link href={navigation.sillasYSillones}>Sillas y Sillones</Link>
               </li>
               <li className="nav-item">
-                <Link href="/productos?filter=sofá&filter=puff">
-                  Sofás y Puffs
-                </Link>
+                <Link href={navigation.sofasyPuffs}>Sofás y Puffs</Link>
               </li>
               <li className="nav-item">
-                <Link href="/productos?filter=mesa">Mesas</Link>
+                <Link href={navigation.mesas}>Mesas</Link>
               </li>
             </ul>
           </li>
@@ -80,7 +77,7 @@ export default function NavMd() {
             onClick={itemClick}
             className="title-3 text-white border-y-2 border-grey-hover py-2 w-[80vw] md:w-[50vw] hover:text-white-hover cursor-pointer"
           >
-            <Link href="/contacto">Contacto</Link>
+            <Link href={navigation.contacto}>Contacto</Link>
           </li>
         </ul>
       </div>

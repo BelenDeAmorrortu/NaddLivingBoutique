@@ -1,6 +1,7 @@
 import { getProduct } from "../../../../../sanity/sanity-utils";
 import { PortableText } from "@portabletext/react";
 import { Carousel } from "@/components";
+import { navigation } from "@/utils/navigation";
 
 type Props = {
   params: { product: "string" };
@@ -10,13 +11,13 @@ export async function generateMetadata({ params }: Props) {
   try {
     const { product } = params;
 
-    const { name, images, category, description } = await getProduct(product);
+    const { name, images, category } = await getProduct(product);
 
     if (!name) throw Error("product not found");
     return {
       title: `${category[0].toLocaleUpperCase() + category.slice(1)} ${name}`,
       alternates: {
-        canonical: `/productos/${product}`,
+        canonical: `${navigation.productos}/${product}`,
       },
       openGraph: {
         title: `${category} ${name}`,
