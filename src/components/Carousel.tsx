@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { Image as Img } from "antd";
+import Image from "next/image";
 
 type Props = {
   images: string[];
