@@ -8,8 +8,8 @@ module.exports = {
 	theme: {
 		colors: {
 			'black':{
-				DEFAULT:'rgb(15,15,15)',
-				'hover': 'rgb(15,15,15, 0.6)'
+				DEFAULT:'#0f0f0f',
+				'hover': '#0f0f0f99'
 			},
 			'white': {
 				DEFAULT: '#ffff',

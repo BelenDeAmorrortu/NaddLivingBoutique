@@ -11,6 +11,7 @@ import Search from "./Search";
 import NavLg from "./NavLg";
 import NavMd from "./NavMd";
 import ContactButtons from "./ContactButtons";
+import Loader from "./Loader";
 
 
 export {
@@ -26,6 +27,7 @@ export {
     Search,
     NavLg,
     NavMd,
-    ContactButtons
+    ContactButtons,
+    Loader
     
 }

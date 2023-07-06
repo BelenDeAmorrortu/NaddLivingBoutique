@@ -26,12 +26,26 @@
         @apply flex-row-center text-grey hover:text-white transition-all cursor-pointer my-1
     }
 
+    .footer ul li a{
+        @apply flex-row-center
+    }
+    .footer ul li .adress{
+        @apply flex justify-center items-start
+    }
+
     .footer h4 {
         @apply title-3 text-white mb-2
     }
 
     .description p{
         @apply text-black-hover mb-2 last:mb-0
+    }
+
+    .loader.white{
+        background-image: conic-gradient(transparent 25%, #ffff 50%)
+    }
+    .loader.black{
+        background-image: conic-gradient(transparent 25%, #0f0f0f 50%)
     }
 }
 
@@ -145,5 +159,18 @@
         @apply w-[160px] md:w-[200px] lg:w-[280px] aspect-[3/2] overflow-hidden justify-center items-center flex
     }
 
+    .loader{
+        animation: 1s loader linear infinite;
+    }
+
+}
+
+@keyframes loader {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
