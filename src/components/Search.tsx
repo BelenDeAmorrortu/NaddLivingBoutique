@@ -1,11 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getProducts } from "../../sanity/sanity-utils";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { Autocomplete, Popper } from "@mui/material";
 import SearchInput from "./SearchInput";
-import { makeStyles, createStyles } from "@mui/styles";
+import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/navigation";
+import { categories } from "@/utils/categories";
+import { navigation } from "@/utils/navigation";
 const queryClient = new QueryClient();
 
 export default function Search() {
@@ -16,6 +18,8 @@ export default function Search() {
   );
 }
 
+let width: number;
+
 const useStyles = makeStyles(() => ({
   root: {
     "& .MuiAutocomplete-listbox": {
@@ -24,11 +28,17 @@ const useStyles = makeStyles(() => ({
       textTransform: "capitalize",
       padding: 25,
       borderRadius: 0,
-      // minHeight: "97vh",
       "& li": {
         borderBottom: "2px solid #9ca3af66",
         margin: "10px 0",
         padding: "8px 0",
+        "@media(max-width: 640px)": {
+          fontSize: "13px",
+          padding: "5px 0",
+        },
+        "@media(max-width: 500px)": {
+          fontSize: "15.5px",
+        },
         "&:hover": {
           borderBottom: "2px solid #ffff",
           transition: "border 0.2s linear",
@@ -40,30 +50,53 @@ const useStyles = makeStyles(() => ({
       color: "#ffff",
       textTransform: "capitalize",
       padding: 25,
-      // borderRadius: 0,
       minHeight: 290,
     },
     "& .MuiAutocomplete-paper": {
       borderRadius: 3,
-      left: 0,
+      left: -25,
       position: "absolute",
-      width: "23vw",
+      width: "26vw",
+      "@media(max-width: 1024px)": {
+        width: "28.5vw",
+        left: -15,
+      },
+      "@media(max-width: 768px)": {
+        width: "31vw",
+        left: -20,
+      },
+      "@media(max-width: 640px)": {
+        width: "37vw",
+        left: -30,
+      },
+      "@media(max-width: 500px)": {
+        width: "100vw",
+        left: "-191%",
+      },
+    },
+    "& .MuiAutocomplete-endAdornment": {
+      "& .MuiSvgIcon-root": {
+        fill: "#ffff",
+      },
+      "& .MuiAutocomplete-popupIndicator": {
+        display: "none",
+      },
     },
   },
 }));
 
 const CustomPopper = (props: any) => {
-  const classes = useStyles();
+  let classes = useStyles();
+
   return (
     <Popper
       {...props}
       style={{
-        width: "35vw",
-        // width: "25vw",
+        width: width < 1024 ? "35vw" : width < 500 ? "100vw" : "26vw",
         zIndex: 10,
         position: "absolute",
       }}
-      className={classes.root}
+      className={classes?.root}
       open={true}
       placement="bottom"
     />
@@ -72,54 +105,41 @@ const CustomPopper = (props: any) => {
 
 function Content() {
   const router = useRouter();
+  const classes = useStyles();
 
   const { isPlaceholderData, error, data } = useQuery({
-    queryFn: getProducts,
+    queryFn: async () => await getProducts([]),
     placeholderData: [],
   });
 
   const options = [
-    {
-      // ahora es hardcodeado pero deberia llamar a las categorias y ahi mapearlas
-      type: "Ver categoría:",
-      category: "Ver categoría:",
-      name: "mesas",
-      URL: "mesa",
-    },
-    {
-      type: "Ver categoría:",
-      category: "Ver categoría:",
-      name: "sillones",
-      URL: "sillón",
-    },
-    {
-      type: "Ver categoría:",
-      category: "Ver categoría:",
-      name: "sillas",
-      URL: "silla",
-    },
-    {
-      type: "Ver categoría:",
-      category: "Ver categoría:",
-      name: "puffs",
-      URL: "puff",
-    },
-    {
-      type: "Ver categoría:",
-      category: "Ver categoría:",
-      name: "sofás",
-      URL: "sofá",
-    },
-    ...data.map((p) => {
-      return { ...p, type: "producto" };
+    ...categories.map((c) => {
+      return {
+        category: "Ver categoría:",
+        name: c,
+        url: c,
+      };
     }),
+    ...data,
   ];
 
   const [input, setInput] = useState("");
 
+  useEffect(() => {
+    const setWidth = () => {
+      width = document?.body.clientWidth;
+      return;
+    };
+
+    window.addEventListener("resize", setWidth);
+
+    () => window.removeEventListener("resize", setWidth);
+  }, []);
+
   return (
-    <div className="flex-col-center align-se items-align w-[22vw] lg:hover:w-[22vw] static transition-[width] duration-150 lg:absolute lg:left-8">
+    <div className="flex-col-center align-se items-align w-[22vw] hover:w-[55vw] focus:w-[55vw] sm:hover:w-[22vw]  static transition-[width] duration-150 lg:absolute lg:left-8">
       <Autocomplete
+        className={classes.root}
         freeSolo={input.length > 0 ? false : true}
         noOptionsText={`No hay resultados para "${input}"`}
         options={options && input.length > 0 ? options : []}
@@ -129,13 +149,31 @@ function Content() {
         renderInput={(props) => (
           <SearchInput props={props} input={input} setInput={setInput} />
         )}
+        filterOptions={(options, { inputValue }) => {
+          console.log("inputValue", inputValue);
+          const input = inputValue.toLowerCase();
+          return options.filter((o) => {
+            if (
+              o.category !== "Ver categoría:" &&
+              (o.category.toLowerCase().includes(input) ||
+                o.name.toLowerCase().includes(input))
+            )
+              return true;
+            else if (
+              o.category === "Ver categoría:" &&
+              o.name.toLowerCase().includes(input)
+            )
+              return true;
+            else return false;
+          });
+        }}
         value={input}
         onChange={(e, value) => {
           if (value && typeof value !== "string") {
             if (value.category === "Ver categoría:") {
               setInput("");
 
-              router.push(`/productos?filter=${value.URL}`);
+              router.push(`${navigation.productos}?filter=${value.URL}`);
             } else {
               setInput("");
 

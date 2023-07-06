@@ -1,6 +1,7 @@
-import React from "react";
+"use client";
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { TextField } from "@mui/material";
+import { useEffect, useState } from "react";
 
 interface Props {
   input: string;
@@ -9,6 +10,19 @@ interface Props {
 }
 
 export default function SearchInput({ input, setInput, props }: Props) {
+  const [screenWidth, setScreenWidth] = useState<number>();
+
+  useEffect(() => {
+    window?.addEventListener("resize", () =>
+      setScreenWidth(document.body.clientWidth)
+    );
+
+    () =>
+      window?.removeEventListener("resize", () =>
+        setScreenWidth(document.body.clientWidth)
+      );
+  }, []);
+
   return (
     <div className="flex justify-between items-align w-full">
       <button>
@@ -16,7 +30,6 @@ export default function SearchInput({ input, setInput, props }: Props) {
       </button>
       <TextField
         {...props}
-        type="search"
         variant="standard"
         value={input}
         onChange={(e) => setInput(e.target.value)}
@@ -26,14 +39,13 @@ export default function SearchInput({ input, setInput, props }: Props) {
           style: {
             background: "transparent",
             color: "#f5f5f5",
-            width: "20vw",
+            width: screenWidth < 500 ? "35vw" : "20vw",
           },
         }}
         placeholder="Buscar..."
         loading={true}
         loadingText="Cargando..."
         onBlur={() => setInput("")}
-        // clearIcon={<XMarkIcon className="fill-white" />}
       />
     </div>
   );
