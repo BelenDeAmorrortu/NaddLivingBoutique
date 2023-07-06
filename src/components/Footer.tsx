@@ -16,8 +16,9 @@ export default function Footer() {
         <ul>
           <li className="group">
             <a
-              className="flex"
-              href="https://www.google.com/maps/place/Av.+C%C3%B3rdoba+4454,+C1414+Villa+Crespo,+Buenos+Aires/@-34.595119,-58.4287119,3a,77.9y,193.89h,96.78t/data=!3m7!1e1!3m5!1sJxFwvuzsPZfHNDGtSYOCFA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fpanoid%3DJxFwvuzsPZfHNDGtSYOCFA%26cb_client%3Dsearch.gws-prod.gps%26w%3D86%26h%3D86%26yaw%3D203.0275%26pitch%3D0%26thumbfov%3D100!7i16384!8i8192!4m7!3m6!1s0x95bcca79e275f0f7:0x8e0e2a2a0b74e3a3!8m2!3d-34.5952946!4d-58.4288169!10e5!16s%2Fg%2F11c2blxhw6?entry=ttu"
+              className="adress"
+              target="_blank"
+              href="https://www.google.com/maps/place/Av.+C%C3%B3rdoba+4454,+C1414+Villa+Crespo,+Buenos+Aires/@-34.5952946,-58.4375716,15z/data=!4m16!1m9!3m8!1s0x95bcca79e275f0f7:0x8e0e2a2a0b74e3a3!2sAv.+C%C3%B3rdoba+4454,+C1414+Villa+Crespo,+Buenos+Aires!3b1!8m2!3d-34.5952946!4d-58.4288169!10e5!16s%2Fg%2F11c2blxhw6!3m5!1s0x95bcca79e275f0f7:0x8e0e2a2a0b74e3a3!8m2!3d-34.5952946!4d-58.4288169!16s%2Fg%2F11c2blxhw6?entry=ttu"
             >
               <MapPinIcon className="footer-icon h-5 w-5" /> Av. Córdoba 4454,
               CABA, Argentina.
@@ -28,8 +29,10 @@ export default function Footer() {
             {"(+54) 11 5346-3845"}
           </li>
           <li className="group">
-            <EnvelopeIcon className="footer-icon" />
-            naddliving@gmail.com
+            <a href="mailto:naddliving@gmail.com">
+              <EnvelopeIcon className="footer-icon" />
+              naddliving@gmail.com
+            </a>
           </li>
         </ul>
       </div>
@@ -37,12 +40,22 @@ export default function Footer() {
         <h4>Redes Sociales</h4>
         <ul>
           <li className="group">
-            <FaInstagram className="footer-icon" />
-            nadd.living.boutique
+            <a
+              target="_blank"
+              href="https://www.instagram.com/nadd.living.boutique/"
+            >
+              <FaInstagram className="footer-icon" />
+              nadd.living.boutique
+            </a>
           </li>
           <li className="group">
-            <FaFacebook className="footer-icon" />
-            NADD living boutique
+            <a
+              target="_blank"
+              href="https://www.facebook.com/profile.php?id=100092571386435"
+            >
+              <FaFacebook className="footer-icon" />
+              NADD living boutique
+            </a>
           </li>
         </ul>
       </div>
