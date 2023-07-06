@@ -54,7 +54,7 @@ const useStyles = makeStyles(() => ({
     },
     "& .MuiAutocomplete-paper": {
       borderRadius: 3,
-      left: -25,
+      left: -21,
       position: "absolute",
       width: "26vw",
       "@media(max-width: 1024px)": {
