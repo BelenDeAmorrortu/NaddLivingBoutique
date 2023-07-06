@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs } from "swiper";
 import "swiper/css";
@@ -7,6 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { Image as Img } from "antd";
 import Image from "next/image";
+import { SwiperRef } from "swiper/react";
 
 type Props = {
   images: string[];
@@ -20,10 +21,13 @@ export default function Carousel({ images }: Props) {
     console.log("activeThumb", activeThumb);
   }, [activeThumb]);
 
+  const sliderRef = useRef<SwiperRef>(null);
+
   return (
     <>
       <Swiper
         loop={true}
+        ref={sliderRef}
         spaceBetween={10}
         navigation={true}
         modules={[Navigation, Thumbs]}
@@ -89,6 +93,7 @@ export default function Carousel({ images }: Props) {
             visible: preview,
             onVisibleChange: (visible) => setPreview(visible),
             current: activeThumb ? activeThumb.activeIndex : 0,
+            onChange: (current) => sliderRef?.current?.swiper?.slideTo(current),
           }}
         >
           {images &&
