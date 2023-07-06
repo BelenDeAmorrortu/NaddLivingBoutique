@@ -8,6 +8,8 @@ import { Product } from "../../../../types/Product";
 import { useSearchParams } from "next/navigation";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
+import { categories } from "@/utils/categories";
+import { navigation } from "@/utils/navigation";
 const queryClient = new QueryClient();
 
 export default function Page() {
@@ -22,8 +24,8 @@ function Content() {
   const router = useRouter();
   const params = useSearchParams();
 
-  const { isPlaceholderData, error, data } = useQuery({
-    queryFn: getProducts,
+  const { isPlaceholderData, error, data, refetch } = useQuery({
+    queryFn: () => getProducts(filters),
     placeholderData: [],
   });
 
@@ -38,23 +40,20 @@ function Content() {
   const indexOfFirstOfPage = indexOfLastOfPage - amountPerPage;
   const currentProducts = products.slice(indexOfFirstOfPage, indexOfLastOfPage);
 
-  const dataFilters = ["sillón", "silla", "sofá", "mesa", "puff"];
-
   useLayoutEffect(() => {
     setFilters(!params.getAll("filter").length ? [] : params.getAll("filter"));
   }, [params, setFilters]);
 
   useEffect(() => {
-    if (data)
-      setProducts(
-        filters.length > 0
-          ? data.filter((p) => filters.includes(p.category))
-          : data
-      );
+    if (data) setProducts(data);
+  }, [data]);
+
+  useEffect(() => {
     const queries = filters.map((f) => `filter=${f}`).join("&");
-    router.push(`/productos?${queries}`);
+    router.push(`${navigation.productos}?${queries}`);
     setCurrentPage(1);
-  }, [filters, data]);
+    refetch();
+  }, [filters]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -84,7 +83,7 @@ function Content() {
         </ul>
         <h4 className="title-3">Categoría</h4>
         <ul className="border-b-2 border-grey-hover pb-3 w-full">
-          {dataFilters.map((f) => (
+          {categories.map((f) => (
             <li
               onClick={() => addFilter(f)}
               className=" text-black cursor-pointer capitalize hover:text-red w-fit"
@@ -109,6 +108,7 @@ function Content() {
           </div>
         )}
         <Pagination
+          visible={!(isPlaceholderData && products.length === 0)}
           current={currentPage}
           setCurrent={setCurrentPage}
           products={products.length}

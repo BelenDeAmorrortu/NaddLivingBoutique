@@ -2,10 +2,35 @@ import { createClient, groq } from 'next-sanity'
 import { Product } from '../types/Product'
 import clientConfig from './config/client-config'
 
-export async function getProducts(): Promise<Product[]>{
+// interface Pagination {
+//     page?: number;
+//     size?: number;
+// }
 
-    return createClient(clientConfig).fetch(
-        groq`*[_type == 'product']{
+// interface GetProducts{
+//     products: Product[],
+//     total: number;
+// }
+
+export async function getProducts(filters: string[]): Promise<Product[]>{
+
+    let queryString = ''
+
+    if(filters.length > 0){
+        filters.forEach( (f, index) =>{
+            if(index === 0){
+                queryString += ` && (category == '${f}'`
+            }
+            else{
+                queryString += ` || category == '${f}'`
+            }
+        })
+        queryString += `)`
+
+    }
+
+    const products =  await createClient(clientConfig).fetch(
+        groq`*[_type == 'product' ${queryString}]{
             _id,
             name,
             category,
@@ -13,6 +38,9 @@ export async function getProducts(): Promise<Product[]>{
             "images": images[].asset->url,
         }`
     )
+
+
+    return products
 }
 
 export async function getProduct(slug: string): Promise<Product>{
@@ -42,42 +70,3 @@ export async function getSpotlight(): Promise<Product[]>{
         }.spotlight`,
     )
 }
-
-// export async function getSofas(): Promise<Product[]>{
-    
-//     return createClient(clientConfig).fetch(
-//         groq`*[_type == 'product' && (category == 'sofá' || category == 'puff')]{
-//             _id,
-//             name,
-//             category,
-//             "URL": URL.current,
-//             "images": images[].asset->url,
-//         }`
-//     )
-// }
-
-// export async function getChairs(): Promise<Product[]>{
-    
-//     return createClient(clientConfig).fetch(
-//         groq`*[_type == 'product' && (category == 'silla' || category == 'sillón')]{
-//             _id,
-//             name,
-//             category,
-//             "URL": URL.current,
-//             "images": images[].asset->url,
-//         }`
-//     )
-// }
-
-// export async function getTables(): Promise<Product[]>{
-    
-//     return createClient(clientConfig).fetch(
-//         groq`*[_type == 'product' && category == 'mesa']{
-//             _id,
-//             name,
-//             category,
-//             "URL": URL.current,
-//             "images": images[].asset->url,
-//         }`
-//     )
-// }

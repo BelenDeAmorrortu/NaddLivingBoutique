@@ -1,3 +1,5 @@
+import { categories } from "@/utils/categories"
+
 const product = {
     name: 'product',
     title: 'Productos',
@@ -21,13 +23,9 @@ const product = {
             title: 'Categoría',
             type: 'string',
             options:{
-                list:[
-                    { title: 'Sofá', value: 'sofá'},
-                    { title: 'Puff', value: 'puff'},
-                    { title: 'Silla', value: 'silla'},
-                    { title: 'Sillón', value: 'sillón'},
-                    { title: 'Mesa', value: 'mesa'},
-                ]
+                list: categories.map( c =>{
+                    return { title: c[0].toUpperCase() + c.slice(1), value: c}
+                })
             },
             validation: rule => rule.required()
         },
