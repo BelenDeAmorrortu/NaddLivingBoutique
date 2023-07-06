@@ -8,6 +8,9 @@ import Footer from "./Footer";
 import Pagination from "./Pagination";
 import BackToTop from "./BackToTop";
 import Search from "./Search";
+import NavLg from "./NavLg";
+import NavMd from "./NavMd";
+import ContactButtons from "./ContactButtons";
 
 
 export {
@@ -20,5 +23,9 @@ export {
     Footer,
     Pagination,
     BackToTop,
-    Search
+    Search,
+    NavLg,
+    NavMd,
+    ContactButtons
+    
 }

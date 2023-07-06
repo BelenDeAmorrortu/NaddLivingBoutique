@@ -23,13 +23,16 @@
     }
 
     .footer ul li{
-        @apply flex-row-center text-grey hover:text-white transition-all cursor-pointer
+        @apply flex-row-center text-grey hover:text-white transition-all cursor-pointer my-1
     }
 
     .footer h4 {
         @apply title-3 text-white mb-2
     }
 
+    .description p{
+        @apply text-black-hover mb-2 last:mb-0
+    }
 }
 
 ::-webkit-scrollbar{
@@ -141,5 +144,6 @@
     .card-image{
         @apply w-[160px] md:w-[200px] lg:w-[280px] aspect-[3/2] overflow-hidden justify-center items-center flex
     }
+
 }
 

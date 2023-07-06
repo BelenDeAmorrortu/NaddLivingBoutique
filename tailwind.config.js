@@ -9,7 +9,7 @@ module.exports = {
 		colors: {
 			'black':{
 				DEFAULT:'rgb(15,15,15)',
-				'hover': '#0a0a0ab0'
+				'hover': 'rgb(15,15,15, 0.6)'
 			},
 			'white': {
 				DEFAULT: '#ffff',
@@ -21,15 +21,20 @@ module.exports = {
 				'hover': '#9ca3af66'
 			},
 			'dark-grey': '#404040',
-			'transparent': 'transparent'
+			'transparent': 'transparent',
+			'whatsapp': '#31b846',
+			'instagram': '#ba0e59'
+			// 'instagram': '#a02ebf'
+
 		},
 		fontFamily:{
 			'primary': 'var(--font-primary)',
 			'secondary': 'var(--font-secondary)'
 		},
 		fontWeight:{
-			'regular': '300',
-			'semi-bold': '400',
+			'thin': '300',
+			'regular': '400',
+			'semi-bold': '500',
 			'bold': '600',
 			'extra-bold': '700'
 		},
