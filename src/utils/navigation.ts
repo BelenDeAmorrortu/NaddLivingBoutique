@@ -4,7 +4,7 @@ interface Props {
     sillasYSillones: string;
     sofasyPuffs: string;
     mesas: string;
-    fq: string;
+    faq: string;
     contacto: string;
 }
 
@@ -14,7 +14,7 @@ export const navigation: Props = {
     sillasYSillones: '/productos?filter=silla&filter=sillón',
     sofasyPuffs: '/productos?filter=sofá&filter=puff',
     mesas: '/productos?filter=mesa',
-    fq: '/preguntas-frecuentes',
-    contacto: '/contacto'
+    faq: '/preguntas-frecuentes',
+    contacto: '/#contacto'
 
 }

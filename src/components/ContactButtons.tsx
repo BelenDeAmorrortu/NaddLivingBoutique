@@ -2,12 +2,19 @@
 import { FaInstagram } from "react-icons/fa";
 import { BsWhatsapp } from "react-icons/bs";
 import { useEffect, useState } from "react";
+import { navigation } from "@/utils/navigation";
 
 export default function ContactButtons() {
   const [screenWidth, setScreenWidth] = useState<number>();
+  const [isContactSection, setIsContactSection] = useState<boolean>();
+
+  const whatsappMessage = isContactSection
+    ? 'Hola! Vengo de visitar la página web de "Nadd Living Boutique". Me gustaría realizar una consulta.'
+    : `Hola! Vengo de visitar la página web de "Nadd Living Boutique". Me gustaría consultar por el siguiente producto: ${window.location.href}`;
 
   useEffect(() => {
     setScreenWidth(document.body.clientWidth);
+    setIsContactSection(!window.location.href.includes(navigation.productos));
   }, []);
 
   return (
@@ -15,11 +22,15 @@ export default function ContactButtons() {
       <button
         onClick={() =>
           window.open(
-            `https://api.whatsapp.com/send?phone=541153463845&text=Hola!%20Me%20gustar%C3%ADa%20consultar%20por%20el%20siguiente%20producto%20que%20vi%20en%20la%20p%C3%A1gina%20web%20%22Nadd%20Living%20Boutique%22.%20${window.location.href}`,
+            `https://api.whatsapp.com/send?phone=541153463845&text=${whatsappMessage}`,
             "_blank"
           )
         }
-        className="flex-row-center text-sm lg:text-base w-[49%] p-2 border-2 border-black uppercase font-bold hover:text-whatsapp hover:border-whatsapp transition-all duration-300"
+        className={"contact-button ".concat(
+          isContactSection
+            ? "border-white text-white hover:border-white-hover hover:text-white-hover"
+            : " border-black hover:text-whatsapp hover:border-whatsapp"
+        )}
       >
         <BsWhatsapp className="w-6 h-6 mr-3" />
         Whatsapp
@@ -33,7 +44,11 @@ export default function ContactButtons() {
             "_blank"
           )
         }
-        className="flex-row-center text-sm lg:text-base w-[49%] p-2 border-2 border-black uppercase font-bold hover:text-instagram hover:border-instagram transition-all duration-300"
+        className={"contact-button ".concat(
+          isContactSection
+            ? "border-white text-white hover:border-white-hover hover:text-white-hover"
+            : " border-black hover:text-instagram hover:border-instagram"
+        )}
       >
         <FaInstagram className="w-6 h-6 mr-3" />
         Instagram

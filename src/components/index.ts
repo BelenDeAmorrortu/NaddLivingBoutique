@@ -12,6 +12,7 @@ import NavLg from "./NavLg";
 import NavMd from "./NavMd";
 import ContactButtons from "./ContactButtons";
 import Loader from "./Loader";
+import Contact from "./Contact"
 
 
 export {
@@ -28,6 +29,6 @@ export {
     NavLg,
     NavMd,
     ContactButtons,
-    Loader
-    
+    Loader,
+    Contact
 }

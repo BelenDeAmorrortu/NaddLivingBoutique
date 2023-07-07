@@ -1,4 +1,4 @@
-import { Header, Banner, Spotlight } from "@/components/index";
+import { Header, Banner, Spotlight, Contact } from "@/components/index";
 
 export default function Home() {
   return (
@@ -6,6 +6,7 @@ export default function Home() {
       <Header />
       <Banner />
       <Spotlight />
+      <Contact />
     </>
   );
 }
