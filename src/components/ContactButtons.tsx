@@ -8,17 +8,18 @@ export default function ContactButtons() {
   const [screenWidth, setScreenWidth] = useState<number>();
   const [isContactSection, setIsContactSection] = useState<boolean>();
 
-  const whatsappMessage = isContactSection
-    ? 'Hola! Vengo de visitar la página web de "Nadd Living Boutique". Me gustaría realizar una consulta.'
-    : `Hola! Vengo de visitar la página web de "Nadd Living Boutique". Me gustaría consultar por el siguiente producto: ${window.location.href}`;
+  let whatsappMessage: string;
 
   useEffect(() => {
     setScreenWidth(document.body.clientWidth);
     setIsContactSection(!window.location.href.includes(navigation.productos));
+    whatsappMessage = isContactSection
+      ? 'Hola! Vengo de visitar la página web de "Nadd Living Boutique". Me gustaría realizar una consulta.'
+      : `Hola! Vengo de visitar la página web de "Nadd Living Boutique". Me gustaría consultar por el siguiente producto: ${window.location.href}`;
   }, []);
 
   return (
-    <div className="flex justify-between w-full">
+    <div className="flex flex-col-center space-y-5 md:space-y-0 md:flex-row md:justify-between w-full">
       <button
         onClick={() =>
           window.open(

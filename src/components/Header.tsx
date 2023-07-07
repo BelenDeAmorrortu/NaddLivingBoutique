@@ -11,7 +11,7 @@ export default function Header() {
       <Image
         src={Banner}
         alt="Imagén sillón París"
-        className="w-screen h-auto -z-10 brightness-50"
+        className="w-screen h-screen object-cover -z-10 brightness-50"
       />
       <div className="flex-col-center w-full h-screen absolute">
         <h4 className="subtitle-1 text-grey">Nadd Living Boutique</h4>
