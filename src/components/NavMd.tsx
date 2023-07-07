@@ -7,12 +7,15 @@ import Link from "next/link";
 import { Search } from ".";
 import { useState } from "react";
 import { navigation } from "@/utils/navigation";
+import { BsChevronCompactDown } from "react-icons/bs";
 
 export default function NavMd() {
   const [open, setOpen] = useState(false);
+  const [productList, setProductList] = useState<boolean>(false);
 
   function itemClick() {
     setOpen(false);
+    setProductList(false);
     document.getElementById("burgerMenu")?.click();
   }
 
@@ -37,7 +40,7 @@ export default function NavMd() {
       </div>
 
       <div
-        className={"bg-black w-screen h-screen flex flex-col justify-start items-center py-10 space-y-10 absolute top-12 transition-all duration-700 ".concat(
+        className={"bg-black w-screen h-screen flex flex-col justify-start items-center py-16 space-y-10 absolute top-12 transition-all duration-700 ".concat(
           open ? " translate-x-0 opacity-100" : " translate-x-full opacity-0"
         )}
       >
@@ -49,16 +52,24 @@ export default function NavMd() {
             <Link href={navigation.home}>Home</Link>
           </li>
           <li
-            onClick={itemClick}
-            className=" w-[80vw] md:w-[50vw] space-y-10 mb-10"
+            className={" w-[80vw] md:w-[50vw] space-y-10 overflow-hidden transition-all duration-[0.3s] ease-linear ".concat(
+              productList ? " max-h-[320px]" : " max-h-[40px]"
+            )}
           >
-            <Link
-              href={navigation.productos}
-              className="title-3 text-white border-y-2 border-grey-hover text-center block py-2 hover:text-white-hover cursor-pointer"
+            <span
+              onClick={() => setProductList(!productList)}
+              className={"flex-row-center title-3 text-white border-y-2 border-grey-hover text-center block py-2 hover:text-white-hover cursor-pointer".concat(
+                !productList ? " border-b-0" : ""
+              )}
             >
               Productos
-            </Link>
-            <ul className="space-y-10">
+              <BsChevronCompactDown
+                className={"h-5 w-5 absolute right-[15vw] text-white transition-all duration-700 ".concat(
+                  productList ? "rotate-180" : "rotate-0"
+                )}
+              />
+            </span>
+            <ul className={"space-y-10 pb-10"} onClick={itemClick}>
               <li className="nav-item">
                 <Link href={navigation.productos}>Ver Todo</Link>
               </li>
