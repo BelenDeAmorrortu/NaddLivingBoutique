@@ -40,17 +40,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`overflow-x-hidden ${montserrat.variable} ${cormorant.variable}`}
-    >
-      <body className="overflow-x-hidden">
-        <main>
-          <Nav />
-          {children}
-          <Footer />
-          <BackToTop />
-        </main>
+    <html lang="en" className={`${montserrat.variable} ${cormorant.variable}`}>
+      <body>
+        <Nav />
+        <main>{children}</main>
+        <Footer />
+        <BackToTop />
       </body>
     </html>
   );

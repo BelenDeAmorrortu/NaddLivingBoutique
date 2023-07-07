@@ -7,13 +7,13 @@ import arrowDown from "react-useanimations/lib/arrowDown";
 
 export default function Header() {
   return (
-    <div className="w-screen max-w-[100vw] h-screen flex-center">
+    <section className="w-full max-w-full h-screen max-h-[100vh] flex-center overflow-hidden">
       <Image
         src={Banner}
         alt="Imagén sillón París"
-        className="w-full h-screen object-cover -z-10 absolute left-0 brightness-50"
+        className="w-screen h-auto -z-10 brightness-50"
       />
-      <div className="flex-col-center w-full">
+      <div className="flex-col-center w-full h-screen absolute">
         <h4 className="subtitle-1 text-grey">Nadd Living Boutique</h4>
         <h3 className="title-1 text-white my-3">
           The Perfect <span className="text-red">Style</span>
@@ -41,6 +41,6 @@ export default function Header() {
           />
         </span>
       </div>
-    </div>
+    </section>
   );
 }

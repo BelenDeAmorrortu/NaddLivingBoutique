@@ -18,22 +18,30 @@
         @apply font-primary font-regular tracking-[1.5px] bg-white text-black scroll-smooth
     }
 
-    .footer ul{
+    section{
+        @apply my-24
+    }
+
+    section:last-child, section:first-child{
+        @apply my-0
+    }
+
+    footer ul{
         @apply flex flex-col items-start
     }
 
-    .footer ul li{
+    footer ul li{
         @apply flex-row-center text-grey hover:text-white transition-all cursor-pointer my-1
     }
 
-    .footer ul li a{
+    footer ul li a{
         @apply flex-row-center
     }
-    .footer ul li .adress{
+    footer ul li .adress{
         @apply flex justify-center items-start
     }
 
-    .footer h4 {
+    footer h4 {
         @apply title-3 text-white mb-2
     }
 
@@ -61,14 +69,8 @@
 
 ::-webkit-scrollbar-thumb {
 
-    @apply bg-grey mix-blend-difference rounded-[2.5px]
-    /* @apply bg-red rounded-[2.5px] */
+    @apply bg-grey rounded-[2.5px]
 
-}
-
-::-webkit-search-cancel-button{
-
-    @apply appearance-none h-[15px] w-[15px] rounded-[50em] bg-contain invert bg-[url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE2LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjEyMy4wNXB4IiBoZWlnaHQ9IjEyMy4wNXB4IiB2aWV3Qm94PSIwIDAgMTIzLjA1IDEyMy4wNSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTIzLjA1IDEyMy4wNTsiDQoJIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPHBhdGggZD0iTTEyMS4zMjUsMTAuOTI1bC04LjUtOC4zOTljLTIuMy0yLjMtNi4xLTIuMy04LjUsMGwtNDIuNCw0Mi4zOTlMMTguNzI2LDEuNzI2Yy0yLjMwMS0yLjMwMS02LjEwMS0yLjMwMS04LjUsMGwtOC41LDguNQ0KCQljLTIuMzAxLDIuMy0yLjMwMSw2LjEsMCw4LjVsNDMuMSw0My4xbC00Mi4zLDQyLjVjLTIuMywyLjMtMi4zLDYuMSwwLDguNWw4LjUsOC41YzIuMywyLjMsNi4xLDIuMyw4LjUsMGw0Mi4zOTktNDIuNGw0Mi40LDQyLjQNCgkJYzIuMywyLjMsNi4xLDIuMyw4LjUsMGw4LjUtOC41YzIuMy0yLjMsMi4zLTYuMSwwLTguNWwtNDIuNS00Mi40bDQyLjQtNDIuMzk5QzEyMy42MjUsMTcuMTI1LDEyMy42MjUsMTMuMzI1LDEyMS4zMjUsMTAuOTI1eiIvPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPC9zdmc+DQo=)]
 }
 
 /* -- Swiper -------------------------------------------------------------- */
@@ -104,7 +106,7 @@
     @apply bg-black
 }
 
-/* -- Custom Classes ------------------------------------------------------- */
+/* -- Components ------------------------------------------------------- */
 
 @layer components {
 
@@ -117,9 +119,7 @@
     }
     
     .title-2-secondary{
-        /* @apply text-5xl lg:text-6xl my-3 font-secondary font-extra-bold */
         @apply text-2xl lg:text-5xl my-3 font-primary font-bold
-
     }
     
     .title-3{
@@ -130,21 +130,8 @@
         @apply text-lg sm:text-xl uppercase font-bold
     }
 
-    .flex-center{
-        @apply flex justify-center items-center
-    }
-    
-    .flex-row-center{
-        @apply flex flex-row justify-center items-center
-    }
-    
-    .flex-col-center{
-        @apply flex flex-col justify-center items-center
-    }
-
     .nav-item{
         @apply font-semi-bold text-white hover:text-white-hover cursor-pointer text-[13.5px]
-        /*  w-36 */
     }
 
     .second-image{
@@ -163,6 +150,25 @@
         animation: 1s loader linear infinite;
     }
 
+    .contact-button{
+        @apply flex-row-center text-sm lg:text-base w-[49%] p-2 border-2 uppercase font-bold transition-all duration-300
+    }
+
+}
+
+@layer utilities {
+
+    .flex-center{
+        @apply flex justify-center items-center
+    }
+    
+    .flex-row-center{
+        @apply flex flex-row justify-center items-center
+    }
+    
+    .flex-col-center{
+        @apply flex flex-col justify-center items-center
+    }
 }
 
 @keyframes loader {

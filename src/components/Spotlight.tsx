@@ -8,7 +8,7 @@ export default async function Spotlight() {
   let products = await getSpotlight();
 
   return (
-    <div className="flex-col-center w-screen h-fit my-8">
+    <section className="flex-col-center w-full h-fit">
       <h4 className="subtitle-1">Nuestros Productos</h4>
       <h3 className="title-2 m-3 mb-16">Destacados</h3>
       <div className="mb-7 flex-center flex-wrap w-[95%] md:w-[80%]">
@@ -24,6 +24,6 @@ export default async function Spotlight() {
       >
         Ver catálogo completo <ChevronRightIcon className="w-5 h-5 ml-2" />
       </Link>
-    </div>
+    </section>
   );
 }

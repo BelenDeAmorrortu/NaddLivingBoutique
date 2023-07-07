@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Banner() {
   return (
-    <div className="flex flex-col sm:flex-row justify-around items-center my-28 h-fit min-h-[65vh] w-screen">
+    <section className="flex flex-col sm:flex-row justify-around items-center h-fit min-h-[65vh] w-full">
       <div className="w-[90%] sm:w-[40%] flex-center">
         <Image
           src={Sofa}
@@ -26,6 +26,6 @@ export default function Banner() {
           producimos de manera artesanal y con los diseños más innovadores.
         </p>
       </div>
-    </div>
+    </section>
   );
 }
