@@ -1,5 +1,5 @@
-
-export const deskStructure = (S, context) =>{
+import { StructureBuilder } from "sanity/desk"
+export const deskStructure = (S: StructureBuilder) =>{
     return S.list()
         .title("Content")
         .items([
@@ -14,6 +14,6 @@ export const deskStructure = (S, context) =>{
                 ),
             S.divider(),
             ...S.documentTypeListItems()
-                .filter(listItem => !['sections'].includes(listItem.getId()))
+                .filter(listItem => !(listItem.getId() === 'sections' ))
         ])
 }
