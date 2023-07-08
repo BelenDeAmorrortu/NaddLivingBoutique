@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -- Base -----------------------------------------------------------------*/
+
+@layer base {
+
+    p, li{
+        @apply text-sm lg:text-base list-none
+    }
+
+    html{
+        scroll-behavior: smooth;
+    }
+
+    body{
+        @apply font-primary font-regular tracking-[1.5px] bg-white text-black scroll-smooth
+    }
+
+    section{
+        @apply my-24
+    }
+
+    section:last-child, section:first-child{
+        @apply my-0
+    }
+
+    footer ul{
+        @apply flex flex-col items-start
+    }
+
+    footer ul li{
+        @apply flex-row-center text-grey hover:text-white transition-all cursor-pointer my-1
+    }
+
+    footer ul li a{
+        @apply flex-row-center
+    }
+    footer ul li .adress{
+        @apply flex justify-center items-start
+    }
+
+    footer h4 {
+        @apply title-3 text-white mb-2
+    }
+
+    .description p{
+        @apply text-black-hover mb-2 last:mb-0
+    }
+
+    .loader.white{
+        background-image: conic-gradient(transparent 25%, #ffff 50%)
+    }
+    .loader.black{
+        background-image: conic-gradient(transparent 25%, #0f0f0f 50%)
+    }
+}
+
+::-webkit-scrollbar{
+
+    @apply w-[10px] max-[450px]:w-[5px]
+}
+
+::-webkit-scrollbar-track , ::-webkit-scrollbar-track-piece{
+
+    @apply bg-transparent
+}
+
+::-webkit-scrollbar-thumb {
+
+    @apply bg-grey rounded-[2.5px]
+
+}
+
+/* -- Swiper -------------------------------------------------------------- */
+
+.swiper-thumbs .swiper-wrapper{
+
+    @apply justify-center
+}
+
+.swiper-thumbs .swiper-slide{
+
+    @apply opacity-70 brightness-75 cursor-pointer
+}
+.swiper-thumbs .swiper-slide-thumb-active{
+
+    @apply opacity-90 brightness-100
+}
+
+.swiper-button-next, .swiper-button-prev{
+
+    @apply text-black hover:text-black-hover transition-colors duration-75 scale-75 drop-shadow-[0_5px_5px_#ffff]
+}
+
+.swiper-button-next{
+    @apply right-0
+}
+
+.swiper-button-prev{
+    @apply left-0
+}
+
+.ant-image-preview-operations{
+    @apply bg-black
+}
+
+/* -- Components ------------------------------------------------------- */
+
+@layer components {
+
+    .title-1{
+        @apply text-[29px] sm:text-3xl md:text-4xl lg:text-5xl uppercase tracking-[1vw] text-center font-extra-bold
+    }
+    
+    .title-2{
+        @apply text-3xl lg:text-4xl uppercase font-extra-bold
+    }
+    
+    .title-2-secondary{
+        @apply text-2xl lg:text-5xl my-3 font-primary font-bold
+    }
+    
+    .title-3{
+        @apply text-[12px] sm:text-sm md:text-base uppercase font-extra-bold
+    }
+    
+    .subtitle-1{
+        @apply text-lg sm:text-xl uppercase font-bold
+    }
+
+    .nav-item{
+        @apply font-semi-bold text-white hover:text-white-hover cursor-pointer text-[13.5px]
+    }
+
+    .second-image{
+        transition: opacity 0.3s linear;
+    }
+
+    .footer-icon{
+        @apply w-4 h-4 mr-3 fill-grey group-hover:fill-white
+    }
+
+    .card-image{
+        @apply w-[160px] md:w-[200px] lg:w-[280px] aspect-[3/2] overflow-hidden justify-center items-center flex
+    }
+
+    .loader{
+        animation: 1s loader linear infinite;
+    }
+
+    .contact-button{
+        @apply flex-row-center text-sm lg:text-base w-full md:w-[49%] p-2 border-2 uppercase font-bold transition-all duration-300
+    }
+
+}
+
+@layer utilities {
+
+    .flex-center{
+        @apply flex justify-center items-center
+    }
+    
+    .flex-row-center{
+        @apply flex flex-row justify-center items-center
+    }
+    
+    .flex-col-center{
+        @apply flex flex-col justify-center items-center
+    }
+}
+
+@keyframes loader {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
