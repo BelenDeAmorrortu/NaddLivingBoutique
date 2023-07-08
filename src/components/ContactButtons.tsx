@@ -7,15 +7,16 @@ import { navigation } from "@/utils/navigation";
 export default function ContactButtons() {
   const [screenWidth, setScreenWidth] = useState<number>();
   const [isContactSection, setIsContactSection] = useState<boolean>();
-
-  let whatsappMessage: string;
+  const [whatsappMessage, setWhatsappMessage] = useState<string>();
 
   useEffect(() => {
     setScreenWidth(document.body.clientWidth);
     setIsContactSection(!window.location.href.includes(navigation.productos));
-    whatsappMessage = isContactSection
-      ? 'Hola! Vengo de visitar la página web de "Nadd Living Boutique". Me gustaría realizar una consulta.'
-      : `Hola! Vengo de visitar la página web de "Nadd Living Boutique". Me gustaría consultar por el siguiente producto: ${window.location.href}`;
+    setWhatsappMessage(
+      isContactSection
+        ? 'Hola! Vengo de visitar la página web de "Nadd Living Boutique". Me gustaría realizar una consulta.'
+        : `Hola! Vengo de visitar la página web de "Nadd Living Boutique". Me gustaría consultar por el siguiente producto: ${window.location.href}`
+    );
   }, []);
 
   return (
