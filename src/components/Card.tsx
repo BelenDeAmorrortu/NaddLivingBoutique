@@ -3,10 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Product } from "../../types/Product";
 
-export default function Card({ _id, name, category, URL, images }: Product) {
+export default function Card({ _id, name, category, url, images }: Product) {
   return (
     <div key={_id} className="flex-col-center my-6 m-2 md:m-4 lg:m-10">
-      <Link href={`${navigation.productos}/${URL}`}>
+      <Link href={`${navigation.productos}/${url}`}>
         <div className="card-image">
           {images.length > 1 ? (
             <>

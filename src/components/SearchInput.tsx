@@ -39,7 +39,7 @@ export default function SearchInput({ input, setInput, props }: Props) {
           style: {
             background: "transparent",
             color: "#f5f5f5",
-            width: screenWidth < 500 ? "35vw" : "20vw",
+            width: screenWidth && screenWidth < 500 ? "35vw" : "20vw",
           },
         }}
         placeholder="Buscar..."

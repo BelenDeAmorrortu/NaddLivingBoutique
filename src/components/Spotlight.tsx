@@ -4,7 +4,16 @@ import Card from "./Card";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import { navigation } from "@/utils/navigation";
 
-export default async function Spotlight() {
+export default function Spotlight() {
+  return (
+    <>
+      {/* @ts-expect-error Server Component */}
+      <Component />
+    </>
+  );
+}
+
+async function Component() {
   let products = await getSpotlight();
 
   return (

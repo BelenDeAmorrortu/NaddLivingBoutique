@@ -1,3 +1,5 @@
+import { Rule } from 'sanity';
+
 const sections = {
 
     name: 'sections',
@@ -14,7 +16,7 @@ const sections = {
                     to: [{type: 'product'}]
                 }
             ],
-            validation: Rule => Rule.length(6).required().unique()
+            validation: (Rule: Rule) => Rule.length(6).required().unique()
         }
     ]
 

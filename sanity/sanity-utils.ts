@@ -34,7 +34,7 @@ export async function getProducts(filters: string[]): Promise<Product[]>{
             _id,
             name,
             category,
-            "URL": URL.current,
+            "url": url.current,
             "images": images[].asset->url,
         }`
     )
@@ -46,7 +46,7 @@ export async function getProducts(filters: string[]): Promise<Product[]>{
 export async function getProduct(slug: string): Promise<Product>{
     
     return createClient(clientConfig).fetch(
-        groq`*[_type == 'product' && URL.current == $slug][0]{
+        groq`*[_type == 'product' && url.current == $slug][0]{
             name,
             category,
             "images": images[].asset->url,
@@ -64,7 +64,7 @@ export async function getSpotlight(): Promise<Product[]>{
                 _id,
                 name,
                 category,
-                "URL": URL.current,
+                "url": url.current,
                 "images": images[].asset->url,                
             }
         }.spotlight`,

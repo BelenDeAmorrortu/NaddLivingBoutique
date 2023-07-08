@@ -4,7 +4,7 @@ export type Product = {
     _id: string;
     name: string;
     category: string;
-    URL: string;
+    url: string;
     images: string[];
     description: PortableTextBlock[];
 }

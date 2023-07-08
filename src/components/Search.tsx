@@ -112,6 +112,8 @@ function Content() {
     placeholderData: [],
   });
 
+  const handleData = data ?? [];
+
   const options = [
     ...categories.map((c) => {
       return {
@@ -120,7 +122,7 @@ function Content() {
         url: c,
       };
     }),
-    ...data,
+    ...handleData,
   ];
 
   const [input, setInput] = useState("");
@@ -173,11 +175,11 @@ function Content() {
             if (value.category === "Ver categoría:") {
               setInput("");
 
-              router.push(`${navigation.productos}?filter=${value.URL}`);
+              router.push(`${navigation.productos}?filter=${value.url}`);
             } else {
               setInput("");
 
-              router.push(`productos/${value.URL}`);
+              router.push(`productos/${value.url}`);
             }
           }
         }}
