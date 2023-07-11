@@ -6,8 +6,8 @@ export const runtime = "edge";
 
 export const alt = "Imagén del producto";
 export const size = {
-  width: 1200,
-  height: 630,
+  width: 500,
+  height: 500,
 };
 
 export const contentType = "image/png";
@@ -27,7 +27,6 @@ export default async function OgImage({ params }: Props) {
     (
       <div
         style={{
-          fontSize: 48,
           width: "100%",
           height: "100%",
           display: "flex",
