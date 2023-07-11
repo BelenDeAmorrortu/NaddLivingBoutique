@@ -55,7 +55,7 @@ export default function Carousel({ images, lqip }: Props) {
                     placeholder={
                       <Image
                         alt="Placeholder"
-                        className=" blur-2xl"
+                        className="object-contain object-center blur-2xl"
                         width={1000}
                         height={1000}
                         src={lqip[index]}
