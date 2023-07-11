@@ -55,10 +55,12 @@ export default function Carousel({ images, lqip }: Props) {
                     placeholder={
                       <Image
                         alt="Placeholder"
-                        className="object-contain object-center blur-2xl"
+                        className="object-contain object-center"
                         width={1000}
                         height={1000}
                         src={lqip[index]}
+                        placeholder="blur"
+                        blurDataURL={lqip[index]}
                       />
                     }
                   />
@@ -70,8 +72,8 @@ export default function Carousel({ images, lqip }: Props) {
       <Swiper
         onSwiper={setActiveThumb}
         loop={true}
-        spaceBetween={4}
-        slidesPerView={6}
+        spaceBetween={0}
+        slidesPerView={7}
         modules={[Navigation, Thumbs]}
         className="my-5"
       >
@@ -80,17 +82,19 @@ export default function Carousel({ images, lqip }: Props) {
             return (
               <SwiperSlide
                 key={index}
-                className="flex justify-center items-center mx-4"
+                className="flex justify-center items-center mx-2 md:mx-0"
               >
-                <Image
-                  src={image}
-                  alt="Imagen ilustrativa del producto"
-                  width={1000}
-                  height={1000}
-                  className=" h-14 md:h-16 w-auto"
-                  placeholder="blur"
-                  blurDataURL={lqip[index]}
-                />
+                <div className="h-14 md:h-16 w-16 md:w-20">
+                  <Image
+                    src={image}
+                    alt="Imagen ilustrativa del producto"
+                    width={1000}
+                    height={1000}
+                    className="object-cover h-full w-full"
+                    placeholder="blur"
+                    blurDataURL={lqip[index]}
+                  />
+                </div>
               </SwiperSlide>
             );
           })}
@@ -105,7 +109,7 @@ export default function Carousel({ images, lqip }: Props) {
           }}
         >
           {images &&
-            images.map((image, index) => {
+            images.map((image) => {
               return (
                 <Img
                   src={image}

@@ -86,7 +86,7 @@
 
 .swiper-thumbs .swiper-slide{
 
-    @apply opacity-70 brightness-75 cursor-pointer
+    @apply opacity-70 brightness-[.90] cursor-pointer
 }
 .swiper-thumbs .swiper-slide-thumb-active{
 
