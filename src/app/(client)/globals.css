@@ -11,7 +11,7 @@
     }
 
     p{
-        @apply text-base lg:text-xl
+        @apply text-base lg:text-[1.15rem]
     }
 
     html{
