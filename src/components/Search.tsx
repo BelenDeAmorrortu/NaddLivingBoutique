@@ -18,8 +18,6 @@ export default function Search() {
   );
 }
 
-let width: number;
-
 const useStyles = makeStyles(() => ({
   root: {
     "& .MuiAutocomplete-listbox": {
@@ -70,8 +68,8 @@ const useStyles = makeStyles(() => ({
         left: -30,
       },
       "@media(max-width: 500px)": {
-        width: "100vw",
-        left: "-191%",
+        width: "100%",
+        left: "0",
       },
     },
     "& .MuiAutocomplete-endAdornment": {
@@ -85,27 +83,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const CustomPopper = (props: any) => {
-  let classes = useStyles();
-
-  return (
-    <Popper
-      {...props}
-      style={{
-        width: width < 1024 ? "35vw" : width < 500 ? "100vw" : "26vw",
-        zIndex: 10,
-        position: "absolute",
-      }}
-      className={classes?.root}
-      open={true}
-      placement="bottom"
-    />
-  );
-};
-
 function Content() {
   const router = useRouter();
   const classes = useStyles();
+  const [width, setWidth] = useState<number>(0);
 
   const { isPlaceholderData, error, data } = useQuery({
     queryFn: async () => await getProducts([]),
@@ -128,15 +109,35 @@ function Content() {
   const [input, setInput] = useState("");
 
   useEffect(() => {
-    const setWidth = () => {
-      width = document?.body.clientWidth;
-      return;
+    const handleEvent = () => {
+      setWidth(document?.body.clientWidth);
     };
 
-    window.addEventListener("resize", setWidth);
+    window.addEventListener("resize", handleEvent);
 
-    () => window.removeEventListener("resize", setWidth);
+    () => window.removeEventListener("resize", handleEvent);
   }, []);
+
+  const CustomPopper = (props: any) => {
+    return (
+      <Popper
+        {...props}
+        style={{
+          width:
+            width < 1024 && width > 500
+              ? "35vw"
+              : width < 500
+              ? "100vw"
+              : "26vw",
+          zIndex: 10,
+          position: "absolute",
+        }}
+        className={classes?.root}
+        open={true}
+        placement="bottom"
+      />
+    );
+  };
 
   return (
     <div className="flex-col-center align-se items-align w-[22vw] hover:w-[55vw] focus:w-[55vw] sm:hover:w-[22vw]  static transition-[width] duration-150 lg:absolute lg:left-8">
