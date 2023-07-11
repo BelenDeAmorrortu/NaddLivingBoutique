@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props) {
         canonical: `${navigation.productos}/${product}`,
       },
       openGraph: {
-        title: `${category} ${name}`,
+        title: `${category[0].toUpperCase() + category.slice(1)} ${name}`,
       },
     };
   } catch (error) {
