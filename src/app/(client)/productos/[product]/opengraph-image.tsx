@@ -29,7 +29,6 @@ export default async function OgImage({ params }: Props) {
       <div
         style={{
           fontSize: 48,
-          background: "white",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -37,7 +36,18 @@ export default async function OgImage({ params }: Props) {
           justifyContent: "center",
         }}
       >
-        {category + " " + name}
+        <Image
+          src={images[0]}
+          alt={`Imagén de ${name}`}
+          width={1200}
+          height={1200}
+          style={{
+            objectFit: "cover",
+            height: "100%",
+            width: "100%",
+            display: "flex",
+          }}
+        />
       </div>
     ),
     {
