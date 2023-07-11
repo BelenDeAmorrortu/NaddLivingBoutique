@@ -1,16 +1,14 @@
 import { createClient, groq } from 'next-sanity'
 import { Product } from '../types/Product'
 import clientConfig from './config/client-config'
+import imageUrlBuilder from '@sanity/image-url'
 
-// interface Pagination {
-//     page?: number;
-//     size?: number;
-// }
+export const client = createClient(clientConfig)
+const builder = imageUrlBuilder(client)
 
-// interface GetProducts{
-//     products: Product[],
-//     total: number;
-// }
+export function sanityImage(url: string){
+    return builder.image(url)
+}
 
 export async function getProducts(filters: string[]): Promise<Product[]>{
 
@@ -29,43 +27,44 @@ export async function getProducts(filters: string[]): Promise<Product[]>{
 
     }
 
-    const products =  await createClient(clientConfig).fetch(
+    return await client.fetch(
         groq`*[_type == 'product' ${queryString}]{
             _id,
             name,
             category,
             "url": url.current,
             "images": images[].asset->url,
+            "lqip": images[].asset->metadata.lqip,                
         }`
     )
-
-
-    return products
 }
 
 export async function getProduct(slug: string): Promise<Product>{
     
-    return createClient(clientConfig).fetch(
+    return client.fetch(
         groq`*[_type == 'product' && url.current == $slug][0]{
             name,
             category,
             "images": images[].asset->url,
+            "lqip": images[].asset->metadata.lqip,                
             description
         }`,
         { slug }
+
     )
 }
 
 export async function getSpotlight(): Promise<Product[]>{
     
-    return createClient(clientConfig).fetch(
+    return await client.fetch(
         groq`*[_type == 'sections'][0]{
             spotlight[]->{
                 _id,
                 name,
                 category,
                 "url": url.current,
-                "images": images[].asset->url,                
+                "images": images[].asset->url,
+                "lqip": images[].asset->metadata.lqip,                
             }
         }.spotlight`,
     )
