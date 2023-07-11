@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/server";
-import { getProduct } from "../../../../../sanity/sanity-utils";
+import { getProduct, sanityImage } from "../../../../../sanity/sanity-utils";
 
 // Route segment config
 export const runtime = "edge";
@@ -35,7 +35,7 @@ export default async function OgImage({ params }: Props) {
         }}
       >
         <img
-          src={lqip[0]}
+          src={sanityImage(lqip[0]).quality(50).url()}
           alt={`Imagén de ${name}`}
           style={{
             objectFit: "cover",
