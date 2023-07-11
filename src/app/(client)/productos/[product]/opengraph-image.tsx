@@ -27,21 +27,13 @@ export default async function OgImage({ params }: Props) {
   return new ImageResponse(
     (
       // ImageResponse JSX element
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <div tw="w-full h-full flex justify-center items-center">
         <Image
           src={images[0]}
           alt={`Imagén de ${name}`}
           width={500}
           height={500}
-          className="object-cover h-full w-full"
+          tw="object-cover h-full w-full"
         />
       </div>
     ),
