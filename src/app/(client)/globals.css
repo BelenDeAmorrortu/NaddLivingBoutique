@@ -134,6 +134,10 @@
         @apply font-semi-bold text-white hover:text-white-hover cursor-pointer text-[13.5px]
     }
 
+    .navmd-li{
+        @apply title-3 text-white border-grey-hover py-3 w-[80vw] md:w-[50vw] hover:text-white-hover cursor-pointer
+    }
+
     .second-image{
         transition: opacity 0.3s linear;
     }

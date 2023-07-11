@@ -45,26 +45,23 @@ export default function NavMd() {
         )}
       >
         <ul className="flex flex-col text-center">
-          <li
-            onClick={itemClick}
-            className="title-3 text-white border-t-2 border-grey-hover py-2 w-[80vw] md:w-[50vw] hover:text-white-hover cursor-pointer"
-          >
+          <li onClick={itemClick} className="navmd-li border-t-2">
             <Link href={navigation.home}>Home</Link>
           </li>
           <li
-            className={" w-[80vw] md:w-[50vw] space-y-10 overflow-hidden transition-all duration-[0.3s] ease-linear ".concat(
-              productList ? " max-h-[320px]" : " max-h-[40px]"
+            className={"space-y-10 overflow-hidden transition-all duration-200 ease-linear ".concat(
+              productList ? " max-h-[320px]" : " max-h-[48px]"
             )}
           >
             <span
               onClick={() => setProductList(!productList)}
-              className={"flex-row-center title-3 text-white border-y-2 border-grey-hover text-center block py-2 hover:text-white-hover cursor-pointer".concat(
+              className={"navmd-li flex-row-center border-y-2 border-grey-hover text-center block".concat(
                 !productList ? " border-b-0" : ""
               )}
             >
               Productos
               <BsChevronCompactDown
-                className={"h-5 w-5 absolute right-[15vw] text-white transition-all duration-700 ".concat(
+                className={"h-5 w-5 absolute right-[15vw] text-white transition-all duration-200 ".concat(
                   productList ? "rotate-180" : "rotate-0"
                 )}
               />
@@ -84,10 +81,7 @@ export default function NavMd() {
               </li>
             </ul>
           </li>
-          <li
-            onClick={itemClick}
-            className="title-3 text-white border-y-2 border-grey-hover py-2 w-[80vw] md:w-[50vw] hover:text-white-hover cursor-pointer"
-          >
+          <li onClick={itemClick} className="navmd-li border-y-2">
             <Link href={navigation.contacto}>Contacto</Link>
           </li>
         </ul>
