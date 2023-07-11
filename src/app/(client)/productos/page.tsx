@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, Pagination } from "@/components";
+import { Card, Loader, Pagination } from "@/components";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { getProducts } from "../../../../sanity/sanity-utils";
@@ -24,14 +24,9 @@ function Content() {
   const router = useRouter();
   const params = useSearchParams();
 
-  const { isPlaceholderData, error, data, refetch } = useQuery({
-    queryFn: () => getProducts(filters),
-    placeholderData: [],
-  });
-
   // Products and filtration
   const [products, setProducts] = useState<Product[]>([]);
-  const [filters, setFilters] = useState<string[]>([]);
+  const [filters, setFilters] = useState<string[]>();
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -40,38 +35,57 @@ function Content() {
   const indexOfFirstOfPage = indexOfLastOfPage - amountPerPage;
   const currentProducts = products.slice(indexOfFirstOfPage, indexOfLastOfPage);
 
-  useLayoutEffect(() => {
-    setFilters(!params.getAll("filter").length ? [] : params.getAll("filter"));
-  }, [params, setFilters]);
+  const { isPlaceholderData, error, data, refetch } = useQuery({
+    queryFn: () => getProducts(filters ? filters : []),
+    placeholderData: [],
+    enabled: filters === undefined ? false : true,
+  });
+
+  useEffect(() => {
+    setFilters(
+      params.getAll("filter").length === 0 ? [] : params.getAll("filter")
+    );
+    console.log("cambiee", params);
+    () => setFilters(undefined);
+  }, [params]);
 
   useEffect(() => {
     if (data) setProducts(data);
   }, [data]);
 
   useEffect(() => {
-    const queries = filters.map((f) => `filter=${f}`).join("&");
-    router.push(`${navigation.productos}?${queries}`);
-    setCurrentPage(1);
-    refetch();
+    if (filters !== undefined) {
+      refetch();
+      setCurrentPage(1);
+    }
   }, [filters]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
 
+  function setParams(filterArray: string[]) {
+    const queries = filterArray?.map((f) => `filter=${f}`).join("&");
+    router.push(`${navigation.productos}?${queries}`);
+  }
+
   function addFilter(s: string) {
-    filters.includes(s) ? null : setFilters([...filters, s]);
+    if (filters) {
+      filters?.includes(s) ? null : setParams([...filters, s]);
+    }
   }
   function removeFilter(s: string) {
-    setFilters(filters.filter((f) => f !== s));
+    if (filters) {
+      setParams(filters?.filter((f) => f !== s));
+    }
   }
 
   return (
     <div className="min-h-[60vh] my-36 w-full flex flex-col items-center sm:flex-row sm:justify-around sm:items-start">
-      <div className=" w-[85%] sm:w-48 md:w-56 space-y-2 sm:mt-10">
+      <div className=" w-[85%] sm:w-48 md:w-56 lg:mx-14 space-y-2 sm:mt-10">
         <h4 className="subtitle-1 font-bold">Filtros</h4>
         <ul className="border-b-2 border-grey-hover py-3 flex flex-wrap w-full">
-          {filters.map((f) => (
+          {filters?.map((f) => (
             <li className="cursor-pointer py-1 px-2 bg-grey-hover max-w-min rounded-sm flex items-center capitalize mr-2 my-2">
               {f}
               <XMarkIcon
@@ -93,11 +107,14 @@ function Content() {
           ))}
         </ul>
       </div>
-      <div className="flex-col-center min-h-[60vh] w-[360px] sm:w-[380px] md:w-[465px] lg:w-[1080px]">
+      <div className="flex-col-center min-h-[60vh] w-[360px] sm:w-[380px] md:w-[465px] lg:w-[660px] min-[1336px]:w-[990px]">
         {error ? (
           <p>Hubo un error</p>
         ) : isPlaceholderData && products.length === 0 ? (
-          <p>Cargando...</p>
+          <div className="flex-col-center space-y-5">
+            <Loader size="small" color="black" />
+            <p>Cargando...</p>
+          </div>
         ) : !isPlaceholderData && products.length === 0 ? (
           <p>No hay productos en esta categoría</p>
         ) : (
