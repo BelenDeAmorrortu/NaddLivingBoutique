@@ -21,7 +21,7 @@ type Props = {
 export default async function OgImage({ params }: Props) {
   const { product } = params;
 
-  const { images, name, category } = await getProduct(product);
+  const { lqip, name } = await getProduct(product);
 
   return new ImageResponse(
     (
@@ -35,7 +35,7 @@ export default async function OgImage({ params }: Props) {
         }}
       >
         <img
-          src={images[0]}
+          src={lqip[0]}
           alt={`Imagén de ${name}`}
           style={{
             objectFit: "cover",
