@@ -11,15 +11,12 @@ import { SwiperRef } from "swiper/react";
 
 type Props = {
   images: string[];
+  lqip: string[];
 };
 
-export default function Carousel({ images }: Props) {
+export default function Carousel({ images, lqip }: Props) {
   const [activeThumb, setActiveThumb] = useState<any>();
   const [preview, setPreview] = useState<boolean>(false);
-
-  useEffect(() => {
-    console.log("activeThumb", activeThumb);
-  }, [activeThumb]);
 
   const sliderRef = useRef<SwiperRef>(null);
 
@@ -55,6 +52,15 @@ export default function Carousel({ images }: Props) {
                     onClick={() => {
                       setPreview(true);
                     }}
+                    placeholder={
+                      <Image
+                        alt="Placeholder"
+                        className=" blur-2xl"
+                        width={1000}
+                        height={1000}
+                        src={lqip[index]}
+                      />
+                    }
                   />
                 </div>
               </SwiperSlide>
@@ -82,6 +88,8 @@ export default function Carousel({ images }: Props) {
                   width={1000}
                   height={1000}
                   className=" h-14 md:h-16 w-auto"
+                  placeholder="blur"
+                  blurDataURL={lqip[index]}
                 />
               </SwiperSlide>
             );

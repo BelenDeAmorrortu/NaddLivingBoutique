@@ -33,12 +33,12 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function page({ params }: Props) {
   const slug = params.product;
-  const { name, images, category, description } = await getProduct(slug);
+  const { name, images, category, description, lqip } = await getProduct(slug);
 
   return (
     <div className="description flex flex-col md:flex-row h-fit py-10 justify-around items-center mt-[4rem] md:mt-[5.5rem]">
       <div className="mb-12 w-[95vw] sm:mb-0 md:w-[50vw] min-[1243px]:w-[47vw]">
-        <Carousel images={images} />
+        <Carousel images={images} lqip={lqip} />
       </div>
       <div className="w-[90vw] md:w-[40vw] flex flex-col justify-center">
         <h1 className="title-3 text-red">{name}</h1>
