@@ -81,7 +81,7 @@ function Content() {
 
   return (
     <div className="min-h-[60vh] my-36 w-full flex flex-col items-center sm:flex-row sm:justify-around sm:items-start">
-      <div className=" w-[85%] sm:w-48 md:w-56 lg:mx-14 space-y-2 sm:mt-10">
+      <div className=" w-[85%] sm:w-48 md:w-56 lg:mx-12 space-y-2 sm:mt-10">
         <h4 className="subtitle-1 font-bold">Filtros</h4>
         <ul className="border-b-2 border-grey-hover py-3 flex flex-wrap w-full">
           {filters?.map((f) => (
