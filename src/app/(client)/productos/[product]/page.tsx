@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props) {
 
     if (!name) throw Error("product not found");
     return {
-      title: `${category[0].toLocaleUpperCase() + category.slice(1)} ${name}`,
+      title: `${category[0].toUpperCase() + category.slice(1)} ${name}`,
       alternates: {
         canonical: `${navigation.productos}/${product}`,
       },
