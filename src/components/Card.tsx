@@ -5,7 +5,10 @@ import { Product } from "../../types/Product";
 
 export default function Card({ _id, name, category, url, images }: Product) {
   return (
-    <div key={_id} className="flex-col-center my-6 m-2 md:m-4 lg:m-10">
+    <div
+      key={_id}
+      className="flex flex-col items-center justify-start w-[160px] min-h-[185px] md:w-[200px] md:min-h-[225px] lg:w-[250px] lg:min-h-[255px] my-6 m-2 md:m-4 lg:m-10"
+    >
       <Link href={`${navigation.productos}/${url}`}>
         <div className="card-image">
           {images.length > 1 ? (
@@ -38,7 +41,7 @@ export default function Card({ _id, name, category, url, images }: Product) {
           )}
         </div>
       </Link>
-      <h4 className="mt-4 mb-2 title-3">{name}</h4>
+      <h4 className="mt-4 mb-2 title-4 text-center">{name}</h4>
       <h5 className="capitalize text-xs">{category}</h5>
     </div>
   );

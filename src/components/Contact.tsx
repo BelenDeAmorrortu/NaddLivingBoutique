@@ -14,7 +14,7 @@ export default function Contact() {
         className="object-cover w-full h-full -z-10 brightness-50"
       />
       <div className="flex-col-center absolute w-full space-y-6">
-        <h3 className="title-2 text-white my-3">Contacto</h3>
+        <h3 className="title-3 text-white my-3">Contacto</h3>
         <div className="w-[60vw] sm:w-[40vw]">
           <ContactButtons />
         </div>

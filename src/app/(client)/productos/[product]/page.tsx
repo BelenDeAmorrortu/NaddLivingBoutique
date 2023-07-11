@@ -41,7 +41,7 @@ export default async function page({ params }: Props) {
         <Carousel images={images} />
       </div>
       <div className="w-[90vw] md:w-[40vw] flex flex-col justify-center">
-        <h1 className="title-2 text-red">{name}</h1>
+        <h1 className="title-3 text-red">{name}</h1>
         <h4 className="subtitle-1 my-5">{category}</h4>
         <PortableText value={description} />
         <h4 className="text-sm lg:text-base uppercase font-bold border-b-2 border-grey text-black py-3 my-5">

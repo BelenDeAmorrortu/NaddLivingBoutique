@@ -19,7 +19,7 @@ async function Component() {
   return (
     <section className="flex-col-center w-full h-fit">
       <h4 className="subtitle-1">Nuestros Productos</h4>
-      <h3 className="title-2 m-3 mb-16">Destacados</h3>
+      <h3 className="title-3 m-3 mb-16">Destacados</h3>
       <div className="mb-7 flex-center flex-wrap w-[95%] md:w-[80%]">
         {products.length > 0 ? (
           products.map((p) => <Card {...p} key={p._id} />)

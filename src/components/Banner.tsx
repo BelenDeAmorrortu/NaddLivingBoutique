@@ -12,7 +12,7 @@ export default function Banner() {
         />
       </div>
       <div className="w-[85%] sm:w-[50%]">
-        <h3 className="title-2-secondary">
+        <h3 className="title-2">
           Nuestro compromiso, la <span className="text-red">excelencia</span>.
         </h3>
         <p>

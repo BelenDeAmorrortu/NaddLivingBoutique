@@ -45,7 +45,6 @@ function Content() {
     setFilters(
       params.getAll("filter").length === 0 ? [] : params.getAll("filter")
     );
-    console.log("cambiee", params);
     () => setFilters(undefined);
   }, [params]);
 
@@ -95,7 +94,7 @@ function Content() {
             </li>
           ))}
         </ul>
-        <h4 className="title-3">Categoría</h4>
+        <h4 className="title-4">Categoría</h4>
         <ul className="border-b-2 border-grey-hover pb-3 w-full">
           {categories.map((f) => (
             <li

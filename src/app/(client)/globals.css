@@ -6,8 +6,12 @@
 
 @layer base {
 
-    p, li{
+    li{
         @apply text-sm lg:text-base list-none
+    }
+
+    p{
+        @apply text-base lg:text-xl
     }
 
     html{
@@ -42,11 +46,11 @@
     }
 
     footer h4 {
-        @apply title-3 text-white mb-2
+        @apply title-4 text-white mb-2
     }
 
     .description p{
-        @apply text-black-hover mb-2 last:mb-0
+        @apply text-sm lg:text-base text-black-hover mb-2 last:mb-0
     }
 
     .loader.white{
@@ -115,14 +119,14 @@
     }
     
     .title-2{
+        @apply text-3xl lg:text-5xl my-3 font-bold
+    }
+
+    .title-3{
         @apply text-3xl lg:text-4xl uppercase font-extra-bold
     }
-    
-    .title-2-secondary{
-        @apply text-2xl lg:text-5xl my-3 font-primary font-bold
-    }
-    
-    .title-3{
+
+    .title-4{
         @apply text-[12px] sm:text-sm md:text-base uppercase font-extra-bold
     }
     
@@ -135,7 +139,7 @@
     }
 
     .navmd-li{
-        @apply title-3 text-white border-grey-hover py-3 w-[80vw] md:w-[50vw] hover:text-white-hover cursor-pointer
+        @apply title-4 text-white border-grey-hover py-3 w-[80vw] md:w-[50vw] hover:text-white-hover cursor-pointer
     }
 
     .second-image{
