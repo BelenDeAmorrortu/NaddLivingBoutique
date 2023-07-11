@@ -22,22 +22,24 @@ type Props = {
 export default async function OgImage({ params }: Props) {
   const { product } = params;
 
-  const { images, name } = await getProduct(product);
+  const { images, name, category } = await getProduct(product);
 
   return new ImageResponse(
     (
-      // ImageResponse JSX element
-      <div tw="w-full h-full flex justify-center items-center">
-        <Image
-          src={images[0]}
-          alt={`Imagén de ${name}`}
-          width={500}
-          height={500}
-          tw="object-cover h-full w-full flex"
-        />
+      <div
+        style={{
+          fontSize: 48,
+          background: "white",
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {category + " " + name}
       </div>
     ),
-    // ImageResponse options
     {
       ...size,
     }
