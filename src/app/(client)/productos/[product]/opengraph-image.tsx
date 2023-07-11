@@ -33,7 +33,7 @@ export default async function OgImage({ params }: Props) {
           alt={`Imagén de ${name}`}
           width={500}
           height={500}
-          tw="object-cover h-full w-full"
+          tw="object-cover h-full w-full flex"
         />
       </div>
     ),
