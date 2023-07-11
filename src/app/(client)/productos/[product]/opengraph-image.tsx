@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ImageResponse } from "next/server";
 import { getProduct } from "../../../../../sanity/sanity-utils";
 
@@ -36,11 +35,9 @@ export default async function OgImage({ params }: Props) {
           justifyContent: "center",
         }}
       >
-        <Image
+        <img
           src={images[0]}
           alt={`Imagén de ${name}`}
-          width={1200}
-          height={1200}
           style={{
             objectFit: "cover",
             height: "100%",
