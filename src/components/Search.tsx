@@ -21,7 +21,7 @@ export default function Search() {
 const useStyles = makeStyles(() => ({
   root: {
     "& .MuiAutocomplete-listbox": {
-      background: "rgb(15,15,15)",
+      background: "#0f0f0f",
       color: "#ffff",
       textTransform: "capitalize",
       padding: 25,
@@ -44,7 +44,7 @@ const useStyles = makeStyles(() => ({
       },
     },
     "& .MuiAutocomplete-noOptions": {
-      background: "rgb(15,15,15)",
+      background: "#0f0f0f",
       color: "#ffff",
       textTransform: "capitalize",
       padding: 25,
@@ -68,7 +68,7 @@ const useStyles = makeStyles(() => ({
         left: -30,
       },
       "@media(max-width: 500px)": {
-        width: "100%",
+        width: "100vw",
         left: "0",
       },
     },
@@ -113,10 +113,16 @@ function Content() {
       setWidth(document?.body.clientWidth);
     };
 
+    handleEvent();
+
     window.addEventListener("resize", handleEvent);
 
     () => window.removeEventListener("resize", handleEvent);
   }, []);
+
+  useEffect(() => {
+    console.log("width", width);
+  }, [width]);
 
   const CustomPopper = (props: any) => {
     return (
