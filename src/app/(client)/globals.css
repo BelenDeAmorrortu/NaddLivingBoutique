@@ -166,7 +166,7 @@
     }
 
     .contact-button{
-        @apply flex-row-center text-sm lg:text-base w-full md:w-[49%] p-2 border-2 uppercase font-bold transition-all duration-300
+        @apply flex-row-center text-sm lg:text-base w-full md:w-[49%] p-2 border-2 uppercase font-bold transition-all duration-200
     }
 
 }
