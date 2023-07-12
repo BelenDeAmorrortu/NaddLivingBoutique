@@ -48,7 +48,8 @@ const useStyles = makeStyles(() => ({
       color: "#ffff",
       textTransform: "capitalize",
       padding: 25,
-      minHeight: 290,
+      minHeight: 70,
+      paddingTop: 40,
     },
     "& .MuiAutocomplete-paper": {
       borderRadius: 3,
@@ -89,7 +90,7 @@ function Content() {
   const [width, setWidth] = useState<number>(0);
 
   const { isPlaceholderData, error, data } = useQuery({
-    queryFn: async () => await getProducts([]),
+    queryFn: async () => await getProducts([], undefined),
     placeholderData: [],
   });
 
@@ -120,10 +121,6 @@ function Content() {
     () => window.removeEventListener("resize", handleEvent);
   }, []);
 
-  useEffect(() => {
-    console.log("width", width);
-  }, [width]);
-
   const CustomPopper = (props: any) => {
     return (
       <Popper
@@ -150,16 +147,20 @@ function Content() {
       <Autocomplete
         className={classes.root}
         freeSolo={input.length > 0 ? false : true}
-        noOptionsText={`No hay resultados para "${input}"`}
+        noOptionsText={`Buscar: "${input}"`}
         options={options && input.length > 0 ? options : []}
         getOptionLabel={(o) =>
           typeof o === "string" ? o : `${o.category} ${o.name}`
         }
         renderInput={(props) => (
-          <SearchInput props={props} input={input} setInput={setInput} />
+          <SearchInput
+            props={props}
+            input={input}
+            setInput={setInput}
+            width={width}
+          />
         )}
         filterOptions={(options, { inputValue }) => {
-          console.log("inputValue", inputValue);
           const input = inputValue.toLowerCase();
           return options.filter((o) => {
             if (

@@ -2,6 +2,7 @@ import { createClient, groq } from 'next-sanity'
 import { Product } from '../types/Product'
 import clientConfig from './config/client-config'
 import imageUrlBuilder from '@sanity/image-url'
+import { removeAccents } from '@/utils/removeAccents'
 
 export const client = createClient(clientConfig)
 const builder = imageUrlBuilder(client)
@@ -10,25 +11,14 @@ export function sanityImage(url: string){
     return builder.image(url)
 }
 
-export async function getProducts(filters: string[]): Promise<Product[]>{
+export async function getProducts(filters: string[] | undefined, search: string | undefined): Promise<Product[]>{
 
-    let queryString = ''
+    const filterString = filters && filters?.length > 0 ? `&& category in [${filters.map(category => `"${category}"`).join(',')}]` : '' 
 
-    if(filters.length > 0){
-        filters.forEach( (f, index) =>{
-            if(index === 0){
-                queryString += ` && (category == '${f}'`
-            }
-            else{
-                queryString += ` || category == '${f}'`
-            }
-        })
-        queryString += `)`
+    // const searchString = search && search?.trim() !== '' ? `&& (name match ".${search}." || category match ".${search}.")` : '' 
 
-    }
-
-    return await client.fetch(
-        groq`*[_type == 'product' ${queryString}]{
+    const products = await client.fetch(
+        groq`*[_type == 'product' ${filterString}]{
             _id,
             name,
             category,
@@ -37,6 +27,62 @@ export async function getProducts(filters: string[]): Promise<Product[]>{
             "lqip": images[].asset->metadata.lqip,                
         }`
     )
+    
+    if(search && search.trim() !== ''){
+   
+        const matches: Product[] = []
+        const inputLength = search.length
+
+        products.forEach( (p: Product) =>{
+            let count = 0
+            let inputI= 0
+            let equalCount = 0
+
+            const stringProducto = removeAccents(`${p.category} ${p.name}`)
+            let arrayProducto = stringProducto.split('')
+            let input = search = removeAccents(search ?? '')
+
+
+            for(let i = 0; i < arrayProducto.length ; i++){
+
+                let l = arrayProducto[i]
+                let lInput = input[inputI]
+
+                if(inputI === inputLength || (stringProducto.length - 1 === i)){
+                    if((((count - equalCount) / inputLength) * 100) >= 60){
+                        matches.push(p)
+                    }
+                    return
+                }
+
+                else if(l === lInput){
+                    if(inputI === count){
+                        count += 1
+                        inputI += 1
+                    }
+                    else {
+                        inputI += 1
+                        count = inputI
+                        if(inputI - count === 2) equalCount += 2
+                        else equalCount += 1
+                    }
+                }
+                else if( l !== lInput && inputI > 0 && (inputI === count || (inputI - count) === 2) || (inputI - count) === 1){
+                    inputI += 1
+                }
+                else if( l !== lInput && inputI > count){
+                    count = 0
+                    inputI = 0
+                    equalCount = 0
+                }
+            }
+        })
+
+        return matches
+    }
+    else {
+        return products
+    }
 }
 
 export async function getProduct(slug: string): Promise<Product>{

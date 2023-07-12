@@ -1,31 +1,33 @@
 "use client";
-import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { navigation } from "@/utils/navigation";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { TextField } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface Props {
   input: string;
   setInput: (args: string) => void;
   props?: any;
+  width: number;
 }
 
-export default function SearchInput({ input, setInput, props }: Props) {
-  const [screenWidth, setScreenWidth] = useState<number>();
+export default function SearchInput({ input, setInput, props, width }: Props) {
+  const router = useRouter();
 
-  useEffect(() => {
-    window?.addEventListener("resize", () =>
-      setScreenWidth(document.body.clientWidth)
-    );
-
-    () =>
-      window?.removeEventListener("resize", () =>
-        setScreenWidth(document.body.clientWidth)
-      );
-  }, []);
+  const handleSearch = (e: any) => {
+    if (input.trim() !== "") {
+      e.preventDefault();
+      router.push(`${navigation.productos}?search=${input}`);
+      setInput("");
+    }
+  };
 
   return (
-    <div className="flex justify-between items-align w-full">
-      <button>
+    <form
+      onSubmit={(e) => handleSearch(e)}
+      className="flex justify-between items-align w-full"
+    >
+      <button type="submit">
         <MagnifyingGlassIcon className="w-5 h-5 mr-3 stroke-white" />
       </button>
       <TextField
@@ -39,7 +41,7 @@ export default function SearchInput({ input, setInput, props }: Props) {
           style: {
             background: "transparent",
             color: "#f5f5f5",
-            width: screenWidth && screenWidth < 500 ? "35vw" : "20vw",
+            width: width < 500 ? "35vw" : "20vw",
           },
         }}
         placeholder="Buscar..."
@@ -47,6 +49,6 @@ export default function SearchInput({ input, setInput, props }: Props) {
         loadingText="Cargando..."
         onBlur={() => setInput("")}
       />
-    </div>
+    </form>
   );
 }
