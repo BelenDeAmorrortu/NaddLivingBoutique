@@ -13,7 +13,7 @@ export default function ContactButtons() {
     setScreenWidth(document.body.clientWidth);
     setIsContactSection(!window.location.href.includes(navigation.productos));
     setWhatsappMessage(
-      isContactSection
+      !window.location.href.includes(navigation.productos)
         ? 'Hola! Vengo de visitar la página web de "Nadd Living Boutique". Me gustaría realizar una consulta.'
         : `Hola! Vengo de visitar la página web de "Nadd Living Boutique". Me gustaría consultar por el siguiente producto: ${window.location.href}`
     );
