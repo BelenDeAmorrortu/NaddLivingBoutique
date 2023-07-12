@@ -13,7 +13,7 @@ module.exports = {
 			},
 			'white': {
 				DEFAULT: '#ffff',
-				'hover': '#ffffffb0'
+				'hover': '#ffffff78'
 			},
 			'red': '#B50706',
 			'grey': {
