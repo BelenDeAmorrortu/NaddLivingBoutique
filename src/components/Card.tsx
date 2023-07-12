@@ -15,7 +15,7 @@ export default function Card({
   return (
     <div
       key={_id}
-      className="flex flex-col items-center justify-start w-[160px] min-h-[185px] md:w-[200px] md:min-h-[225px] lg:w-[250px] lg:min-h-[255px] my-6 m-2 md:m-4 lg:m-10"
+      className="flex flex-col items-center justify-start w-[160px] max-[370px]:w-[220px] min-h-[185px] md:w-[200px] md:min-h-[225px] lg:w-[250px] lg:min-h-[255px] my-6 m-2 md:m-4 lg:m-10"
     >
       <Link href={`${navigation.productos}/${url}`}>
         <div className="card-image">

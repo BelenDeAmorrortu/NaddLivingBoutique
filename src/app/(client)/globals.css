@@ -158,7 +158,7 @@
     }
 
     .card-image{
-        @apply w-[160px] md:w-[200px] lg:w-[280px] aspect-[3/2] overflow-hidden justify-center items-center flex
+        @apply  max-[370px]:w-[220px] w-[160px] md:w-[200px] lg:w-[280px] aspect-[3/2] overflow-hidden justify-center items-center flex
     }
 
     .loader{

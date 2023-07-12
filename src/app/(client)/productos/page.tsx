@@ -106,7 +106,7 @@ function Content() {
           ))}
         </ul>
       </div>
-      <div className="flex-col-center min-h-[60vh] w-[360px] sm:w-[380px] md:w-[465px] lg:w-[660px] min-[1336px]:w-[990px]">
+      <div className="flex-col-center min-h-[60vh] max-[370px]:w-[235px] w-[360px] sm:w-[380px] md:w-[465px] lg:w-[660px] min-[1336px]:w-[990px]">
         {error ? (
           <p>Hubo un error</p>
         ) : isPlaceholderData && products.length === 0 ? (
