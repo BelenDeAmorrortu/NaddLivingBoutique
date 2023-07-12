@@ -13,7 +13,7 @@ export default function Loader({ color, size }: Props) {
             ? " h-16 w-16"
             : size === "medium"
             ? " h-12 w-12"
-            : " h-10 w-10 p-[2px]"
+            : " h-10 w-10 p-[1.7px]"
         )}
     >
       <div
