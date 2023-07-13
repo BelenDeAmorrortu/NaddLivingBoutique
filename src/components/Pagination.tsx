@@ -1,7 +1,4 @@
-import {
-  ArrowSmallRightIcon,
-  ArrowSmallLeftIcon,
-} from "@heroicons/react/24/outline";
+import { HiArrowSmallRight, HiArrowSmallLeft } from "react-icons/hi2";
 
 type Props = {
   products: number;
@@ -31,9 +28,9 @@ export default function Pagination({
         visible ? "visible" : "invisible"
       )}
     >
-      <ArrowSmallLeftIcon
+      <HiArrowSmallLeft
         onClick={() => setCurrent(current !== 1 ? current - 1 : current)}
-        className="stroke-black hover:stroke-black-hover w-5 h-5"
+        className="stroke-black hover:stroke-black-hover w-5 h-5 cursor-pointer"
       />
       {pages.map((p, index) => (
         <button
@@ -47,11 +44,11 @@ export default function Pagination({
           {p}
         </button>
       ))}
-      <ArrowSmallRightIcon
+      <HiArrowSmallRight
         onClick={() =>
           setCurrent(current !== pages.length ? current + 1 : current)
         }
-        className="stroke-black hover:stroke-black-hover w-5 h-5"
+        className="stroke-black hover:stroke-black-hover w-5 h-5 cursor-pointer"
       />
     </div>
   );
