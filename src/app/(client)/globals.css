@@ -15,7 +15,7 @@
     }
 
     html{
-        scroll-behavior: smooth;
+        @apply scroll-smooth
     }
 
     body{
@@ -68,7 +68,7 @@
 
 ::-webkit-scrollbar-track , ::-webkit-scrollbar-track-piece{
 
-    @apply bg-white
+    @apply bg-transparent
 }
 
 ::-webkit-scrollbar-thumb {
