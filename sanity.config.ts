@@ -2,6 +2,7 @@ import { defineConfig } from 'sanity'
 import { deskTool } from 'sanity/desk'
 import product from './sanity/schemas/product-schema'
 import sections from './sanity/schemas/sections-schema'
+import category from './sanity/schemas/category-schema'
 import {deskStructure} from './sanity/sanity-desk-structure'
 
 const config = defineConfig({
@@ -16,7 +17,7 @@ const config = defineConfig({
         })
     ],
     schema: { 
-        types: [product, sections],
+        types: [product, sections, category],
     }
 })
 

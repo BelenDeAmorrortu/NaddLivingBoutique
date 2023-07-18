@@ -13,15 +13,14 @@ export function sanityImage(url: string){
 
 export async function getProducts(filters: string[] | undefined, search: string | undefined): Promise<Product[]>{
 
-    const filterString = filters && filters?.length > 0 ? `&& category in [${filters.map(category => `"${category}"`).join(',')}]` : '' 
+    const filterString = filters && filters?.length > 0 ? `&& category->category in [${filters.map(category => `"${category}"`).join(',')}]` : '' 
 
-    // const searchString = search && search?.trim() !== '' ? `&& (name match ".${search}." || category match ".${search}.")` : '' 
 
     const products = await client.fetch(
         groq`*[_type == 'product' ${filterString}]{
             _id,
             name,
-            category,
+            "category": category->category,
             "url": url.current,
             "images": images[].asset->url,
             "lqip": images[].asset->metadata.lqip,                
@@ -90,7 +89,7 @@ export async function getProduct(slug: string): Promise<Product>{
     return client.fetch(
         groq`*[_type == 'product' && url.current == $slug][0]{
             name,
-            category,
+            "category": category->category,
             "images": images[].asset->url,
             "lqip": images[].asset->metadata.lqip,                
             description
@@ -107,11 +106,23 @@ export async function getSpotlight(): Promise<Product[]>{
             spotlight[]->{
                 _id,
                 name,
-                category,
+                "category": category->category,
                 "url": url.current,
                 "images": images[].asset->url,
                 "lqip": images[].asset->metadata.lqip,                
             }
         }.spotlight`,
     )
+}
+
+export async function getCategories(): Promise<{category: string}[]>{
+    
+    const categories =  await client.fetch(
+        groq`*[_type == 'category']{
+            category               
+            }
+        }`
+    )
+
+    return categories.map((c: {category: string}) => c.category)
 }

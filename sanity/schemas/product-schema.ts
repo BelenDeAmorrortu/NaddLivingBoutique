@@ -1,4 +1,3 @@
-import { categories } from "@/utils/categories"
 import { Rule } from 'sanity';
 
 const product = {
@@ -22,12 +21,8 @@ const product = {
         {
             name:'category',
             title: 'Categoría',
-            type: 'string',
-            options:{
-                list: categories.map( c =>{
-                    return { title: c[0].toUpperCase() + c.slice(1), value: c}
-                })
-            },
+            type: 'reference',
+            to: [{ type: 'category' }],
             validation: (rule: Rule) => rule.required()
         },
         {

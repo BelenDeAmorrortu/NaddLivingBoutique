@@ -14,6 +14,6 @@ export const deskStructure = (S: StructureBuilder) =>{
                 ),
             S.divider(),
             ...S.documentTypeListItems()
-                .filter(listItem => !(listItem.getId() === 'sections' ))
+                .filter(listItem => !(listItem.getId() === 'sections'))
         ])
 }
