@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
       padding: 25,
       borderRadius: 0,
       "& li": {
-        borderBottom: "2px solid #9ca3af66",
+        borderBottom: "1px solid #9ca3af66",
         margin: "10px 0",
         padding: "8px 0",
         "@media(max-width: 640px)": {
@@ -38,7 +38,7 @@ const useStyles = makeStyles(() => ({
           fontSize: "15.5px",
         },
         "&:hover": {
-          borderBottom: "2px solid #ffff",
+          borderBottom: "1px solid #ffff",
           transition: "border 0.2s linear",
         },
       },
@@ -132,7 +132,7 @@ function Content() {
               : width < 500
               ? "100vw"
               : "26vw",
-          zIndex: 10,
+          zIndex: 100,
           position: "absolute",
         }}
         className={classes?.root}
