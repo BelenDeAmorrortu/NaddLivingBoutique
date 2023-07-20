@@ -24,7 +24,7 @@ export default function NavLg() {
               <Link href={navigation.sofasyPuffs}>Sofás y Puffs</Link>
             </li>
             <li className="nav-item">
-              <Link href={navigation.mesas}>Mesas</Link>
+              <Link href={navigation.mesasYMuebles}>Mesas y Muebles</Link>
             </li>
           </ul>
         </li>

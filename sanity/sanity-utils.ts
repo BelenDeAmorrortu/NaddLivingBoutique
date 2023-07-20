@@ -115,12 +115,11 @@ export async function getSpotlight(): Promise<Product[]>{
     )
 }
 
-export async function getCategories(): Promise<{category: string}[]>{
+export async function getCategories(): Promise<string[]>{
     
     const categories =  await client.fetch(
         groq`*[_type == 'category']{
             category               
-            }
         }`
     )
 

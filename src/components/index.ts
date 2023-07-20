@@ -13,6 +13,7 @@ import NavMd from "./NavMd";
 import ContactButtons from "./ContactButtons";
 import Loader from "./Loader";
 import Contact from "./Contact"
+import Filters from './Filters'
 
 
 export {
@@ -30,5 +31,6 @@ export {
     NavMd,
     ContactButtons,
     Loader,
-    Contact
+    Contact,
+    Filters
 }
