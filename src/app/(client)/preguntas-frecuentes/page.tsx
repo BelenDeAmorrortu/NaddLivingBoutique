@@ -1,7 +1,7 @@
 "use client";
 import { Loader } from "@/components";
 import { PortableText } from "@portabletext/react";
-import { CollapsePanelProps, CollapseProps } from "antd";
+import { CollapseProps } from "antd";
 import { Collapse } from "antd";
 import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
@@ -17,7 +17,7 @@ export default function Page() {
   );
 }
 
-export function Content() {
+function Content() {
   const { isPlaceholderData, error, data } = useQuery({
     queryFn: () => getFaq(),
     placeholderData: [],
@@ -41,7 +41,9 @@ export function Content() {
 
   return (
     <div className="faq min-h-[80vh] h-fit flex flex-col items-center justify-center py-20">
-      <h3 className="title-3 my-10 text-center">Preguntas Frecuentes</h3>
+      <h3 className="title-3 text-[1.75rem] my-10 text-center">
+        Preguntas Frecuentes
+      </h3>
       {isPlaceholderData && data?.length === 0 ? (
         <div className="flex flex-col justify-evenly items-center m-20 h-32">
           <Loader size="medium" color="black" />
