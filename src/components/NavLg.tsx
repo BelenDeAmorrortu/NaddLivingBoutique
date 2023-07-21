@@ -34,10 +34,10 @@ export default function NavLg() {
           </Link>
         </li>
         <li className="nav-item h-20 flex items-center">
-          <Link href={navigation.contacto}>Contacto</Link>
+          <a href={navigation.contacto}>Contacto</a>
         </li>
       </ul>
-      <Link className="absolute right-8" href="/">
+      <Link className="absolute right-8" href={navigation.home}>
         <HomeIcon className="w-5 h-5 mr-3 lg:mr-0 fill-white self-end" />
       </Link>
     </div>

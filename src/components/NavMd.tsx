@@ -82,7 +82,7 @@ export default function NavMd() {
             </ul>
           </li>
           <li onClick={itemClick} className="navmd-li border-y-2">
-            <Link href={navigation.contacto}>Contacto</Link>
+            <a href={navigation.contacto}>Contacto</a>
           </li>
         </ul>
       </div>
