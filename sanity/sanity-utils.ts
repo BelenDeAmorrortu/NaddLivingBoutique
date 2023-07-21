@@ -3,6 +3,7 @@ import { Product } from '../types/Product'
 import clientConfig from './config/client-config'
 import imageUrlBuilder from '@sanity/image-url'
 import { removeAccents } from '@/utils/removeAccents'
+import { Faq } from '../types/Faq'
 
 export const client = createClient(clientConfig)
 const builder = imageUrlBuilder(client)
@@ -124,4 +125,16 @@ export async function getCategories(): Promise<string[]>{
     )
 
     return categories.map((c: {category: string}) => c.category)
+}
+
+export async function getFaq(): Promise<Faq[]>{
+    
+    return await client.fetch(
+        groq`*[_type == 'faq']{
+            _id,
+            question,
+            answer               
+        }`
+    )
+
 }

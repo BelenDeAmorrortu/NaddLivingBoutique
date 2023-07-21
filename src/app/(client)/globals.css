@@ -53,6 +53,10 @@
         @apply text-sm lg:text-base text-black-hover mb-2 last:mb-0
     }
 
+    .faq p{
+        @apply text-sm lg:text-base text-black px-7
+    }
+
     .loader.white{
         background-image: conic-gradient(transparent 25%, #ffff 50%)
     }
@@ -117,6 +121,28 @@
 .ant-image-preview-operations-progress{
     @apply max-[500px]:left-[35px]
 }
+
+.ant-collapse{
+    @apply w-[80vw] rounded-[5px] border-none bg-transparent
+}
+
+:where(.css-dev-only-do-not-override-14wwjjs).ant-collapse>.ant-collapse-item:last-child>.ant-collapse-header, :where(.css-dev-only-do-not-override-14wwjjs).ant-collapse>.ant-collapse-item{
+    border-radius: 0 !important;
+    border-color: #0f0f0f7c;
+}
+
+.ant-collapse-expand-icon{
+    @apply text-red
+}
+
+.ant-collapse-header-text{
+    @apply text-sm lg:text-base font-semi-bold
+}
+
+.ant-collapse .ant-collapse-content{
+    @apply border-t-0
+}
+
 /* -- Components ------------------------------------------------------- */
 
 @layer components {

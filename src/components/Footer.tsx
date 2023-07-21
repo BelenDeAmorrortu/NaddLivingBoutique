@@ -1,4 +1,6 @@
+import { navigation } from "@/utils/navigation";
 import { PhoneIcon, MapPinIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 import { FaInstagram, FaFacebook } from "react-icons/fa";
 
 export default function Footer() {
@@ -7,8 +9,12 @@ export default function Footer() {
       <div className="w-[300px]">
         <h4>Ayuda</h4>
         <ul>
-          <li>Contacto</li>
-          <li>Preguntas Frecuentes</li>
+          <li>
+            <Link href={navigation.contacto}>Contacto</Link>
+          </li>
+          <li>
+            <Link href={navigation.faq}>Preguntas Frecuentes</Link>
+          </li>
         </ul>
       </div>
       <div className="w-[300px] max-w-[300px]">

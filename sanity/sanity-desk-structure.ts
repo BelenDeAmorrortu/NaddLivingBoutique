@@ -4,15 +4,14 @@ export const deskStructure = (S: StructureBuilder) =>{
         .title("Content")
         .items([
             S.listItem()
-                .title("Personalizar Secciones")
+                .title("Destacados")
                 .id("sections")
                 .child(
                     S.document()
-                        .title("Personalizar Secciones")
+                        .title("Destacados")
                         .schemaType("sections")
                         .documentId("sections")
                 ),
-            S.divider(),
             ...S.documentTypeListItems()
                 .filter(listItem => !(listItem.getId() === 'sections'))
         ])
