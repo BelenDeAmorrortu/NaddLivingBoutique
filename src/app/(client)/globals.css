@@ -15,7 +15,7 @@
     }
 
     html{
-        @apply scroll-smooth
+        @apply scroll-smooth bg-black
     }
 
     body{
@@ -72,7 +72,7 @@
 
 ::-webkit-scrollbar-track , ::-webkit-scrollbar-track-piece{
 
-    @apply bg-transparent
+    @apply bg-white
 }
 
 ::-webkit-scrollbar-thumb {
@@ -147,6 +147,10 @@
     place-items: center !important;
 }
 
+.MuiAutocomplete-listbox::-webkit-scrollbar-track, .MuiAutocomplete-listbox::-webkit-scrollbar-track-piece{
+    background: transparent !important;
+}
+
 /* -- Components ------------------------------------------------------- */
 
 @layer components {
@@ -188,7 +192,7 @@
     }
 
     .card-image{
-        @apply  max-[370px]:w-[220px] w-[160px] md:w-[200px] lg:w-[280px] aspect-[3/2] overflow-hidden justify-center items-center flex
+        @apply  max-[370px]:w-[220px] w-[160px] md:w-[200px] lg:w-[280px] aspect-[3/2] overflow-hidden flex justify-center items-center
     }
 
     .loader{

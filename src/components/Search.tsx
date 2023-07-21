@@ -132,7 +132,7 @@ function Content() {
               : width < 500
               ? "100vw"
               : "26vw",
-          zIndex: 100,
+          zIndex: width < 500 ? 100 : 10,
           position: "absolute",
         }}
         className={classes?.root}
