@@ -54,7 +54,7 @@
     }
 
     .faq p{
-        @apply text-sm lg:text-base text-black px-7
+        @apply text-sm lg:text-base text-dark-grey px-7
     }
 
     .loader.white{
@@ -136,11 +136,15 @@
 }
 
 .ant-collapse-header-text{
-    @apply text-sm lg:text-base font-semi-bold
+    @apply text-base lg:text-lg font-bold
 }
 
 .ant-collapse .ant-collapse-content{
     @apply border-t-0
+}
+
+.ant-collapse-header{
+    place-items: center !important;
 }
 
 /* -- Components ------------------------------------------------------- */
