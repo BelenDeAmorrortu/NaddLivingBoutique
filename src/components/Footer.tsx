@@ -31,8 +31,10 @@ export default function Footer() {
             </a>
           </li>
           <li className="group">
-            <PhoneIcon className="footer-icon" />
-            {"(+54) 11 5346-3845"}
+            <a href="tel:1153463845">
+              <PhoneIcon className="footer-icon" />
+              {"(+54) 11 5346-3845"}
+            </a>
           </li>
           <li className="group">
             <a href="mailto:naddliving@gmail.com">
