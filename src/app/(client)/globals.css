@@ -19,7 +19,11 @@
     }
 
     body{
-        @apply font-primary font-regular tracking-[1.5px] bg-white text-black scroll-smooth
+        @apply font-primary font-regular tracking-[1.5px] bg-black text-black scroll-smooth
+    }
+
+    main{
+        @apply bg-white min-h-[70vh]
     }
 
     section{
@@ -123,7 +127,7 @@
 }
 
 .ant-collapse{
-    @apply w-[80vw] rounded-[5px] border-none bg-transparent
+    @apply w-[90vw] sm:w-[80vw] border-none bg-transparent
 }
 
 :where(.css-dev-only-do-not-override-14wwjjs).ant-collapse>.ant-collapse-item:last-child>.ant-collapse-header, :where(.css-dev-only-do-not-override-14wwjjs).ant-collapse>.ant-collapse-item{

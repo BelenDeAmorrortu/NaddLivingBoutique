@@ -102,7 +102,7 @@ function Content() {
   }
 
   return (
-    <div className="min-h-[60vh] my-36 w-full flex flex-col items-center sm:flex-row sm:justify-around sm:items-start">
+    <div className="min-h-[60vh] py-36 w-full flex flex-col items-center sm:flex-row sm:justify-around sm:items-start">
       <Filters
         filters={filters}
         search={search}
