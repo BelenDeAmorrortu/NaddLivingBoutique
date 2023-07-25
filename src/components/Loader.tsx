@@ -6,14 +6,14 @@ interface Props {
 export default function Loader({ color, size }: Props) {
   return (
     <div
-      className={"loader p-[6px] rounded-[100%] relative "
+      className={"loader rounded-[100%] relative "
         .concat(color === "white" ? "white" : "black")
         .concat(
           size === "large"
-            ? " h-16 w-16"
+            ? " h-16 w-16 p-[6px]"
             : size === "medium"
-            ? " h-12 w-12"
-            : " h-10 w-10 p-[1.5px]"
+            ? " h-12 w-12 p-[4px]"
+            : " h-10 w-10 p-[3px]"
         )}
     >
       <div
