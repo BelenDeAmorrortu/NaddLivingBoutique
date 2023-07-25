@@ -24,7 +24,7 @@ export default function Footer() {
             <a
               className="adress"
               target="_blank"
-              href="https://www.google.com/maps/place/Av.+C%C3%B3rdoba+4454,+C1414+Villa+Crespo,+Buenos+Aires/@-34.5952946,-58.4375716,15z/data=!4m16!1m9!3m8!1s0x95bcca79e275f0f7:0x8e0e2a2a0b74e3a3!2sAv.+C%C3%B3rdoba+4454,+C1414+Villa+Crespo,+Buenos+Aires!3b1!8m2!3d-34.5952946!4d-58.4288169!10e5!16s%2Fg%2F11c2blxhw6!3m5!1s0x95bcca79e275f0f7:0x8e0e2a2a0b74e3a3!8m2!3d-34.5952946!4d-58.4288169!16s%2Fg%2F11c2blxhw6?entry=ttu"
+              href="https://www.google.com/maps/place/Nadd/@-34.5952946,-58.4313918,17z/data=!3m1!4b1!4m6!3m5!1s0x95bccab9a1d5c4ad:0x74afd8399ecd97d3!8m2!3d-34.5952946!4d-58.4288169!16s%2Fg%2F1td9fyx2?entry=ttu"
             >
               <MapPinIcon className="footer-icon h-5 w-5" /> Av. Córdoba 4454,
               CABA, Argentina.
