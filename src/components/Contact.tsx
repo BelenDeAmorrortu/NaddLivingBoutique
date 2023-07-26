@@ -12,6 +12,7 @@ export default function Contact() {
         src={Contact1}
         alt="Imagén sillón Pistachio"
         fill
+        placeholder="blur"
         className="object-cover brightness-50"
       />
       <div className="flex-col-center absolute w-full space-y-6">

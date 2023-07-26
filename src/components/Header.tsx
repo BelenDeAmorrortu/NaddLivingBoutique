@@ -12,6 +12,8 @@ export default function Header() {
         src={Banner}
         alt="Imagén sillón París"
         fill
+        priority
+        placeholder="blur"
         className="object-cover brightness-50"
       />
       <div className="flex-col-center w-full h-screen absolute">
