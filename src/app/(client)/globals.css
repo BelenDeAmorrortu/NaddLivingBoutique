@@ -127,7 +127,7 @@
 }
 
 .ant-collapse{
-    @apply w-[90vw] sm:w-[80vw] border-none bg-transparent
+    @apply w-[90vw] sm:w-[80vw] border-none bg-transparent rounded-none
 }
 
 :where(.css-dev-only-do-not-override-14wwjjs).ant-collapse>.ant-collapse-item:last-child>.ant-collapse-header, :where(.css-dev-only-do-not-override-14wwjjs).ant-collapse>.ant-collapse-item{
