@@ -19,7 +19,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata = {
-  // metadataBase: new URL('URL DEL DEPLOY'),
+  metadataBase: new URL("naddlivingboutique.com"),
   title: {
     default: "NADD Living Boutique",
     template: `%s | NADD Living Boutique`,
