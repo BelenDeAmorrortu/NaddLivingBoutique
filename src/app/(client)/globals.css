@@ -89,7 +89,7 @@
 
 .swiper-thumbs .swiper-wrapper{
 
-    @apply justify-center
+    justify-content: center !important;
 }
 
 .swiper-thumbs .swiper-slide{
@@ -103,7 +103,15 @@
 
 .swiper-button-next, .swiper-button-prev{
 
-    @apply text-black hover:text-black-hover transition-colors duration-75 scale-75 drop-shadow-[0_5px_5px_#ffff]
+    color: #0f0f0f !important;
+    transition: color 300ms linear !important;
+    transform: scale(0.75) !important;
+    /* @apply text-black hover:text-black-hover transition-colors duration-75 scale-75 drop-shadow-[0_5px_5px_#ffff] */
+}
+
+.swiper-button-next:hover, .swiper-button-prev:hover{
+
+    color: #0f0f0f99 !important;
 }
 
 .swiper-button-next{
