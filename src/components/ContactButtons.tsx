@@ -5,12 +5,10 @@ import { useEffect, useState } from "react";
 import { navigation } from "@/utils/navigation";
 
 export default function ContactButtons() {
-  const [screenWidth, setScreenWidth] = useState<number>();
   const [isContactSection, setIsContactSection] = useState<boolean>();
   const [whatsappMessage, setWhatsappMessage] = useState<string>();
 
   useEffect(() => {
-    setScreenWidth(document.body.clientWidth);
     setIsContactSection(!window.location.href.includes(navigation.productos));
     setWhatsappMessage(
       !window.location.href.includes(navigation.productos)
@@ -40,9 +38,7 @@ export default function ContactButtons() {
       <button
         onClick={() =>
           window.open(
-            screenWidth && screenWidth < 500
-              ? "https://ig.me/m/nadd.living.boutique"
-              : "https://www.instagram.com/nadd.living.boutique/",
+            "https://www.instagram.com/nadd.living.boutique/",
             "_blank"
           )
         }
