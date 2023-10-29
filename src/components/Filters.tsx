@@ -2,7 +2,7 @@
 
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-import { getCategories } from "../../sanity/sanity-utils";
+import { getCategories } from "../sanity/requests/sanity-requests";
 
 const queryClient = new QueryClient();
 

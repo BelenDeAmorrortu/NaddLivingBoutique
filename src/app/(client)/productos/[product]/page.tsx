@@ -1,4 +1,4 @@
-import { getProduct } from "../../../../../sanity/sanity-utils";
+import { getProduct } from "../../../../sanity/requests/sanity-requests";
 import { PortableText } from "@portabletext/react";
 import { Carousel, ContactButtons } from "@/components";
 import { navigation } from "@/utils/navigation";
@@ -11,16 +11,16 @@ export async function generateMetadata({ params }: Props) {
   try {
     const { product } = params;
 
-    const { name, images, category } = await getProduct(product);
+    const { name, category } = await getProduct(product);
 
     if (!name) throw Error("product not found");
     return {
-      title: `${category[0].toUpperCase() + category.slice(1)} ${name}`,
+      title: `${category[0][0].toUpperCase() + category[0].slice(1)} ${name}`,
       alternates: {
         canonical: `${navigation.productos}/${product}`,
       },
       openGraph: {
-        title: `${category[0].toUpperCase() + category.slice(1)} ${name}`,
+        title: `${category[0][0].toUpperCase() + category[0].slice(1)} ${name}`,
       },
     };
   } catch (error) {
@@ -42,7 +42,7 @@ export default async function page({ params }: Props) {
       </div>
       <div className="w-[90vw] md:w-[40vw] flex flex-col justify-center">
         <h1 className="title-3 text-red">{name}</h1>
-        <h4 className="subtitle-1 my-5">{category}</h4>
+        <h4 className="subtitle-1 my-5">{category.join(" - ")}</h4>
         <PortableText value={description} />
         <h4 className="text-sm lg:text-base uppercase font-bold border-b-2 border-grey text-black py-3 my-5">
           Consultar

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { getProducts } from "../../sanity/sanity-utils";
+import { getProducts } from "../sanity/requests/sanity-requests";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { Autocomplete, Popper } from "@mui/material";
 import SearchInput from "./SearchInput";
@@ -99,7 +99,7 @@ function Content() {
   const options = [
     ...categories.map((c) => {
       return {
-        category: "Ver categoría:",
+        category: ["Ver categoría:"],
         name: c,
         url: c,
       };
@@ -150,7 +150,7 @@ function Content() {
         noOptionsText={`Buscar: "${input}"`}
         options={options && input.length > 0 ? options : []}
         getOptionLabel={(o) =>
-          typeof o === "string" ? o : `${o.category} ${o.name}`
+          typeof o === "string" ? o : `${o.category.join(" ")} ${o.name}`
         }
         renderInput={(props) => (
           <SearchInput
@@ -164,13 +164,13 @@ function Content() {
           const input = inputValue.toLowerCase();
           return options.filter((o) => {
             if (
-              o.category !== "Ver categoría:" &&
-              (o.category.toLowerCase().includes(input) ||
+              !o.category.includes("Ver categoría:") &&
+              (o.category.some((c) => c.toLowerCase().includes(input)) ||
                 o.name.toLowerCase().includes(input))
             )
               return true;
             else if (
-              o.category === "Ver categoría:" &&
+              o.category.includes("Ver categoría:") &&
               o.name.toLowerCase().includes(input)
             )
               return true;
@@ -180,7 +180,7 @@ function Content() {
         value={input}
         onChange={(e, value) => {
           if (value && typeof value !== "string") {
-            if (value.category === "Ver categoría:") {
+            if (value.category.includes("Ver categoría:")) {
               setInput("");
 
               router.push(`${navigation.productos}?filter=${value.url}`);

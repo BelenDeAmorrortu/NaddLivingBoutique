@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getSpotlight } from "../../sanity/sanity-utils";
+import { getSpotlight } from "../sanity/requests/sanity-requests";
 import Card from "./Card";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import { navigation } from "@/utils/navigation";
