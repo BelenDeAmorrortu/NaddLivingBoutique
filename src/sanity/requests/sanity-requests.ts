@@ -1,10 +1,9 @@
 import { createClient, groq } from "next-sanity";
-import { Product } from "../types/Product";
-import clientConfig from "./config/client-config";
+import { Product } from "../../../types/Product";
+import clientConfig from "../config/client-config";
 import imageUrlBuilder from "@sanity/image-url";
-import { removeAccents } from "@/utils/removeAccents";
-import { Faq } from "../types/Faq";
-import category from "./schemas/category-schema";
+import { Faq } from "../../../types/Faq";
+import { searchProducts } from "@/utils/searchProducts";
 
 export const client = createClient(clientConfig);
 const builder = imageUrlBuilder(client);
@@ -19,13 +18,11 @@ export async function getProducts(
 ): Promise<Product[]> {
   const filterString =
     filters && filters?.length > 0
-      ? `&& count(category[]->category in [${filters
+      ? `&& count((category[]->category)[@ in [${filters
           .map((filter) => `"${filter}"`)
-          .join(",")}]) > 0
+          .join(", ")}]]) > 0
       `
       : "";
-
-  // count(category[]->category in [${filters.map((filter) => `*[_type == 'category' && category == "${filter}"]._id`).join(",")}]) > 0
 
   const products = await client.fetch(
     groq`*[_type == 'product' ${filterString}]{
@@ -38,56 +35,8 @@ export async function getProducts(
         }`
   );
 
-  console.log("products", products);
-
   if (search && search.trim() !== "") {
-    const matches: Product[] = [];
-    const inputLength = search.length;
-
-    products.forEach((p: Product) => {
-      let count = 0;
-      let inputI = 0;
-      let equalCount = 0;
-
-      const stringProducto = removeAccents(`${p.category} ${p.name}`);
-      let arrayProducto = stringProducto.split("");
-      let input = (search = removeAccents(search ?? ""));
-
-      for (let i = 0; i < arrayProducto.length; i++) {
-        let l = arrayProducto[i];
-        let lInput = input[inputI];
-
-        if (inputI === inputLength || stringProducto.length - 1 === i) {
-          if (((count - equalCount) / inputLength) * 100 >= 60) {
-            matches.push(p);
-          }
-          return;
-        } else if (l === lInput) {
-          if (inputI === count) {
-            count += 1;
-            inputI += 1;
-          } else {
-            inputI += 1;
-            count = inputI;
-            if (inputI - count === 2) equalCount += 2;
-            else equalCount += 1;
-          }
-        } else if (
-          (l !== lInput &&
-            inputI > 0 &&
-            (inputI === count || inputI - count === 2)) ||
-          inputI - count === 1
-        ) {
-          inputI += 1;
-        } else if (l !== lInput && inputI > count) {
-          count = 0;
-          inputI = 0;
-          equalCount = 0;
-        }
-      }
-    });
-
-    return matches;
+    return searchProducts(search, products);
   } else {
     return products;
   }

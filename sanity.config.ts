@@ -1,14 +1,14 @@
 import { defineConfig } from "sanity";
 import { deskTool } from "sanity/desk";
-import product from "./sanity/schemas/product-schema";
-import sections from "./sanity/schemas/sections-schema";
-import category from "./sanity/schemas/category-schema";
-import faq from "./sanity/schemas/faq-schema";
-import { deskStructure } from "./sanity/sanity-desk-structure";
+import product from "./src/sanity/schemas/product-schema";
+import sections from "./src/sanity/schemas/sections-schema";
+import category from "./src/sanity/schemas/category-schema";
+import faq from "./src/sanity/schemas/faq-schema";
+import { deskStructure } from "./src/sanity/config/sanity-desk-structure";
 
 const config = defineConfig({
-  projectId: "83r3ol58",
-  dataset: "dev",
+  projectId: `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}`,
+  dataset: `${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
   title: "NADD living boutique",
   apiVersion: "2023-05-11",
   basePath: "/admin",

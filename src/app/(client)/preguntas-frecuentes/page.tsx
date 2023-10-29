@@ -5,7 +5,7 @@ import { CollapseProps } from "antd";
 import { Collapse } from "antd";
 import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-import { getFaq } from "../../../../sanity/sanity-utils";
+import { getFaq } from "../../../sanity/requests/sanity-requests";
 
 const queryClient = new QueryClient();
 

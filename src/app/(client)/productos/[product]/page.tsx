@@ -1,4 +1,4 @@
-import { getProduct } from "../../../../../sanity/sanity-utils";
+import { getProduct } from "../../../../sanity/requests/sanity-requests";
 import { PortableText } from "@portabletext/react";
 import { Carousel, ContactButtons } from "@/components";
 import { navigation } from "@/utils/navigation";

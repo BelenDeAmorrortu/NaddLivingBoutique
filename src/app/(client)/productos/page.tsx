@@ -2,7 +2,7 @@
 import { Card, Filters, Loader, Pagination } from "@/components";
 import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-import { getProducts } from "../../../../sanity/sanity-utils";
+import { getProducts } from "../../../sanity/requests/sanity-requests";
 import { Product } from "../../../../types/Product";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
