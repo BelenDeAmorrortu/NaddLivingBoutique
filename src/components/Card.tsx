@@ -1,7 +1,7 @@
 import { navigation } from "@/utils/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "../../types/Product";
+import { Product } from "../types/Product";
 
 export default function Card({
   _id,

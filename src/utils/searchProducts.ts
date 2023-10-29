@@ -1,4 +1,4 @@
-import { Product } from "../../types/Product";
+import { Product } from "../types/Product";
 import { removeAccents } from "./removeAccents";
 
 export const searchProducts = (search: string, products: Product[]) => {
