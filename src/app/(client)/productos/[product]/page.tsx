@@ -11,16 +11,16 @@ export async function generateMetadata({ params }: Props) {
   try {
     const { product } = params;
 
-    const { name, images, category } = await getProduct(product);
+    const { name, category } = await getProduct(product);
 
     if (!name) throw Error("product not found");
     return {
-      title: `${category[0].toUpperCase() + category.slice(1)} ${name}`,
+      title: `${category[0][0].toUpperCase() + category[0].slice(1)} ${name}`,
       alternates: {
         canonical: `${navigation.productos}/${product}`,
       },
       openGraph: {
-        title: `${category[0].toUpperCase() + category.slice(1)} ${name}`,
+        title: `${category[0][0].toUpperCase() + category[0].slice(1)} ${name}`,
       },
     };
   } catch (error) {
