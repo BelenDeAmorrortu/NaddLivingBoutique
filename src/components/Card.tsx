@@ -44,7 +44,7 @@ export default function Card({
           </div>
         </Link>
         <h4 className="mt-4 mb-2 title-4 text-center">{name}</h4>
-        <h5 className="capitalize text-xs">{category}</h5>
+        <h5 className="capitalize text-xs">{category.join(" - ")}</h5>
       </div>
     );
   }
