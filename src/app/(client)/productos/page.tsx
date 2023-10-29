@@ -54,6 +54,9 @@ function Content() {
     setSearch(
       params.getAll("search").length === 0 ? "" : params.getAll("search")[0]
     );
+    const page = Number(params.get("page"));
+    setCurrentPage(page == 0 ? 1 : page);
+
     () => {
       setFilters(undefined);
       setSearch(undefined);
@@ -67,7 +70,6 @@ function Content() {
   useEffect(() => {
     if (filters !== undefined) {
       refetch();
-      setCurrentPage(1);
     }
   }, [filters]);
 
@@ -81,13 +83,14 @@ function Content() {
     window.scrollTo(0, 0);
   }, [currentPage]);
 
-  function setParams(filterArray: string[]) {
+  function setParams(filterArray: string[], page?: number) {
     const queries = filterArray?.map((f) => `filter=${f}`).join("&");
-    router.push(
-      `${navigation.productos}?${queries ?? ""}${
-        search ? `&search=${search}` : ""
-      }`
-    );
+
+    const url = `${navigation.productos}?${queries ?? ""}${
+      search ? `&search=${search}` : ""
+    }&page=${page ?? 1}`;
+
+    router.push(url);
   }
 
   function addFilter(s: string) {
@@ -99,6 +102,10 @@ function Content() {
     if (filters) {
       setParams(filters?.filter((f) => f !== s));
     }
+  }
+
+  function handleSetCurrentPage(page: number) {
+    setParams(filters ?? [], page);
   }
 
   return (
@@ -134,7 +141,7 @@ function Content() {
         <Pagination
           visible={!(isPlaceholderData || products.length === 0)}
           current={currentPage}
-          setCurrent={setCurrentPage}
+          setCurrent={handleSetCurrentPage}
           products={products.length}
           productsPerPage={amountPerPage}
         />
