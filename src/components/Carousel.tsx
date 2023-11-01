@@ -36,10 +36,7 @@ export default function Carousel({ images, lqip }: Props) {
         {images &&
           images.map((image, index) => {
             return (
-              <SwiperSlide
-                key={index}
-                className="flex justify-center items-center"
-              >
+              <SwiperSlide key={index} className="swiperSlide">
                 <div className="w-[280px] min-[500px]:w-[300px] h-[300px] md:h-[350px] md:w-[350px] min-[880px]:w-[380px] lg:h-[400px] lg:w-[460px] min-[1243px]:w-[530px] flex justify-center items-center">
                   <Img
                     key={index}

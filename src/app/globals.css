@@ -88,6 +88,12 @@
   justify-content: center !important;
 }
 
+.swiperSlide {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
 .swiper-thumbs .swiper-slide {
   @apply opacity-70 brightness-[.90] cursor-pointer;
 }
