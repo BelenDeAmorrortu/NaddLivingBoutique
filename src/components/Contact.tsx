@@ -6,7 +6,7 @@ export default function Contact() {
   return (
     <section
       id="contacto"
-      className="relative h-[50vh] w-full flex-center overflow-hidden"
+      className="relative h-[55vh] w-full flex-center overflow-hidden"
     >
       <Image
         src={Contact1}

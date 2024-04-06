@@ -8,7 +8,7 @@ export default async function Layout({
 }) {
   return (
     <>
-      <Nav />
+      <Nav color="black" />
       <main>{children}</main>
       <Footer />
       <BackToTop />

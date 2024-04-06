@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { navigation } from "@/utils/navigation";
 import { FiInfo } from "react-icons/fi";
 import { BiErrorCircle } from "react-icons/bi";
+import { CascadeReveal } from "@/transitions";
 
 const queryClient = new QueryClient();
 
@@ -133,8 +134,10 @@ function Content() {
           </p>
         ) : (
           <div className="flex flex-wrap w-full">
-            {currentProducts.map((p) => (
-              <Card {...p} />
+            {currentProducts.map((p, i) => (
+              <CascadeReveal key={i}>
+                <Card {...p} />
+              </CascadeReveal>
             ))}
           </div>
         )}

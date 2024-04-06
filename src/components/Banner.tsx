@@ -1,9 +1,13 @@
 import { Sofa } from "@/assets/images";
+import Reveal from "@/transitions/Reveal";
 import Image from "next/image";
 
 export default function Banner() {
   return (
-    <section className="flex flex-col sm:flex-row justify-around items-center h-fit min-h-[65vh] w-full">
+    <Reveal
+      isSection
+      tailwindStyles="flex flex-col sm:flex-row justify-around items-center h-fit min-h-[65vh] w-full"
+    >
       <div className="w-[90%] sm:w-[40%] flex-center">
         <Image
           src={Sofa}
@@ -26,6 +30,6 @@ export default function Banner() {
           producimos de manera artesanal y con los diseños más innovadores.
         </p>
       </div>
-    </section>
+    </Reveal>
   );
 }

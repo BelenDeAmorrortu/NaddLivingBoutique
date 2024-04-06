@@ -1,36 +1,14 @@
-import Nav from "./Nav";
-import Header from "./Header";
-import Banner from "./Banner";
-import Card from "./Card";
-import Spotlight from "./Spotlight";
-import Carousel from './Carousel'
-import Footer from "./Footer";
-import Pagination from "./Pagination";
-import BackToTop from "./BackToTop";
-import Search from "./Search";
-import NavLg from "./NavLg";
-import NavMd from "./NavMd";
-import ContactButtons from "./ContactButtons";
-import Loader from "./Loader";
-import Contact from "./Contact"
-import Filters from './Filters'
-
-
-export {
-    Nav,
-    Header,
-    Banner,
-    Card,
-    Spotlight,
-    Carousel,
-    Footer,
-    Pagination,
-    BackToTop,
-    Search,
-    NavLg,
-    NavMd,
-    ContactButtons,
-    Loader,
-    Contact,
-    Filters
-}
+export { default as Nav } from "./Nav";
+export { default as Header } from "./Header";
+export { default as Banner } from "./Banner";
+export { default as Card } from "./Card";
+export { default as Spotlight } from "./Spotlight";
+export { default as Carousel } from "./Carousel";
+export { default as Footer } from "./Footer";
+export { default as Pagination } from "./Pagination";
+export { default as BackToTop } from "./BackToTop";
+// export {default as Search} from "./Search";
+export { default as ContactButtons } from "./ContactButtons";
+export { default as Loader } from "./Loader";
+export { default as Contact } from "./Contact";
+export { default as Filters } from "./Filters";
