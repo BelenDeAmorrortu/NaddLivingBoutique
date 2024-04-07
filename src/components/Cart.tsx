@@ -19,7 +19,7 @@ export default function Cart({ isOpen, close }: IProps) {
     >
       <div className="w-[400px] h-screen px-5 bg-white flex flex-col justify-center items-start">
         <div className="w-full h-[65px] flex justify-between items-center border-b border-black">
-          <h3 className="text-black font-semi-bold text-xl">CARRITO</h3>
+          <h3 className="text-black font-bold text-xl">CARRITO</h3>
           <button
             onClick={close}
             className=" border-none bg-transparent p-0 m-0"
@@ -41,12 +41,12 @@ export default function Cart({ isOpen, close }: IProps) {
               />
             </div>
             <div className="flex flex-col justify-start items-start gap-1">
-              <h4 className=" font-semi-bold uppercase text-base">
+              <h4 className=" font-bold uppercase text-base">
                 Nombre producto
               </h4>
               <h4 className="uppercase text-xs">Color a eleccion</h4>
               <h4 className="uppercase text-xs">1.80m x 0.80m</h4>
-              <h4 className="text-base font-semi-bold">$1.600.000</h4>
+              <h4 className="text-base font-bold">$1.600.000</h4>
             </div>
             <div>
               <AiFillDelete size={20} />
