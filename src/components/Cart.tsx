@@ -12,13 +12,9 @@ interface IProps {
 
 export default function Cart({ isOpen, close }: IProps) {
   return (
-    <div
-      className={`${
-        isOpen ? "visible" : "invisible"
-      } w-full h-screen bg-black-hover z-50 fixed top-0 left-0 flex justify-end items-start`}
-    >
-      <div className="w-[400px] h-screen px-5 bg-white flex flex-col justify-center items-start">
-        <div className="w-full h-[65px] flex justify-between items-center border-b border-black">
+    <div className={`${isOpen ? "visible" : "invisible"} cart`}>
+      <div className="cart-sheet">
+        <div className="cart-sheet-header">
           <h3 className="text-black font-bold text-xl">CARRITO</h3>
           <button
             onClick={close}
@@ -27,11 +23,9 @@ export default function Cart({ isOpen, close }: IProps) {
             <IoClose size={25} />
           </button>
         </div>
-        <ul className="flex w-full flex-1 flex-col justify-start items-start">
-          <li className=" my-5 flex justify-between items-center w-full min-h-16 h-fit">
-            <div
-              className={`w-[100px] aspect-square overflow-hidden flex justify-center items-center`}
-            >
+        <ul className="cart-sheet-ul">
+          <li className="cart-sheet-li">
+            <div className={`cart-sheet-img`}>
               <Image
                 src={Sofas}
                 alt={`Imagén del Producto`}
@@ -53,7 +47,7 @@ export default function Cart({ isOpen, close }: IProps) {
             </div>
           </li>
         </ul>
-        <div className="flex flex-col w-full justify-center items-center gap-5 py-5 border-t border-t-black">
+        <div className="cart-sheet-bottom">
           <h4 className="flex justify-between w-full h-fit ">
             <span className="font-bold">TOTAL:</span>
             <span>$1.600.000</span>
