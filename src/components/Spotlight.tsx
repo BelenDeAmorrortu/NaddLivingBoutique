@@ -26,7 +26,7 @@ function Component() {
 
   return (
     <section className="flex-col-center w-full h-fit my-10">
-      <Reveal>
+      <Reveal tailwindStyles="flex-col-center">
         <h4 className="subtitle-1">Nuestros Productos</h4>
         <h3 className="title-3 m-3 mb-16">Destacados</h3>
       </Reveal>
