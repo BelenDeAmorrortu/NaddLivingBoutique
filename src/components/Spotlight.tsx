@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getSpotlight } from "../sanity/requests/sanity-requests";
 import Card from "./Card";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
-import { navigation } from "@/utils/navigation";
+import { navigation } from "@/constants/navigation";
 import Reveal from "@/transitions/Reveal";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import CascadeReveal from "@/transitions/CascadeReveal";
