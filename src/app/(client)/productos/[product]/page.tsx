@@ -1,7 +1,7 @@
 import { getProduct } from "../../../../sanity/requests/sanity-requests";
 import { PortableText } from "@portabletext/react";
 import { Carousel, ContactButtons } from "@/components";
-import { navigation } from "@/utils/navigation";
+import { navigation } from "@/constants/navigation";
 
 type Props = {
   params: { product: "string" };

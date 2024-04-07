@@ -6,7 +6,7 @@ import { getProducts } from "../../../sanity/requests/sanity-requests";
 import { Product } from "../../../types/Product";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { navigation } from "@/utils/navigation";
+import { navigation } from "@/constants/navigation";
 import { FiInfo } from "react-icons/fi";
 import { BiErrorCircle } from "react-icons/bi";
 import { CascadeReveal } from "@/transitions";

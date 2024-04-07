@@ -1,4 +1,4 @@
-import { navigation } from "@/utils/navigation";
+import { navigation } from "@/constants/navigation";
 import { PhoneIcon, MapPinIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { FaInstagram, FaFacebook } from "react-icons/fa";

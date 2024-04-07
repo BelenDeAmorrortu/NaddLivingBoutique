@@ -1,4 +1,4 @@
-import { Nav, Footer, BackToTop } from "../../components";
+import { Nav, Footer, BackToTop, Whatsapp } from "../../components";
 import "../globals.css";
 
 export default async function Layout({
@@ -12,6 +12,7 @@ export default async function Layout({
       <main>{children}</main>
       <Footer />
       <BackToTop />
+      <Whatsapp />
     </>
   );
 }

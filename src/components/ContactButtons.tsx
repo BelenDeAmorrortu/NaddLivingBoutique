@@ -2,7 +2,8 @@
 import { FaInstagram } from "react-icons/fa";
 import { BsWhatsapp } from "react-icons/bs";
 import { useEffect, useState } from "react";
-import { navigation } from "@/utils/navigation";
+import { navigation } from "@/constants/navigation";
+import { sendWhatsappMessage } from "@/utils/sendWhatsappMessage";
 
 export default function ContactButtons() {
   const [isContactSection, setIsContactSection] = useState<boolean>();
@@ -20,12 +21,9 @@ export default function ContactButtons() {
   return (
     <div className="flex flex-col-center space-y-5 md:space-y-0 md:flex-row md:justify-between w-full">
       <button
-        onClick={() =>
-          window.open(
-            `https://api.whatsapp.com/send?phone=541153463845&text=${whatsappMessage}`,
-            "_blank"
-          )
-        }
+        onClick={() => {
+          if (whatsappMessage) sendWhatsappMessage(whatsappMessage);
+        }}
         className={"contact-button ".concat(
           isContactSection
             ? "border-white text-white hover:border-white-hover hover:text-white-hover"

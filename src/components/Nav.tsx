@@ -1,60 +1,19 @@
 "use client";
-import { Banner, Logo, Mesas, Sillon, Sofas, Todo } from "@/assets/images";
-import { navigation } from "@/utils/navigation";
+import { navigation } from "@/constants/navigation";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { BsBagFill, BsChevronCompactDown } from "react-icons/bs";
 import Cart from "./Cart";
-import Nav from "./Nav";
 import UseAnimations from "react-useanimations";
 import menu2 from "react-useanimations/lib/menu2";
+import { navItems } from "@/constants/NavItems";
+import { Logo } from "@/assets/images";
 
 interface IProps {
   color: "white" | "black";
 }
-
-const navItems = [
-  {
-    name: `Home`,
-    href: navigation.home,
-  },
-  {
-    name: `Productos`,
-    href: navigation.productos,
-    categories: [
-      {
-        name: `Sillas y Sillones`,
-        href: navigation.sillasYSillones,
-        image: Sillon,
-      },
-      {
-        name: `Sofás y Puffs`,
-        href: navigation.sofasyPuffs,
-        image: Sofas,
-      },
-      {
-        name: `Mesas y Muebles`,
-        href: navigation.mesasYMuebles,
-        image: Mesas,
-      },
-      {
-        name: `Ver todo`,
-        href: navigation.productos,
-        image: Todo,
-      },
-    ],
-  },
-  {
-    name: "Telas",
-    href: navigation.contacto,
-  },
-  {
-    name: "Contacto",
-    href: navigation.contacto,
-  },
-];
 
 export default function Nav({ color }: IProps) {
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
@@ -112,7 +71,7 @@ const NavItemsLg = () => {
               i.categories ? `group` : ""
             }`}
           >
-            <a href={i.href} className={` text-white uppercase`}>
+            <a href={i.href} className={` text-white uppercase font-semi-bold`}>
               {i.name}
             </a>
             {i.categories && (
@@ -131,7 +90,7 @@ const NavItemsLg = () => {
                       </div>
                       <Link
                         href={p.href}
-                        className={`flex flex-1 absolute uppercase`}
+                        className={`flex flex-1 absolute uppercase font-bold drop-shadow-md`}
                       >
                         {p.name}
                       </Link>
