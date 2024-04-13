@@ -12,8 +12,17 @@ interface IProps {
 
 export default function Cart({ isOpen, close }: IProps) {
   return (
-    <div className={`${isOpen ? "visible" : "invisible"} cart`}>
-      <div className="cart-sheet">
+    <>
+      <div
+        className={`${
+          isOpen ? "visible opacity-100" : "invisible opacity-0"
+        } veil transition-opacity duration-75 delay-75`}
+      ></div>
+      <div
+        className={`${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        } cart-sheet transition-transform duration-300`}
+      >
         <div className="cart-sheet-header">
           <h3 className="text-black font-bold text-xl">CARRITO</h3>
           <button
@@ -23,7 +32,7 @@ export default function Cart({ isOpen, close }: IProps) {
             <IoClose size={25} />
           </button>
         </div>
-        <ul className="cart-sheet-ul">
+        <ul className={`cart-sheet-ul`}>
           <li className="cart-sheet-li">
             <div className={`cart-sheet-img`}>
               <Image
@@ -55,6 +64,6 @@ export default function Cart({ isOpen, close }: IProps) {
           <button className="contact-button w-full">CHECKOUT</button>
         </div>
       </div>
-    </div>
+    </>
   );
 }
