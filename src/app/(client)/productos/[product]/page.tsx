@@ -2,6 +2,7 @@ import { getProduct } from "../../../../sanity/requests/sanity-requests";
 import { PortableText } from "@portabletext/react";
 import { Carousel, ContactButtons } from "@/components";
 import { navigation } from "@/constants/navigation";
+import AddToCartProductForm from "@/components/AddToCartProductForm";
 
 type Props = {
   params: { product: "string" };
@@ -44,6 +45,7 @@ export default async function page({ params }: Props) {
         <h1 className="title-3 text-red">{name}</h1>
         <h4 className="subtitle-1 my-5">{category.join(" - ")}</h4>
         <PortableText value={description} />
+        <AddToCartProductForm />
         <h4 className="text-sm lg:text-base uppercase font-bold border-b-2 border-grey text-black py-3 my-5">
           Consultar
         </h4>

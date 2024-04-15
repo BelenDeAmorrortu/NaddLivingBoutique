@@ -21,7 +21,7 @@ export default function Nav({ color }: IProps) {
   return (
     <>
       <nav
-        className={`z-20 bg-${color} w-full h-16 lg:h-[65px] fixed top-0 left-0 text-sm flex justify-center items-center`}
+        className={` z-30 bg-${color} w-full h-16 lg:h-[65px] fixed top-0 left-0 text-sm flex justify-center items-center`}
       >
         {/* Large */}
         <div
