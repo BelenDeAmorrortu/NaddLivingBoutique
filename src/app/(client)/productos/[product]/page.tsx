@@ -38,7 +38,7 @@ export default async function page({ params }: Props) {
 
   return (
     <div className="description flex flex-col md:flex-row h-fit pb-10 pt-32 justify-around items-center">
-      <div className="mb-12 w-[95vw] sm:mb-0 md:w-[50vw] min-[1243px]:w-[47vw]">
+      <div className="mb-12 w-[95vw] sm:mb-0 md:w-[50vw] min-[1243px]:w-[47vw] md:self-baseline">
         <Carousel images={images} lqip={lqip} />
       </div>
       <div className="w-[90vw] md:w-[40vw] flex flex-col justify-center">
