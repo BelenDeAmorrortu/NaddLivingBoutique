@@ -64,21 +64,25 @@ export default function Nav({ color }: IProps) {
 const NavItemsLg = () => {
   return (
     <ul className={`navlg`}>
-      {navItems.map((i) => {
+      {navItems.map((item, i) => {
         return (
           <li
             className={`nav-item  h-16 flex items-center ${
-              i.categories ? `group` : ""
+              item.categories ? `group` : ""
             }`}
+            key={i}
           >
-            <a href={i.href} className={` text-white uppercase font-semi-bold`}>
-              {i.name}
+            <a
+              href={item.href}
+              className={` text-white uppercase font-semi-bold`}
+            >
+              {item.name}
             </a>
-            {i.categories && (
+            {item.categories && (
               <div className={`navlg-categories`}>
                 <ul className={`flex-row-center flex-wrap gap-5`}>
-                  {i.categories.map((p) => (
-                    <li className={`group/product navlg-categories-li`}>
+                  {item.categories.map((p, i) => (
+                    <li className={`group/product navlg-categories-li`} key={i}>
                       <div className={`card-image`}>
                         <Image
                           src={p.image}
@@ -147,6 +151,7 @@ const NavItemsSm = () => {
             {navItems.map((item, index) => {
               return (
                 <li
+                  key={index}
                   onClick={() => itemClick(item)}
                   className={` ${
                     index === 0 || navItems[index - 1].categories
