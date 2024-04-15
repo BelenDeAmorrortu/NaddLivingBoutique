@@ -40,7 +40,11 @@ export default function Whatsapp() {
   };
 
   return (
-    <div className={`whatsapp-container`}>
+    <div
+      className={`whatsapp-container ${
+        isDialogVisible ? "h-fit" : " h-10 w-10"
+      }`}
+    >
       <div
         className={`${
           isDialogVisible
