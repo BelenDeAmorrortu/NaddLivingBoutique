@@ -95,7 +95,7 @@ const NavItemsLg = () => {
                       </div>
                       <Link
                         href={p.href}
-                        className={`flex flex-1 absolute uppercase font-bold drop-shadow-md`}
+                        className={`flex w-full h-full absolute uppercase font-bold drop-shadow-md flex-col-center`}
                       >
                         {p.name}
                       </Link>
