@@ -14,30 +14,35 @@ export default function CustomNumberInput({ form }: IProps) {
   return (
     <div className="flex justify-around items-center border-2 h-[43px] w-fit">
       <button
-        className="h-full flex items-center justify-center bg-transparent outline-none border-none border-r-black border-2 mx-3"
+        className="group h-full flex items-center justify-center bg-transparent outline-none border-none border-r-black border-2 mx-3 "
         onClick={() => {
           if (cantidad > 1) {
             form.setFieldValue("cantidad", cantidad - 1);
           }
         }}
+        name="Restar"
+        aria-label="Restar"
       >
-        <AiOutlineMinus />
+        <AiOutlineMinus className=" group-hover:fill-red fill-black transition-all duration-75" />
       </button>
       <InputNumber
         ref={inputRef}
         min={1}
         //defaultValue={1}
         controls={false}
-        className="w-[25px] border-none outline-none p text-center"
+        className="w-[80px] border-none outline-none p text-center font-bold"
         value={cantidad}
+        aria-label="Cantidad"
       />
       <button
-        className="h-full flex items-center justify-center bg-transparent outline-none border-none border-l-black border border-2 mx-3"
+        className="group h-full flex items-center justify-center bg-transparent outline-none border-none border-l-black border border-2 mx-3"
         onClick={() => {
           form.setFieldValue("cantidad", cantidad + 1);
         }}
+        name="Sumar"
+        aria-label="Sumar"
       >
-        <AiOutlinePlus />
+        <AiOutlinePlus className="group-hover:fill-red fill-black transition-all duration-75" />
       </button>
     </div>
   );
