@@ -33,7 +33,6 @@ export default function Whatsapp() {
   }, [isVisible]);
 
   const handleMessage = () => {
-    console.log(input?.current?.value);
     if (input?.current?.value && input.current.value.trim() !== "") {
       sendWhatsappMessage(input.current.value);
     }
@@ -62,6 +61,8 @@ export default function Whatsapp() {
           <button
             className="border-none m-0 p-0 outline-none"
             onClick={() => setIsDialogVisible(false)}
+            name="Cerrar"
+            aria-label="Cerrar chat de Whatsapp"
           >
             <IoClose
               size={25}
@@ -83,6 +84,7 @@ export default function Whatsapp() {
           <button
             className="border-none m-0 p-0 outline-none"
             onClick={handleMessage}
+            aria-label="Enviar mensaje"
           >
             <VscSend
               size={25}
@@ -95,6 +97,8 @@ export default function Whatsapp() {
         className="whatsapp-button"
         style={{ opacity: isVisible || isDialogVisible ? "1" : "0" }}
         onClick={() => setIsDialogVisible(!isDialogVisible)}
+        aria-label="Whatsapp"
+        name="Whatsapp"
       >
         <FaWhatsapp size={25} className="fill-white" />
       </button>

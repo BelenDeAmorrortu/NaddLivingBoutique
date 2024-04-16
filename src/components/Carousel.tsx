@@ -14,6 +14,7 @@ import {
   IoChevronForward,
   IoChevronForwardCircleOutline,
 } from "react-icons/io5";
+import { Reveal } from "@/transitions";
 
 type Props = {
   images: string[];
@@ -59,7 +60,7 @@ export default function Carousel({ images, lqip }: Props) {
   };
 
   return (
-    <>
+    <Reveal>
       <Swiper
         loop={true}
         ref={sliderRef}
@@ -73,7 +74,7 @@ export default function Carousel({ images, lqip }: Props) {
           images.map((image, index) => {
             return (
               <SwiperSlide key={index} className="swiperSlide">
-                <div className="w-[340px] min-[500px]:w-[400px] h-[350px] md:h-[400px] md:w-[370px] min-[880px]:w-[400px] lg:h-[450px] lg:w-[500px] lg:h-[70vh] min-[1243px]:w-[600px] flex justify-center items-center">
+                <div className="w-[340px] min-[500px]:w-[400px] h-[350px] md:h-[400px] md:w-[370px] min-[880px]:w-[400px] lg:h-[450px] lg:w-[500px] lg:h-[70vh] min-[1243px]:w-[650px] flex justify-center items-center">
                   <Img
                     key={index}
                     preview={{ visible: false }}
@@ -106,6 +107,7 @@ export default function Carousel({ images, lqip }: Props) {
         <button
           onClick={handlePrev}
           className="mx-3 border-none outline-none w-fit h-fit hover:scale-105 transition-transform cursor-pointer"
+          aria-label="Anterior"
         >
           <IoChevronBack size={25} />
         </button>
@@ -114,6 +116,7 @@ export default function Carousel({ images, lqip }: Props) {
           images.map((_, index) => {
             return (
               <button
+                aria-label={`Imagen ${index + 1}`}
                 key={index}
                 className={`h-2 w-2 m-2 rounded-full outline-none ${
                   index === activeIndex
@@ -127,6 +130,7 @@ export default function Carousel({ images, lqip }: Props) {
         <button
           onClick={handleNext}
           className="mx-3 border-none outline-none w-fit h-fit hover:scale-105 transition-transform cursor-pointer"
+          aria-label="Siguiente"
         >
           <IoChevronForward size={25} />
         </button>
@@ -141,7 +145,7 @@ export default function Carousel({ images, lqip }: Props) {
           }}
         >
           {images &&
-            images.map((image) => {
+            images.map((image, i) => {
               return (
                 <Img
                   src={image}
@@ -149,11 +153,12 @@ export default function Carousel({ images, lqip }: Props) {
                   width={1000}
                   height={1000}
                   className="object-contain object-center"
+                  key={i}
                 />
               );
             })}
         </Img.PreviewGroup>
       </div>
-    </>
+    </Reveal>
   );
 }

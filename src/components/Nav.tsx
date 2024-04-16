@@ -23,7 +23,6 @@ export default function Nav({ color }: IProps) {
       <nav
         className={` z-30 bg-${color} w-full h-16 lg:h-[65px] fixed top-0 left-0 text-sm flex justify-center items-center`}
       >
-        {/* Large */}
         <div
           className={`flex justify-between items-center w-[95%]  h-16 lg:h-[65px] border-b`}
         >
@@ -43,6 +42,8 @@ export default function Nav({ color }: IProps) {
             <button
               onClick={() => setIsCartOpen(true)}
               className=" border-none bg-transparent p-0 m-0"
+              name="Carrito"
+              aria-label="Carrito"
             >
               <BsBagFill
                 className={`w-5 h-5 mr-3 lg:mr-0 self-end fill-white`}
@@ -183,8 +184,8 @@ const NavItemsSm = () => {
                         />
                       </span>
                       <ul className={"space-y-10 pb-10"} onClick={itemClick}>
-                        {item.categories.map((p) => (
-                          <li className="nav-item">
+                        {item.categories.map((p, i) => (
+                          <li className="nav-item" key={i}>
                             <Link
                               href={p.href}
                               className="capitalize opacity-95 font-regular"

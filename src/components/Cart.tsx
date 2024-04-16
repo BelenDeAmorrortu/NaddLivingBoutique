@@ -28,6 +28,8 @@ export default function Cart({ isOpen, close }: IProps) {
           <button
             onClick={close}
             className=" border-none bg-transparent p-0 m-0"
+            name="Cerrar"
+            aria-label="Cerrar carrito"
           >
             <IoClose size={25} />
           </button>
@@ -61,7 +63,9 @@ export default function Cart({ isOpen, close }: IProps) {
             <span className="font-bold">TOTAL:</span>
             <span>$1.600.000</span>
           </h4>
-          <button className="contact-button w-full">CHECKOUT</button>
+          <button className="contact-button w-full hover:bg-black hover:text-white transition-all duration-150">
+            CHECKOUT
+          </button>
         </div>
       </div>
     </>
