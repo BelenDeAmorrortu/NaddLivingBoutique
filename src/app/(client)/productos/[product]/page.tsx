@@ -4,8 +4,7 @@ import { Carousel, ContactButtons } from "@/components";
 import { navigation } from "@/constants/navigation";
 import AddToCartProductForm from "@/components/AddToCartProductForm";
 import { HiArrowLongRight } from "react-icons/hi2";
-import { Reveal } from "@/transitions";
-import { Arrow, CTA } from "@/assets/images";
+import { CTA } from "@/assets/images";
 import Image from "next/image";
 
 type Props = {
