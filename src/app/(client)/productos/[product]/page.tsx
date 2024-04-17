@@ -3,9 +3,6 @@ import { PortableText } from "@portabletext/react";
 import { Carousel, ContactButtons } from "@/components";
 import { navigation } from "@/constants/navigation";
 import AddToCartProductForm from "@/components/AddToCartProductForm";
-import { HiArrowLongRight } from "react-icons/hi2";
-import { CTA } from "@/assets/images";
-import Image from "next/image";
 
 type Props = {
   params: { product: "string" };
@@ -52,19 +49,14 @@ export default async function page({ params }: Props) {
           <AddToCartProductForm />
         </div>
       </div>
-      <div className="flex flex-col gap-4 md:flex-row justify-evenly items-center w-full h-fit my-6">
+      <div className="flex flex-col gap-6 md:gap-0 md:flex-row justify-evenly items-center w-full h-fit my-10">
         <div className="flex flex-col w-[90vw] md:max-w-[45vw] gap-4">
-          <h4 className="md:hidden text-3xl font-bold text-red">
+          <h4 className="text-2xl md:text-[2.4vw] text-nowrap font-bold text-red">
             ¿Querés tu producto a medida?
           </h4>
-          <h5 className="md:hidden text-xl flex-row-center w-full">
+          <h5 className="text-lg md:text-[1.8vw] flex-row-center w-full text-nowrap">
             <span className="flex flex-1">Contactanos en nuestras redes</span>
           </h5>
-          <Image
-            src={CTA}
-            alt="¿Querés tu producto personalizado? Contactanos en nuestras redes"
-            className="hidden md:flex w-full h-auto"
-          />
         </div>
         <div className="flex flex-col flex-1 w-[90vw] md:max-w-[40vw]">
           <ContactButtons />
