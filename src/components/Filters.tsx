@@ -1,18 +1,7 @@
 "use client";
-
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { getCategories } from "../sanity/requests/sanity-requests";
-
-const queryClient = new QueryClient();
-
-export default function Filters(props: Props) {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Content {...props} />
-    </QueryClientProvider>
-  );
-}
+import useFetch from "@/hooks/useFetch";
 
 interface Props {
   filters: string[] | undefined;
@@ -22,24 +11,24 @@ interface Props {
   addFilter: (arg: string) => void;
 }
 
-export function Content({
+export default function Filters({
   filters,
   search,
   setSearch,
   removeFilter,
   addFilter,
 }: Props) {
-  const { data: categoriesData } = useQuery({
-    queryFn: () => getCategories(),
-    placeholderData: [],
-  });
+  const { data: categoriesData } = useFetch("categories", getCategories);
 
   return (
-    <div className=" w-[85%] sm:w-48 md:w-56 lg:mx-12 space-y-2 sm:mt-10">
+    <div className=" w-full space-y-2 sm:mt-10">
       <h4 className="subtitle-1 font-bold">Filtros</h4>
-      <ul className="border-b-2 border-grey-hover py-3 flex flex-wrap w-full">
-        {filters?.map((f) => (
-          <li className="cursor-pointer py-1 px-2 bg-grey-hover max-w-min rounded-sm flex items-center capitalize mr-2 my-2">
+      <ul className="border-b border-grey py-3 flex flex-wrap w-full">
+        {filters?.map((f, i) => (
+          <li
+            className="cursor-pointer py-1 px-2 bg-grey-hover max-w-min rounded-sm flex items-center capitalize mr-2 my-2"
+            key={i}
+          >
             {f}
             <XMarkIcon
               onClick={() => removeFilter(f)}
@@ -49,11 +38,12 @@ export function Content({
         ))}
       </ul>
       <h4 className="title-4">Categoría</h4>
-      <ul className="border-b-2 border-grey-hover pb-3 w-full">
-        {categoriesData?.map((f) => (
+      <ul className="border-b border-grey pb-3 w-full">
+        {categoriesData?.map((f, i) => (
           <li
             onClick={() => addFilter(f)}
             className=" text-black cursor-pointer capitalize hover:text-red w-fit"
+            key={i}
           >
             {f}
           </li>

@@ -1,7 +1,6 @@
 "use client";
-import { Card, Filters, Loader, Pagination } from "@/components";
+import { Card, Filters, Pagination } from "@/components";
 import { useEffect, useState } from "react";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { getProducts } from "../../../sanity/requests/sanity-requests";
 import { Product } from "../../../types/Product";
 import { useSearchParams } from "next/navigation";
@@ -10,23 +9,15 @@ import { navigation } from "@/constants/navigation";
 import { FiInfo } from "react-icons/fi";
 import { BiErrorCircle } from "react-icons/bi";
 import { CascadeReveal } from "@/transitions";
-
-const queryClient = new QueryClient();
+import useFetch from "@/hooks/useFetch";
+import CardSkeleton from "@/components/CardSkeleton";
 
 export default function Page() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Content />
-    </QueryClientProvider>
-  );
-}
-
-function Content() {
   const router = useRouter();
   const params = useSearchParams();
 
   // Products and filtration
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>(Array(12).fill(""));
   const [filters, setFilters] = useState<string[]>();
   const [search, setSearch] = useState<string | undefined>("");
 
@@ -38,15 +29,11 @@ function Content() {
   const currentProducts = products.slice(indexOfFirstOfPage, indexOfLastOfPage);
 
   const {
-    isPlaceholderData,
     error,
     data: productData,
     refetch,
-  } = useQuery({
-    queryFn: () => getProducts(filters ? filters : [], search),
-    placeholderData: [],
-    enabled: filters === undefined ? false : true,
-  });
+    isLoading,
+  } = useFetch("products", () => getProducts(filters ? filters : [], search));
 
   useEffect(() => {
     setFilters(
@@ -84,6 +71,10 @@ function Content() {
     window.scrollTo(0, 0);
   }, [currentPage]);
 
+  useEffect(() => {
+    console.log(isLoading);
+  }, [isLoading]);
+
   function setParams(filterArray: string[], page?: number) {
     const queries = filterArray?.map((f) => `filter=${f}`).join("&");
 
@@ -110,39 +101,48 @@ function Content() {
   }
 
   return (
-    <div className="min-h-[60vh] py-36 w-full flex flex-col items-center sm:flex-row sm:justify-around sm:items-start">
-      <Filters
-        filters={filters}
-        search={search}
-        setSearch={setSearch}
-        removeFilter={removeFilter}
-        addFilter={addFilter}
-      />
-      <div className="flex-col-center min-h-[60vh] max-[370px]:w-[235px] w-[360px] sm:w-[380px] md:w-[465px] lg:w-[660px] min-[1336px]:w-[990px]">
+    <div className="min-h-[60vh] py-36 w-full flex flex-col items-center sm:flex-row sm:justify-evenly sm:items-start">
+      <div className="flex flex-col w-[85vw] mb-20 sm:w-48 md:w-60 min-[640px]:mb-0 min-[640px]:sticky min-[640px]:top-36">
+        <Filters
+          filters={filters}
+          search={search}
+          setSearch={setSearch}
+          removeFilter={removeFilter}
+          addFilter={addFilter}
+        />
+        <h4 className="hidden min-[640px]:block w-full font-semi-bold text-black text-sm md:text-lg my-10 uppercase">
+          Colores, texturas, modelos{" "}
+          <span className="font-bold  text-red">
+            <span className="text-xl md:text-3xl">100% </span>
+            <span className="leading-7 md:leading-10">personalizados</span>
+          </span>
+        </h4>
+        {/* <Image
+          src={Outline}
+          alt="Ilustración de un sofá"
+          className="w-full h-auto my-10"
+        /> */}
+      </div>
+      <div className="flex-col-center min-h-[60vh]">
         {error ? (
-          <p className="flex-row-center">
+          <p className="flex-row-center flex-1">
             <BiErrorCircle className="w-6 h-6 mr-7 text-red" /> Hubo un error
           </p>
-        ) : isPlaceholderData && products.length === 0 ? (
-          <div className="flex-col-center space-y-5">
-            <Loader size="small" color="black" />
-            <p>Cargando...</p>
-          </div>
-        ) : !isPlaceholderData && products.length === 0 ? (
-          <p className="flex-row-center">
+        ) : products.length === 0 ? (
+          <p className="flex-row-center flex-1">
             <FiInfo className="w-6 h-6 mr-7" /> No se encontraron resultados
           </p>
         ) : (
-          <div className="flex flex-wrap w-full">
+          <div className="cards-container">
             {currentProducts.map((p, i) => (
               <CascadeReveal key={i}>
-                <Card {...p} />
+                {isLoading ? <CardSkeleton /> : <Card {...p} />}
               </CascadeReveal>
             ))}
           </div>
         )}
         <Pagination
-          visible={!(isPlaceholderData || products.length === 0)}
+          visible={!(isLoading || products.length === 0)}
           current={currentPage}
           setCurrent={handleSetCurrentPage}
           products={products.length}

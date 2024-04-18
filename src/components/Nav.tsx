@@ -21,36 +21,32 @@ export default function Nav({ color }: IProps) {
   return (
     <>
       <nav
-        className={` z-30 bg-${color} w-full h-16 lg:h-[65px] fixed top-0 left-0 text-sm flex justify-center items-center`}
+        className={` z-30 bg-${color} w-full h-16 fixed top-0 left-0 text-sm flex justify-between px-[2.5%] items-center`}
       >
-        <div
-          className={`flex justify-between items-center w-[95%]  h-16 lg:h-[65px] border-b`}
-        >
-          <NavItemsLg />
-          <NavItemsSm />
-          <Link href={navigation.home}>
-            <Image src={Logo} alt="NADD Logo" className={`w-[150px]`} />
-          </Link>
-          <div
-            className={`flex flex-row justify-end items-center gap-10 flex-1`}
+        {/* <div
+          className={`flex justify-between items-center w-[95%] h-fit border-b`}
+        > */}
+        <NavItemsLg />
+        <NavItemsSm />
+        <Link href={navigation.home}>
+          <Image src={Logo} alt="NADD Logo" className={` w-[150px] h-auto`} />
+        </Link>
+        <div className={`flex flex-row justify-end items-center gap-10 flex-1`}>
+          <MagnifyingGlassIcon
+            className={`w-5 h-5 mr-3 fill-${
+              color === "white" ? "black" : "white"
+            }`}
+          />
+          <button
+            onClick={() => setIsCartOpen(true)}
+            className=" border-none bg-transparent p-0 m-0"
+            name="Carrito"
+            aria-label="Carrito"
           >
-            <MagnifyingGlassIcon
-              className={`w-5 h-5 mr-3 fill-${
-                color === "white" ? "black" : "white"
-              }`}
-            />
-            <button
-              onClick={() => setIsCartOpen(true)}
-              className=" border-none bg-transparent p-0 m-0"
-              name="Carrito"
-              aria-label="Carrito"
-            >
-              <BsBagFill
-                className={`w-5 h-5 mr-3 lg:mr-0 self-end fill-white`}
-              />
-            </button>
-          </div>
+            <BsBagFill className={`w-5 h-5 mr-3 lg:mr-0 self-end fill-white`} />
+          </button>
         </div>
+        {/* </div> */}
       </nav>
       <Cart
         isOpen={isCartOpen}
@@ -68,7 +64,7 @@ const NavItemsLg = () => {
       {navItems.map((item, i) => {
         return (
           <li
-            className={`nav-item  h-16 flex items-center ${
+            className={`nav-item flex items-center ${
               item.categories ? `group` : ""
             }`}
             key={i}
@@ -134,12 +130,12 @@ const NavItemsSm = () => {
         strokeColor="#fff"
         speed={2}
         onClick={() => setOpen(!open)}
-        className=" z-[55]"
+        className="z-[55]"
       />
       <div
         className={`${
           open ? "visible" : "invisible"
-        } w-full h-screen bg-black-hover z-50 fixed top-0 left-0 flex justify-start items-start`}
+        } w-full h-full bg-black-hover z-20 fixed top-0 left-0 flex justify-start items-start`}
       >
         <div
           className={"navmd".concat(

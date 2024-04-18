@@ -4,24 +4,11 @@ import { PortableText } from "@portabletext/react";
 import { CollapseProps } from "antd";
 import { Collapse } from "antd";
 import { useEffect, useState } from "react";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { getFaq } from "../../../sanity/requests/sanity-requests";
-
-const queryClient = new QueryClient();
+import useFetch from "@/hooks/useFetch";
 
 export default function Page() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Content />
-    </QueryClientProvider>
-  );
-}
-
-function Content() {
-  const { isPlaceholderData, error, data } = useQuery({
-    queryFn: () => getFaq(),
-    placeholderData: [],
-  });
+  const { data, isLoading } = useFetch("faq", getFaq);
 
   const [items, setItems] = useState<CollapseProps["items"]>([]);
 
@@ -44,7 +31,7 @@ function Content() {
       <h3 className="title-3 text-[1.75rem] my-10 text-center">
         Preguntas Frecuentes
       </h3>
-      {isPlaceholderData && data?.length === 0 ? (
+      {isLoading ? (
         <div className="flex flex-col justify-evenly items-center m-20 h-32">
           <Loader size="medium" color="black" />
           <p>Cargando...</p>

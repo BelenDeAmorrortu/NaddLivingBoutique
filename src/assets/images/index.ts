@@ -8,5 +8,17 @@ import Puff from "./puff.jpg";
 import Sillon from "./sillon.jpg";
 import Todo from "./todo.jpg";
 import Sofas from "./Rinconero G4 1.jpg";
+import Outline from "./outline.png";
 
-export { Logo, Sofa, Banner, Contact1, Sofas, Mesas, Puff, Sillon, Todo };
+export {
+  Logo,
+  Sofa,
+  Banner,
+  Contact1,
+  Sofas,
+  Mesas,
+  Puff,
+  Sillon,
+  Todo,
+  Outline,
+};

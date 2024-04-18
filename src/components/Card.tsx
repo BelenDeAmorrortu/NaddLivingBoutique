@@ -1,7 +1,6 @@
 import { navigation } from "@/constants/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "../types/Product";
 
 export default function Card({
   _id,
@@ -10,12 +9,12 @@ export default function Card({
   url,
   images,
   lqip,
-}: Product) {
+}: IProps) {
   if (_id && name && category && url && images && lqip) {
     return (
       <div
         key={_id}
-        className="flex flex-col items-center justify-start w-[160px] max-[370px]:w-[220px] min-h-[185px] md:w-[200px] md:min-h-[225px] lg:w-[250px] lg:min-h-[255px] my-6 m-2 md:m-4 lg:m-10"
+        className="flex flex-col items-center justify-start w-[80vw] min-h-[185px] min-[640px]:w-[25vw] min-[1080px]:w-[20vw] md:min-h-[225px] lg:min-h-[255px]"
       >
         <Link href={`${navigation.productos}/${url}`}>
           <div className="card-image">
