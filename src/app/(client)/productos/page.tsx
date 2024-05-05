@@ -1,7 +1,11 @@
 "use client";
 import { Card, Filters, Pagination } from "@/components";
 import { useEffect, useState } from "react";
-import { getProducts } from "../../../sanity/requests/sanity-requests";
+// import { getProducts } from "../../../sanity/requests/sanity-requests";
+import {
+  getMetaobjects,
+  getProducts as getShopifyProducts,
+} from "../../../requests/index";
 import { Product } from "../../../types/Product";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -33,7 +37,11 @@ export default function Page() {
     data: productData,
     refetch,
     isLoading,
-  } = useFetch("products", () => getProducts(filters ? filters : [], search));
+  } = useFetch(
+    "products",
+    async () =>
+      await getShopifyProducts(filters ? filters : [], search, undefined)
+  );
 
   useEffect(() => {
     setFilters(
@@ -52,7 +60,7 @@ export default function Page() {
   }, [params]);
 
   useEffect(() => {
-    if (productData) setProducts(productData);
+    if (productData) setProducts(productData.data);
   }, [productData]);
 
   useEffect(() => {
@@ -70,10 +78,6 @@ export default function Page() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
-
-  useEffect(() => {
-    console.log(isLoading);
-  }, [isLoading]);
 
   function setParams(filterArray: string[], page?: number) {
     const queries = filterArray?.map((f) => `filter=${f}`).join("&");
@@ -123,7 +127,7 @@ export default function Page() {
           className="w-full h-auto my-10"
         /> */}
       </div>
-      <div className="flex-col-center min-h-[60vh]">
+      <div className="flex-col-center min-h-[60vh] min-w-[70vw]">
         {error ? (
           <p className="flex-row-center flex-1">
             <BiErrorCircle className="w-6 h-6 mr-7 text-red" /> Hubo un error
@@ -136,7 +140,7 @@ export default function Page() {
           <div className="cards-container">
             {currentProducts.map((p, i) => (
               <CascadeReveal key={i}>
-                {isLoading ? <CardSkeleton /> : <Card {...p} />}
+                {isLoading !== false ? <CardSkeleton /> : <Card {...p} />}
               </CascadeReveal>
             ))}
           </div>

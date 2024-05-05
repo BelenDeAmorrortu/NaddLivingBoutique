@@ -8,12 +8,7 @@ import "swiper/css/thumbs";
 import { Image as Img } from "antd";
 import Image from "next/image";
 import { SwiperRef } from "swiper/react";
-import {
-  IoChevronBack,
-  IoChevronBackCircleOutline,
-  IoChevronForward,
-  IoChevronForwardCircleOutline,
-} from "react-icons/io5";
+import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import { Reveal } from "@/transitions";
 
 type Props = {

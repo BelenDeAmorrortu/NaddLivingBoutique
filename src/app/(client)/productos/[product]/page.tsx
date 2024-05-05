@@ -1,4 +1,5 @@
-import { getProduct } from "../../../../sanity/requests/sanity-requests";
+// import { getProduct } from "../../../../sanity/requests/sanity-requests";
+import { getProduct } from "../../../../requests/index";
 import { PortableText } from "@portabletext/react";
 import { Carousel, ContactButtons } from "@/components";
 import { navigation } from "@/constants/navigation";
@@ -45,7 +46,7 @@ export default async function page({ params }: Props) {
         <div className="w-[90vw] md:w-[40vw] flex flex-col justify-center">
           <h1 className="title-3 text-red">{name}</h1>
           <h2 className="subtitle-1 my-5">{category.join(" - ")}</h2>
-          <PortableText value={description} />
+          <div dangerouslySetInnerHTML={{ __html: description }} />
           <AddToCartProductForm />
         </div>
       </div>

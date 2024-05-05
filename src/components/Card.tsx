@@ -1,4 +1,5 @@
 import { navigation } from "@/constants/navigation";
+import { Product } from "@/types/Product";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,7 +10,8 @@ export default function Card({
   url,
   images,
   lqip,
-}: IProps) {
+  price,
+}: Product) {
   if (_id && name && category && url && images && lqip) {
     return (
       <div
@@ -42,8 +44,21 @@ export default function Card({
             ) : null}
           </div>
         </Link>
-        <h4 className="mt-4 mb-2 title-4 text-center">{name}</h4>
-        <h5 className="capitalize text-xs">{category.join(" - ")}</h5>
+        <div className="flex-col-center w-full my-4 gap-2">
+          <div className="flex flex-col justify-start items-start w-full">
+            <h4 className="title-4 text-sm">{name}</h4>
+            {/* <h4 className="text-sm font-semi-bold flex justify-center items-end">
+              {"$" + price}
+            </h4>
+            <h5 className="capitalize text-xs">{category.join(" - ")}</h5> */}
+          </div>
+          <div className="flex justify-between items-end w-full">
+            <h5 className="capitalize text-xs">{category.join(" - ")}</h5>
+            <h4 className="text-sm font-semi-bold flex flex-col justify-center items-end">
+              $1.000.000
+            </h4>
+          </div>
+        </div>
       </div>
     );
   }

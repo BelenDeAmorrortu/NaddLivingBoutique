@@ -1,7 +1,7 @@
 "use client";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import { getCategories } from "../sanity/requests/sanity-requests";
 import useFetch from "@/hooks/useFetch";
+import { getMetaobjects } from "@/requests";
 
 interface Props {
   filters: string[] | undefined;
@@ -18,7 +18,10 @@ export default function Filters({
   removeFilter,
   addFilter,
 }: Props) {
-  const { data: categoriesData } = useFetch("categories", getCategories);
+  const { data: categoriesData } = useFetch(
+    "categories",
+    async () => await getMetaobjects("categoria")
+  );
 
   return (
     <div className=" w-full space-y-2 sm:mt-10">
@@ -41,11 +44,11 @@ export default function Filters({
       <ul className="border-b border-grey pb-3 w-full">
         {categoriesData?.map((f, i) => (
           <li
-            onClick={() => addFilter(f)}
+            onClick={() => addFilter(f.nombre)}
             className=" text-black cursor-pointer capitalize hover:text-red w-fit"
             key={i}
           >
-            {f}
+            {f.nombre}
           </li>
         ))}
       </ul>

@@ -1,3 +1,4 @@
+import React from "react";
 import { PortableTextBlock } from "sanity";
 
 export type Product = {
@@ -7,5 +8,6 @@ export type Product = {
   url: string;
   lqip: string[];
   images: string[];
-  description: PortableTextBlock[];
+  description: string;
+  price: string;
 };
