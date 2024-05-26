@@ -5,8 +5,14 @@ import CustomSelect from "./CustomSelect";
 import CustomNumberInput from "./CustomNumberInput";
 import { BsBagFill } from "react-icons/bs";
 import { CiCreditCard1 } from "react-icons/ci";
+import { formatPrice } from "@/utils/formatPrice";
 
-export default function AddToCartProductForm() {
+interface IProps {
+  variants: any;
+  price: string;
+}
+
+export default function AddToCartProductForm({ variants, price }: IProps) {
   const [form] = Form.useForm();
 
   return (
@@ -56,7 +62,8 @@ export default function AddToCartProductForm() {
         </Form.Item>
         <div className="flex flex-col">
           <h5 className=" text-2xl font-extra-bold">
-            $600.000<span className="text-xl ml-1">ARS</span>
+            {"$" + formatPrice(price)}
+            <span className="text-xl ml-1">ARS</span>
           </h5>
           <h6 className="flex justify-center items-start text-red ">
             <CiCreditCard1 size={20} className="mr-1 mt-[2px]" />

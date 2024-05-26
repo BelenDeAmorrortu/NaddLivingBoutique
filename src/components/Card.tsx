@@ -1,5 +1,6 @@
 import { navigation } from "@/constants/navigation";
 import { Product } from "@/types/Product";
+import { formatPrice } from "@/utils/formatPrice";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -55,7 +56,7 @@ export default function Card({
           <div className="flex justify-between items-end w-full">
             <h5 className="capitalize text-xs">{category.join(" - ")}</h5>
             <h4 className="text-sm font-semi-bold flex flex-col justify-center items-end">
-              $1.000.000
+              {"$" + formatPrice(price)}
             </h4>
           </div>
         </div>

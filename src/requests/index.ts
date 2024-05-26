@@ -3,16 +3,13 @@ import { storefront } from "@/utils/storefront";
 import { queries } from "../constants/queries";
 import { isJsonString } from "@/utils/isJsonString";
 import { arrayToIdsObject } from "@/utils/arrayToIdsObject";
+import { getMinPrice } from "@/utils/getMinPrice";
 
 export const getProducts = async (
   filters: string[],
   search: string | undefined,
   cursor: string | undefined
-): Promise<{
-  nextPage: string | false;
-  previousPage: string | false;
-  data: Product[];
-}> => {
+): Promise<Product[]> => {
   try {
     const { data } = await storefront(queries.products, {
       cursor: cursor ?? null,
@@ -28,58 +25,28 @@ export const getProducts = async (
           ? search
           : null,
     });
+    const products = data.products.edges.map((p: any) => {
+      const { title, id, handle, images, descriptionHtml, variants, tags } =
+        p.node;
 
-    const categories = await getMetaobjects("categoria");
-
-    const categoriesById = arrayToIdsObject(categories);
-
-    console.log("DATA", data);
-
-    const products = {
-      nextPage: data.products.pageInfo.hasNextPage
-        ? data.products.pageInfo.endCursor
-        : false,
-      previousPage: data.products.pageInfo.hasPreviousPage
-        ? data.products.pageInfo.startCursor
-        : false,
-      data: data.products.edges.map((p: any) => {
-        const {
-          title,
-          id,
-          variants,
-          handle,
-          images,
-          descriptionHtml,
-          categories,
-        } = p.node;
-
-        return {
-          _id: id,
-          images: images.edges.map((i: any) => i.node.url),
-          category: categories?.value
-            ? JSON.parse(categories.value).map(
-                (c: keyof typeof categoriesById) => categoriesById[c]
-              )
-            : [],
-          description: descriptionHtml,
-          url: handle,
-          name: title,
-          lqip: images.edges.map(
-            (i: any) => i.node.url + "?blur=500&px=16&auto=format"
-          ),
-          price: variants.nodes[0].price.amount,
-        };
-      }),
-    };
+      return {
+        _id: id,
+        images: images.edges.map((i: any) => i.node.url),
+        category: tags,
+        description: descriptionHtml,
+        url: handle,
+        name: title,
+        lqip: images.edges.map(
+          (i: any) => i.node.url + "?blur=500&px=16&auto=format"
+        ),
+        price: getMinPrice(variants.nodes),
+      };
+    });
 
     return products;
   } catch (e) {
     console.log("ERROR", e);
-    return {
-      nextPage: false,
-      previousPage: false,
-      data: [],
-    };
+    return [];
   }
 };
 
@@ -87,7 +54,7 @@ export const getProduct = async (handle: string): Promise<Product> => {
   try {
     const { data } = await storefront(queries.product, { handle });
 
-    const { title, id, productType, tags, images, descriptionHtml, variants } =
+    const { title, id, tags, images, descriptionHtml, variants } =
       data.productByHandle;
 
     return {
@@ -100,7 +67,8 @@ export const getProduct = async (handle: string): Promise<Product> => {
       lqip: images.edges.map(
         (i: any) => i.node.url + "?blur=500&px=16&auto=format"
       ),
-      price: variants.nodes[0].price.amount,
+      price: getMinPrice(variants.nodes),
+      variants: variants.nodes,
     };
   } catch (e) {
     console.log("ERROR", e);
@@ -124,28 +92,20 @@ export const getSpotlight = async (): Promise<Product[]> => {
     });
 
     return data.collectionByHandle.products.edges.map((p: any) => {
-      const {
-        title,
-        id,
-        productType,
-        tags,
-        handle,
-        images,
-        descriptionHtml,
-        variants,
-      } = p.node;
+      const { title, id, tags, handle, images, descriptionHtml, variants } =
+        p.node;
 
       return {
         _id: id,
-        images: images.edges.map((i: any) => i.node.transformedSrc),
+        images: images.edges.map((i: any) => i.node.url),
         category: tags,
         description: descriptionHtml,
         url: handle,
         name: title,
         lqip: images.edges.map(
-          (i: any) => i.node.transformedSrc + "?blur=500&px=16&auto=format"
+          (i: any) => i.node.url + "?blur=500&px=16&auto=format"
         ),
-        price: variants.nodes[0].price.amount,
+        price: getMinPrice(variants.nodes),
       };
     });
   } catch (e) {

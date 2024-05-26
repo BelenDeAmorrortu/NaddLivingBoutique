@@ -1,6 +1,4 @@
-// import { getProduct } from "../../../../sanity/requests/sanity-requests";
 import { getProduct } from "../../../../requests/index";
-import { PortableText } from "@portabletext/react";
 import { Carousel, ContactButtons } from "@/components";
 import { navigation } from "@/constants/navigation";
 import AddToCartProductForm from "@/components/AddToCartProductForm";
@@ -35,7 +33,8 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function page({ params }: Props) {
   const slug = params.product;
-  const { name, images, category, description, lqip } = await getProduct(slug);
+  const { name, images, category, description, lqip, variants, price } =
+    await getProduct(slug);
 
   return (
     <div className="flex flex-col h-fit w-full">
@@ -47,7 +46,7 @@ export default async function page({ params }: Props) {
           <h1 className="title-3 text-red">{name}</h1>
           <h2 className="subtitle-1 my-5">{category.join(" - ")}</h2>
           <div dangerouslySetInnerHTML={{ __html: description }} />
-          <AddToCartProductForm />
+          <AddToCartProductForm {...{ variants, price }} />
         </div>
       </div>
       <div className="flex flex-col gap-6 md:gap-0 md:flex-row justify-evenly items-center w-full h-fit my-10">

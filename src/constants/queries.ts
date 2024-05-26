@@ -1,8 +1,10 @@
 import { Spotlight } from "@/components";
+import { categories } from "./categories";
+import { getMetaobject } from "@/requests";
 
 export const queries = {
   products: `query Products($filter: String){
-        products(first: 100, query: $filter){
+        products(first: 250, query: $filter){
             pageInfo {
                 hasNextPage
                 hasPreviousPage
@@ -22,15 +24,10 @@ export const queries = {
                       title,
                       price{
                         amount
-                      }
+                      },
+                      id
                     }
-                  }
-                  categories: metafield(
-                    namespace: "custom"
-                    key: "categorias"
-                    ) {
-                        value
-                  }
+                  },
                   images(first: 2){
                     edges{
                       node{
@@ -51,23 +48,14 @@ export const queries = {
             tags,
             handle,
             descriptionHtml,
-            color: metafield(
-              namespace: "custom"
-              key: "color"
-              ) {
-                  value
-            }
-            categories: metafield(
-              namespace: "custom"
-              key: "categorias"
-              ) {
-                  value
-            }
-            dimensions: metafield(
-              namespace: "custom"
-              key: "medidas"
-              ) {
-                  value
+            variants(first: 12){
+              nodes {
+                title,
+                price{
+                  amount
+                },
+                id
+              }
             }
             images(first: 100){
                 edges{
@@ -96,11 +84,14 @@ export const queries = {
                 productType
                 tags
                 handle
-                categories: metafield(
-                  namespace: "custom"
-                  key: "categorias"
-                  ) {
-                      value
+                variants(first: 12){
+                  nodes {
+                    title,
+                    price{
+                      amount
+                    },
+                    id
+                  }
                 }
                 images(first: 2) {
                   edges {

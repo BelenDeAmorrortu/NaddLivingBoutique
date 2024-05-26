@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { getSpotlight } from "../sanity/requests/sanity-requests";
 import Card from "./Card";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import { navigation } from "@/constants/navigation";
@@ -8,6 +7,7 @@ import Reveal from "@/transitions/Reveal";
 import CascadeReveal from "@/transitions/CascadeReveal";
 import useFetch from "@/hooks/useFetch";
 import CardSkeleton from "./CardSkeleton";
+import { getSpotlight } from "@/requests";
 
 export default function Spotlight() {
   const { data: products, isLoading } = useFetch("spotlight", getSpotlight);
