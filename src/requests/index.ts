@@ -4,7 +4,6 @@ import { queries } from "../constants/queries";
 import { isJsonString } from "@/utils/isJsonString";
 import { arrayToIdsObject } from "@/utils/arrayToIdsObject";
 import { getMinPrice } from "@/utils/getMinPrice";
-import { Faq } from "@/types/Faq";
 
 export const getProducts = async (
   filters: string[],

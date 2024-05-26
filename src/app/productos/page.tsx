@@ -1,12 +1,8 @@
 "use client";
 import { Card, Filters, Pagination } from "@/components";
 import { useEffect, useState } from "react";
-// import { getProducts } from "../../../sanity/requests/sanity-requests";
-import {
-  getMetaobjects,
-  getProducts as getShopifyProducts,
-} from "../../../requests/index";
-import { Product } from "../../../types/Product";
+import { getProducts as getShopifyProducts } from "../../requests/index";
+import { Product } from "../../types/Product";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { navigation } from "@/constants/navigation";
@@ -60,7 +56,7 @@ export default function Page() {
   }, [params]);
 
   useEffect(() => {
-    if (productData) setProducts(productData.data);
+    if (productData) setProducts(productData);
   }, [productData]);
 
   useEffect(() => {

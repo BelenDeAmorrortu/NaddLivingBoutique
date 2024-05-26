@@ -1,4 +1,4 @@
-import { getProduct } from "../../../../requests/index";
+import { getProduct } from "../../../requests/index";
 import { Carousel, ContactButtons } from "@/components";
 import { navigation } from "@/constants/navigation";
 import AddToCartProductForm from "@/components/AddToCartProductForm";

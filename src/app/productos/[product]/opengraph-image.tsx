@@ -1,5 +1,5 @@
+import { getProduct } from "@/requests";
 import { ImageResponse } from "next/server";
-import { getProduct } from "../../../../sanity/requests/sanity-requests";
 
 // Route segment config
 export const runtime = "edge";
