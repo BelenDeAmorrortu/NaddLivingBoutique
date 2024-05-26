@@ -4,11 +4,14 @@ import { PortableText } from "@portabletext/react";
 import { CollapseProps } from "antd";
 import { Collapse } from "antd";
 import { useEffect, useState } from "react";
-import { getFaq } from "../../../sanity/requests/sanity-requests";
 import useFetch from "@/hooks/useFetch";
+import { getMetaobjects } from "@/requests";
 
 export default function Page() {
-  const { data, isLoading } = useFetch("faq", getFaq);
+  const { data, isLoading } = useFetch(
+    "faq",
+    async () => await getMetaobjects("preguntas_frecuentes")
+  );
 
   const [items, setItems] = useState<CollapseProps["items"]>([]);
 
@@ -17,9 +20,9 @@ export default function Page() {
       setItems(
         data?.map((q) => {
           return {
-            key: q._id,
-            label: q.question,
-            children: <PortableText value={q.answer} />,
+            key: q.id,
+            label: q.titulo,
+            children: <p dangerouslySetInnerHTML={{ __html: q.contenido }} />,
           };
         })
       );

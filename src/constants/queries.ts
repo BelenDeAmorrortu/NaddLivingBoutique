@@ -1,7 +1,3 @@
-import { Spotlight } from "@/components";
-import { categories } from "./categories";
-import { getMetaobject } from "@/requests";
-
 export const queries = {
   products: `query Products($filter: String){
         products(first: 250, query: $filter){
