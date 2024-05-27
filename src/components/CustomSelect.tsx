@@ -4,9 +4,14 @@ import React, { useEffect } from "react";
 
 interface CustomSelectProps extends SelectProps<any> {
   prefix?: string;
+  onChange?: (value: any) => void;
 }
 
-export default function CustomSelect({ prefix, ...props }: CustomSelectProps) {
+export default function CustomSelect({
+  onChange,
+  prefix,
+  ...props
+}: CustomSelectProps) {
   const setInnerText = (text: string) => {
     if (document && prefix) {
       const selectText = document
@@ -24,14 +29,14 @@ export default function CustomSelect({ prefix, ...props }: CustomSelectProps) {
       );
       setInnerText(valueLabel);
     }
-  }, []);
+  }, [props.value]);
 
   return (
     <Select
       {...props}
       className={prefix ? `select-type-${prefix}` : ""}
       onChange={(_, option: any) => {
-        setInnerText(option.label);
+        onChange(option.value);
       }}
     />
   );

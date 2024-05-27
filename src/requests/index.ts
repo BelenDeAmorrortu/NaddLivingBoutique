@@ -57,6 +57,13 @@ export const getProduct = async (handle: string): Promise<Product> => {
     const { title, id, tags, images, descriptionHtml, variants } =
       data.productByHandle;
 
+    const parseVariants = variants.nodes.map((v: any) => {
+      return {
+        ...v,
+        price: v.price.amount,
+      };
+    });
+
     return {
       _id: id,
       images: images.edges.map((i: any) => i.node.url),
@@ -68,7 +75,7 @@ export const getProduct = async (handle: string): Promise<Product> => {
         (i: any) => i.node.url + "?blur=500&px=16&auto=format"
       ),
       price: getMinPrice(variants.nodes),
-      variants: variants.nodes,
+      variants: parseVariants,
     };
   } catch (e) {
     console.log("ERROR", e);

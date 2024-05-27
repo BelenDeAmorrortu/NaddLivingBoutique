@@ -10,13 +10,14 @@ import UseAnimations from "react-useanimations";
 import menu2 from "react-useanimations/lib/menu2";
 import { navItems } from "@/constants/NavItems";
 import { Logo } from "@/assets/images";
+import { useCart } from "@/contexts/CartContext";
 
 interface IProps {
   color: "white" | "black";
 }
 
 export default function Nav({ color }: IProps) {
-  const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
+  const { isOpen: isCartOpen, setIsOpen: setIsCartOpen } = useCart();
 
   return (
     <>

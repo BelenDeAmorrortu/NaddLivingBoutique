@@ -4,6 +4,10 @@ import Image from "next/image";
 import React from "react";
 import { IoClose } from "react-icons/io5";
 import { AiFillDelete } from "react-icons/ai";
+import { useCart } from "@/contexts/CartContext";
+import CartItem from "./CartItem";
+import { BsBag, BsBagFill } from "react-icons/bs";
+import { formatPrice } from "@/utils/formatPrice";
 
 interface IProps {
   isOpen: boolean;
@@ -11,6 +15,8 @@ interface IProps {
 }
 
 export default function Cart({ isOpen, close }: IProps) {
+  const { items, total } = useCart();
+
   return (
     <>
       <div
@@ -35,33 +41,21 @@ export default function Cart({ isOpen, close }: IProps) {
           </button>
         </div>
         <ul className={`cart-sheet-ul`}>
-          <li className="cart-sheet-li">
-            <div className={`cart-sheet-img`}>
-              <Image
-                src={Sofas}
-                alt={`Imagén del Producto`}
-                width={500}
-                height={500}
-                className={`object-cover h-full rounded-sm`}
-              />
+          {items.length > 0 ? (
+            items.map((p) => <CartItem {...p} />)
+          ) : (
+            <div className="flex-1 w-full flex-col-center opacity-50 gap-10">
+              <BsBag size={50} className="text-black" />
+              <p className=" text-base text-center">
+                Aún no hay productos en su carrito
+              </p>
             </div>
-            <div className="flex flex-col justify-start items-start gap-1">
-              <h4 className=" font-bold uppercase text-base">
-                Nombre producto
-              </h4>
-              <h4 className="uppercase text-xs">Color a eleccion</h4>
-              <h4 className="uppercase text-xs">1.80m x 0.80m</h4>
-              <h4 className="text-base font-bold">$1.600.000</h4>
-            </div>
-            <div>
-              <AiFillDelete size={20} />
-            </div>
-          </li>
+          )}
         </ul>
         <div className="cart-sheet-bottom">
           <h4 className="flex justify-between w-full h-fit ">
             <span className="font-bold">TOTAL:</span>
-            <span>$1.600.000</span>
+            <span>{"$" + formatPrice(String(total))}</span>
           </h4>
           <button className="contact-button w-full hover:bg-black hover:text-white transition-all duration-150">
             CHECKOUT

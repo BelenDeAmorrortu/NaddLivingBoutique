@@ -33,20 +33,19 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function page({ params }: Props) {
   const slug = params.product;
-  const { name, images, category, description, lqip, variants, price } =
-    await getProduct(slug);
+  const product = await getProduct(slug);
 
   return (
     <div className="flex flex-col h-fit w-full">
       <div className="description flex flex-col md:flex-row h-fit pb-10 pt-32 justify-evenly items-center">
         <div className="mb-12 w-[95vw] sm:mb-0 md:w-[50vw] md:sticky md:top-32 min-[1243px]:w-[45vw] md:self-baseline">
-          <Carousel images={images} lqip={lqip} />
+          <Carousel images={product.images} lqip={product.lqip} />
         </div>
         <div className="w-[90vw] md:w-[40vw] flex flex-col justify-center">
-          <h1 className="title-3 text-red">{name}</h1>
-          <h2 className="subtitle-1 my-5">{category.join(" - ")}</h2>
-          <div dangerouslySetInnerHTML={{ __html: description }} />
-          <AddToCartProductForm {...{ variants, price }} />
+          <h1 className="title-3 text-red">{product.name}</h1>
+          <h2 className="subtitle-1 my-5">{product.category.join(" - ")}</h2>
+          <div dangerouslySetInnerHTML={{ __html: product.description }} />
+          <AddToCartProductForm {...{ product }} />
         </div>
       </div>
       <div className="flex flex-col gap-6 md:gap-0 md:flex-row justify-evenly items-center w-full h-fit my-10">

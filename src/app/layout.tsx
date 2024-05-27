@@ -1,6 +1,7 @@
 import { Montserrat, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { BackToTop, Footer, Nav, Whatsapp } from "@/components";
+import { CartProvider } from "@/contexts/CartContext";
 
 const montserrat = Montserrat({
   weight: ["300", "400", "600", "700"],
@@ -42,11 +43,13 @@ export default async function RootLayout({
   return (
     <html lang="en" className={`${montserrat.variable} ${cormorant.variable}`}>
       <body>
-        <Nav color="black" />
-        <main>{children}</main>
-        <Footer />
-        <BackToTop />
-        <Whatsapp />
+        <CartProvider>
+          <Nav color="black" />
+          <main>{children}</main>
+          <Footer />
+          <BackToTop />
+          <Whatsapp />
+        </CartProvider>
       </body>
     </html>
   );

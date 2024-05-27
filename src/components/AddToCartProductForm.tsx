@@ -1,22 +1,54 @@
 "use client";
 import { Form } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CustomSelect from "./CustomSelect";
 import CustomNumberInput from "./CustomNumberInput";
 import { BsBagFill } from "react-icons/bs";
 import { CiCreditCard1 } from "react-icons/ci";
 import { formatPrice } from "@/utils/formatPrice";
+import { Variant } from "@/types/Variant";
+import { useCart } from "@/contexts/CartContext";
+import { Product } from "@/types/Product";
 
 interface IProps {
-  variants: any;
-  price: string;
+  product: Product;
 }
 
-export default function AddToCartProductForm({ variants, price }: IProps) {
+export default function AddToCartProductForm({ product }: IProps) {
   const [form] = Form.useForm();
+  const variant = Form.useWatch("variant", form);
+  const amount = Form.useWatch("amount", form);
+
+  const { addToCart } = useCart();
+
+  const initialValues = {
+    variant: product.variants.find((v: Variant) => v.price === product.price)
+      .id,
+    amount: 1,
+    color: "A elección",
+  };
+
+  const sizeVariants = product.variants.map((v: Variant) => {
+    return {
+      value: v.id,
+      label: v.title,
+    };
+  });
+
+  const handleSubmit = () => {
+    addToCart(
+      product,
+      product.variants.find((v: Variant) => v.id === variant),
+      amount
+    );
+  };
 
   return (
-    <Form form={form} className="w-full flex-col-center gap-5 my-5">
+    <Form
+      form={form}
+      className="w-full flex-col-center gap-5 my-5"
+      initialValues={initialValues}
+    >
       <div className="flex flex-col min-[1200px]:flex-row items-center justify-between w-full h-fit gap-5">
         <Form.Item
           name={"color"}
@@ -33,19 +65,16 @@ export default function AddToCartProductForm({ variants, price }: IProps) {
           />
         </Form.Item>
         <Form.Item
-          name="medida"
+          name="variant"
           className="w-full h-fit"
-          initialValue={"Small"}
           style={{ margin: 0 }}
+          required
         >
           <CustomSelect
             prefix="Medida"
-            options={[
-              { value: "Small", label: "Small" },
-              { value: "Medium", label: "Medium" },
-              { value: "Large", label: "Large" },
-            ]}
-            value={"Small"}
+            options={sizeVariants}
+            value={variant}
+            onChange={(value) => form.setFieldValue("variant", value)}
             style={{ width: "100%" }}
             aria-label="Seleccionar medida"
           />
@@ -53,19 +82,32 @@ export default function AddToCartProductForm({ variants, price }: IProps) {
       </div>
       <div className="flex flex-col min-[850px]:flex-row justify-start items-start min-[850px]:items-center w-full gap-4">
         <Form.Item
-          name="cantidad"
+          name="amount"
           initialValue={1}
           className="h-fit"
           style={{ margin: 0 }}
+          required
         >
-          <CustomNumberInput form={form} />
+          <CustomNumberInput
+            setValue={(value: number) => form.setFieldValue("amount", value)}
+            value={amount}
+            size="large"
+          />
         </Form.Item>
         <div className="flex flex-col">
           <h5 className=" text-2xl font-extra-bold">
-            {"$" + formatPrice(price)}
+            {"$" +
+              (variant && amount
+                ? formatPrice(
+                    String(
+                      product.variants.find((v: Variant) => v.id === variant)
+                        .price * amount
+                    )
+                  )
+                : 0)}
             <span className="text-xl ml-1">ARS</span>
           </h5>
-          <h6 className="flex justify-center items-start text-red ">
+          <h6 className="flex justify-center items-start text-whatsapp ">
             <CiCreditCard1 size={20} className="mr-1 mt-[2px]" />
             Hasta 3 cuotas sin interes
           </h6>
@@ -75,7 +117,7 @@ export default function AddToCartProductForm({ variants, price }: IProps) {
           Agregar al carrito
         </button> */}
       </div>
-      <button className="flex flex-1 button-solid">
+      <button className="flex flex-1 button-solid" onClick={handleSubmit}>
         <BsBagFill className={`w-4 h-4 mr-3 fill-white`} />
         Agregar al carrito
       </button>
