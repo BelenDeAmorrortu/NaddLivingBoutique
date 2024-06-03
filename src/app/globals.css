@@ -212,6 +212,21 @@
   text-align: center !important;
 }
 
+/* Pop Confirm */
+
+.ant-popconfirm-buttons .ant-btn-primary.ant-btn-sm {
+  @apply bg-red;
+}
+
+.ant-popconfirm-buttons .ant-btn-primary.ant-btn-sm:hover {
+  @apply bg-red/75;
+}
+
+.ant-popover-inner,
+.ant-popconfirm-buttons .ant-btn-primary.ant-btn-sm,
+.ant-popconfirm-buttons .ant-btn-default.ant-btn-sm {
+  border-radius: 0px !important;
+}
 /* .MuiAutocomplete-listbox::-webkit-scrollbar-track,
 .MuiAutocomplete-listbox::-webkit-scrollbar-track-piece {
   background: transparent !important;
@@ -328,7 +343,7 @@
   }
 
   .cart-sheet {
-    @apply z-[55] w-[400px] h-screen px-5 bg-white flex flex-col justify-center items-start fixed right-0 top-0;
+    @apply z-[55] w-full md:w-[400px] h-screen px-5 bg-white flex flex-col justify-center items-start fixed right-0 top-0;
   }
 
   .cart-sheet-header {

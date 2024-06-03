@@ -21,9 +21,9 @@ export default function CustomNumberInput({
   return (
     <Popconfirm
       title="Eliminar"
-      description="¿Está seguro que desea quitar el producto del carrito?"
-      okText="Eliminar"
-      cancelText="Cancelar"
+      description="¿Está seguro que desea eliminar el producto del carrito?"
+      okText="Si, Eliminar"
+      cancelText="No, Cancelar"
       disabled={!handleRemove && value > 1}
       onConfirm={handleRemove}
       icon={<MdDelete size={20} className="text-red flex-col-center mx-1" />}

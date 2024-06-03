@@ -27,10 +27,12 @@ export default function CartItem({
         />
       </div>
       <div className="flex flex-col justify-start items-start gap-1">
-        <h4 className=" font-bold uppercase text-base">{name}</h4>
-        <h4 className="uppercase text-xs">Color a eleccion</h4>
-        <h4 className="uppercase text-xs">{variant.title.split("/")[0]}</h4>
-        <h4 className="text-base font-bold">
+        <h4 className=" font-bold uppercase text-sm md:text-base">{name}</h4>
+        <h4 className="uppercase text-[10px] md:text-xs">Color a eleccion</h4>
+        <h4 className="uppercase text-[10px] md:text-xs">
+          {variant.title.split("/")[0]}
+        </h4>
+        <h4 className=" text-sm md:text-base font-bold">
           {"$" + formatPrice(String(variant.price * amount))}
         </h4>
       </div>
