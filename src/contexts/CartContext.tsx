@@ -1,4 +1,5 @@
 "use client";
+import { createCart } from "@/requests";
 import { ICartItem } from "@/types/CartItem";
 import { ICartProvider } from "@/types/CartProvider";
 import { Product } from "@/types/Product";
@@ -10,10 +11,12 @@ import { v4 as uuidv4 } from "uuid";
 const CartContext = React.createContext<ICartProvider>({
   items: [],
   total: 0,
+  count: 0,
   addToCart: () => {},
   removeFromCart: () => {},
   updateAmount: () => {},
   setIsOpen: () => {},
+  checkout: () => {},
   isOpen: false,
 });
 
@@ -28,6 +31,7 @@ export function CartProvider({
 }) {
   const [cartItems, setCartItems] = useState<ICartItem[]>([]);
   const [total, setTotal] = useState<number>(0);
+  const [count, setCount] = useState<number>(0);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const addToCart = (product: Product, variant: Variant, amount: number) => {
@@ -43,6 +47,7 @@ export function CartProvider({
       window.localStorage.setItem("cartItems", JSON.stringify(updateItems));
       setCartItems(updateItems);
       setTotal(calcTotal(updateItems));
+      setCount(calcCount(updateItems));
       setIsOpen(true);
     } else {
       const item: ICartItem = {
@@ -59,6 +64,7 @@ export function CartProvider({
       );
       setCartItems([...cartItems, item]);
       setTotal(total + Number(variant.price) * amount);
+      setCount(count + item.amount);
       setIsOpen(true);
     }
   };
@@ -92,12 +98,23 @@ export function CartProvider({
     }, 0);
   };
 
+  const calcCount = (items: ICartItem[]) => {
+    return items.reduce((total, item) => {
+      return total + item.amount;
+    }, 0);
+  };
+
+  const checkout = async () => {
+    await createCart(cartItems);
+  };
+
   useEffect(() => {
     const savedItems = window.localStorage.getItem("cartItems");
     if (savedItems) {
       const parsed = JSON.parse(savedItems);
       setCartItems(parsed);
-      calcTotal(parsed);
+      setTotal(calcTotal(parsed));
+      setCount(calcCount(parsed));
     }
   }, []);
 
@@ -109,6 +126,8 @@ export function CartProvider({
     isOpen,
     setIsOpen,
     updateAmount,
+    count,
+    checkout,
   };
 
   return (

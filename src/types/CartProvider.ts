@@ -5,9 +5,11 @@ import { Variant } from "./Variant";
 export interface ICartProvider {
   items: ICartItem[];
   total: number;
+  count: number;
   addToCart: (product: Product, variant: Variant, amount: number) => void;
   removeFromCart: (itemId: string) => void;
   updateAmount: (itemId: string, amount: number) => void;
   isOpen: boolean;
   setIsOpen: (arg: boolean) => void;
+  checkout: () => void;
 }

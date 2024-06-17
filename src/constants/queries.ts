@@ -121,4 +121,13 @@ export const queries = {
                 type
               }
           }`,
+  createCart: `mutation Cart($products: [CartLineInput!]){
+           cartCreate(input: {
+            lines: $products }){
+            cart {
+              id
+              checkoutUrl
+            }
+  }
+}`,
 };

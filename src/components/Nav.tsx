@@ -11,13 +11,14 @@ import menu2 from "react-useanimations/lib/menu2";
 import { navItems } from "@/constants/NavItems";
 import { Logo } from "@/assets/images";
 import { useCart } from "@/contexts/CartContext";
+import { Badge } from "antd";
 
 interface IProps {
   color: "white" | "black";
 }
 
 export default function Nav({ color }: IProps) {
-  const { isOpen: isCartOpen, setIsOpen: setIsCartOpen } = useCart();
+  const { isOpen: isCartOpen, setIsOpen: setIsCartOpen, count } = useCart();
 
   return (
     <>
@@ -34,17 +35,24 @@ export default function Nav({ color }: IProps) {
         </Link>
         <div className={`flex flex-row justify-end items-center gap-10 flex-1`}>
           <MagnifyingGlassIcon
-            className={`w-5 h-5 mr-3 fill-${
+            className={`w-6 h-6 mr-3 fill-${
               color === "white" ? "black" : "white"
             }`}
           />
           <button
             onClick={() => setIsCartOpen(true)}
-            className=" border-none bg-transparent p-0 m-0"
+            className=" border-none bg-transparent p-0 m-0 flex-col-center relative"
             name="Carrito"
             aria-label="Carrito"
           >
-            <BsBagFill className={`w-5 h-5 mr-3 lg:mr-0 self-end fill-white`} />
+            <BsBagFill className={`w-6 h-6 mr-3 lg:mr-0 self-end fill-white`} />
+            <span
+              className={`absolute top-2 z-10 text-black text-${
+                String(count).length > 2 ? "[5px]" : "xs"
+              } font-bold`}
+            >
+              {count == 0 ? "" : count}
+            </span>
           </button>
         </div>
         {/* </div> */}

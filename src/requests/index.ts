@@ -4,6 +4,8 @@ import { queries } from "../constants/queries";
 import { isJsonString } from "@/utils/isJsonString";
 import { arrayToIdsObject } from "@/utils/arrayToIdsObject";
 import { getMinPrice } from "@/utils/getMinPrice";
+import { ICartItem } from "@/types/CartItem";
+import { notification } from "antd";
 
 export const getProducts = async (
   filters: string[],
@@ -153,5 +155,26 @@ export const getMetaobjects = async (type: string) => {
     return metaobjectsValues;
   } catch (e) {
     console.log("ERROR", e);
+  }
+};
+
+export const createCart = async (cartItems: ICartItem[]) => {
+  try {
+    const products = cartItems.map((i) => {
+      return {
+        quantity: i.amount,
+        merchandiseId: i.variant.id,
+      };
+    });
+    const { data } = await storefront(queries.createCart, { products });
+
+    window.open(data.cartCreate.cart.checkoutUrl);
+  } catch (e) {
+    console.log("ERROR", e);
+    notification.error({
+      message:
+        "Error al iniciar Checkout. Por favor, vuelva a intentarlo mas tarde",
+      duration: 10,
+    });
   }
 };

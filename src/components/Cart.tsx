@@ -15,7 +15,7 @@ interface IProps {
 }
 
 export default function Cart({ isOpen, close }: IProps) {
-  const { items, total } = useCart();
+  const { items, total, checkout } = useCart();
 
   return (
     <>
@@ -57,7 +57,10 @@ export default function Cart({ isOpen, close }: IProps) {
             <span className="font-bold">TOTAL:</span>
             <span>{"$" + formatPrice(String(total))}</span>
           </h4>
-          <button className="contact-button w-full hover:bg-black hover:text-white transition-all duration-150">
+          <button
+            className="contact-button w-full hover:bg-black hover:text-white transition-all duration-150"
+            onClick={checkout}
+          >
             CHECKOUT
           </button>
         </div>
