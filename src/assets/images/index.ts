@@ -9,6 +9,8 @@ import Sillon from "./sillon.jpg";
 import Todo from "./todo.jpg";
 import Sofas from "./Rinconero G4 1.jpg";
 import Outline from "./outline.png";
+import Fabrics from "./fabrics.jpg";
+import Waves from "./waves.png";
 
 export {
   Logo,
@@ -21,4 +23,6 @@ export {
   Sillon,
   Todo,
   Outline,
+  Fabrics,
+  Waves,
 };

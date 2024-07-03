@@ -130,4 +130,14 @@ export const queries = {
             }
   }
 }`,
+  imageReferenceURL: `query ImageUrl($id: ID!){
+  node(id: $id) {
+    ... on MediaImage {
+      image {
+        url
+      }
+    }
+  }
+}
+`,
 };

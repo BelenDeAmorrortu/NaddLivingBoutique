@@ -6,6 +6,7 @@ import { arrayToIdsObject } from "@/utils/arrayToIdsObject";
 import { getMinPrice } from "@/utils/getMinPrice";
 import { ICartItem } from "@/types/CartItem";
 import { notification } from "antd";
+import { Fabric } from "@/types/Fabric";
 
 export const getProducts = async (
   filters: string[],
@@ -155,6 +156,53 @@ export const getMetaobjects = async (type: string) => {
     return metaobjectsValues;
   } catch (e) {
     console.log("ERROR", e);
+  }
+};
+
+export const getImageUrl = async (id: string) => {
+  try {
+    const { data } = await storefront(queries.imageReferenceURL, { id });
+    return data.node.image.url;
+  } catch (e) {
+    console.log("ERROR", e);
+  }
+};
+
+export const getFabrics = async (): Promise<Fabric[]> => {
+  try {
+    const { data } = await storefront(queries.metaobjects, { type: "telas" });
+    const metaobjectsValuesPromises = data.metaobjects.edges.map((o: any) => {
+      return getMetaobject(o.node.id);
+    });
+
+    const metaobjectsValues = await Promise.all(metaobjectsValuesPromises);
+
+    const { data: colors } = await storefront(queries.metaobjects, {
+      type: "color_tela",
+    });
+    const colorsPromises = colors.metaobjects.edges.map(async (o: any) => {
+      const data = await getMetaobject(o.node.id);
+      const image = await getImageUrl(data.foto);
+      return {
+        ...data,
+        foto: image,
+      };
+    });
+
+    const colorsValues = await Promise.all(colorsPromises);
+
+    const fabrics = metaobjectsValues.map((f) => {
+      const colors = colorsValues.filter((c) => c.tipo_tela === f.id);
+      return {
+        ...f,
+        colores: colors,
+      };
+    });
+
+    return fabrics;
+  } catch (e) {
+    console.log("ERROR", e);
+    return [];
   }
 };
 

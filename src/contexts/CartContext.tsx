@@ -74,6 +74,7 @@ export function CartProvider({
     window.localStorage.setItem("cartItems", JSON.stringify(removed));
     setCartItems(removed);
     setTotal(calcTotal(removed));
+    setCount(calcCount(removed));
   };
 
   const updateAmount = (id: string, amount: number) => {
@@ -90,6 +91,7 @@ export function CartProvider({
     window.localStorage.setItem("cartItems", JSON.stringify(updated));
     setCartItems(updated);
     setTotal(calcTotal(updated));
+    setCount(calcCount(updated));
   };
 
   const calcTotal = (items: ICartItem[]) => {
