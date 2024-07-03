@@ -11,7 +11,6 @@ import menu2 from "react-useanimations/lib/menu2";
 import { navItems } from "@/constants/NavItems";
 import { Logo } from "@/assets/images";
 import { useCart } from "@/contexts/CartContext";
-import { Badge } from "antd";
 
 interface IProps {
   color: "white" | "black";
@@ -21,49 +20,37 @@ export default function Nav({ color }: IProps) {
   const { isOpen: isCartOpen, setIsOpen: setIsCartOpen, count } = useCart();
 
   return (
-    <>
-      <nav
-        className={` z-30 bg-${color} w-full h-16 fixed top-0 left-0 text-sm flex justify-between px-[2.5%] items-center`}
-      >
-        {/* <div
-          className={`flex justify-between items-center w-[95%] h-fit border-b`}
-        > */}
-        <NavItemsLg />
-        <NavItemsSm />
-        <Link href={navigation.home}>
-          <Image src={Logo} alt="NADD Logo" className={` w-[150px] h-auto`} />
-        </Link>
-        <div className={`flex flex-row justify-end items-center gap-10 flex-1`}>
-          <MagnifyingGlassIcon
-            className={`w-6 h-6 mr-3 fill-${
-              color === "white" ? "black" : "white"
-            }`}
-          />
-          <button
-            onClick={() => setIsCartOpen(true)}
-            className=" border-none bg-transparent p-0 m-0 flex-col-center relative"
-            name="Carrito"
-            aria-label="Carrito"
+    <nav
+      className={` z-30 bg-${color} w-full h-16 fixed top-0 left-0 text-sm flex justify-between px-[2.5%] items-center`}
+    >
+      <NavItemsLg />
+      <NavItemsSm />
+      <Link href={navigation.home}>
+        <Image src={Logo} alt="NADD Logo" className={` w-[150px] h-auto`} />
+      </Link>
+      <div className={`flex flex-row justify-end items-center gap-10 flex-1`}>
+        <MagnifyingGlassIcon
+          className={`w-6 h-6 mr-3 fill-${
+            color === "white" ? "black" : "white"
+          }`}
+        />
+        <button
+          onClick={() => setIsCartOpen(true)}
+          className=" border-none bg-transparent p-0 m-0 flex-col-center relative"
+          name="Carrito"
+          aria-label="Carrito"
+        >
+          <BsBagFill className={`w-6 h-6 mr-3 lg:mr-0 self-end fill-white`} />
+          <span
+            className={`absolute top-2 z-10 text-black text-${
+              String(count)?.length > 2 ? "[5px]" : "xs"
+            } font-bold`}
           >
-            <BsBagFill className={`w-6 h-6 mr-3 lg:mr-0 self-end fill-white`} />
-            <span
-              className={`absolute top-2 z-10 text-black text-${
-                String(count).length > 2 ? "[5px]" : "xs"
-              } font-bold`}
-            >
-              {count == 0 ? "" : count}
-            </span>
-          </button>
-        </div>
-        {/* </div> */}
-      </nav>
-      <Cart
-        isOpen={isCartOpen}
-        close={() => {
-          setIsCartOpen(false);
-        }}
-      />
-    </>
+            {count == 0 ? "" : count}
+          </span>
+        </button>
+      </div>
+    </nav>
   );
 }
 

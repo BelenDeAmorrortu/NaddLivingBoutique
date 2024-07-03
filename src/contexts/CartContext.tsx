@@ -1,11 +1,11 @@
 "use client";
+import Cart from "@/components/Cart";
 import { createCart } from "@/requests";
 import { ICartItem } from "@/types/CartItem";
 import { ICartProvider } from "@/types/CartProvider";
 import { Product } from "@/types/Product";
 import { Variant } from "@/types/Variant";
-import { Modal } from "antd";
-import React, { useContext, useEffect, useId, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const CartContext = React.createContext<ICartProvider>({
@@ -135,6 +135,12 @@ export function CartProvider({
   return (
     <CartContext.Provider value={values}>
       {providerChildren}
+      <Cart
+        isOpen={isOpen}
+        close={() => {
+          setIsOpen(false);
+        }}
+      />
     </CartContext.Provider>
   );
 }
