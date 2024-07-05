@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { BsBagFill, BsChevronCompactDown } from "react-icons/bs";
-import Cart from "./Cart";
 import UseAnimations from "react-useanimations";
 import menu2 from "react-useanimations/lib/menu2";
 import { navItems } from "@/constants/NavItems";
@@ -17,7 +16,7 @@ interface IProps {
 }
 
 export default function Nav({ color }: IProps) {
-  const { isOpen: isCartOpen, setIsOpen: setIsCartOpen, count } = useCart();
+  const { setIsOpen, count } = useCart();
 
   return (
     <nav
@@ -35,7 +34,7 @@ export default function Nav({ color }: IProps) {
           }`}
         />
         <button
-          onClick={() => setIsCartOpen(true)}
+          onClick={() => setIsOpen(true)}
           className=" border-none bg-transparent p-0 m-0 flex-col-center relative"
           name="Carrito"
           aria-label="Carrito"

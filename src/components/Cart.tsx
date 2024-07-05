@@ -1,22 +1,27 @@
 "use client";
-import { Sofas } from "@/assets/images";
-import Image from "next/image";
 import React from "react";
 import { IoClose } from "react-icons/io5";
-import { AiFillDelete } from "react-icons/ai";
 import { useCart } from "@/contexts/CartContext";
 import CartItem from "./CartItem";
-import { BsBag, BsBagFill } from "react-icons/bs";
+import { BsBag } from "react-icons/bs";
 import { formatPrice } from "@/utils/formatPrice";
+import { ICartItem } from "@/types/CartItem";
 
 interface IProps {
   isOpen: boolean;
   close: () => void;
+  items: ICartItem[];
+  total: number;
+  checkout: () => void;
 }
 
-export default function Cart({ isOpen, close }: IProps) {
-  const { items, total, checkout } = useCart();
-
+export default function Cart({
+  isOpen,
+  close,
+  items,
+  total,
+  checkout,
+}: IProps) {
   return (
     <>
       <div
@@ -41,7 +46,7 @@ export default function Cart({ isOpen, close }: IProps) {
           </button>
         </div>
         <ul className={`cart-sheet-ul`}>
-          {items.length > 0 ? (
+          {items?.length > 0 ? (
             items.map((p) => <CartItem {...p} />)
           ) : (
             <div className="flex-1 w-full flex-col-center opacity-50 gap-10">

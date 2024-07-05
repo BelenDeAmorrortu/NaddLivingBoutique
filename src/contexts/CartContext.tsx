@@ -140,6 +140,9 @@ export function CartProvider({
         close={() => {
           setIsOpen(false);
         }}
+        items={cartItems}
+        total={total}
+        checkout={checkout}
       />
     </CartContext.Provider>
   );
