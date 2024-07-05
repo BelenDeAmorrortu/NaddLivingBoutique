@@ -212,6 +212,24 @@
   text-align: center !important;
 }
 
+/* -- Input ---------------------------------------------------------------------- */
+
+.ant-input {
+  @apply bg-transparent border-black border-2 rounded-none min-h-[43px];
+}
+
+textarea.ant-input {
+  @apply min-h-[43px] flex-col-center;
+}
+
+.ant-form-item label {
+  color: #000000 !important;
+}
+
+.ant-input::placeholder {
+  @apply text-black-hover;
+}
+
 /* Pop Confirm */
 
 .ant-popconfirm-buttons .ant-btn-primary.ant-btn-sm {
