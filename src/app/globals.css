@@ -124,7 +124,8 @@
 
 /* -- Image Preview -------------------------------------------------------------- */
 
-.ant-image-preview-operations {
+.ant-image-preview-operations,
+.ant-image-preview-close {
   @apply bg-black;
 }
 
@@ -137,6 +138,15 @@
 
 .ant-image-preview-operations-progress {
   @apply max-[500px]:left-[35px];
+}
+
+.ant-image-preview-switch-left,
+.ant-image-preview-switch-right {
+  @apply bg-black mx-[100px] scale-125;
+}
+
+.ant-image-preview-operations-wrapper .anticon {
+  @apply fill-white;
 }
 
 /* -- Collapse -------------------------------------------------------------- */

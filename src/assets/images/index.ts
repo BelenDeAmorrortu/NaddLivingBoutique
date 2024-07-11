@@ -11,6 +11,7 @@ import Sofas from "./Rinconero G4 1.jpg";
 import Outline from "./outline.png";
 import Fabrics from "./fabrics.jpg";
 import Waves from "./waves.png";
+import Fabrics2 from "./fabrics2.jpg";
 
 export {
   Logo,
@@ -25,4 +26,5 @@ export {
   Outline,
   Fabrics,
   Waves,
+  Fabrics2,
 };

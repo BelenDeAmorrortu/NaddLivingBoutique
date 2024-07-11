@@ -4,9 +4,10 @@ import { motion } from "framer-motion";
 interface IProps {
   children: ReactNode;
   key: number;
+  twStyles?: string;
 }
 
-export default function CascadeReveal({ children, key }: IProps) {
+export default function CascadeReveal({ children, key, twStyles }: IProps) {
   return (
     <motion.div
       key={key}
@@ -14,6 +15,7 @@ export default function CascadeReveal({ children, key }: IProps) {
       transition={{ duration: 0.5, delay: key * 0.1 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
+      className={twStyles ?? ""}
     >
       {children}
     </motion.div>
