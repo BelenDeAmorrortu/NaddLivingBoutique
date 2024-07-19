@@ -4,6 +4,7 @@ import Image from "next/image";
 import UseAnimations from "react-useanimations";
 import instagram from "react-useanimations/lib/instagram";
 import arrowDown from "react-useanimations/lib/arrowDown";
+import { CascadeReveal } from "@/transitions";
 
 export default function Header() {
   return (
@@ -17,10 +18,14 @@ export default function Header() {
         className="object-cover brightness-50"
       />
       <div className="flex-col-center w-full h-screen absolute">
-        <h4 className="subtitle-1 text-grey">Nadd Living Boutique</h4>
-        <h3 className="title-1 text-white my-3">
-          The Perfect <span className="text-red">Style</span>
-        </h3>
+        <CascadeReveal key={4}>
+          <h4 className="subtitle-1 text-grey">Nadd Living Boutique</h4>
+        </CascadeReveal>
+        <CascadeReveal key={1}>
+          <h3 className="title-1 text-white my-3">
+            The Perfect <span className="text-red">Style</span>
+          </h3>
+        </CascadeReveal>
         <a
           href="https://www.instagram.com/nadd.living.boutique/"
           target="_blank"

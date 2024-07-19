@@ -1,6 +1,10 @@
-import ContactForm from "@/components/ContactForm";
-import { Header, Banner, Spotlight, Contact } from "@/components/index";
-import Reveal from "@/transitions/Reveal";
+import {
+  Header,
+  Banner,
+  Spotlight,
+  OurShop,
+  ContactForm,
+} from "@/components/index";
 
 export default function Home() {
   return (
@@ -8,7 +12,7 @@ export default function Home() {
       <Header />
       <Banner />
       <Spotlight />
-      {/* <Contact /> */}
+      <OurShop />
       <ContactForm />
     </>
   );

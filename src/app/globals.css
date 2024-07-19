@@ -240,6 +240,10 @@ textarea.ant-input {
   @apply text-black-hover;
 }
 
+.contact-form .ant-form.ant-form-vertical {
+  margin: 0px !important;
+}
+
 /* Pop Confirm */
 
 .ant-popconfirm-buttons .ant-btn-primary.ant-btn-sm {

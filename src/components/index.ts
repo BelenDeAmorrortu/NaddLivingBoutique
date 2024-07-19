@@ -13,3 +13,5 @@ export { default as Loader } from "./Loader";
 export { default as Contact } from "./Contact";
 export { default as Filters } from "./Filters";
 export { default as Whatsapp } from "./Whatsapp";
+export { default as ContactForm } from "./ContactForm";
+export { default as OurShop } from "./OurShop";

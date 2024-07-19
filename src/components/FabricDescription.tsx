@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { Divider } from "antd";
-import Icon, { EyeOutlined } from "@ant-design/icons";
+import { EyeOutlined } from "@ant-design/icons";
 
 interface IProps {
   fabric: Fabric;

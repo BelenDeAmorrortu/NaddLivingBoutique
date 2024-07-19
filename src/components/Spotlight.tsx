@@ -15,7 +15,7 @@ export default function Spotlight() {
   return (
     <section className="flex-col-center w-full h-fit my-10">
       <Reveal tailwindStyles="flex-col-center">
-        <h4 className="uppercase font-semi-bold text-2xl text-black/80">
+        <h4 className="uppercase font-bold text-2xl text-black/80">
           Nuestros Productos
         </h4>
         <h3 className="title-2 uppercase m-3 mb-16">Destacados</h3>

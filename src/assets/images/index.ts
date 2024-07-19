@@ -12,6 +12,9 @@ import Outline from "./outline.png";
 import Fabrics from "./fabrics.jpg";
 import Waves from "./waves.png";
 import Fabrics2 from "./fabrics2.jpg";
+import Local from "./local.jpg";
+import Local2 from "./local2.jpg";
+import Local3 from "./local3.webp";
 
 export {
   Logo,
@@ -27,4 +30,7 @@ export {
   Fabrics,
   Waves,
   Fabrics2,
+  Local,
+  Local2,
+  Local3,
 };

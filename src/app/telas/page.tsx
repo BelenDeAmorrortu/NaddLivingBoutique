@@ -19,7 +19,7 @@ export default function Page() {
             twStyles="relative aspect-w-16 aspect-h-9 flex items-end"
           >
             <video
-              className="absolute inset-0 w-full h-full object-cover object-bottom brightness-50"
+              className="absolute inset-0 w-full h-full object-cover object-bottom brightness-75"
               src="/IMG_7499.MOV"
               muted
               loop
@@ -30,7 +30,7 @@ export default function Page() {
           </CascadeReveal>
           <CascadeReveal key={3} twStyles="relative aspect-w-16 aspect-h-9">
             <Image
-              className="absolute inset-0 w-full h-full object-cover brightness-50"
+              className="absolute inset-0 w-full h-full object-cover brightness-75"
               src={Fabrics2}
               alt="Description"
               placeholder="blur"
@@ -38,7 +38,7 @@ export default function Page() {
           </CascadeReveal>
           <CascadeReveal key={5} twStyles="relative aspect-w-16 aspect-h-9">
             <video
-              className="absolute inset-0 w-full h-full object-cover  brightness-50"
+              className="absolute inset-0 w-full h-full object-cover brightness-75"
               src="/VID_20240701_105753766 (1).mp4"
               muted
               loop
