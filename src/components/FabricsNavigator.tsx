@@ -1,13 +1,10 @@
 "use client";
 import useFetch from "@/hooks/useFetch";
 import { getFabrics } from "@/requests";
-import { Col, Row } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import FabricDescription from "./FabricDescription";
 import { Image as Img } from "antd";
-import Link from "next/link";
 import { Color } from "@/types/Fabric";
-import { useInView } from "framer-motion";
 
 export default function FabricsNavigator() {
   const [preview, setPreview] = useState<boolean>(false);

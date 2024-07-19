@@ -3,7 +3,8 @@ import { Fabric, Color } from "@/types/Fabric";
 import React, { useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
-import { Divider, Image as Img } from "antd";
+import { Divider } from "antd";
+import Icon, { EyeOutlined } from "@ant-design/icons";
 
 interface IProps {
   fabric: Fabric;
@@ -75,32 +76,27 @@ export default function FabricDescription({
         {fabric.colores.map((c, i) => {
           return (
             <div key={c.id} className="flex-col-center gap-3 max-w-[100px]">
-              <div className="w-[100px] h-[100px] rounded-full overflow-hidden">
-                <Img
-                  preview={{ visible: false }}
+              <button
+                className="relative group w-[100px] h-[100px] rounded-full overflow-hidden"
+                onClick={() => {
+                  setSelectedFabricColors(fabric.colores);
+                  setPreview(true);
+                  setActiveColorIndex(i);
+                }}
+              >
+                <Image
                   src={c.foto}
                   alt="Imagen ilustrativa del producto"
                   width={100}
                   height={100}
                   className="object-contain object-center"
-                  onClick={() => {
-                    setSelectedFabricColors(fabric.colores);
-                    setPreview(true);
-                    setActiveColorIndex(i);
-                  }}
-                  placeholder={
-                    <Image
-                      alt="Placeholder"
-                      className="object-contain object-center"
-                      width={100}
-                      height={100}
-                      src={c.foto + "?blur=500&px=16&auto=format"}
-                      placeholder="blur"
-                      blurDataURL={c.foto + "?blur=500&px=16&auto=format"}
-                    />
-                  }
+                  placeholder="blur"
+                  blurDataURL={c.foto + "?blur=500&px=16&auto=format"}
                 />
-              </div>
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-75 absolute h-full w-full bg-black/50 flex-row-center top-0">
+                  <EyeOutlined style={{ color: "white", fontSize: 18 }} />
+                </div>
+              </button>
               <h4 className="uppercase text-sm font-bold text-dark-grey text-center">
                 {c.nombre.replace(" - ", "/ ")}
               </h4>

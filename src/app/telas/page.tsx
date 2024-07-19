@@ -7,24 +7,6 @@ import Image from "next/image";
 export default function Page() {
   return (
     <div className="h-fit pt-16">
-      {/* <div className="relative w-full h-[40vh] overflow-hidden flex-col-center">
-        <Image
-          fill
-          priority
-          src={Fabrics}
-          alt="Muestrario de telas"
-          className="absolute brightness-[0.3] object-cover"
-        />
-        <div className="flex-col-center w-[1000px] h-full absolute">
-          <h4 className="title-2 text-white">Descubrí nuestras telas</h4>
-          <p className="text-white/70 my-3 text-center font-thin">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe at
-            alias a! Magnam, laborum error! Officiis unde voluptatem molestias
-            sapiente, architecto laudantium magnam aliquam rerum, nulla, ipsa
-            dolorem maiores suscipit?
-          </p>
-        </div>
-      </div> */}
       <div className="h-[90vh] w-full p-5">
         <Reveal>
           <h4 className="title-2 text-black text-center my-16 uppercase">
