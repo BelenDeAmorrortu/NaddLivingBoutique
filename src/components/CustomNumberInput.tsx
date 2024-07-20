@@ -64,7 +64,7 @@ export default function CustomNumberInput({
           aria-label="Cantidad"
           readOnly={true}
           onClick={(e) => e.stopPropagation()}
-          // size={size === "large" ? undefined : "small"}
+          size={size === "large" ? undefined : "small"}
         />
         <button
           className={"group h-full flex items-center justify-center bg-transparent outline-none border-none border-l-black border-2".concat(

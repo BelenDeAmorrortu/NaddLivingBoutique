@@ -57,6 +57,7 @@ export function CartProvider({
         variant,
         image: product.images[0],
         amount,
+        url: product.url,
       };
       window.localStorage.setItem(
         "cartItems",

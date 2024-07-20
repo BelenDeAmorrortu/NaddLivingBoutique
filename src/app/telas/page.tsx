@@ -7,7 +7,7 @@ import Image from "next/image";
 export default function Page() {
   return (
     <div className="h-fit pt-16">
-      <div className="h-[90vh] w-full p-5">
+      <div className="h-[80vh] w-full px-10">
         <Reveal>
           <h4 className="title-2 text-black text-center my-16 uppercase">
             Descubrí nuestras telas
@@ -16,7 +16,7 @@ export default function Page() {
         <div className="grid grid-cols-3 h-[60vh] w-full relative gap-5">
           <CascadeReveal
             key={1}
-            twStyles="relative aspect-w-16 aspect-h-9 flex items-end"
+            twStyles="relative aspect-w-16 aspect-h-9 flex items-end overflow-hidden rounded-sm"
           >
             <video
               className="absolute inset-0 w-full h-full object-cover object-bottom brightness-75"
@@ -28,7 +28,10 @@ export default function Page() {
               preload=""
             />
           </CascadeReveal>
-          <CascadeReveal key={3} twStyles="relative aspect-w-16 aspect-h-9">
+          <CascadeReveal
+            key={3}
+            twStyles="relative aspect-w-16 aspect-h-9 overflow-hidden rounded-sm"
+          >
             <Image
               className="absolute inset-0 w-full h-full object-cover brightness-75"
               src={Fabrics2}
@@ -36,7 +39,10 @@ export default function Page() {
               placeholder="blur"
             />
           </CascadeReveal>
-          <CascadeReveal key={5} twStyles="relative aspect-w-16 aspect-h-9">
+          <CascadeReveal
+            key={5}
+            twStyles="relative aspect-w-16 aspect-h-9 overflow-hidden rounded-sm"
+          >
             <video
               className="absolute inset-0 w-full h-full object-cover brightness-75"
               src="/VID_20240701_105753766 (1).mp4"

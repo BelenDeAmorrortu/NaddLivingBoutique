@@ -4,6 +4,8 @@ import { formatPrice } from "@/utils/formatPrice";
 import Image from "next/image";
 import React from "react";
 import CustomNumberInput from "./CustomNumberInput";
+import { navigation } from "@/constants/navigation";
+import Link from "next/link";
 
 export default function CartItem({
   name,
@@ -11,8 +13,9 @@ export default function CartItem({
   variant,
   amount,
   _id,
+  url,
 }: ICartItem) {
-  const { removeFromCart, updateAmount } = useCart();
+  const { removeFromCart, updateAmount, setIsOpen } = useCart();
 
   return (
     <li className="cart-sheet-li" key={_id}>
@@ -41,6 +44,11 @@ export default function CartItem({
         handleRemove={() => removeFromCart(_id)}
         size="small"
       />
+      <Link
+        href={`${navigation.productos}/${url}`}
+        className="absolute h-full w-[calc(100%-70px)] left-0"
+        onClick={() => setIsOpen(false)}
+      ></Link>
     </li>
   );
 }

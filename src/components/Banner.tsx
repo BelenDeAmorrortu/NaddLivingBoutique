@@ -6,7 +6,7 @@ export default function Banner() {
   return (
     <Reveal
       isSection
-      tailwindStyles="flex flex-col sm:flex-row justify-around items-center h-fit min-h-[65vh] w-full"
+      tailwindStyles="flex flex-col sm:flex-row justify-around items-center h-fit min-h-[65vh] w-full px-10"
     >
       <div className="w-[90%] sm:w-[40%] flex-center">
         <Image
@@ -15,7 +15,7 @@ export default function Banner() {
           className=" brightness-110 w-[78%]"
         />
       </div>
-      <div className="w-[85%] sm:w-[50%]">
+      <div className="w-[85%] sm:w-[60%]">
         <h3 className="title-2">
           Nuestro compromiso, la <span className="text-red">excelencia</span>.
         </h3>

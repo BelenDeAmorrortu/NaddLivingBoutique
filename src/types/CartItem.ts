@@ -5,4 +5,5 @@ export interface ICartItem {
   variant: any;
   image: string;
   amount: number;
+  url: string;
 }

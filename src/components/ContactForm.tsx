@@ -39,7 +39,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="h-fit w-full flex flex-row justify-center gap-20 px-20 pb-20">
+    <section className="h-fit w-full flex flex-row justify-center gap-20 px-10 pb-20">
       <div className="flex flex-1 h-full flex-col gap-5">
         <h3 className="title-3 uppercase text-black">¿Tenés una consulta?</h3>
         <p className="text-xl">
@@ -81,24 +81,26 @@ export default function ContactForm() {
           initialValues={initialValues}
           layout="vertical"
         >
-          <Form.Item
-            name={"name"}
-            className="w-full h-fit flex flex-col"
-            style={{ margin: 0 }}
-            required
-            label="Nombre y apellido"
-          >
-            <Input placeholder="Nombre y apellido" />
-          </Form.Item>
-          <Form.Item
-            name="email"
-            className="w-full h-fit flex flex-col"
-            style={{ margin: 0 }}
-            required
-            label="Email"
-          >
-            <Input placeholder="Email" />
-          </Form.Item>
+          <div className="flex-row-center gap-5 w-full">
+            <Form.Item
+              name={"name"}
+              className="w-full h-fit flex flex-col"
+              style={{ margin: 0 }}
+              required
+              label="Nombre y apellido"
+            >
+              <Input placeholder="Nombre y apellido" />
+            </Form.Item>
+            <Form.Item
+              name="email"
+              className="w-full h-fit flex flex-col"
+              style={{ margin: 0 }}
+              required
+              label="Email"
+            >
+              <Input placeholder="Email" />
+            </Form.Item>
+          </div>
 
           <Form.Item
             name="message"
@@ -107,7 +109,7 @@ export default function ContactForm() {
             required
             label="Mensaje"
           >
-            <Input.TextArea placeholder="Mensaje" autoSize />
+            <Input.TextArea placeholder="Mensaje" autoSize size="large" />
           </Form.Item>
           <button className="w-full button-solid" onClick={handleSubmit}>
             Enviar

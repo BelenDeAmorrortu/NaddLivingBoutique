@@ -222,10 +222,15 @@
   text-align: center !important;
 }
 
+:where(.css-dev-only-do-not-override-f7vrd6).ant-input-number-sm
+  input.ant-input-number-input {
+  height: 30px !important;
+}
+
 /* -- Input ---------------------------------------------------------------------- */
 
 .ant-input {
-  @apply bg-transparent border-black border-2 rounded-none min-h-[43px];
+  @apply bg-transparent border-black border-2 rounded-none min-h-[43px] hover:border-dark-grey focus:border-dark-grey;
 }
 
 textarea.ant-input {
@@ -258,6 +263,11 @@ textarea.ant-input {
 .ant-popconfirm-buttons .ant-btn-primary.ant-btn-sm,
 .ant-popconfirm-buttons .ant-btn-default.ant-btn-sm {
   border-radius: 0px !important;
+}
+
+.ant-popconfirm-buttons .ant-btn-default.ant-btn-sm:hover,
+.ant-popconfirm-buttons .ant-btn-default.ant-btn-sm:focus {
+  @apply border-dark-grey text-dark-grey;
 }
 /* .MuiAutocomplete-listbox::-webkit-scrollbar-track,
 .MuiAutocomplete-listbox::-webkit-scrollbar-track-piece {
@@ -387,7 +397,7 @@ textarea.ant-input {
   }
 
   .cart-sheet-li {
-    @apply my-5 flex justify-between items-center w-full h-16 h-fit;
+    @apply my-5 flex justify-between items-center w-full h-16 h-fit relative;
   }
 
   .cart-sheet-img {

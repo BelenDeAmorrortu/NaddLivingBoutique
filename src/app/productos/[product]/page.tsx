@@ -36,19 +36,19 @@ export default async function page({ params }: Props) {
   const product = await getProduct(slug);
 
   return (
-    <div className="flex flex-col h-fit w-full">
-      <div className="description flex flex-col md:flex-row h-fit pb-10 pt-32 justify-evenly items-center">
+    <div className="flex flex-col h-fit w-full px-10">
+      <div className="description flex flex-col md:flex-row h-fit pb-10 pt-32 gap-10 justify-between items-center">
         <div className="mb-12 w-[95vw] sm:mb-0 md:w-[50vw] md:sticky md:top-32 min-[1243px]:w-[45vw] md:self-baseline">
           <Carousel images={product.images} lqip={product.lqip} />
         </div>
-        <div className="w-[90vw] md:w-[40vw] flex flex-col justify-center">
+        <div className="w-[90vw] md:w-[45vw] flex flex-col justify-center">
           <h1 className="title-3 text-red">{product.name}</h1>
           <h2 className="subtitle-1 my-5">{product.category.join(" - ")}</h2>
           <div dangerouslySetInnerHTML={{ __html: product.description }} />
           <AddToCartProductForm {...{ product }} />
         </div>
       </div>
-      <div className="flex flex-col gap-6 md:gap-0 md:flex-row justify-evenly items-center w-full h-fit my-10">
+      <div className="flex flex-col gap-6 md:gap-0 md:flex-row justify-between items-center w-full h-fit my-10">
         <div className="flex flex-col w-[90vw] md:max-w-[45vw] gap-4">
           <h4 className="text-2xl md:text-[2.4vw] text-nowrap font-bold text-red">
             ¿Querés tu producto a medida?

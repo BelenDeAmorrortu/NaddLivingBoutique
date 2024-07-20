@@ -101,7 +101,7 @@ export default function Page() {
   }
 
   return (
-    <div className="min-h-[60vh] py-36 w-full flex flex-col items-center sm:flex-row sm:justify-evenly sm:items-start">
+    <div className="min-h-[60vh] py-36 w-full flex flex-col items-center sm:flex-row sm:justify-between px-10 sm:items-start">
       <div className="flex flex-col w-[85vw] mb-20 sm:w-48 md:w-60 min-[640px]:mb-0 min-[640px]:sticky min-[640px]:top-36">
         <Filters
           filters={filters}

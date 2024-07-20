@@ -25,10 +25,10 @@ export default function OurShop() {
           </div>
         </div>
       </Reveal>
-      <div className="grid grid-cols-3 h-[60vh] w-full relative gap-5 px-5">
+      <div className="grid grid-cols-3 h-[60vh] w-full relative gap-5 px-10">
         <CascadeReveal
           key={1}
-          twStyles="relative aspect-w-16 aspect-h-9 flex items-end"
+          twStyles="relative aspect-w-16 aspect-h-9 flex items-end rounded-sm overflow-hidden"
         >
           <Image
             src={Local3}
@@ -37,7 +37,10 @@ export default function OurShop() {
             className="absolute object-cover w-full h-full"
           />
         </CascadeReveal>
-        <CascadeReveal key={3} twStyles="relative aspect-w-16 aspect-h-9">
+        <CascadeReveal
+          key={3}
+          twStyles="relative aspect-w-16 aspect-h-9 rounded-sm overflow-hidden"
+        >
           <Image
             src={Local}
             alt="Exterior del local en Av. Córdoba 4454"
@@ -45,7 +48,10 @@ export default function OurShop() {
             className="absolute object-cover w-full h-full"
           />
         </CascadeReveal>
-        <CascadeReveal key={5} twStyles="relative aspect-w-16 aspect-h-9">
+        <CascadeReveal
+          key={5}
+          twStyles="relative aspect-w-16 aspect-h-9 rounded-sm overflow-hidden"
+        >
           <Image
             src={Local2}
             alt="Intorior del local en Av. Córdoba 4454"
