@@ -63,7 +63,7 @@ export default function FabricsNavigator() {
   }, [selectedFabricColors, activeColorIndex, preview]);
 
   return (
-    <div className="h-fit p-10 grid grid-cols-4">
+    <div className="h-fit p-10 my-10 grid grid-cols-4" id="telas">
       <div className="h-[85vh] col-span-1 flex flex-col justify-center items-start mx-5 gap-5 border-l border-l-black-hover sticky top-20">
         {data &&
           data.map((i) => {
@@ -106,11 +106,11 @@ export default function FabricsNavigator() {
             onChange: (current) => setActiveColorIndex(current),
           }}
         >
-          <h3 className="title-3 uppercase font-bold absolute z-50 top-16 text-white">
+          <h4 className="title-3 uppercase font-bold absolute z-50 top-16 text-white">
             {selectedFabricColors.length > 0 && activeColorIndex
               ? selectedFabricColors[activeColorIndex].nombre
               : ""}
-          </h3>
+          </h4>
 
           {selectedFabricColors.length > 0 &&
             selectedFabricColors.map((c) => {

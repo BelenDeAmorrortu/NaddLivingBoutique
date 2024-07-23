@@ -25,7 +25,7 @@ export default function OurShop() {
           </div>
         </div>
       </Reveal>
-      <div className="grid grid-cols-3 h-[60vh] w-full relative gap-5 px-10">
+      <div className="grid grid-cols-3 h-[65vh] w-full relative gap-1 px-1">
         <CascadeReveal
           key={1}
           twStyles="relative aspect-w-16 aspect-h-9 flex items-end rounded-sm overflow-hidden"

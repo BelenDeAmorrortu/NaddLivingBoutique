@@ -70,7 +70,7 @@ export default function FabricDescription({
       key={fabric.id}
       className="h-fit w-full my-10 min-h-[90vh] flex flex-col gap-6"
     >
-      <h3 className="title-2 text-4xl my-0">{fabric.nombre}</h3>
+      <h2 className="title-2 text-4xl my-0">{fabric.nombre}</h2>
       <p className="text-dark-grey font-regular">{fabric.descripcion}</p>
       <div className="flex flex-row flex-wrap items-start gap-6">
         {fabric.colores.map((c, i) => {

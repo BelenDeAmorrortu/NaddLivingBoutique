@@ -39,7 +39,10 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="h-fit w-full flex flex-row justify-center gap-20 px-10 pb-20">
+    <section
+      className="h-fit w-full flex flex-row justify-center gap-20 px-10 pb-20"
+      id="contacto"
+    >
       <div className="flex flex-1 h-full flex-col gap-5">
         <h3 className="title-3 uppercase text-black">¿Tenés una consulta?</h3>
         <p className="text-xl">
