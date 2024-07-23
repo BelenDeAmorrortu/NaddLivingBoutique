@@ -1,6 +1,3 @@
-import React from "react";
-import { PortableTextBlock } from "sanity";
-
 export type Product = {
   _id: string;
   name: string;

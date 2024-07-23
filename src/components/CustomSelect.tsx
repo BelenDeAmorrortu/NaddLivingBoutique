@@ -36,7 +36,7 @@ export default function CustomSelect({
       {...props}
       className={prefix ? `select-type-${prefix}` : ""}
       onChange={(_, option: any) => {
-        onChange(option.value);
+        if (onChange) onChange(option.value);
       }}
     />
   );
