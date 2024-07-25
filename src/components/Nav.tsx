@@ -3,66 +3,99 @@ import { navigation } from "@/constants/navigation";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { BsBagFill, BsChevronCompactDown } from "react-icons/bs";
 import UseAnimations from "react-useanimations";
 import menu2 from "react-useanimations/lib/menu2";
 import { navItems } from "@/constants/NavItems";
 import { Logo } from "@/assets/images";
 import { useCart } from "@/contexts/CartContext";
+import CategoriesNav from "./CategoriesNav";
 
 interface IProps {
   color: "white" | "black";
 }
 
 export default function Nav({ color }: IProps) {
+  const [productCategoriesVisible, setProductCategoriesVisible] =
+    useState<boolean>(false);
+  const [isHovering, setIsHovering] = useState<boolean>(false);
+
   const { setIsOpen, count } = useCart();
 
+  useEffect(() => {
+    if (isHovering) {
+      setProductCategoriesVisible(true);
+    } else {
+      const timeoutId = setTimeout(() => {
+        if (!isHovering) {
+          setProductCategoriesVisible(false);
+        }
+      }, 200);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [isHovering]);
+
   return (
-    <nav
-      className={` z-30 bg-${color} w-full h-16 fixed top-0 left-0 text-sm flex justify-between px-[2.5%] items-center`}
-    >
-      <NavItemsLg />
-      <NavItemsSm />
-      <Link href={navigation.home}>
-        <Image src={Logo} alt="NADD Logo" className={` w-[150px] h-auto`} />
-      </Link>
-      <div className={`flex flex-row justify-end items-center gap-10 flex-1`}>
-        <MagnifyingGlassIcon
-          className={`w-6 h-6 mr-3 fill-${
-            color === "white" ? "black" : "white"
-          }`}
-        />
-        <button
-          onClick={() => setIsOpen(true)}
-          className=" border-none bg-transparent p-0 m-0 flex-col-center relative"
-          name="Carrito"
-          aria-label="Carrito"
-        >
-          <BsBagFill className={`w-6 h-6 mr-3 lg:mr-0 self-end fill-white`} />
-          <span
-            className={`absolute top-2 z-10 text-black text-${
-              String(count)?.length > 2 ? "[5px]" : "xs"
-            } font-bold`}
+    <>
+      <nav
+        className={` z-30 bg-${color} w-full h-16 fixed top-0 left-0 text-sm flex justify-between px-[2.5%] items-center`}
+      >
+        <NavItemsLg setIsHovering={setIsHovering} />
+        <NavItemsSm />
+        <Link href={navigation.home}>
+          <Image src={Logo} alt="NADD Logo" className={` w-[150px] h-auto`} />
+        </Link>
+        <div className={`flex flex-row justify-end items-center gap-10 flex-1`}>
+          <MagnifyingGlassIcon
+            className={`w-6 h-6 mr-3 fill-${
+              color === "white" ? "black" : "white"
+            }`}
+          />
+          <button
+            onClick={() => setIsOpen(true)}
+            className=" border-none bg-transparent p-0 m-0 flex-col-center relative"
+            name="Carrito"
+            aria-label="Carrito"
           >
-            {count == 0 ? "" : count}
-          </span>
-        </button>
-      </div>
-    </nav>
+            <BsBagFill className={`w-6 h-6 mr-3 lg:mr-0 self-end fill-white`} />
+            <span
+              className={`absolute top-2 z-10 text-black text-${
+                String(count)?.length > 2 ? "[5px]" : "xs"
+              } font-bold`}
+            >
+              {count == 0 ? "" : count}
+            </span>
+          </button>
+        </div>
+      </nav>
+      <CategoriesNav
+        visible={productCategoriesVisible}
+        setIsHovering={setIsHovering}
+      />
+    </>
   );
 }
 
-const NavItemsLg = () => {
+const NavItemsLg = ({
+  setIsHovering,
+}: {
+  setIsHovering: (arg: boolean) => void;
+}) => {
   return (
     <ul className={`navlg`}>
       {navItems.map((item, i) => {
         return (
           <li
-            className={`nav-item flex items-center ${
-              item.categories ? `group` : ""
-            }`}
+            className={`nav-item flex items-center`}
             key={i}
+            {...(item.name === "Productos"
+              ? {
+                  onMouseEnter: () => setIsHovering(true),
+                  onMouseLeave: () => setIsHovering(false),
+                }
+              : {})}
           >
             <a
               href={item.href}
@@ -70,31 +103,6 @@ const NavItemsLg = () => {
             >
               {item.name}
             </a>
-            {item.categories && (
-              <div className={`navlg-categories`}>
-                <ul className={`flex-row-center flex-wrap gap-5`}>
-                  {item.categories.map((p, i) => (
-                    <li className={`group/product navlg-categories-li`} key={i}>
-                      <div className={`card-image`}>
-                        <Image
-                          src={p.image}
-                          alt={`Imagén de ${p.name}`}
-                          width={500}
-                          height={500}
-                          className={`group-hover/product:scale-110 navlg-categories-img`}
-                        />
-                      </div>
-                      <Link
-                        href={p.href}
-                        className={`flex w-full h-full absolute uppercase font-bold drop-shadow-md flex-col-center`}
-                      >
-                        {p.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
           </li>
         );
       })}
