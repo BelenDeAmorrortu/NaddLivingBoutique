@@ -302,7 +302,7 @@ textarea.ant-input {
   /* Nav */
 
   .nav-item {
-    @apply font-semi-bold text-white cursor-pointer text-[13.5px] h-fit lg:h-16;
+    @apply font-semi-bold text-white cursor-pointer text-[13.5px] h-fit min-[1220px]:h-16;
   }
 
   .navlg {
