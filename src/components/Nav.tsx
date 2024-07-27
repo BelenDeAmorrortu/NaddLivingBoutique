@@ -12,11 +12,7 @@ import { Logo } from "@/assets/images";
 import { useCart } from "@/contexts/CartContext";
 import CategoriesNav from "./CategoriesNav";
 
-interface IProps {
-  color: "white" | "black";
-}
-
-export default function Nav({ color }: IProps) {
+export default function Nav() {
   const [productCategoriesVisible, setProductCategoriesVisible] =
     useState<boolean>(false);
   const [isHovering, setIsHovering] = useState<boolean>(false);
@@ -40,28 +36,34 @@ export default function Nav({ color }: IProps) {
   return (
     <>
       <nav
-        className={` z-30 bg-${color} w-full h-16 fixed top-0 left-0 text-sm flex justify-between px-[2.5%] items-center`}
+        className={` z-30 bg-black w-full h-14 md:h-16 fixed top-0 left-0 text-sm flex justify-between px-[2.5%] items-center`}
       >
         <NavItemsLg setIsHovering={setIsHovering} />
         <NavItemsSm />
         <Link href={navigation.home}>
-          <Image src={Logo} alt="NADD Logo" className={` w-[150px] h-auto`} />
-        </Link>
-        <div className={`flex flex-row justify-end items-center gap-10 flex-1`}>
-          <MagnifyingGlassIcon
-            className={`w-6 h-6 mr-3 fill-${
-              color === "white" ? "black" : "white"
-            }`}
+          <Image
+            src={Logo}
+            alt="NADD Logo"
+            className={`w-[100px] md:w-[150px] h-auto`}
           />
+        </Link>
+        <div
+          className={`flex flex-row justify-end items-center gap-6 md:gap-10 flex-1`}
+        >
+          <MagnifyingGlassIcon className={`w-5 h-5 md:w-6 md:h-6 fill-white`} />
           <button
             onClick={() => setIsOpen(true)}
-            className=" border-none bg-transparent p-0 m-0 flex-col-center relative"
+            className=" border-none bg-transparent p-0 m-0 md:mr-3 lg:mr-0 flex-col-center relative"
             name="Carrito"
             aria-label="Carrito"
           >
-            <BsBagFill className={`w-6 h-6 mr-3 lg:mr-0 self-end fill-white`} />
+            <BsBagFill
+              className={`w-5 h-5 md:w-6 md:h-6 self-end fill-white`}
+            />
             <span
-              className={`absolute top-2 z-10 text-black text-${
+              className={`absolute top-1 md:top-2 z-10 text-black text-[${
+                String(count)?.length > 2 ? "8px" : "10px"
+              }] md:text-${
                 String(count)?.length > 2 ? "[5px]" : "xs"
               } font-bold`}
             >
@@ -177,7 +179,7 @@ const NavItemsSm = () => {
                       >
                         {item.name}
                         <BsChevronCompactDown
-                          className={"h-5 w-5 absolute right-[15vw] lg:right-[60px] text-white transition-all duration-200 ".concat(
+                          className={"h-5 w-5 absolute right-[15vw] md:right-[60px] text-white transition-all duration-200 ".concat(
                             productList ? "rotate-180" : "rotate-0"
                           )}
                         />

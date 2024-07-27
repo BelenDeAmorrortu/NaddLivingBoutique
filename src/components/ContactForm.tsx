@@ -40,7 +40,7 @@ export default function ContactForm() {
 
   return (
     <section
-      className="h-fit w-full flex flex-row justify-center gap-20 px-10 pb-20"
+      className="h-fit w-full flex flex-col md:flex-row justify-center gap-20 px-10 pb-20"
       id="contacto"
     >
       <div className="flex flex-1 h-full flex-col gap-5">
@@ -84,7 +84,7 @@ export default function ContactForm() {
           initialValues={initialValues}
           layout="vertical"
         >
-          <div className="flex-row-center gap-5 w-full">
+          <div className="flex-col-center md:flex-row-center gap-5 w-full">
             <Form.Item
               name={"name"}
               className="w-full h-fit flex flex-col"
@@ -112,7 +112,12 @@ export default function ContactForm() {
             required
             label="Mensaje"
           >
-            <Input.TextArea placeholder="Mensaje" autoSize size="large" />
+            <Input.TextArea
+              placeholder="Mensaje"
+              autoSize
+              size="large"
+              className="ant-textarea"
+            />
           </Form.Item>
           <button className="w-full button-solid" onClick={handleSubmit}>
             Enviar

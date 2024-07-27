@@ -70,14 +70,17 @@ export default function FabricDescription({
       key={fabric.id}
       className="h-fit w-full my-10 min-h-[90vh] flex flex-col gap-6"
     >
-      <h2 className="title-2 text-4xl my-0">{fabric.nombre}</h2>
+      <h2 className="title-2 lg:text-4xl my-0">{fabric.nombre}</h2>
       <p className="text-dark-grey font-regular">{fabric.descripcion}</p>
-      <div className="flex flex-row flex-wrap items-start gap-6">
+      <div className="flex flex-row flex-wrap justify-center md:justify-start items-start gap-6">
         {fabric.colores.map((c, i) => {
           return (
-            <div key={c.id} className="flex-col-center gap-3 max-w-[100px]">
+            <div
+              key={c.id}
+              className="flex-col-center gap-3 max-w-[90px] md:max-w-[100px]"
+            >
               <button
-                className="relative group w-[100px] h-[100px] rounded-full overflow-hidden"
+                className="relative group w-[90px] h-[90px] md:w-[100px] md:h-[100px] rounded-full overflow-hidden"
                 onClick={() => {
                   setSelectedFabricColors(fabric.colores);
                   setPreview(true);
@@ -91,13 +94,16 @@ export default function FabricDescription({
                   height={100}
                   className="object-contain object-center"
                   placeholder="blur"
-                  blurDataURL={c.foto + "?blur=500&px=16&auto=format"}
+                  blurDataURL={
+                    c.foto +
+                    "?w=20&h=20&q=50&fm=webp&fit=crop&blur=500&px=16&auto=format"
+                  }
                 />
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-75 absolute h-full w-full bg-black/50 flex-row-center top-0">
                   <EyeOutlined style={{ color: "white", fontSize: 18 }} />
                 </div>
               </button>
-              <h4 className="uppercase text-sm font-bold text-dark-grey text-center">
+              <h4 className="uppercase text-xs md:text-sm font-bold text-dark-grey text-center">
                 {c.nombre.replace(" - ", "/ ")}
               </h4>
             </div>

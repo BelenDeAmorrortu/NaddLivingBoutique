@@ -44,7 +44,7 @@ export default async function RootLayout({
     <html lang="en" className={`${montserrat.variable} ${cormorant.variable}`}>
       <body>
         <CartProvider>
-          <Nav color="black" />
+          <Nav />
           <main>{children}</main>
           <Footer />
           <BackToTop />

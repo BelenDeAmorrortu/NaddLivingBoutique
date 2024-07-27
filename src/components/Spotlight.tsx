@@ -15,12 +15,10 @@ export default function Spotlight() {
   return (
     <section className="flex-col-center w-full h-fit my-10">
       <Reveal tailwindStyles="flex-col-center">
-        <h4 className="uppercase font-bold text-2xl text-black/80">
-          Nuestros Productos
-        </h4>
+        <h4 className="subtitle-1 text-black/80">Nuestros Productos</h4>
         <h3 className="title-2 uppercase m-3 mb-16">Destacados</h3>
       </Reveal>
-      <div className="mb-10 grid grid-cols-1 gap-[70px] min-[640px]:grid-cols-2 min-[1080px]:grid-cols-3 min-[640px]:gap-[2vw]">
+      <div className="mb-10 grid grid-cols-1 gap-[70px] md:grid-cols-2 min-[1080px]:grid-cols-3 min-[640px]:gap-[2vw]">
         {!isLoading && products?.length === 0 ? (
           <p>No hay productos destacados</p>
         ) : (

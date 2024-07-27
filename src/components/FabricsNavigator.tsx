@@ -63,8 +63,11 @@ export default function FabricsNavigator() {
   }, [selectedFabricColors, activeColorIndex, preview]);
 
   return (
-    <div className="h-fit p-10 my-10 grid grid-cols-4" id="telas">
-      <div className="h-[85vh] col-span-1 flex flex-col justify-center items-start mx-5 gap-5 border-l border-l-black-hover sticky top-20">
+    <div
+      className="h-fit p-5 md:p-10 my-10 grid grid-cols-1 md:grid-cols-4"
+      id="telas"
+    >
+      <div className="hidden md:flex h-[85vh] col-span-1 flex-col justify-center items-start lg:mx-5 gap-5 border-l border-l-black-hover sticky top-20">
         {data &&
           data.map((i) => {
             return (
@@ -73,9 +76,9 @@ export default function FabricsNavigator() {
                 key={i.id}
                 className={`${
                   activeFabric === i.id
-                    ? "text-2xl font-bold border-l-red border-l-4 -translate-x-[2px]"
-                    : "text-xl font-regular border-none"
-                } px-5 transition-all duration-300`}
+                    ? "text-xl lg:text-2xl font-bold border-l-red border-l-4 -translate-x-[2px]"
+                    : "text-lg lg:text-xl font-regular border-none"
+                } px-5 transition-all duration-300 text-left`}
               >
                 {i.nombre}
               </button>

@@ -142,7 +142,7 @@
 
 .ant-image-preview-switch-left,
 .ant-image-preview-switch-right {
-  @apply bg-black mx-[100px] scale-125;
+  @apply lg:bg-black lg:mx-[100px] scale-125;
 }
 
 .ant-image-preview-operations-wrapper .anticon {
@@ -234,7 +234,7 @@
 }
 
 textarea.ant-input {
-  @apply min-h-[43px] flex-col-center;
+  @apply min-h-[110px] flex-col-center;
 }
 
 .ant-form-item label {
@@ -296,13 +296,13 @@ textarea.ant-input {
   }
 
   .subtitle-1 {
-    @apply text-lg sm:text-xl uppercase font-bold;
+    @apply text-lg sm:text-2xl uppercase font-bold;
   }
 
   /* Nav */
 
   .nav-item {
-    @apply font-semi-bold text-white cursor-pointer text-[13.5px] h-16;
+    @apply font-semi-bold text-white cursor-pointer text-[13.5px] h-fit lg:h-16;
   }
 
   .navlg {
@@ -322,11 +322,11 @@ textarea.ant-input {
   }
 
   .navmd {
-    @apply bg-black w-screen lg:w-[400px] h-screen flex flex-col justify-start items-center py-16 space-y-10 absolute top-16 lg:top-[65px] left-0 transition-all duration-700;
+    @apply bg-black w-screen md:w-[400px] h-screen flex flex-col justify-start items-center py-16 space-y-10 absolute top-14 md:top-16 left-0 transition-all duration-700;
   }
 
   .navmd-li {
-    @apply title-4 text-white border-grey-hover py-3 w-[80vw] lg:w-[350px] md:w-[50vw] hover:text-white-hover cursor-pointer;
+    @apply title-4 text-white border-grey-hover py-3 w-[80vw] md:w-[350px] hover:text-white-hover cursor-pointer;
   }
 
   .navmd-li-collapse {
@@ -340,14 +340,14 @@ textarea.ant-input {
   /* Card */
 
   .card-image {
-    @apply w-[80vw] min-[640px]:w-[25vw] min-[1080px]:w-[20vw] aspect-[3/2] overflow-hidden flex justify-center items-center;
+    @apply w-[80vw] md:w-[25vw] min-[1080px]:w-[20vw] aspect-[3/2] overflow-hidden flex justify-center items-center;
   }
   .second-image {
     transition: opacity 0.3s linear;
   }
 
   .cards-container {
-    @apply grid grid-cols-1 gap-[70px] mb-20 min-[640px]:grid-cols-2 min-[1080px]:grid-cols-3 min-[640px]:gap-[2vw] justify-center;
+    @apply grid grid-cols-1 gap-[70px] mb-20 md:grid-cols-2 min-[1080px]:grid-cols-3 min-[640px]:gap-[2vw] justify-center;
   }
 
   /* Whatsapp */
@@ -428,6 +428,14 @@ textarea.ant-input {
 
   .contact-button {
     @apply button-outline md:w-[49%];
+  }
+
+  .photo-grid {
+    @apply grid grid-cols-1 sm:grid-cols-3 md:h-[65vh] w-full relative gap-1 px-1;
+  }
+
+  .photo-grid-item {
+    @apply relative min-h-[35vh] flex items-end rounded-sm overflow-hidden;
   }
 }
 

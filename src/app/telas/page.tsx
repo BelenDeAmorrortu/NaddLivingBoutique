@@ -11,12 +11,12 @@ import arrowDown from "react-useanimations/lib/arrowDown";
 export default function Page() {
   return (
     <div className="h-fit pt-16">
-      <div className="h-[85vh] w-full">
+      <div className="h-fit md:h-[85vh] w-full">
         <Reveal tailwindStyles="flex-col-center px-10 gap-5 my-6">
           <h1 className="title-2 text-black text-center uppercase p-0 m-0">
             Descubrí nuestras telas
           </h1>
-          <p className="max-w-[900px] text-center">
+          <p className="md:max-w-[900px] text-center">
             En NADD Living Boutique nos encanta que cada cliente sea parte del
             proceso creativo de su próximo mueble. Por eso ofrecemos una gran
             variedad de telas para que tu mueble refleje tu estilo único.
@@ -34,11 +34,8 @@ export default function Page() {
             />
           </Link>
         </Reveal>
-        <div className="grid grid-cols-3 h-[60vh] w-full relative gap-1 px-1">
-          <CascadeReveal
-            key={1}
-            twStyles="relative aspect-w-16 aspect-h-9 flex items-end overflow-hidden rounded-sm"
-          >
+        <div className="photo-grid md:h-[60vh]">
+          <CascadeReveal key={1} twStyles="photo-grid-item">
             <video
               className="absolute inset-0 w-full h-full object-cover object-bottom brightness-75"
               src="/IMG_7499.MOV"
@@ -49,10 +46,7 @@ export default function Page() {
               preload=""
             />
           </CascadeReveal>
-          <CascadeReveal
-            key={3}
-            twStyles="relative aspect-w-16 aspect-h-9 overflow-hidden rounded-sm"
-          >
+          <CascadeReveal key={3} twStyles="photo-grid-item">
             <Image
               className="absolute inset-0 w-full h-full object-cover brightness-75"
               src={Fabrics2}
@@ -60,10 +54,7 @@ export default function Page() {
               placeholder="blur"
             />
           </CascadeReveal>
-          <CascadeReveal
-            key={5}
-            twStyles="relative aspect-w-16 aspect-h-9 overflow-hidden rounded-sm"
-          >
+          <CascadeReveal key={5} twStyles="photo-grid-item">
             <video
               className="absolute inset-0 w-full h-full object-cover brightness-75"
               src="/VID_20240701_105753766 (1).mp4"

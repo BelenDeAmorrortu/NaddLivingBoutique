@@ -9,14 +9,14 @@ export default function OurShop() {
   return (
     <section className="flex flex-col gap-10 py-10">
       <Reveal>
-        <div className="flex-row-center gap-5 my-2">
+        <div className="flex-col-center sm:flex-row-center gap-5 my-2">
           <CiLocationOn className="text-red h-[100px] w-[100px]" />
           <div className="flex flex-col gap-2">
-            <h3 className="title-2 uppercase p-0 m-0">
-              Visitanos en nuestro local
+            <h3 className="text-center sm:text-left title-2 uppercase p-0 m-0">
+              Visitanos en nuestro local
             </h3>
             <a
-              className="title-2 text-red text-4xl p-0 m-0 active:text-red visited:text-red"
+              className="text-center sm:text-left title-2 text-red md:text-4xl p-0 m-0 active:text-red visited:text-red"
               target="_blank"
               href="https://www.google.com/maps/place/Nadd/@-34.5952946,-58.4313918,17z/data=!3m1!4b1!4m6!3m5!1s0x95bccab9a1d5c4ad:0x74afd8399ecd97d3!8m2!3d-34.5952946!4d-58.4288169!16s%2Fg%2F1td9fyx2?entry=ttu"
             >
@@ -25,11 +25,8 @@ export default function OurShop() {
           </div>
         </div>
       </Reveal>
-      <div className="grid grid-cols-3 h-[65vh] w-full relative gap-1 px-1">
-        <CascadeReveal
-          key={1}
-          twStyles="relative aspect-w-16 aspect-h-9 flex items-end rounded-sm overflow-hidden"
-        >
+      <div className="photo-grid">
+        <CascadeReveal key={1} twStyles="photo-grid-item">
           <Image
             src={Local3}
             alt="Intorior del local en Av. Córdoba 4454"
@@ -37,10 +34,7 @@ export default function OurShop() {
             className="absolute object-cover w-full h-full"
           />
         </CascadeReveal>
-        <CascadeReveal
-          key={3}
-          twStyles="relative aspect-w-16 aspect-h-9 rounded-sm overflow-hidden"
-        >
+        <CascadeReveal key={3} twStyles="photo-grid-item">
           <Image
             src={Local}
             alt="Exterior del local en Av. Córdoba 4454"
@@ -48,10 +42,7 @@ export default function OurShop() {
             className="absolute object-cover w-full h-full"
           />
         </CascadeReveal>
-        <CascadeReveal
-          key={5}
-          twStyles="relative aspect-w-16 aspect-h-9 rounded-sm overflow-hidden"
-        >
+        <CascadeReveal key={5} twStyles="photo-grid-item">
           <Image
             src={Local2}
             alt="Intorior del local en Av. Córdoba 4454"
