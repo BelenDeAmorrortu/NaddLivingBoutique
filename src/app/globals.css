@@ -337,6 +337,12 @@ textarea.ant-input {
     @apply flex-row-center border-y border-grey-hover text-center block border-b-0;
   }
 
+  /* Search */
+
+  .ant-input.search {
+    @apply text-white bg-transparent border-none active:shadow-none focus:shadow-none active:bg-transparent focus:bg-transparent placeholder:text-white-hover text-lg;
+  }
+
   /* Card */
 
   .card-image {

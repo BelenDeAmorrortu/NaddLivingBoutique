@@ -7,6 +7,7 @@ import { getMinPrice } from "@/utils/getMinPrice";
 import { ICartItem } from "@/types/CartItem";
 import { notification } from "antd";
 import { Fabric } from "@/types/Fabric";
+import { searchProducts } from "@/utils/searchProducts";
 
 export const getProducts = async (
   filters: string[],
@@ -46,7 +47,9 @@ export const getProducts = async (
       };
     });
 
-    return products;
+    if (search && search.trim() !== "") {
+      return searchProducts(search, products);
+    } else return products;
   } catch (e) {
     console.log("ERROR", e);
     return [];

@@ -4,6 +4,10 @@ import { formatPrice } from "@/utils/formatPrice";
 import Image from "next/image";
 import Link from "next/link";
 
+interface IProps extends Product {
+  color?: "black" | "white";
+}
+
 export default function Card({
   _id,
   name,
@@ -12,12 +16,16 @@ export default function Card({
   images,
   lqip,
   price,
-}: Product) {
+  color,
+}: IProps) {
   if (_id && name && category && url && images && lqip) {
     return (
       <div
         key={_id}
-        className="flex flex-col items-center justify-start w-[80vw] min-h-[185px] md:w-[25vw] min-[1080px]:w-[20vw] md:min-h-[225px] lg:min-h-[255px]"
+        className={
+          "flex flex-col items-center justify-start w-[80vw] min-h-[185px] md:w-[25vw] min-[1080px]:w-[20vw] md:min-h-[225px] lg:min-h-[255px]" +
+          ""
+        }
       >
         <Link href={`${navigation.productos}/${url}`}>
           <div className="card-image">
@@ -47,15 +55,23 @@ export default function Card({
         </Link>
         <div className="flex-col-center w-full my-4 gap-2">
           <div className="flex flex-col justify-start items-start w-full">
-            <h4 className="title-4 text-sm">{name}</h4>
-            {/* <h4 className="text-sm font-semi-bold flex justify-center items-end">
+            <h4 className={`title-4 text-sm text-${color ?? "back"}`}>
+              {name}
+            </h4>
+            {/* <h4 className={`text-sm font-semi-bold flex justify-center items-end">
               {"$" + price}
             </h4>
             <h5 className="capitalize text-xs">{category.join(" - ")}</h5> */}
           </div>
           <div className="flex justify-between items-end w-full">
-            <h5 className="capitalize text-xs">{category.join(" - ")}</h5>
-            <h4 className="text-sm font-semi-bold flex flex-col justify-center items-end">
+            <h5 className={`capitalize text-xs text-${color ?? "back"}`}>
+              {category.join(" - ")}
+            </h5>
+            <h4
+              className={`text-sm font-semi-bold flex flex-col justify-center items-end text-${
+                color ?? "back"
+              }`}
+            >
               {"$" + formatPrice(price)}
             </h4>
           </div>

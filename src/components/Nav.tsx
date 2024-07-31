@@ -11,16 +11,18 @@ import { navItems } from "@/constants/NavItems";
 import { Logo } from "@/assets/images";
 import { useCart } from "@/contexts/CartContext";
 import CategoriesNav from "./CategoriesNav";
+import Search from "./Search";
 
 export default function Nav() {
   const [productCategoriesVisible, setProductCategoriesVisible] =
     useState<boolean>(false);
   const [isHovering, setIsHovering] = useState<boolean>(false);
+  const [searchOpen, setSearchOpen] = useState<boolean>(false);
 
   const { setIsOpen, count } = useCart();
 
   useEffect(() => {
-    if (isHovering) {
+    if (isHovering && !searchOpen) {
       setProductCategoriesVisible(true);
     } else {
       const timeoutId = setTimeout(() => {
@@ -50,7 +52,11 @@ export default function Nav() {
         <div
           className={`flex flex-row justify-end items-center gap-6 md:gap-10 flex-1`}
         >
-          <MagnifyingGlassIcon className={`w-5 h-5 md:w-6 md:h-6 fill-white`} />
+          <button onClick={() => setSearchOpen(true)}>
+            <MagnifyingGlassIcon
+              className={`w-5 h-5 md:w-6 md:h-6 fill-white`}
+            />
+          </button>
           <button
             onClick={() => setIsOpen(true)}
             className=" border-none bg-transparent p-0 m-0 md:mr-3 lg:mr-0 flex-col-center relative"
@@ -76,6 +82,7 @@ export default function Nav() {
         visible={productCategoriesVisible}
         setIsHovering={setIsHovering}
       />
+      <Search visible={searchOpen} setSearchOpen={setSearchOpen} />
     </>
   );
 }
