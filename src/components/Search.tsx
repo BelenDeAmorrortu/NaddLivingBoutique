@@ -89,6 +89,10 @@ export default function Search({ visible, setSearchOpen }: IProps) {
             placeholder="Búsqueda..."
             size="large"
             className="search"
+            onPressEnter={() =>
+              (window.location.href =
+                navigation.productos + "?search=" + search)
+            }
           />
         </Form.Item>
         <button onClick={closeAndReset}>
@@ -107,13 +111,20 @@ export default function Search({ visible, setSearchOpen }: IProps) {
             <h5 className="text-white-hover font-bold uppercase text-sm">
               Categorías
             </h5>
-            <Link
-              onClick={closeAndReset}
-              href={navigation.productos}
-              className="text-white text-sm"
-            >
-              Ver todo
-            </Link>
+            {categoriesSearch.length > 0 && (
+              <Link
+                onClick={closeAndReset}
+                href={
+                  navigation.productos +
+                  `?${categoriesSearch
+                    .map((i) => "filter=" + i.name)
+                    .join("&")}`
+                }
+                className="text-white text-sm"
+              >
+                Ver todo
+              </Link>
+            )}
           </div>
           <ul className="flex flex-col gap-5 my-5">
             {categoriesSearch.length > 0 ? (
@@ -136,28 +147,38 @@ export default function Search({ visible, setSearchOpen }: IProps) {
           </ul>
         </div>
         <div className="col-span-4 order-1 min-[640px]:order-2 min-[640px]:col-span-2 min-[1080px]:col-span-3">
-          {results.length > 0 ? (
-            <>
-              <div className=" p-3 border-b border-b-white-hover flex justify-between items-start">
-                <h5 className="text-white-hover font-bold uppercase text-sm">
-                  {"Resultados" + ` (${results.length})`}
-                </h5>
-                <Link
-                  href={navigation.productos + "?search=" + search}
-                  className="text-white text-sm"
-                  onClick={closeAndReset}
-                >
-                  Ver todo
-                </Link>
-              </div>
-              <div className="hidden min-[1080px]:grid min-[1080px]:grid-cols-3 my-5">
-                {results.slice(0, 3).map((i) => {
-                  return <Card {...i} color="white" />;
-                })}
-              </div>
-              <div className="flex flex-col min-[1080px]:hidden gap-3 py-3">
-                {results.slice(0, 3).map((i) => {
-                  return (
+          <div className=" p-3 border-b border-b-white-hover flex justify-between items-start">
+            <h5 className="text-white-hover font-bold uppercase text-sm">
+              {"Resultados" + ` (${results.length})`}
+            </h5>
+            {results.length > 0 && (
+              <Link
+                href={navigation.productos + "?search=" + search}
+                className="text-white text-sm"
+                onClick={closeAndReset}
+              >
+                Ver todo
+              </Link>
+            )}
+          </div>
+          <ul className="hidden min-[1080px]:grid min-[1080px]:grid-cols-3 my-5">
+            {results.length > 0 ? (
+              results.slice(0, 3).map((i) => {
+                return (
+                  <li>
+                    <Card {...i} color="white" />;
+                  </li>
+                );
+              })
+            ) : (
+              <li className="text-white-hover">Sin Resultados</li>
+            )}
+          </ul>
+          <ul className="flex flex-col min-[1080px]:hidden gap-3 py-3">
+            {results.length > 0 ? (
+              results.slice(0, 3).map((i) => {
+                return (
+                  <li>
                     <Link
                       href={i.url}
                       className="flex flex-row-center w-full gap-3"
@@ -182,15 +203,13 @@ export default function Search({ visible, setSearchOpen }: IProps) {
                         </h6>
                       </div>
                     </Link>
-                  );
-                })}
-              </div>
-            </>
-          ) : (
-            <p className="text-white">
-              BUSCAR: "{form.getFieldValue("search")}"
-            </p>
-          )}
+                  </li>
+                );
+              })
+            ) : (
+              <li className="text-white-hover">Sin Resultados</li>
+            )}
+          </ul>
         </div>
       </div>
     </div>
