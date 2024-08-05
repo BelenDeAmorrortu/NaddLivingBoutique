@@ -310,7 +310,7 @@ textarea.ant-input {
   }
 
   .navlg-categories {
-    @apply z-[29] absolute flex-row-center top-0 left-0 text-center w-full h-fit py-7 space-x-5 border-t-[1.5px] border-grey-hover bg-black transition-all duration-300 ease-out;
+    @apply z-[29] fixed flex-row-center top-0 left-0 text-center w-full h-fit py-7 space-x-5 border-t-[1.5px] border-grey-hover bg-black transition-all duration-300 ease-out;
   }
 
   .navlg-categories-li {
@@ -353,7 +353,7 @@ textarea.ant-input {
   }
 
   .cards-container {
-    @apply grid grid-cols-1 gap-[70px] mb-20 md:grid-cols-2 min-[1080px]:grid-cols-3 min-[640px]:gap-[2vw] justify-center;
+    @apply grid gap-[70px] mb-20 md:grid-cols-2 min-[1080px]:grid-cols-3 min-[640px]:gap-[2vw] justify-center;
   }
 
   /* Whatsapp */
@@ -399,7 +399,11 @@ textarea.ant-input {
   }
 
   .cart-sheet-ul {
-    @apply flex w-full flex-1 flex-col justify-start items-start;
+    @apply flex w-full flex-1 flex-col justify-start items-start overflow-y-scroll px-1;
+  }
+
+  .cart-sheet-ul::-webkit-scrollbar {
+    @apply w-[5px];
   }
 
   .cart-sheet-li {
