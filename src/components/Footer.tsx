@@ -6,7 +6,30 @@ import { FaInstagram, FaFacebook } from "react-icons/fa";
 export default function Footer() {
   return (
     <footer className="bg-black w-full h-fit md:h-[40vh] flex flex-col md:flex-row justify-between items-center md:items-start p-10 space-y-10 md:space-y-0 ">
-      <div className="w-[300px] max-w-[300px]">
+      <div className="w-[250px] md:w-[300px]">
+        <h4>Redes Sociales</h4>
+        <ul>
+          <li className="group">
+            <a
+              target="_blank"
+              href="https://www.instagram.com/nadd.living.boutique/"
+            >
+              <FaInstagram className="footer-icon" />
+              nadd.living.boutique
+            </a>
+          </li>
+          <li className="group">
+            <a
+              target="_blank"
+              href="https://www.facebook.com/profile.php?id=100092571386435"
+            >
+              <FaFacebook className="footer-icon" />
+              NADD living boutique
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div className="w-[250px] md:w-[300px] max-w-[300px]">
         <h4>Nadd living boutique</h4>
         <ul>
           <li className="group">
@@ -33,30 +56,7 @@ export default function Footer() {
           </li>
         </ul>
       </div>
-      <div className="w-[300px]  max-w-[300px]">
-        <h4>Redes Sociales</h4>
-        <ul>
-          <li className="group">
-            <a
-              target="_blank"
-              href="https://www.instagram.com/nadd.living.boutique/"
-            >
-              <FaInstagram className="footer-icon" />
-              nadd.living.boutique
-            </a>
-          </li>
-          <li className="group">
-            <a
-              target="_blank"
-              href="https://www.facebook.com/profile.php?id=100092571386435"
-            >
-              <FaFacebook className="footer-icon" />
-              NADD living boutique
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div className="w-[300px]">
+      <div className=" w-[250px] md:w-[300px]">
         <h4>Ayuda</h4>
         <ul>
           <li>
