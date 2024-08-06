@@ -12,7 +12,7 @@ export default function Page() {
   return (
     <div className="h-fit pt-16">
       <div className="h-fit md:h-[85vh] w-full">
-        <Reveal tailwindStyles="flex-col-center px-10 gap-5 my-6">
+        <Reveal tailwindStyles="flex-col-center px-10 gap-5 my-7">
           <h1 className="title-2 text-black text-center uppercase p-0 m-0">
             Descubrí nuestras telas
           </h1>
@@ -34,7 +34,7 @@ export default function Page() {
             />
           </Link>
         </Reveal>
-        <div className="photo-grid md:h-[60vh]">
+        <div className="photo-grid md:h-[57vh]">
           <CascadeReveal key={1} twStyles="photo-grid-item">
             <video
               className="absolute inset-0 w-full h-full object-cover object-bottom brightness-75"
