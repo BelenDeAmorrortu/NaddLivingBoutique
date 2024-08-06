@@ -50,7 +50,10 @@ export default function ContactForm() {
         </p>
         <ul className="flex flex-col gap-5">
           <li className="group">
-            <a href="tel:1153463845" className="flex-row-center w-fit">
+            <a
+              href="https://api.whatsapp.com/send?phone=541153463845"
+              className="flex-row-center w-fit"
+            >
               <FaWhatsapp className="w-6 h-6 mr-3 fill-whatsapp" />
               {"(+54) 11 5346-3845"}
             </a>
