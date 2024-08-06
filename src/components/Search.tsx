@@ -165,7 +165,7 @@ export default function Search({ visible, setSearchOpen }: IProps) {
             {results.length > 0 ? (
               results.slice(0, 3).map((i) => {
                 return (
-                  <li>
+                  <li onClick={closeAndReset}>
                     <Card {...i} color="white" />;
                   </li>
                 );
@@ -180,7 +180,7 @@ export default function Search({ visible, setSearchOpen }: IProps) {
                 return (
                   <li>
                     <Link
-                      href={i.url}
+                      href={navigation.productos + "/" + i.url}
                       className="flex flex-row-center w-full gap-3"
                       onClick={closeAndReset}
                     >
