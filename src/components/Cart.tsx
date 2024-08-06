@@ -1,7 +1,6 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { IoClose } from "react-icons/io5";
-import { useCart } from "@/contexts/CartContext";
 import CartItem from "./CartItem";
 import { BsBag } from "react-icons/bs";
 import { formatPrice } from "@/utils/formatPrice";
@@ -22,6 +21,21 @@ export default function Cart({
   total,
   checkout,
 }: IProps) {
+  const cartRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Listener to close the component when clicking outside of it
+    const handleMouseDown = (e: any) => {
+      if (!cartRef?.current?.contains(e.target)) {
+        close();
+      }
+    };
+
+    document.addEventListener("mousedown", handleMouseDown);
+
+    return () => document.removeEventListener("mousedown", handleMouseDown);
+  }, []);
+
   return (
     <>
       <div
@@ -33,6 +47,7 @@ export default function Cart({
         className={`${
           isOpen ? "translate-x-0" : "translate-x-full"
         } cart-sheet transition-transform duration-300`}
+        ref={cartRef}
       >
         <div className="cart-sheet-header">
           <h3 className="text-black font-bold text-xl">CARRITO</h3>
