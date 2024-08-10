@@ -233,8 +233,12 @@
   @apply bg-transparent border-black border-2 rounded-none min-h-[43px] hover:border-dark-grey focus:border-dark-grey;
 }
 
-textarea.ant-input {
+#contacto textarea.ant-input {
   @apply min-h-[110px] flex-col-center;
+}
+
+#cart-textarea {
+  @apply border-black/50;
 }
 
 .ant-form-item label {
@@ -407,7 +411,7 @@ textarea.ant-input {
   }
 
   .cart-sheet-li {
-    @apply my-5 flex justify-between items-center w-full h-16 h-fit relative;
+    @apply my-3 first:mt-6 flex justify-between items-center w-full h-16 h-fit relative;
   }
 
   .cart-sheet-img {

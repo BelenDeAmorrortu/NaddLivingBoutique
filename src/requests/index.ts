@@ -209,7 +209,7 @@ export const getFabrics = async (): Promise<Fabric[]> => {
   }
 };
 
-export const createCart = async (cartItems: ICartItem[]) => {
+export const createCart = async (cartItems: ICartItem[], fabric?: string) => {
   try {
     const products = cartItems.map((i) => {
       return {
@@ -217,7 +217,10 @@ export const createCart = async (cartItems: ICartItem[]) => {
         merchandiseId: i.variant.id,
       };
     });
-    const { data } = await storefront(queries.createCart, { products });
+    const { data } = await storefront(queries.createCart, {
+      products,
+      attributes: [{ key: "custom.fabric", value: fabric ?? "" }],
+    });
 
     window.open(data.cartCreate.cart.checkoutUrl);
   } catch (e) {

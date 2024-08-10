@@ -5,13 +5,16 @@ import CartItem from "./CartItem";
 import { BsBag } from "react-icons/bs";
 import { formatPrice } from "@/utils/formatPrice";
 import { ICartItem } from "@/types/CartItem";
+import { Form, Input } from "antd";
+import { navigation } from "@/constants/navigation";
+import Link from "next/link";
 
 interface IProps {
   isOpen: boolean;
   close: () => void;
   items: ICartItem[];
   total: number;
-  checkout: () => void;
+  checkout: (fabric?: string) => void;
 }
 
 export default function Cart({
@@ -22,11 +25,22 @@ export default function Cart({
   checkout,
 }: IProps) {
   const cartRef = useRef<HTMLDivElement>(null);
+  const [form] = Form.useForm();
+
+  const plural = items.length > 1 || items.some((i) => i.amount > 1);
+  const fabricCTA = `¿Ya elegiste la${plural ? "s" : ""} tela${
+    plural ? "s" : ""
+  } y color${plural ? "es" : ""} de tu${plural ? "s" : ""} producto${
+    plural ? "s" : ""
+  }?`;
 
   useEffect(() => {
     // Listener to close the component when clicking outside of it
     const handleMouseDown = (e: any) => {
-      if (!cartRef?.current?.contains(e.target)) {
+      if (
+        !cartRef?.current?.contains(e.target) &&
+        !e.target.closest(".ant-popconfirm")
+      ) {
         close();
       }
     };
@@ -72,6 +86,22 @@ export default function Cart({
             </div>
           )}
         </ul>
+        {items.length > 0 && (
+          <Form form={form}>
+            <h5 className="text-sm font-bold my-2">
+              {fabricCTA}
+              <span className=" font-regular"> Comentanos abajo:</span>
+            </h5>
+            <Form.Item name={"fabric"}>
+              <Input.TextArea
+                className="h-[43px]"
+                size="small"
+                id="cart-textarea"
+                placeholder='EJ: pana lisa color "Azul/ Pan"'
+              />
+            </Form.Item>
+          </Form>
+        )}
         <div className="cart-sheet-bottom">
           <h4 className="flex justify-between w-full h-fit ">
             <span className="font-bold">TOTAL:</span>
@@ -79,7 +109,7 @@ export default function Cart({
           </h4>
           <button
             className="contact-button w-full hover:bg-black hover:text-white transition-all duration-150"
-            onClick={checkout}
+            onClick={() => checkout(form.getFieldValue("fabric"))}
           >
             CHECKOUT
           </button>

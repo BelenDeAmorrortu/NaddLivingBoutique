@@ -16,7 +16,7 @@ const CartContext = React.createContext<ICartProvider>({
   removeFromCart: () => {},
   updateAmount: () => {},
   setIsOpen: () => {},
-  checkout: () => {},
+  checkout: (fabric?: string) => {},
   isOpen: false,
 });
 
@@ -107,8 +107,8 @@ export function CartProvider({
     }, 0);
   };
 
-  const checkout = async () => {
-    await createCart(cartItems);
+  const checkout = async (fabric?: string) => {
+    await createCart(cartItems, fabric);
   };
 
   useEffect(() => {

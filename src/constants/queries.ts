@@ -121,9 +121,9 @@ export const queries = {
                 type
               }
           }`,
-  createCart: `mutation Cart($products: [CartLineInput!]){
+  createCart: `mutation Cart($products: [CartLineInput!], $attributes: [AttributeInput!]){
            cartCreate(input: {
-            lines: $products }){
+            lines: $products, attributes: $attributes}){
             cart {
               id
               checkoutUrl

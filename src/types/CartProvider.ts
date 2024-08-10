@@ -11,5 +11,5 @@ export interface ICartProvider {
   updateAmount: (itemId: string, amount: number) => void;
   isOpen: boolean;
   setIsOpen: (arg: boolean) => void;
-  checkout: () => void;
+  checkout: (fabric?: string) => void;
 }
