@@ -23,7 +23,11 @@ export default function Whatsapp() {
   }, []);
 
   useEffect(() => {
-    if (isVisible && !firstDisplayExecuted) {
+    if (
+      isVisible &&
+      !firstDisplayExecuted &&
+      window.location.pathname === "/"
+    ) {
       setIsDialogVisible(true);
       setFirstDisplayExecuted(true);
       setTimeout(() => {
@@ -72,7 +76,7 @@ export default function Whatsapp() {
         </div>
         <div className="whatsapp-dialog-chat">
           <p className="whatsapp-dialog-message">
-            Hola, mi nombre es Tomi. En que puedo ayudarte?
+            Hola, mi nombre es Tomás. En que puedo ayudarte?
           </p>
         </div>
         <div className="whatsapp-dialog-bottom-bar">
