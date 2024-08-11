@@ -219,7 +219,7 @@ export const createCart = async (cartItems: ICartItem[], fabric?: string) => {
     });
     const { data } = await storefront(queries.createCart, {
       products,
-      attributes: [{ key: "custom.fabric", value: fabric ?? "" }],
+      attributes: [{ key: "custom.fabric", value: fabric ?? "-" }],
     });
 
     window.open(data.cartCreate.cart.checkoutUrl);

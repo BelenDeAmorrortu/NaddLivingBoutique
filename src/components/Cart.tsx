@@ -87,17 +87,17 @@ export default function Cart({
           )}
         </ul>
         {items.length > 0 && (
-          <Form form={form}>
-            <h5 className="text-sm font-bold my-2">
-              {fabricCTA}
-              <span className=" font-regular"> Comentanos abajo:</span>
+          <Form form={form} className="w-full">
+            <h5 className="text-sm font-bold my-2 w-full">
+              Oberservaciones
+              {/* <span className=" font-regular"> Comentanos abajo:</span> */}
             </h5>
             <Form.Item name={"fabric"}>
               <Input.TextArea
-                className="h-[43px]"
+                className="h-[43px] w-full"
                 size="small"
                 id="cart-textarea"
-                placeholder='EJ: pana lisa color "Azul/ Pan"'
+                placeholder='EJ: tela pana lisa color "Azul/ Pan"'
               />
             </Form.Item>
           </Form>
@@ -109,7 +109,9 @@ export default function Cart({
           </h4>
           <button
             className="contact-button w-full hover:bg-black hover:text-white transition-all duration-150"
-            onClick={() => checkout(form.getFieldValue("fabric"))}
+            onClick={() => {
+              checkout(form.getFieldValue("fabric"));
+            }}
           >
             CHECKOUT
           </button>
