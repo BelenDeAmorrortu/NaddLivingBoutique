@@ -11,6 +11,9 @@ import { BiErrorCircle } from "react-icons/bi";
 import { CascadeReveal } from "@/transitions";
 import useFetch from "@/hooks/useFetch";
 import CardSkeleton from "@/components/CardSkeleton";
+import { CiCreditCard1 } from "react-icons/ci";
+import { RiBankFill } from "react-icons/ri";
+import { IoCashOutline } from "react-icons/io5";
 
 export default function Page() {
   const router = useRouter();
@@ -101,8 +104,8 @@ export default function Page() {
   }
 
   return (
-    <div className="min-h-[60vh] py-36 w-full flex flex-col items-center sm:flex-row sm:justify-between px-10 sm:items-start">
-      <div className="flex flex-col w-[85vw] mb-20 sm:w-48 md:w-60 min-[640px]:mb-0 min-[640px]:sticky min-[640px]:top-36">
+    <div className="min-h-[60vh] py-36 w-full flex flex-col items-center md:flex-row md:justify-between px-10 md:items-start">
+      <div className="flex flex-col w-[85vw] sm:w-[70vw] mb-20 md:w-60 md:mb-0 md:sticky md:top-36">
         <Filters
           filters={filters}
           search={search}
@@ -110,18 +113,24 @@ export default function Page() {
           removeFilter={removeFilter}
           addFilter={addFilter}
         />
-        <h4 className="hidden min-[640px]:block w-full font-semi-bold text-black text-sm md:text-lg my-10 uppercase">
-          Colores, texturas, modelos{" "}
-          <span className="font-bold  text-red">
-            <span className="text-xl md:text-3xl">100% </span>
-            <span className="leading-7 md:leading-10">personalizados</span>
-          </span>
-        </h4>
-        {/* <Image
-          src={Outline}
-          alt="Ilustración de un sofá"
-          className="w-full h-auto my-10"
-        /> */}
+        <div className="flex flex-col gap-2 py-5">
+          <div className="flex items-center">
+            <CiCreditCard1 size={22} className="mr-2 mt-[2px] text-red" />
+            <p className="text-xs min-[1040px]:text-sm">
+              3 y 6 Cuotas sin interés
+            </p>
+          </div>
+          <div className="flex items-center">
+            <RiBankFill size={22} className="mr-2 mt-[2px] text-red" />
+            <p className="text-xs min-[1040px]:text-sm">
+              Transferencia 35% OFF
+            </p>
+          </div>
+          <div className="flex items-center">
+            <IoCashOutline size={22} className="mr-2 mt-[2px] text-red" />
+            <p className="text-xs min-[1040px]:text-sm">Efectivo 35% OFF</p>
+          </div>
+        </div>
       </div>
       <div className="flex-col-center min-h-[60vh] min-w-[70vw]">
         {error ? (

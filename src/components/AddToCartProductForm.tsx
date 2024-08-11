@@ -109,7 +109,7 @@ export default function AddToCartProductForm({ product }: IProps) {
           </h5>
           <h6 className="flex justify-center items-start text-whatsapp ">
             <CiCreditCard1 size={20} className="mr-1 mt-[2px]" />
-            Hasta 3 cuotas sin interes
+            Hasta 6 cuotas sin interes
           </h6>
         </div>
         {/* <button className="flex flex-1 button-solid">
