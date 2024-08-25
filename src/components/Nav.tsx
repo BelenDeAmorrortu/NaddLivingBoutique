@@ -5,13 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
 import { BsBagFill, BsChevronCompactDown } from "react-icons/bs";
-import UseAnimations from "react-useanimations";
 import menu2 from "react-useanimations/lib/menu2";
 import { navItems } from "@/constants/NavItems";
 import { Logo } from "@/assets/images";
 import { useCart } from "@/contexts/CartContext";
 import CategoriesNav from "./CategoriesNav";
 import Search from "./Search";
+import AnimatedIcon from "./AnimatedIcon";
 
 export default function Nav() {
   const [productCategoriesVisible, setProductCategoriesVisible] =
@@ -161,7 +161,7 @@ const NavItemsSm = () => {
 
   return (
     <div className="flex min-[1220px]:hidden flex-1 justify-start items-center h-16">
-      <UseAnimations
+      <AnimatedIcon
         id="burgerMenu"
         animation={menu2}
         size={35}

@@ -16,3 +16,4 @@ export { default as Whatsapp } from "./Whatsapp";
 export { default as ContactForm } from "./ContactForm";
 export { default as OurShop } from "./OurShop";
 export { default as CategoriesNav } from "./CategoriesNav";
+export { default as AnimatedIcon } from "./AnimatedIcon";

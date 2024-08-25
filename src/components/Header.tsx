@@ -1,10 +1,9 @@
-"use client";
 import { Banner } from "@/assets/images";
 import Image from "next/image";
-import UseAnimations from "react-useanimations";
 import instagram from "react-useanimations/lib/instagram";
 import arrowDown from "react-useanimations/lib/arrowDown";
 import { CascadeReveal } from "@/transitions";
+import AnimatedIcon from "./AnimatedIcon";
 
 export default function Header() {
   return (
@@ -31,7 +30,7 @@ export default function Header() {
           target="_blank"
           className="group transition-all duration-75 absolute bottom-3 right-3 flex-row-center mx-3 text-grey uppercase text-xs md:text-sm"
         >
-          <UseAnimations
+          <AnimatedIcon
             animation={instagram}
             size={30}
             strokeColor="rgb(156 163 175)"
@@ -41,7 +40,7 @@ export default function Header() {
         </a>
         <span className="absolute bottom-3 flex-col-center text-grey uppercase text-xs md:text-sm">
           Scroll Down
-          <UseAnimations
+          <AnimatedIcon
             animation={arrowDown}
             size={30}
             strokeColor="rgb(209 213 219)"

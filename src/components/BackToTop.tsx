@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import UseAnimations from "react-useanimations";
 import arrowUp from "react-useanimations/lib/arrowUp";
+import AnimatedIcon from "./AnimatedIcon";
 
 export default function BackToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -30,7 +30,7 @@ export default function BackToTop() {
       aria-label="Volver al inicio de la página"
       name="Subir"
     >
-      <UseAnimations animation={arrowUp} loop={false} strokeColor="#ffff" />
+      <AnimatedIcon animation={arrowUp} loop={false} strokeColor="#ffff" />
     </button>
   );
 }

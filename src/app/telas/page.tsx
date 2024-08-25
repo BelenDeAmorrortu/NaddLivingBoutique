@@ -1,11 +1,10 @@
-"use client";
-import { Fabrics, Fabrics2 } from "@/assets/images";
+import { Fabrics2 } from "@/assets/images";
+import { AnimatedIcon } from "@/components";
 import FabricsNavigator from "@/components/FabricsNavigator";
 import { navigation } from "@/constants/navigation";
 import { CascadeReveal, Reveal } from "@/transitions";
 import Image from "next/image";
 import Link from "next/link";
-import UseAnimations from "react-useanimations";
 import arrowDown from "react-useanimations/lib/arrowDown";
 
 export default function Page() {
@@ -26,7 +25,7 @@ export default function Page() {
             className="capitalize  flex-row-center text-red font-bold text-lg w-fit hover:opacity-75 transition-opacity duration-100"
           >
             Continuar
-            <UseAnimations
+            <AnimatedIcon
               animation={arrowDown}
               size={30}
               strokeColor="#B50706"
@@ -35,7 +34,7 @@ export default function Page() {
           </Link>
         </Reveal>
         <div className="photo-grid md:h-[57vh]">
-          <CascadeReveal key={1} twStyles="photo-grid-item">
+          <CascadeReveal key={2} twStyles="photo-grid-item">
             <video
               className="absolute inset-0 w-full h-full object-cover object-bottom brightness-75"
               src="/IMG_7499.MOV"
@@ -43,10 +42,10 @@ export default function Page() {
               loop
               autoPlay
               placeholder=""
-              preload=""
+              preload="auto"
             />
           </CascadeReveal>
-          <CascadeReveal key={3} twStyles="photo-grid-item">
+          <CascadeReveal key={4} twStyles="photo-grid-item">
             <Image
               className="absolute inset-0 w-full h-full object-cover brightness-75"
               src={Fabrics2}
@@ -54,7 +53,7 @@ export default function Page() {
               placeholder="blur"
             />
           </CascadeReveal>
-          <CascadeReveal key={5} twStyles="photo-grid-item">
+          <CascadeReveal key={6} twStyles="photo-grid-item">
             <video
               className="absolute inset-0 w-full h-full object-cover brightness-75"
               src="/VID_20240701_105753766 (1).mp4"
@@ -62,7 +61,7 @@ export default function Page() {
               loop
               autoPlay
               placeholder=""
-              preload=""
+              preload="auto"
             />
           </CascadeReveal>
         </div>
