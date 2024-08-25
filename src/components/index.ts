@@ -10,7 +10,6 @@ export { default as BackToTop } from "./BackToTop";
 // export {default as Search} from "./Search";
 export { default as ContactButtons } from "./ContactButtons";
 export { default as Loader } from "./Loader";
-export { default as Contact } from "./Contact";
 export { default as Filters } from "./Filters";
 export { default as Whatsapp } from "./Whatsapp";
 export { default as ContactForm } from "./ContactForm";
