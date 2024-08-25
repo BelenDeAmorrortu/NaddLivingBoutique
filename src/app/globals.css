@@ -316,7 +316,7 @@
   }
 
   .announcement-bar-2 {
-    @apply hidden min-[340px]:fixed bg-[#676767] h-6 md:h-7 w-full top-14 md:top-16 z-[28] flex-row-center;
+    @apply hidden min-[340px]:fixed bg-[#680807] h-6 md:h-7 w-full top-14 md:top-16 z-[28] flex-row-center;
   }
 
   .nav-item {
