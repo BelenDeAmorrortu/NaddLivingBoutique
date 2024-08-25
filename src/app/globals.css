@@ -266,17 +266,23 @@
 .ant-popover-inner,
 .ant-popconfirm-buttons .ant-btn-primary.ant-btn-sm,
 .ant-popconfirm-buttons .ant-btn-default.ant-btn-sm {
-  border-radius: 0px !important;
+  border-radius: 2px !important;
 }
 
 .ant-popconfirm-buttons .ant-btn-default.ant-btn-sm:hover,
 .ant-popconfirm-buttons .ant-btn-default.ant-btn-sm:focus {
   @apply border-dark-grey text-dark-grey;
 }
-/* .MuiAutocomplete-listbox::-webkit-scrollbar-track,
-.MuiAutocomplete-listbox::-webkit-scrollbar-track-piece {
-  background: transparent !important;
-} */
+
+/* Notification */
+
+.ant-notification-notice-wrapper {
+  border-radius: 2px !important;
+}
+
+.ant-notification-notice {
+  padding: 15px !important;
+}
 
 /* -- Components ------------------------------------------------------- */
 
@@ -304,6 +310,30 @@
   }
 
   /* Nav */
+
+  .announcement-bar {
+    @apply fixed bg-dark-red h-7 w-full top-0 z-50 flex-row-center;
+  }
+
+  .announcement-bar-2 {
+    @apply fixed bg-dark-red h-7 w-full top-16 z-[28] flex-row-center;
+  }
+
+  .announcement-bar-3 {
+    @apply fixed bg-[#565353b3] h-7 w-full top-16 z-[28] flex-row-center backdrop-blur-lg;
+  }
+
+  .announcement-bar-4 {
+    @apply fixed bg-[#565353] h-7 w-full top-16 z-[28] flex-row-center backdrop-blur-lg;
+  }
+
+  .announcement-bar-5 {
+    @apply fixed bg-[#6d6969] h-7 w-full top-16 z-[28] flex-row-center backdrop-blur-lg;
+  }
+
+  .announcement-bar-6 {
+    @apply fixed bg-[#6d6969b3] h-7 w-full top-16 z-[28] flex-row-center backdrop-blur-lg;
+  }
 
   .nav-item {
     @apply font-semi-bold text-white cursor-pointer text-[13.5px] h-fit min-[1220px]:h-16;
@@ -350,14 +380,14 @@
   /* Card */
 
   .card-image {
-    @apply w-[80vw] md:w-[25vw] min-[1080px]:w-[20vw] aspect-[3/2] overflow-hidden flex justify-center items-center;
+    @apply w-[80vw] sm:w-[65vw] md:w-[25vw] min-[1080px]:w-[20vw] aspect-[3/2] overflow-hidden flex justify-center items-center;
   }
   .second-image {
     transition: opacity 0.3s linear;
   }
 
   .cards-container {
-    @apply grid gap-[70px] mb-20 md:grid-cols-2 min-[1080px]:grid-cols-3 min-[640px]:gap-[2vw] justify-center;
+    @apply grid gap-[70px] mb-20 md:grid-cols-2 min-[1080px]:grid-cols-3 md:gap-[2vw] justify-center;
   }
 
   /* Whatsapp */

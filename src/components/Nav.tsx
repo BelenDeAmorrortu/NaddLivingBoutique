@@ -52,7 +52,7 @@ export default function Nav() {
         <div
           className={`flex flex-row justify-end items-center gap-6 md:gap-10 flex-1`}
         >
-          <button onClick={() => setSearchOpen(true)}>
+          <button onClick={() => setSearchOpen(!searchOpen)}>
             <MagnifyingGlassIcon
               className={`w-5 h-5 md:w-6 md:h-6 fill-white`}
             />
@@ -67,7 +67,7 @@ export default function Nav() {
               className={`w-5 h-5 md:w-6 md:h-6 self-end fill-white`}
             />
             <span
-              className={`absolute top-1 md:top-2 z-10 text-black text-[${
+              className={`absolute top-1 md:top-[5px] z-10 text-black text-[${
                 String(count)?.length > 2 ? "8px" : "10px"
               }] md:text-${
                 String(count)?.length > 2 ? "[5px]" : "xs"
@@ -78,6 +78,11 @@ export default function Nav() {
           </button>
         </div>
       </nav>
+      <div className="announcement-bar-5">
+        <p className="text-white text-xs">
+          3 y 6 Cuotas sin interes/ 35% OFF por transferencia
+        </p>
+      </div>
       <CategoriesNav
         visible={productCategoriesVisible}
         setIsHovering={setIsHovering}
@@ -123,6 +128,27 @@ const NavItemsSm = () => {
   const [open, setOpen] = useState(false);
   const [productList, setProductList] = useState<boolean>(false);
 
+  const navRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Listener to close the component when clicking outside of it
+    const handleMouseDown = (e: any) => {
+      console.log(e.target, open);
+      if (
+        !e.target.id.includes("menu2") &&
+        !navRef?.current?.contains(e.target) &&
+        open
+      ) {
+        setOpen(false);
+        document.getElementById("burgerMenu")?.click();
+      }
+    };
+
+    document.addEventListener("mousedown", handleMouseDown);
+
+    return () => document.removeEventListener("mousedown", handleMouseDown);
+  }, [open]);
+
   function itemClick(navItem: any) {
     if (navItem.categories) {
       setProductList(!productList);
@@ -155,6 +181,7 @@ const NavItemsSm = () => {
               ? " -translate-x-0 opacity-100"
               : " -translate-x-full opacity-0"
           )}
+          ref={navRef}
         >
           <ul className="flex flex-col text-center">
             {navItems.map((item, index) => {
