@@ -16,18 +16,15 @@ module.exports = {
         hover: "#ffffff78",
       },
       red: "#B50706",
-      // "dark-red": "#900d0c",
       "dark-red": "#8e0b0a",
-
       grey: {
-        DEFAULT: "#9ca3af",
-        hover: "#9ca3af66",
+        DEFAULT: "#b3b3b3",
+        hover: "#b3b3b366",
       },
-      "dark-grey": "#404040",
+      "dark-grey": "#888888",
       transparent: "transparent",
       whatsapp: "#31b846",
       instagram: "#ba0e59",
-      // 'instagram': '#a02ebf'
     },
     fontFamily: {
       primary: "var(--font-primary)",

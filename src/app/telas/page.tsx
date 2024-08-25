@@ -10,7 +10,7 @@ import arrowDown from "react-useanimations/lib/arrowDown";
 
 export default function Page() {
   return (
-    <div className="h-fit pt-16">
+    <div className="h-fit pt-[92px]">
       <div className="h-fit md:h-[85vh] w-full">
         <Reveal tailwindStyles="flex-col-center px-10 gap-5 my-7">
           <h1 className="title-2 text-black text-center uppercase p-0 m-0">

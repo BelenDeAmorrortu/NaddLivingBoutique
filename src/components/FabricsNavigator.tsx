@@ -67,7 +67,7 @@ export default function FabricsNavigator() {
       className="h-fit p-5 md:p-10 my-10 grid grid-cols-1 md:grid-cols-4"
       id="telas"
     >
-      <div className="hidden md:flex h-[85vh] col-span-1 flex-col justify-center items-start lg:mx-5 gap-5 border-l border-l-black-hover sticky top-20">
+      <div className="hidden md:flex h-[80vh] col-span-1 flex-col justify-center items-start lg:mx-5 gap-5 border-l border-l-black-hover sticky top-28">
         {data &&
           data.map((i) => {
             return (

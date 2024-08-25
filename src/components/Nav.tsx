@@ -67,7 +67,7 @@ export default function Nav() {
               className={`w-5 h-5 md:w-6 md:h-6 self-end fill-white`}
             />
             <span
-              className={`absolute top-1 md:top-[5px] z-10 text-black text-[${
+              className={`absolute top-[3px] md:top-[7px] z-10 text-black text-[${
                 String(count)?.length > 2 ? "8px" : "10px"
               }] md:text-${
                 String(count)?.length > 2 ? "[5px]" : "xs"
@@ -78,8 +78,8 @@ export default function Nav() {
           </button>
         </div>
       </nav>
-      <div className="announcement-bar-5">
-        <p className="text-white text-xs">
+      <div className="announcement-bar-2">
+        <p className="text-white text-[10px] md:text-xs">
           3 y 6 Cuotas sin interes/ 35% OFF por transferencia
         </p>
       </div>
