@@ -36,6 +36,7 @@ export default function CategoriesNav({ visible, setIsHovering }: IProps) {
             </div>
             <Link
               href={p.href}
+              onClick={() => setIsHovering(false)}
               className={`flex w-full h-full absolute uppercase font-bold drop-shadow-md flex-col-center`}
             >
               {p.name}
