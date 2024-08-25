@@ -14,7 +14,7 @@ export default function Header() {
         fill
         priority
         placeholder="blur"
-        className="object-cover brightness-50"
+        className="object-cover animate-scaleIn"
       />
       <div className="flex-col-center w-full h-screen absolute">
         <CascadeReveal key={4}>

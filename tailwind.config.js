@@ -41,6 +41,21 @@ module.exports = {
       screens: {
         xxs: "320px",
       },
+      keyframes: {
+        scaleIn: {
+          "0%": {
+            transform: "scale(1.2)",
+            filter: "blur(3px) brightness(0.5)",
+          },
+          "100%": {
+            transform: "scale(1)",
+            filter: "blur(0px)  brightness(0.5)",
+          },
+        },
+      },
+      animation: {
+        scaleIn: "scaleIn 1s ease-in-out forwards",
+      },
     },
   },
   plugins: [],
