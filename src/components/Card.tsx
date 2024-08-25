@@ -23,7 +23,7 @@ export default function Card({
       <div
         key={_id}
         className={
-          "flex flex-col items-center justify-start w-[80vw] min-h-[185px] md:w-[25vw] min-[1080px]:w-[20vw] md:min-h-[225px] lg:min-h-[255px]" +
+          "flex flex-col items-center justify-start w-[80vw] sm:w-[65vw] min-h-[185px] md:w-[25vw] min-[1080px]:w-[20vw] md:min-h-[225px] lg:min-h-[255px]" +
           ""
         }
       >
