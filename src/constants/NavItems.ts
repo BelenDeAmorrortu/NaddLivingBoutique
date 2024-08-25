@@ -1,4 +1,11 @@
-import { Mesas, Sillon, Sofas, Todo } from "@/assets/images";
+import {
+  Almohadones,
+  Almohadones2,
+  Mesas,
+  Sillon,
+  Sofas,
+  Todo,
+} from "@/assets/images";
 import { navigation } from "@/constants/navigation";
 
 export const navItems = [
@@ -21,9 +28,9 @@ export const navItems = [
         image: Sofas,
       },
       {
-        name: `Mesas y Muebles`,
+        name: `Almohadones`,
         href: navigation.mesasYMuebles,
-        image: Mesas,
+        image: Almohadones2,
       },
       {
         name: `Ver todo`,
