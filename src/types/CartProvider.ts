@@ -6,9 +6,13 @@ export interface ICartProvider {
   items: ICartItem[];
   total: number;
   count: number;
-  addToCart: (product: Product, variant: Variant, amount: number) => void;
-  removeFromCart: (itemId: string) => void;
-  updateAmount: (itemId: string, amount: number) => void;
+  addToCart: (
+    product: Product,
+    variant: Variant,
+    amount: number
+  ) => Promise<void>;
+  removeFromCart: (itemId: string) => Promise<void>;
+  updateAmount: (itemId: string, amount: number) => Promise<void>;
   isOpen: boolean;
   setIsOpen: (arg: boolean) => void;
   checkout: (fabric?: string) => void;

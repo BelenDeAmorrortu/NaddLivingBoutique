@@ -1,20 +1,26 @@
 "use client";
 import Cart from "@/components/Cart";
-import { createCart } from "@/requests";
+import {
+  addCartItems,
+  createCart,
+  getCart as getShopifyCart,
+  removeCartItems,
+  updateCartItems,
+  updateFabric,
+} from "@/requests";
 import { ICartItem } from "@/types/CartItem";
 import { ICartProvider } from "@/types/CartProvider";
 import { Product } from "@/types/Product";
 import { Variant } from "@/types/Variant";
 import React, { useContext, useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 const CartContext = React.createContext<ICartProvider>({
   items: [],
   total: 0,
   count: 0,
-  addToCart: () => {},
-  removeFromCart: () => {},
-  updateAmount: () => {},
+  addToCart: async () => {},
+  removeFromCart: async () => {},
+  updateAmount: async () => {},
   setIsOpen: () => {},
   checkout: (fabric?: string) => {},
   isOpen: false,
@@ -29,97 +35,130 @@ export function CartProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const [cart, setCart] = useState<any>();
   const [cartItems, setCartItems] = useState<ICartItem[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [count, setCount] = useState<number>(0);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const addToCart = (product: Product, variant: Variant, amount: number) => {
-    const findItem = cartItems.find(
-      (i) => i.productId === product._id && i.variant.id === variant.id
-    );
-    if (findItem) {
-      const updateItems = cartItems.map((item) =>
-        item.productId === product._id && item.variant.id === variant.id
-          ? { ...item, amount: item.amount + amount }
-          : item
-      );
-      window.localStorage.setItem("cartItems", JSON.stringify(updateItems));
-      setCartItems(updateItems);
-      setTotal(calcTotal(updateItems));
-      setCount(calcCount(updateItems));
-      setIsOpen(true);
-    } else {
-      const item: ICartItem = {
-        _id: uuidv4(),
-        productId: product._id,
-        name: product.name,
-        variant,
-        image: product.images[0],
-        amount,
-        url: product.url,
+  function parseCartItem(cartLines: any) {
+    return cartLines.edges.map((edge: any) => {
+      const node = edge.node;
+      const merchandise = node.merchandise;
+
+      return {
+        _id: node.id,
+        productId: merchandise.product.id,
+        name: merchandise.product.title,
+        variant: {
+          id: merchandise.id,
+          title: merchandise.title,
+          price: merchandise.price.amount,
+        },
+        image: merchandise.product.featuredImage.url,
+        amount: node.quantity,
+        url: merchandise.product.handle,
       };
-      window.localStorage.setItem(
-        "cartItems",
-        JSON.stringify([...cartItems, item])
+    });
+  }
+
+  const addToCart = async (
+    product: Product,
+    variant: Variant,
+    amount: number
+  ) => {
+    if (cart) {
+      const findItem = cartItems.find(
+        (i) => i.productId === product._id && i.variant.id === variant.id
       );
-      setCartItems([...cartItems, item]);
-      setTotal(total + Number(variant.price) * amount);
-      setCount(count + item.amount);
-      setIsOpen(true);
+      if (findItem) {
+        const updateItems = cartItems.map((item) =>
+          item.productId === product._id && item.variant.id === variant.id
+            ? { ...item, amount: item.amount + amount }
+            : item
+        );
+        const updatedCart = await updateCartItems(cart.id, updateItems);
+        if (updatedCart) setCart(updatedCart);
+        setIsOpen(true);
+      } else {
+        const item: ICartItem = {
+          _id: "",
+          productId: product._id,
+          name: product.name,
+          variant,
+          image: product.images[0],
+          amount,
+          url: product.url,
+        };
+        const updatedCart = await addCartItems(cart.id, [item]);
+        if (updatedCart) setCart(updatedCart);
+        setIsOpen(true);
+      }
     }
   };
 
-  const removeFromCart = (id: string) => {
-    const removed = cartItems.filter((p) => p._id !== id);
-    window.localStorage.setItem("cartItems", JSON.stringify(removed));
-    setCartItems(removed);
-    setTotal(calcTotal(removed));
-    setCount(calcCount(removed));
+  const removeFromCart = async (id: string) => {
+    if (cart) {
+      const updatedCart = await removeCartItems(cart.id, [id]);
+      if (updatedCart) setCart(updatedCart);
+    }
   };
 
-  const updateAmount = (id: string, amount: number) => {
-    const updated = cartItems.map((i) => {
-      if (i._id === id) {
-        return {
-          ...i,
-          amount,
-        };
-      } else {
-        return i;
-      }
-    });
-    window.localStorage.setItem("cartItems", JSON.stringify(updated));
-    setCartItems(updated);
-    setTotal(calcTotal(updated));
-    setCount(calcCount(updated));
-  };
-
-  const calcTotal = (items: ICartItem[]) => {
-    return items.reduce((total, item) => {
-      return total + item.variant.price * item.amount;
-    }, 0);
-  };
-
-  const calcCount = (items: ICartItem[]) => {
-    return items.reduce((total, item) => {
-      return total + item.amount;
-    }, 0);
+  const updateAmount = async (id: string, amount: number) => {
+    if (cart) {
+      const updated = cartItems.map((i) => {
+        if (i._id === id) {
+          return {
+            ...i,
+            amount,
+          };
+        } else {
+          return i;
+        }
+      });
+      const updatedCart = await updateCartItems(cart.id, updated);
+      if (updatedCart) setCart(updatedCart);
+    }
   };
 
   const checkout = async (fabric?: string) => {
-    await createCart(cartItems, fabric);
+    if (cart) {
+      if (fabric) await updateFabric(cart.id, fabric);
+      return window.open(cart.checkoutUrl);
+    }
+  };
+
+  const getCart = async () => {
+    const savedCartId = window.localStorage.getItem("cartId");
+
+    if (!savedCartId) {
+      createShopifyCart();
+    } else {
+      const updatedCart = await getShopifyCart(savedCartId);
+      if (updatedCart) setCart(updatedCart);
+      else if (updatedCart === null) createShopifyCart();
+    }
+  };
+
+  const createShopifyCart = async () => {
+    const updatedCart = await createCart();
+    if (updatedCart) {
+      window.localStorage.setItem("cartId", updatedCart.id);
+      setCart(updatedCart);
+    }
   };
 
   useEffect(() => {
-    const savedItems = window.localStorage.getItem("cartItems");
-    if (savedItems) {
-      const parsed = JSON.parse(savedItems);
-      setCartItems(parsed);
-      setTotal(calcTotal(parsed));
-      setCount(calcCount(parsed));
-    }
+    getCart();
   }, []);
+
+  useEffect(() => {
+    if (cart) {
+      if (cart?.lines) setCartItems(parseCartItem(cart.lines));
+      setCount(cart?.totalQuantity ?? 0);
+      setTotal(Number(cart.cost.totalAmount.amount) ?? 0);
+    }
+  }, [cart]);
 
   const values = {
     items: cartItems,

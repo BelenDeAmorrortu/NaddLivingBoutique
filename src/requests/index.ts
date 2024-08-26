@@ -209,7 +209,32 @@ export const getFabrics = async (): Promise<Fabric[]> => {
   }
 };
 
-export const createCart = async (cartItems: ICartItem[], fabric?: string) => {
+export const createCart = async () => {
+  try {
+    const { data } = await storefront(queries.createCart, {
+      products: [],
+      attributes: [{ key: "custom.fabric", value: "-" }],
+    });
+
+    return data.cartCreate.cart;
+  } catch (e) {
+    console.log("ERROR", e);
+  }
+};
+
+export const getCart = async (id: string) => {
+  try {
+    const { data } = await storefront(queries.getCart, {
+      id,
+    });
+
+    return data.cart;
+  } catch (e) {
+    console.log("ERROR", e);
+  }
+};
+
+export const addCartItems = async (id: string, cartItems: ICartItem[]) => {
   try {
     const products = cartItems.map((i) => {
       return {
@@ -217,18 +242,58 @@ export const createCart = async (cartItems: ICartItem[], fabric?: string) => {
         merchandiseId: i.variant.id,
       };
     });
-    const { data } = await storefront(queries.createCart, {
+    const { data } = await storefront(queries.addCart, {
+      id,
       products,
+    });
+
+    return data.cartLinesAdd.cart;
+  } catch (e) {
+    console.log("ERROR", e);
+  }
+};
+
+export const updateCartItems = async (id: string, cartItems: ICartItem[]) => {
+  try {
+    const products = cartItems.map((i) => {
+      return {
+        quantity: i.amount,
+        id: i._id,
+      };
+    });
+    const { data } = await storefront(queries.updateCart, {
+      id,
+      products,
+    });
+
+    return data.cartLinesUpdate.cart;
+  } catch (e) {
+    console.log("ERROR", e);
+  }
+};
+
+export const removeCartItems = async (id: string, productIds: string[]) => {
+  try {
+    const { data } = await storefront(queries.removeCart, {
+      id,
+      productIds,
+    });
+
+    return data.cartLinesRemove.cart;
+  } catch (e) {
+    console.log("ERROR", e);
+  }
+};
+
+export const updateFabric = async (id: string, fabric?: string) => {
+  try {
+    const { data } = await storefront(queries.updateCartAttributes, {
+      id,
       attributes: [{ key: "custom.fabric", value: fabric ?? "-" }],
     });
 
-    window.open(data.cartCreate.cart.checkoutUrl);
+    return true;
   } catch (e) {
     console.log("ERROR", e);
-    notification.error({
-      message:
-        "Error al iniciar Checkout. Por favor, vuelva a intentarlo mas tarde",
-      duration: 10,
-    });
   }
 };

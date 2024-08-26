@@ -22,23 +22,23 @@ export default function AddToCartProductForm({ product }: IProps) {
   const { addToCart } = useCart();
 
   const initialValues = {
-    variant: product.variants.find((v: Variant) => v.price === product.price)
+    variant: product?.variants?.find((v: Variant) => v.price === product.price)
       .id,
     amount: 1,
     color: "A elección",
   };
 
-  const sizeVariants = product.variants.map((v: Variant) => {
+  const sizeVariants = product?.variants?.map((v: Variant) => {
     return {
       value: v.id,
       label: v.title,
     };
   });
 
-  const handleSubmit = () => {
-    addToCart(
+  const handleSubmit = async () => {
+    await addToCart(
       product,
-      product.variants.find((v: Variant) => v.id === variant),
+      product?.variants?.find((v: Variant) => v.id === variant),
       amount
     );
   };

@@ -31,9 +31,7 @@ export default function CartItem({
       <div className="md:max-w-[145px] flex flex-col justify-start items-start ">
         <h4 className=" font-bold uppercase text-sm md:text-[14px]">{name}</h4>
         <h4 className="uppercase text-[11px] h-[22px]">Color a eleccion</h4>
-        <h4 className="uppercase text-[11px] h-[22px]">
-          {variant.title.split("/")[0]}
-        </h4>
+        <h4 className="uppercase text-[11px] h-[22px]">{variant.title}</h4>
         <h4 className="text-sm uppercase md:text-[14px] font-bold">
           {"$" + formatPrice(String(variant.price * amount))}
         </h4>

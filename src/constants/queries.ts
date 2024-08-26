@@ -130,6 +130,187 @@ export const queries = {
             }
   }
 }`,
+  getCart: `query Cart($id: ID!){
+    cart(id: $id) {
+      id,
+      checkoutUrl,
+      totalQuantity,
+      lines(first: 20){
+        edges{
+          node{
+            id,
+            quantity,
+            merchandise {
+              ... on ProductVariant {
+                id, 
+                title, 
+                price{
+                  amount
+                }
+                product{
+                  id,
+                  handle,
+                  title,
+                  featuredImage{
+                    url
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      attributes {
+        key,
+        value
+      },
+      cost {
+        totalAmount {
+          amount,
+          currencyCode
+        }
+      }
+    }
+  }`,
+  addCart: `mutation cartLinesAdd($id: ID!, $products: [CartLineInput!]!) {
+  cartLinesAdd(cartId: $id, lines: $products) {
+    cart {
+      id,
+      totalQuantity,
+      checkoutUrl,
+      lines(first: 20){
+        edges{
+          node{
+            id,
+            quantity,
+            merchandise {
+              ... on ProductVariant {
+                id, 
+                title, 
+                price{
+                  amount
+                }
+                product{
+                  id,
+                  handle,
+                  title,
+                  featuredImage{
+                    url
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      attributes {
+        key,
+        value
+      },
+      cost {
+        totalAmount {
+          amount,
+          currencyCode
+        }
+      }
+    }
+  }
+}`,
+  updateCart: `mutation cartLinesUpdate($id: ID!, $products: [CartLineUpdateInput!]!) {
+  cartLinesUpdate(cartId: $id, lines: $products) {
+    cart {
+      id,
+      checkoutUrl,
+      totalQuantity,
+      lines(first: 20){
+        edges{
+          node{
+            id,
+            quantity,
+            merchandise {
+              ... on ProductVariant {
+                id,
+                title, 
+                price{
+                  amount
+                }
+                product{
+                  id,
+                  handle,
+                  title,
+                  featuredImage{
+                    url
+                  }
+                }              
+              }
+            }
+          }
+        }
+      },
+      attributes {
+        key,
+        value
+      },
+      cost {
+        totalAmount {
+          amount,
+          currencyCode
+        }
+      }
+    }
+  }
+}`,
+  removeCart: `mutation cartLinesRemove($id: ID!, $productIds: [ID!]!) {
+  cartLinesRemove(cartId: $id, lineIds: $productIds) {
+    cart {
+      id,
+      checkoutUrl,
+      totalQuantity,
+      lines(first: 20){
+        edges{
+          node{
+            id,
+            quantity,
+            merchandise {
+              ... on ProductVariant {
+                id, 
+                title, 
+                price{
+                  amount
+                }
+                product{
+                  id,
+                  handle,
+                  title,
+                  featuredImage{
+                    url
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      attributes {
+        key,
+        value
+      },
+      cost {
+        totalAmount {
+          amount,
+          currencyCode
+        }
+      }
+    }
+  }
+}`,
+  updateCartAttributes: `mutation cartAttributesUpdate($attributes: [AttributeInput!]!, $id: ID!) {
+  cartAttributesUpdate(attributes: $attributes, cartId: $id) {
+    cart {
+      id
+    }
+  }
+}`,
   imageReferenceURL: `query ImageUrl($id: ID!){
   node(id: $id) {
     ... on MediaImage {

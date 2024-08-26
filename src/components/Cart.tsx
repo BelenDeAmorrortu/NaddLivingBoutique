@@ -6,8 +6,6 @@ import { BsBag } from "react-icons/bs";
 import { formatPrice } from "@/utils/formatPrice";
 import { ICartItem } from "@/types/CartItem";
 import { Form, Input } from "antd";
-import { navigation } from "@/constants/navigation";
-import Link from "next/link";
 
 interface IProps {
   isOpen: boolean;
