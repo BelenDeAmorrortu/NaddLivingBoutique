@@ -23,8 +23,7 @@ export default function Card({
       <div
         key={_id}
         className={
-          "flex flex-col items-center justify-start w-[80vw] sm:w-[65vw] min-h-[185px] md:w-[25vw] min-[1080px]:w-[20vw] md:min-h-[225px] lg:min-h-[255px]" +
-          ""
+          "flex flex-col items-center justify-start w-[80vw] sm:w-[65vw] min-h-[185px] md:w-[25vw] min-[1080px]:w-[20vw] md:min-h-[225px] lg:min-h-[255px]"
         }
       >
         <Link href={`${navigation.productos}/${url}`}>
@@ -54,22 +53,20 @@ export default function Card({
           </div>
         </Link>
         <div className="flex-col-center w-full my-4 gap-2">
-          <div className="flex flex-col justify-start items-start w-full">
-            <h4 className={`title-4 text-sm text-${color ?? "back"}`}>
-              {name}
-            </h4>
-            {/* <h4 className={`text-sm font-semi-bold flex justify-center items-end">
-              {"$" + price}
-            </h4>
-            <h5 className="capitalize text-xs">{category.join(" - ")}</h5> */}
-          </div>
+          <h4
+            className={`title-4 text-sm text-${
+              color ?? "black"
+            } w-full text-start`}
+          >
+            {name}
+          </h4>
           <div className="flex justify-between items-end w-full">
-            <h5 className={`capitalize text-xs text-${color ?? "back"}`}>
+            <h5 className={`capitalize text-xs text-${color ?? "black"}`}>
               {category.join(" - ")}
             </h5>
             <h4
-              className={`text-sm font-semi-bold flex flex-col justify-center items-end text-${
-                color ?? "back"
+              className={`text-sm font-bold flex flex-col justify-center items-end ${
+                color ? `text-${color}/80` : "text-black/80"
               }`}
             >
               {"$" + formatPrice(price)}
