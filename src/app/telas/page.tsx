@@ -37,7 +37,7 @@ export default function Page() {
           <CascadeReveal key={2} twStyles="photo-grid-item">
             <video
               className="absolute inset-0 w-full h-full object-cover object-bottom brightness-75"
-              src="/IMG_7499.MOV"
+              src="/IMG_7500.webm"
               muted
               loop
               autoPlay
@@ -56,7 +56,7 @@ export default function Page() {
           <CascadeReveal key={6} twStyles="photo-grid-item">
             <video
               className="absolute inset-0 w-full h-full object-cover brightness-75"
-              src="/VID_20240701_105753766 (1).mp4"
+              src="/VID_20240701_105753766-_1__1.webm"
               muted
               loop
               autoPlay
