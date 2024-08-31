@@ -10,6 +10,9 @@ import { IoClose } from "react-icons/io5";
 import Link from "next/link";
 import Card from "./Card";
 import Image from "next/image";
+import { removeAccents } from "@/utils/removeAccents";
+import Loader from "./Loader";
+import CardSkeleton from "./CardSkeleton";
 
 interface IProps {
   visible: boolean;
@@ -21,14 +24,16 @@ export default function Search({ visible, setSearchOpen }: IProps) {
   const [categoriesSearch, setCategoriesSearch] = useState<
     { name: string; url: string }[]
   >([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [form] = Form.useForm();
   const search = Form.useWatch("search", form);
   const inputRef = useRef<any>(null);
 
   const handleSearch = async () => {
+    setIsLoading(true);
     const searchProducts = await getProducts([], search, undefined);
-
     setResults(searchProducts);
+    setIsLoading(false);
   };
 
   const closeAndReset = () => {
@@ -44,8 +49,8 @@ export default function Search({ visible, setSearchOpen }: IProps) {
         categories
           .filter(
             (i) =>
-              i.toLocaleLowerCase().startsWith(search.toLocaleLowerCase()) ||
-              i.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+              removeAccents(i).startsWith(removeAccents(search)) ||
+              removeAccents(i).includes(removeAccents(search))
           )
           .map((i) => {
             return {
@@ -162,10 +167,20 @@ export default function Search({ visible, setSearchOpen }: IProps) {
             )}
           </div>
           <ul className="hidden min-[1080px]:grid min-[1080px]:grid-cols-3 my-5">
-            {results.length > 0 ? (
+            {isLoading ? (
+              Array(3)
+                .fill("")
+                .map((_, i) => {
+                  return (
+                    <li onClick={closeAndReset} key={i + "search"}>
+                      <CardSkeleton />;
+                    </li>
+                  );
+                })
+            ) : results.length > 0 ? (
               results.slice(0, 3).map((i) => {
                 return (
-                  <li onClick={closeAndReset}>
+                  <li onClick={closeAndReset} key={i._id + "search"}>
                     <Card {...i} color="white" />;
                   </li>
                 );
@@ -175,7 +190,11 @@ export default function Search({ visible, setSearchOpen }: IProps) {
             )}
           </ul>
           <ul className="flex flex-col min-[1080px]:hidden gap-3 py-3">
-            {results.length > 0 ? (
+            {isLoading ? (
+              <li className="flex-col-center flex-1 h-full py-5">
+                <Loader color="white" size="medium" />
+              </li>
+            ) : results.length > 0 ? (
               results.slice(0, 3).map((i) => {
                 return (
                   <li>
