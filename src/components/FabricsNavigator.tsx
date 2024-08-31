@@ -5,6 +5,8 @@ import React, { useEffect, useRef, useState } from "react";
 import FabricDescription from "./FabricDescription";
 import { Image as Img } from "antd";
 import { Color } from "@/types/Fabric";
+import { FiInfo } from "react-icons/fi";
+import Loader from "./Loader";
 
 export default function FabricsNavigator() {
   const [preview, setPreview] = useState<boolean>(false);
@@ -85,8 +87,13 @@ export default function FabricsNavigator() {
             );
           })}
       </div>
-      <div className="col-span-3" ref={containerRef}>
-        {data &&
+      <div
+        className="col-span-3 min-h-[80vh] flex-col-center"
+        ref={containerRef}
+      >
+        {isLoading ? (
+          <Loader color="black" size="large" />
+        ) : data ? (
           data.map((i) => {
             return (
               <FabricDescription
@@ -98,7 +105,12 @@ export default function FabricsNavigator() {
                 setActiveColorIndex={setActiveColorIndex}
               />
             );
-          })}
+          })
+        ) : (
+          <p className="flex-row-center flex-1">
+            <FiInfo className="w-6 h-6 mr-7" /> No se encontraron resultados
+          </p>
+        )}
       </div>
       <div style={{ display: "none" }}>
         <Img.PreviewGroup
