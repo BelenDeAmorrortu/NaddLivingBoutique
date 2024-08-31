@@ -6,7 +6,6 @@ import { Product } from "../../types/Product";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { navigation } from "@/constants/navigation";
-import { FiInfo } from "react-icons/fi";
 import { BiErrorCircle } from "react-icons/bi";
 import { CascadeReveal } from "@/transitions";
 import useFetch from "@/hooks/useFetch";
@@ -14,6 +13,7 @@ import CardSkeleton from "@/components/CardSkeleton";
 import { CiCreditCard1 } from "react-icons/ci";
 import { RiBankFill } from "react-icons/ri";
 import { IoCashOutline } from "react-icons/io5";
+import { TbSofaOff } from "react-icons/tb";
 
 export default function Page() {
   const router = useRouter();
@@ -138,9 +138,10 @@ export default function Page() {
             <BiErrorCircle className="w-6 h-6 mr-7 text-red" /> Hubo un error
           </p>
         ) : products.length === 0 ? (
-          <p className="flex-row-center flex-1">
-            <FiInfo className="w-6 h-6 mr-7" /> No se encontraron resultados
-          </p>
+          <div className="flex-1 w-full flex-col-center opacity-50 gap-5">
+            <TbSofaOff size={75} className="text-black" />
+            <p className="text-lg text-center">No se encontraron resultados</p>
+          </div>
         ) : (
           <div className="cards-container">
             {currentProducts.map((p, i) => (

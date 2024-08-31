@@ -7,6 +7,7 @@ import { Image as Img } from "antd";
 import { Color } from "@/types/Fabric";
 import { FiInfo } from "react-icons/fi";
 import Loader from "./Loader";
+import { HiOutlineSwatch } from "react-icons/hi2";
 
 export default function FabricsNavigator() {
   const [preview, setPreview] = useState<boolean>(false);
@@ -69,79 +70,84 @@ export default function FabricsNavigator() {
       className="h-fit p-5 md:p-10 my-10 grid grid-cols-1 md:grid-cols-4"
       id="telas"
     >
-      <div className="hidden md:flex h-[80vh] col-span-1 flex-col justify-center items-start lg:mx-5 gap-5 border-l border-l-black-hover sticky top-28">
-        {data &&
-          data.map((i) => {
-            return (
-              <button
-                onClick={() => handleNavigateTo(i.id)}
-                key={i.id}
-                className={`${
-                  activeFabric === i.id
-                    ? "text-xl lg:text-2xl font-bold border-l-red border-l-4 -translate-x-[2px]"
-                    : "text-lg lg:text-xl font-regular border-none"
-                } px-5 transition-all duration-300 text-left`}
-              >
-                {i.nombre}
-              </button>
-            );
-          })}
-      </div>
-      <div
-        className="col-span-3 min-h-[80vh] flex-col-center"
-        ref={containerRef}
-      >
-        {isLoading ? (
+      {isLoading ? (
+        <div className="col-span-4 flex-col-center  min-h-[80vh]">
           <Loader color="black" size="large" />
-        ) : data ? (
-          data.map((i) => {
-            return (
-              <FabricDescription
-                key={i.id}
-                fabric={i}
-                setPreview={setPreview}
-                setActiveFabric={setActiveFabric}
-                setSelectedFabricColors={setSelectedFabricColors}
-                setActiveColorIndex={setActiveColorIndex}
-              />
-            );
-          })
-        ) : (
-          <p className="flex-row-center flex-1">
-            <FiInfo className="w-6 h-6 mr-7" /> No se encontraron resultados
-          </p>
-        )}
-      </div>
-      <div style={{ display: "none" }}>
-        <Img.PreviewGroup
-          preview={{
-            visible: preview,
-            onVisibleChange: (visible) => setPreview(visible),
-            current: activeColorIndex,
-            onChange: (current) => setActiveColorIndex(current),
-          }}
-        >
-          <h4 className="title-3 uppercase font-bold absolute z-50 top-16 text-white">
-            {selectedFabricColors.length > 0 && activeColorIndex
-              ? selectedFabricColors[activeColorIndex].nombre
-              : ""}
-          </h4>
-
-          {selectedFabricColors.length > 0 &&
-            selectedFabricColors.map((c) => {
+        </div>
+      ) : data && data.length > 0 ? (
+        <>
+          <div className="hidden md:flex h-[80vh] col-span-1 flex-col justify-center items-start lg:mx-5 gap-5 border-l border-l-black-hover sticky top-28">
+            {data &&
+              data.map((i) => {
+                return (
+                  <button
+                    onClick={() => handleNavigateTo(i.id)}
+                    key={i.id}
+                    className={`${
+                      activeFabric === i.id
+                        ? "text-xl lg:text-2xl font-bold border-l-red border-l-4 -translate-x-[2px]"
+                        : "text-lg lg:text-xl font-regular border-none"
+                    } px-5 transition-all duration-300 text-left`}
+                  >
+                    {i.nombre}
+                  </button>
+                );
+              })}
+          </div>
+          <div
+            className="col-span-3 min-h-[80vh] flex-col-center"
+            ref={containerRef}
+          >
+            {data.map((i) => {
               return (
-                <Img
-                  src={c.foto}
-                  alt={c.nombre}
-                  width={1000}
-                  height={1000}
-                  className="object-contain object-center"
-                  key={c.id}
+                <FabricDescription
+                  key={i.id}
+                  fabric={i}
+                  setPreview={setPreview}
+                  setActiveFabric={setActiveFabric}
+                  setSelectedFabricColors={setSelectedFabricColors}
+                  setActiveColorIndex={setActiveColorIndex}
                 />
               );
             })}
-        </Img.PreviewGroup>
-      </div>
+          </div>
+          <div style={{ display: "none" }}>
+            <Img.PreviewGroup
+              preview={{
+                visible: preview,
+                onVisibleChange: (visible) => setPreview(visible),
+                current: activeColorIndex,
+                onChange: (current) => setActiveColorIndex(current),
+              }}
+            >
+              <h4 className="title-3 uppercase font-bold absolute z-50 top-16 text-white">
+                {selectedFabricColors.length > 0 && activeColorIndex
+                  ? selectedFabricColors[activeColorIndex].nombre
+                  : ""}
+              </h4>
+
+              {selectedFabricColors.length > 0 &&
+                selectedFabricColors.map((c) => {
+                  return (
+                    <Img
+                      src={c.foto}
+                      alt={c.nombre}
+                      width={1000}
+                      height={1000}
+                      className="object-contain object-center"
+                      key={c.id}
+                    />
+                  );
+                })}
+            </Img.PreviewGroup>
+          </div>
+        </>
+      ) : (
+        <div className="col-span-4 flex-col-center opacity-50 gap-5 min-h-[80vh]">
+          <HiOutlineSwatch size={75} className="text-black" />
+          <p className="text-lg text-center">No se encontraron resultados</p>
+        </div>
+      )}
     </div>
   );
 }
