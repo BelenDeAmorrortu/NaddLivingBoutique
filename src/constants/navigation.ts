@@ -3,7 +3,7 @@ interface Props {
   productos: string;
   sillasYSillones: string;
   sofasyPuffs: string;
-  mesasYMuebles: string;
+  almohadones: string;
   faq: string;
   contacto: string;
   telas: string;
@@ -14,7 +14,7 @@ export const navigation: Props = {
   productos: "/productos",
   sillasYSillones: "/productos?filter=silla&filter=sillón",
   sofasyPuffs: "/productos?filter=sofá&filter=puff",
-  mesasYMuebles: "/productos?filter=mesa&filter=mueble",
+  almohadones: "/productos?filter=almohadón",
   faq: "/preguntas-frecuentes",
   contacto: "/#contacto",
   telas: "/telas",
