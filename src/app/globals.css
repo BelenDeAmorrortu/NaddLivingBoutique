@@ -249,7 +249,8 @@
 }
 
 :where(.css-dev-only-do-not-override-f7vrd6).ant-input-number-sm
-  input.ant-input-number-input {
+  input.ant-input-number-input,
+:where(.css-f7vrd6).ant-input-number-sm input.ant-input-number-input {
   height: 30px !important;
 }
 
