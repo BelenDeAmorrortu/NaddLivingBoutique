@@ -2,12 +2,9 @@ import { Product } from "@/types/Product";
 import { storefront } from "@/utils/storefront";
 import { queries } from "../constants/queries";
 import { isJsonString } from "@/utils/isJsonString";
-import { arrayToIdsObject } from "@/utils/arrayToIdsObject";
 import { getMinPrice } from "@/utils/getMinPrice";
 import { ICartItem } from "@/types/CartItem";
-import { notification } from "antd";
 import { Fabric } from "@/types/Fabric";
-import { searchProducts } from "@/utils/searchProducts";
 
 export const getProducts = async (
   filters: string[],
@@ -18,15 +15,13 @@ export const getProducts = async (
     const { data } = await storefront(queries.products, {
       cursor: cursor ?? null,
       filter:
-        filters.length === 1 && !search
-          ? filters[0]
-          : filters.length > 1 && search
+        filters.length > 0
           ? filters
-              .map((f) => `${f}`)
+              .map((f) => `tag:${f}`)
               .join(" OR ")
-              .concat(search ? ` AND ${search}` : "")
+              .concat(search ? ` AND (title:${search}* OR tag:${search}*)` : "")
           : search
-          ? search
+          ? `(tag:${search}* OR title:${search}*)`
           : null,
     });
     const products = data.products.edges.map((p: any) => {
@@ -47,9 +42,7 @@ export const getProducts = async (
       };
     });
 
-    if (search && search.trim() !== "") {
-      return searchProducts(search, products);
-    } else return products;
+    return products;
   } catch (e) {
     console.log("ERROR", e);
     return [];
