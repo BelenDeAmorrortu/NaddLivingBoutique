@@ -92,6 +92,32 @@
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
+  width: 95vw !important;
+  height: 40vh !important;
+}
+
+@media (min-width: 500px) {
+  .swiperSlide {
+    height: 450px !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .swiperSlide {
+    width: 50vw !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .swiperSlide {
+    height: 70vh !important;
+  }
+}
+
+@media (min-width: 1243px) {
+  .swiperSlide {
+    width: 45vw !important;
+  }
 }
 
 .swiper-thumbs .swiper-slide {

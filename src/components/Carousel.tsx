@@ -69,6 +69,7 @@ export default function Carousel({ images, lqip }: Props) {
           images.map((image, index) => {
             return (
               <SwiperSlide key={index} className="swiperSlide">
+                {/* check styles from global.css when modifying this dimensions*/}
                 <div className="w-[90vw] h-[40vh] min-[500px]:h-[400px] md:w-[45vw] lg:h-[70vh] flex justify-center items-center relative">
                   <Img
                     key={index}
