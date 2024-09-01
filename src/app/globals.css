@@ -26,12 +26,7 @@
   }
 
   section {
-    @apply my-24;
-  }
-
-  section:last-child,
-  section:first-child {
-    @apply my-0;
+    @apply px-10 py-16;
   }
 
   footer ul {
@@ -58,7 +53,7 @@
   }
 
   .faq p {
-    @apply text-sm lg:text-base text-dark-grey px-7;
+    @apply text-sm lg:text-base text-black-hover px-7;
   }
 
   .loader.white {

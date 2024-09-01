@@ -7,7 +7,7 @@ import { CiLocationOn } from "react-icons/ci";
 
 export default function OurShop() {
   return (
-    <section className="flex flex-col gap-10 py-10">
+    <section className="flex flex-col gap-10 px-0">
       <Reveal>
         <div className="flex-col-center sm:flex-row-center gap-5 my-2">
           <CiLocationOn className="text-red h-[100px] w-[100px]" />

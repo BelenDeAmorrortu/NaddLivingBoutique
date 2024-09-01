@@ -69,7 +69,7 @@ export default function ContactForm() {
     <Context.Provider value={contextValue}>
       {contextHolder}
       <section
-        className="h-fit w-full flex flex-col md:flex-row justify-center gap-20 px-10 pb-20"
+        className="h-fit w-full flex flex-col md:flex-row justify-center gap-20 py-10"
         id="contacto"
       >
         <div className="flex flex-1 h-full flex-col gap-5">

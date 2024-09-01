@@ -6,7 +6,7 @@ export default function Banner() {
   return (
     <Reveal
       isSection
-      tailwindStyles="flex flex-col md:flex-row justify-around items-center h-fit min-h-[65vh] w-full px-10"
+      tailwindStyles="flex flex-col md:flex-row justify-around items-center h-fit min-h-[65vh] w-full pb-10"
     >
       <div className="w-[90%] md:w-[40%] flex-center">
         <Image

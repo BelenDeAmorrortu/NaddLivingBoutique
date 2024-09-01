@@ -13,7 +13,7 @@ export default function Spotlight() {
   const { data: products, isLoading } = useFetch("spotlight", getSpotlight);
 
   return (
-    <section className="flex-col-center w-full h-fit my-10">
+    <section className="flex-col-center w-full h-fit">
       <Reveal tailwindStyles="flex-col-center">
         <h4 className="subtitle-1 text-black/80">Nuestros Productos</h4>
         <h3 className="title-2 uppercase m-3 mb-16">Destacados</h3>
