@@ -30,7 +30,7 @@ export default function Page() {
   }, [data]);
 
   return (
-    <div className="faq min-h-[80vh] h-fit flex flex-col items-center justify-center py-20">
+    <section className="faq min-h-[80vh] h-fit flex flex-col items-center justify-baseline pt-24">
       <h3 className="title-3 text-[1.75rem] my-10 text-center">
         Preguntas Frecuentes
       </h3>
@@ -42,6 +42,6 @@ export default function Page() {
       ) : (
         <Collapse items={items} />
       )}
-    </div>
+    </section>
   );
 }
