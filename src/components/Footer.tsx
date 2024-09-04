@@ -1,7 +1,7 @@
 import { navigation } from "@/constants/navigation";
-import { PhoneIcon, MapPinIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { FaInstagram, FaFacebook } from "react-icons/fa";
+import { HiMapPin, HiPhone, HiEnvelope } from "react-icons/hi2";
 
 export default function Footer() {
   return (
@@ -38,19 +38,19 @@ export default function Footer() {
               target="_blank"
               href="https://www.google.com/maps/place/Nadd/@-34.5952946,-58.4313918,17z/data=!3m1!4b1!4m6!3m5!1s0x95bccab9a1d5c4ad:0x74afd8399ecd97d3!8m2!3d-34.5952946!4d-58.4288169!16s%2Fg%2F1td9fyx2?entry=ttu"
             >
-              <MapPinIcon className="footer-icon h-5 w-5" /> Av. Córdoba 4454,
+              <HiMapPin className="footer-icon h-5 w-5" /> Av. Córdoba 4454,
               CABA, Argentina.
             </a>
           </li>
           <li className="group">
             <a href="tel:1153463845">
-              <PhoneIcon className="footer-icon" />
+              <HiPhone className="footer-icon" />
               {"(+54) 11 5346-3845"}
             </a>
           </li>
           <li className="group">
             <a href="mailto:naddliving@gmail.com">
-              <EnvelopeIcon className="footer-icon" />
+              <HiEnvelope className="footer-icon" />
               naddliving@gmail.com
             </a>
           </li>

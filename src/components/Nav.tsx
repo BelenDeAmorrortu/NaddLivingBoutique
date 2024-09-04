@@ -1,6 +1,6 @@
 "use client";
 import { navigation } from "@/constants/navigation";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import { HiMagnifyingGlass } from "react-icons/hi2";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
@@ -53,9 +53,7 @@ export default function Nav() {
           className={`flex flex-row justify-end items-center gap-6 md:gap-10 flex-1`}
         >
           <button onClick={() => setSearchOpen(!searchOpen)}>
-            <MagnifyingGlassIcon
-              className={`w-5 h-5 md:w-6 md:h-6 fill-white`}
-            />
+            <HiMagnifyingGlass className={`w-5 h-5 md:w-6 md:h-6 fill-white`} />
           </button>
           <button
             onClick={() => setIsOpen(true)}

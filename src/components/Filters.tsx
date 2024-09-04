@@ -1,5 +1,5 @@
 "use client";
-import { XMarkIcon } from "@heroicons/react/24/solid";
+import { HiXMark } from "react-icons/hi2";
 import useFetch from "@/hooks/useFetch";
 import { getMetaobjects } from "@/requests";
 
@@ -33,7 +33,7 @@ export default function Filters({
             key={i}
           >
             {f}
-            <XMarkIcon
+            <HiXMark
               onClick={() => removeFilter(f)}
               className="w-4 h-4 ml-1 hover:stroke-red"
             />
@@ -61,7 +61,7 @@ export default function Filters({
               className=" cursor-pointer py-1 px-2 w-fit bg-grey-hover rounded-sm flex items-center capitalize mr-2 my-2"
             >
               {search}
-              <XMarkIcon
+              <HiXMark
                 onClick={() => setSearch(undefined)}
                 className="w-4 h-4 ml-1 hover:stroke-red"
               />

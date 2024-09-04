@@ -5,7 +5,7 @@ import { Form, Input } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import { categories } from "@/constants/categories";
 import { navigation } from "@/constants/navigation";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import { HiMagnifyingGlass } from "react-icons/hi2";
 import { IoClose } from "react-icons/io5";
 import Link from "next/link";
 import Card from "./Card";
@@ -80,7 +80,7 @@ export default function Search({ visible, setSearchOpen }: IProps) {
         initialValues={{ search: undefined }}
       >
         <button>
-          <MagnifyingGlassIcon
+          <HiMagnifyingGlass
             className={`w-5 h-5 md:w-6 md:h-6 fill-white-hover`}
           />
         </button>

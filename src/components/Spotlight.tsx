@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Card from "./Card";
-import { ChevronRightIcon } from "@heroicons/react/24/solid";
+import { HiChevronRight } from "react-icons/hi";
 import { navigation } from "@/constants/navigation";
 import Reveal from "@/transitions/Reveal";
 import CascadeReveal from "@/transitions/CascadeReveal";
@@ -33,7 +33,7 @@ export default function Spotlight() {
         href={navigation.productos}
         className="flex-row-center text-red font-bold hover:underline underline-offset-4 cursor-pointer"
       >
-        Ver catálogo completo <ChevronRightIcon className="w-5 h-5 ml-2" />
+        Ver catálogo completo <HiChevronRight className="w-5 h-5 ml-2" />
       </Link>
     </section>
   );

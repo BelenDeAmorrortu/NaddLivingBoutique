@@ -1,6 +1,5 @@
 "use client";
 import { Loader } from "@/components";
-import { PortableText } from "@portabletext/react";
 import { CollapseProps } from "antd";
 import { Collapse } from "antd";
 import { useEffect, useState } from "react";
