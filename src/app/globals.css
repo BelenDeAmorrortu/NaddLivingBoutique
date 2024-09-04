@@ -115,6 +115,10 @@
   }
 }
 
+.swiper.swiper-initialized.swiper-horizontal {
+  padding: 0 !important;
+}
+
 .swiper-thumbs .swiper-slide {
   @apply opacity-70 brightness-[.90] cursor-pointer;
 }
