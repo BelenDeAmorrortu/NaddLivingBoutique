@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Card from "./Card";
 import { HiChevronRight } from "react-icons/hi";
-import { navigation } from "@/constants/navigation";
+import { navigation } from "@/constants";
 import Reveal from "@/transitions/Reveal";
 import CascadeReveal from "@/transitions/CascadeReveal";
 import useFetch from "@/hooks/useFetch";

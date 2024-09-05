@@ -1,6 +1,6 @@
 import { getProduct } from "../../../requests/index";
 import { Carousel, ContactButtons } from "@/components";
-import { navigation } from "@/constants/navigation";
+import { navigation } from "@/constants";
 import AddToCartProductForm from "@/components/AddToCartProductForm";
 
 type Props = {

@@ -1,12 +1,12 @@
 "use client";
-import { navigation } from "@/constants/navigation";
+import { navigation } from "@/constants";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
 import { BsBagFill, BsChevronCompactDown } from "react-icons/bs";
 import menu2 from "react-useanimations/lib/menu2";
-import { navItems } from "@/constants/NavItems";
+import { navItems } from "@/constants";
 import { Logo } from "@/assets/images";
 import { useCart } from "@/contexts/CartContext";
 import CategoriesNav from "./CategoriesNav";

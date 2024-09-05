@@ -1,4 +1,4 @@
-import { navigation } from "@/constants/navigation";
+import { navigation } from "@/constants";
 import { Product } from "@/types/Product";
 import { formatPrice } from "@/utils/formatPrice";
 import Image from "next/image";

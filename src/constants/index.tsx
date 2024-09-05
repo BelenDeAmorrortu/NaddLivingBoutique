@@ -1,5 +1,15 @@
 import { Almohadones2, Sillon, Sofas, Todo } from "@/assets/images";
-import { navigation } from "@/constants/navigation";
+
+export const navigation: Record<string, string> = {
+  home: "/",
+  productos: "/productos",
+  sillasYSillones: "/productos?filter=silla&filter=sillón",
+  sofasyPuffs: "/productos?filter=sofá&filter=puff",
+  almohadones: "/productos?filter=almohadón",
+  faq: "/preguntas-frecuentes",
+  contacto: "/#contacto",
+  telas: "/telas",
+};
 
 export const navItems = [
   {
@@ -41,3 +51,6 @@ export const navItems = [
     href: navigation.contacto,
   },
 ];
+
+export const placeholderBlurParams =
+  "&width=100&quality=10&format=webp&blur=100";

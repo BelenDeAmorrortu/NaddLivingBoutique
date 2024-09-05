@@ -5,7 +5,7 @@ import { getProducts as getShopifyProducts } from "../../requests/index";
 import { Product } from "../../types/Product";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { navigation } from "@/constants/navigation";
+import { navigation } from "@/constants";
 import { BiErrorCircle } from "react-icons/bi";
 import { CascadeReveal } from "@/transitions";
 import useFetch from "@/hooks/useFetch";

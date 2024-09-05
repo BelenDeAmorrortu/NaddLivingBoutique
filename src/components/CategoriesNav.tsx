@@ -1,5 +1,5 @@
 "use client";
-import { navItems } from "@/constants/NavItems";
+import { navItems } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";

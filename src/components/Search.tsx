@@ -1,10 +1,9 @@
 "use client";
-import { getProducts } from "@/requests";
+import { getMetaobjects, getProducts } from "@/requests";
 import { Product } from "@/types/Product";
 import { Form, Input } from "antd";
 import React, { useEffect, useRef, useState } from "react";
-import { categories } from "@/constants/categories";
-import { navigation } from "@/constants/navigation";
+import { navigation } from "@/constants";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { IoClose } from "react-icons/io5";
 import Link from "next/link";
@@ -13,6 +12,7 @@ import Image from "next/image";
 import { removeAccents } from "@/utils/removeAccents";
 import Loader from "./Loader";
 import CardSkeleton from "./CardSkeleton";
+import useFetch from "@/hooks/useFetch";
 
 interface IProps {
   visible: boolean;
@@ -29,6 +29,11 @@ export default function Search({ visible, setSearchOpen }: IProps) {
   const search = Form.useWatch("search", form);
   const inputRef = useRef<any>(null);
 
+  const { data: categories } = useFetch(
+    "categories",
+    async () => await getMetaobjects("categoria")
+  );
+
   const handleSearch = async () => {
     setIsLoading(true);
     const searchProducts = await getProducts([], search, undefined);
@@ -42,25 +47,25 @@ export default function Search({ visible, setSearchOpen }: IProps) {
   };
 
   useEffect(() => {
-    if (search) {
+    if (search && categories) {
       handleSearch();
 
       setCategoriesSearch(
         categories
           .filter(
             (i) =>
-              removeAccents(i).startsWith(removeAccents(search)) ||
-              removeAccents(i).includes(removeAccents(search))
+              removeAccents(i.nombre).startsWith(removeAccents(search)) ||
+              removeAccents(i.nombre).includes(removeAccents(search))
           )
           .map((i) => {
             return {
-              name: i,
-              url: navigation.productos + "?filter=" + i,
+              name: i.nombre,
+              url: navigation.productos + "?filter=" + i.nombre,
             };
           })
       );
     }
-  }, [search]);
+  }, [search, categories]);
 
   useEffect(() => {
     if (inputRef.current && visible) {

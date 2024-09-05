@@ -1,4 +1,4 @@
-import { navigation } from "@/constants/navigation";
+import { navigation } from "@/constants";
 import Link from "next/link";
 import { FaInstagram, FaFacebook } from "react-icons/fa";
 import { HiMapPin, HiPhone, HiEnvelope } from "react-icons/hi2";

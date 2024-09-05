@@ -1,7 +1,7 @@
 import { Fabrics2 } from "@/assets/images";
 import { AnimatedIcon } from "@/components";
 import FabricsNavigator from "@/components/FabricsNavigator";
-import { navigation } from "@/constants/navigation";
+import { navigation } from "@/constants";
 import { CascadeReveal, Reveal } from "@/transitions";
 import Image from "next/image";
 import Link from "next/link";

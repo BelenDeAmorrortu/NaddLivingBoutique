@@ -1,10 +1,11 @@
 import { Product } from "@/types/Product";
 import { storefront } from "@/utils/storefront";
-import { queries } from "../constants/queries";
+import { queries } from "./queries";
 import { isJsonString } from "@/utils/isJsonString";
 import { getMinPrice } from "@/utils/getMinPrice";
 import { ICartItem } from "@/types/CartItem";
 import { Fabric } from "@/types/Fabric";
+import { placeholderBlurParams } from "@/constants";
 
 export const getProducts = async (
   filters: string[],
@@ -35,9 +36,7 @@ export const getProducts = async (
         description: descriptionHtml,
         url: handle,
         name: title,
-        lqip: images.edges.map(
-          (i: any) => i.node.url + "?blur=500&px=16&auto=format"
-        ),
+        lqip: images.edges.map((i: any) => i.node.url + placeholderBlurParams),
         price: getMinPrice(variants.nodes),
       };
     });
@@ -70,9 +69,7 @@ export const getProduct = async (handle: string): Promise<Product> => {
       description: descriptionHtml,
       url: handle,
       name: title,
-      lqip: images.edges.map(
-        (i: any) => i.node.url + "?blur=500&px=16&auto=format"
-      ),
+      lqip: images.edges.map((i: any) => i.node.url + placeholderBlurParams),
       price: getMinPrice(variants.nodes),
       variants: parseVariants,
     };
@@ -108,9 +105,7 @@ export const getSpotlight = async (): Promise<Product[]> => {
         description: descriptionHtml,
         url: handle,
         name: title,
-        lqip: images.edges.map(
-          (i: any) => i.node.url + "?blur=500&px=16&auto=format"
-        ),
+        lqip: images.edges.map((i: any) => i.node.url + placeholderBlurParams),
         price: getMinPrice(variants.nodes),
       };
     });

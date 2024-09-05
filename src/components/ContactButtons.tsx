@@ -2,7 +2,7 @@
 import { FaInstagram } from "react-icons/fa";
 import { BsWhatsapp } from "react-icons/bs";
 import { useEffect, useState } from "react";
-import { navigation } from "@/constants/navigation";
+import { navigation } from "@/constants";
 import { sendWhatsappMessage } from "@/utils/sendWhatsappMessage";
 
 export default function ContactButtons() {
