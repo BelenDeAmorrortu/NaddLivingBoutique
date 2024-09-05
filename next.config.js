@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+  output: "standalone",
   images: {
     dangerouslyAllowSVG: true,
     remotePatterns: [
@@ -10,13 +11,6 @@ const nextConfig = {
         port: "",
         pathname: "**",
       },
-    ],
-  },
-  experimental: {
-    serverComponentsExternalPackages: [
-      "@react-email/components",
-      "@react-email/render",
-      "@react-email/tailwind",
     ],
   },
 };
