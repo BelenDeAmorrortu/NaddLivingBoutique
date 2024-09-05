@@ -56,7 +56,7 @@ export default function Page() {
           <CascadeReveal key={6} twStyles="photo-grid-item">
             <video
               className="absolute inset-0 w-full h-full object-cover brightness-75"
-              src="/VID_20240701_105753766-_1__1.webm"
+              src="/telas_2.mp4"
               muted
               loop
               autoPlay
