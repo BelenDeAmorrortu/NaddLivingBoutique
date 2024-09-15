@@ -71,12 +71,12 @@ export default function AddToCartProductForm({ product }: IProps) {
           required
         >
           <CustomSelect
-            prefix="Medida"
+            prefix="Modelo"
             options={sizeVariants}
             value={variant}
             onChange={(value) => form.setFieldValue("variant", value)}
             style={{ width: "100%" }}
-            aria-label="Seleccionar medida"
+            aria-label="Seleccionar modelo"
           />
         </Form.Item>
       </div>
