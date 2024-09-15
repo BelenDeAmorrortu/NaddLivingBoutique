@@ -34,7 +34,7 @@ export default function Page() {
           </Link>
         </Reveal>
         <div className="photo-grid md:h-[57vh]">
-          <CascadeReveal key={2} twStyles="photo-grid-item">
+          <CascadeReveal position={1} twStyles="photo-grid-item">
             <video
               className="absolute inset-0 w-full h-full object-cover object-bottom brightness-75"
               src="/antimanchas1.mp4"
@@ -45,7 +45,7 @@ export default function Page() {
               preload="auto"
             />
           </CascadeReveal>
-          <CascadeReveal key={4} twStyles="photo-grid-item">
+          <CascadeReveal position={3} twStyles="photo-grid-item">
             <Image
               className="absolute inset-0 w-full h-full object-cover brightness-75"
               src={Fabrics2}
@@ -53,7 +53,7 @@ export default function Page() {
               placeholder="blur"
             />
           </CascadeReveal>
-          <CascadeReveal key={6} twStyles="photo-grid-item">
+          <CascadeReveal position={5} twStyles="photo-grid-item">
             <video
               className="absolute inset-0 w-full h-full object-cover brightness-75"
               src="/antimanchas2.mp4"

@@ -145,7 +145,7 @@ export default function Page() {
         ) : (
           <div className="cards-container">
             {currentProducts.map((p, i) => (
-              <CascadeReveal key={i}>
+              <CascadeReveal position={i / 2} key={i}>
                 {isLoading !== false ? <CardSkeleton /> : <Card {...p} />}
               </CascadeReveal>
             ))}

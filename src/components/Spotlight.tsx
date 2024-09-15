@@ -23,7 +23,7 @@ export default function Spotlight() {
           <p>No hay productos destacados</p>
         ) : (
           products?.map((p, i) => (
-            <CascadeReveal key={i}>
+            <CascadeReveal position={i} key={i}>
               {isLoading ? <CardSkeleton /> : <Card {...p} key={p._id} />}
             </CascadeReveal>
           ))

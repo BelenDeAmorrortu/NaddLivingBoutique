@@ -26,7 +26,7 @@ export default function OurShop() {
         </div>
       </Reveal>
       <div className="photo-grid">
-        <CascadeReveal key={1} twStyles="photo-grid-item">
+        <CascadeReveal position={1} twStyles="photo-grid-item">
           <Image
             src={Local3}
             alt="Intorior del local en Av. Córdoba 4454"
@@ -34,7 +34,7 @@ export default function OurShop() {
             className="absolute object-cover w-full h-full"
           />
         </CascadeReveal>
-        <CascadeReveal key={3} twStyles="photo-grid-item">
+        <CascadeReveal position={3} twStyles="photo-grid-item">
           <Image
             src={Local}
             alt="Exterior del local en Av. Córdoba 4454"
@@ -42,7 +42,7 @@ export default function OurShop() {
             className="absolute object-cover w-full h-full"
           />
         </CascadeReveal>
-        <CascadeReveal key={5} twStyles="photo-grid-item">
+        <CascadeReveal position={5} twStyles="photo-grid-item">
           <Image
             src={Local2}
             alt="Intorior del local en Av. Córdoba 4454"
@@ -51,20 +51,6 @@ export default function OurShop() {
           />
         </CascadeReveal>
       </div>
-      {/* <div className="w-full flex-row-center gap-5 h-[70vh]">
-        <div className="flex-1 h-full relative">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.350614541125!2d-58.431391824458764!3d-34.59529457295726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccab9a1d5c4ad%3A0x74afd8399ecd97d3!2sNadd%20Living!5e0!3m2!1ses!2sar!4v1720029646904!5m2!1ses!2sar"
-            width="100%"
-            height="380"
-            style={{ border: 0, position: "absolute" }}
-            allowFullScreen={false}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </div>
-        <div className="flex flex-1"></div>
-      </div> */}
     </section>
   );
 }

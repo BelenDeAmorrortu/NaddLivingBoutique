@@ -17,10 +17,10 @@ export default function Header() {
         className="object-cover animate-scaleIn"
       />
       <div className="flex-col-center w-full h-screen absolute">
-        <CascadeReveal key={4}>
+        <CascadeReveal position={3}>
           <h4 className="subtitle-1 text-grey">Nadd Living Boutique</h4>
         </CascadeReveal>
-        <CascadeReveal key={1}>
+        <CascadeReveal position={1}>
           <h3 className="title-1 text-white my-3">
             The Perfect <span className="text-red">Style</span>
           </h3>
