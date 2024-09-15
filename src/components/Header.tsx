@@ -1,15 +1,15 @@
-import { Banner } from "@/assets/images";
 import Image from "next/image";
 import instagram from "react-useanimations/lib/instagram";
 import arrowDown from "react-useanimations/lib/arrowDown";
 import { CascadeReveal } from "@/transitions";
 import AnimatedIcon from "./AnimatedIcon";
+import Paris from "../../public/Paris.webp";
 
 export default function Header() {
   return (
     <section className="relative w-full max-w-full h-screen max-h-[100vh] flex-center overflow-hidden">
       <Image
-        src={Banner}
+        src={Paris}
         alt="Imagén sillón París"
         fill
         priority
