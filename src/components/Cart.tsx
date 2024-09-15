@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import { IoClose } from "react-icons/io5";
-import CartItem from "./CartItem";
 import { BsBag } from "react-icons/bs";
 import { formatPrice } from "@/utils/formatPrice";
 import { ICartItem } from "@/types/CartItem";
 import { Form, Input } from "antd";
+import { Button, CartItem } from "@/components";
 
 interface IProps {
   isOpen: boolean;
@@ -115,14 +115,13 @@ export default function Cart({
             <span className="font-bold">TOTAL:</span>
             <span>{"$" + formatPrice(String(total))}</span>
           </h4>
-          <button
-            className="contact-button w-full hover:bg-black hover:text-white transition-all duration-150"
+          <Button
             onClick={() => {
               checkout(form.getFieldValue("observations"));
             }}
           >
             CHECKOUT
-          </button>
+          </Button>
         </div>
       </div>
     </>

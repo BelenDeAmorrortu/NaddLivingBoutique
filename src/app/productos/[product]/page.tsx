@@ -1,7 +1,6 @@
 import { getProduct } from "../../../requests/index";
-import { Carousel, ContactButtons } from "@/components";
+import { Carousel, ContactButtons, AddToCartProductForm } from "@/components";
 import { navigation } from "@/constants";
-import AddToCartProductForm from "@/components/AddToCartProductForm";
 
 type Props = {
   params: { product: "string" };
@@ -49,8 +48,8 @@ export default async function page({ params }: Props) {
           <AddToCartProductForm {...{ product }} />
         </div>
       </div>
-      <div className="flex flex-col gap-6 md:gap-0 md:flex-row justify-between items-center w-full h-fit my-10">
-        <div className="flex flex-col w-[90vw] md:max-w-[45vw] gap-4">
+      <div className="flex flex-col gap-6 md:gap-10 min-[1243px]:gap-0 md:flex-row justify-between items-center w-full h-fit my-10">
+        <div className="flex flex-col w-[95vw] md:w-[50vw] min-[1243px]:w-[45vw] gap-4">
           <h4 className="text-2xl md:text-[2.4vw] text-nowrap font-bold text-red">
             ¿Querés tu producto a medida?
           </h4>
@@ -58,7 +57,7 @@ export default async function page({ params }: Props) {
             <span className="flex flex-1">Contactanos en nuestras redes</span>
           </h5>
         </div>
-        <div className="flex flex-col flex-1 w-[90vw] md:max-w-[40vw]">
+        <div className="flex flex-col flex-1 w-[90vw] md:max-w-[45vw]">
           <ContactButtons />
         </div>
       </div>

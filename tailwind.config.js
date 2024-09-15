@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,23 +9,35 @@ module.exports = {
   theme: {
     colors: {
       black: {
-        DEFAULT: "#0f0f0f",
-        hover: "#0f0f0f99",
+        DEFAULT: "rgba(var(--black))",
+        hover: "rgba(var(--black-hover))",
       },
       white: {
-        DEFAULT: "#ffff",
-        hover: "#ffffff78",
+        DEFAULT: "rgba(var(--white))",
+        hover: "rgba(var(--white-hover))",
       },
-      red: "#B50706",
-      "dark-red": "#8e0b0a",
+      red: {
+        DEFAULT: "rgba(var(--red))",
+      },
+      "dark-red": {
+        DEFAULT: "rgba(var(--dark-red))",
+      },
       grey: {
-        DEFAULT: "#b3b3b3",
-        hover: "#b3b3b366",
+        DEFAULT: "rgba(var(--grey))",
+        hover: "rgba(var(--grey-hover))",
       },
-      "dark-grey": "#888888",
-      transparent: "transparent",
-      whatsapp: "#31b846",
-      instagram: "#ba0e59",
+      "dark-grey": {
+        DEFAULT: "rgba(var(--dark-grey))",
+      },
+      transparent: {
+        DEFAULT: "transparent",
+      },
+      whatsapp: {
+        DEFAULT: "rgba(var(--whatsapp))",
+      },
+      instagram: {
+        DEFAULT: "rgba(var(--instagram))",
+      },
     },
     fontFamily: {
       primary: "var(--font-primary)",

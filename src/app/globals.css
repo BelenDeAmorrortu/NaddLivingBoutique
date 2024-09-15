@@ -5,6 +5,23 @@
 /* -- Base -----------------------------------------------------------------*/
 
 @layer base {
+  /* -- Colors --------------------------------------------------------------- */
+
+  :root {
+    --black: 15, 15, 15, 1;
+    --black-hover: 15, 15, 15, 0.6;
+    --white: 255, 255, 255, 1;
+    --white-hover: 255, 255, 255, 0.47;
+    --red: 181, 7, 6, 1;
+    --dark-red: 136, 136, 136, 1;
+    --grey: 179, 179, 179, 1;
+    --grey-hover: 179, 179, 179, 0.4;
+    --dark-grey: 136, 136, 136, 1;
+    --transparen: transparent;
+    --whatsapp: 49, 184, 70, 1;
+    --instagram: 186, 14, 89, 1;
+  }
+
   li {
     @apply text-sm lg:text-base list-none;
   }
@@ -474,15 +491,15 @@
   }
 
   .button-outline {
-    @apply flex-row-center text-sm lg:text-base w-full p-2 border-2 uppercase font-bold transition-all duration-200;
+    @apply flex-row-center text-sm lg:text-base w-full p-2 border-2 bg-white uppercase font-bold transition-all duration-200 relative hover:text-white hover:before:text-white before:absolute before:top-0 before:left-0 before:flex before:w-full before:h-0 before:mb-0 before:transition-all before:duration-200 before:ease-out before:transform before:translate-y-0 hover:before:h-full before:opacity-100 before:bg-[var(--animation-color)] hover:border-[var(--animation-color)];
   }
 
   .button-solid {
-    @apply flex-row-center text-sm lg:text-base w-full p-2 bg-black text-white border-2 border-black uppercase font-bold hover:bg-black-hover hover:border-transparent transition-all duration-200;
+    @apply flex-row-center text-sm lg:text-base w-full p-2 text-white border-2 uppercase font-bold transition-all duration-200 relative hover:text-black hover:before:text-black before:absolute before:top-0 before:left-0 before:flex before:w-full before:h-0 before:mb-0 before:transition-all before:duration-200 before:ease-out before:transform before:translate-y-0 before:bg-white hover:before:h-full before:opacity-100 border-[var(--animation-color)] bg-[var(--animation-color)];
   }
 
-  .contact-button {
-    @apply button-outline md:w-[49%];
+  .button-outline::before {
+    background-color: var(--animation-color);
   }
 
   .photo-grid {

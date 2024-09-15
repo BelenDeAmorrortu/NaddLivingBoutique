@@ -3,7 +3,8 @@ import { Form, Input, notification } from "antd";
 import React, { useMemo, useState } from "react";
 import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import emailjs from "@emailjs/browser";
-import Loader from "./Loader";
+import { Button, Loader } from "@/components";
+
 const Context = React.createContext({
   name: "Default",
 });
@@ -175,9 +176,9 @@ export default function ContactForm() {
                 className="ant-textarea"
               />
             </Form.Item>
-            <button className="w-full button-solid h-[42px]" type="submit">
+            <Button tailwindStyles="w-full h-[42px]" solid type="submit">
               {loading ? <Loader color="white" size="xsmall" /> : "Enviar"}
-            </button>
+            </Button>
           </Form>
         </div>
       </section>

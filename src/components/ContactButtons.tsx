@@ -4,6 +4,7 @@ import { BsWhatsapp } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { navigation } from "@/constants";
 import { sendWhatsappMessage } from "@/utils/sendWhatsappMessage";
+import { Button } from "@/components";
 
 export default function ContactButtons() {
   const [isContactSection, setIsContactSection] = useState<boolean>();
@@ -19,36 +20,30 @@ export default function ContactButtons() {
   }, []);
 
   return (
-    <div className="flex flex-col-center space-y-5 md:space-y-0 md:flex-row md:justify-between w-full">
-      <button
+    <div className="flex flex-col-center md:flex-row md:justify-between w-full gap-5">
+      <Button
+        tailwindStyles="hover:text-white"
+        color="whatsapp"
         onClick={() => {
           if (whatsappMessage) sendWhatsappMessage(whatsappMessage);
         }}
-        className={"contact-button ".concat(
-          isContactSection
-            ? "border-white text-white hover:border-white-hover hover:text-white-hover"
-            : " border-black hover:text-whatsapp hover:border-whatsapp"
-        )}
       >
-        <BsWhatsapp className="w-6 h-6 mr-3" />
+        <BsWhatsapp className="w-6 h-6 mr-3 group-hover/button:fill-white" />
         Whatsapp
-      </button>
-      <button
+      </Button>
+      <Button
+        tailwindStyles="hover:text-white"
+        color="instagram"
         onClick={() =>
           window.open(
             "https://www.instagram.com/nadd.living.boutique/",
             "_blank"
           )
         }
-        className={"contact-button ".concat(
-          isContactSection
-            ? "border-white text-white hover:border-white-hover hover:text-white-hover"
-            : " border-black hover:text-instagram hover:border-instagram"
-        )}
       >
-        <FaInstagram className="w-6 h-6 mr-3" />
+        <FaInstagram className="w-6 h-6 mr-3 group-hover/button:fill-white" />
         Instagram
-      </button>
+      </Button>
     </div>
   );
 }

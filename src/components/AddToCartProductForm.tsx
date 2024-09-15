@@ -1,14 +1,13 @@
 "use client";
 import { Form } from "antd";
 import React from "react";
-import CustomSelect from "./CustomSelect";
-import CustomNumberInput from "./CustomNumberInput";
 import { BsBagFill } from "react-icons/bs";
 import { CiCreditCard1 } from "react-icons/ci";
 import { formatPrice } from "@/utils/formatPrice";
 import { Variant } from "@/types/Variant";
 import { useCart } from "@/contexts/CartContext";
 import { Product } from "@/types/Product";
+import { Button, CustomSelect, CustomNumberInput } from "@/components";
 
 interface IProps {
   product: Product;
@@ -112,15 +111,13 @@ export default function AddToCartProductForm({ product }: IProps) {
             Hasta 6 cuotas sin interes
           </h6>
         </div>
-        {/* <button className="flex flex-1 button-solid">
-          <BsBagFill className={`w-4 h-4 mr-3 fill-white`} />
-          Agregar al carrito
-        </button> */}
       </div>
-      <button className="flex flex-1 button-solid" onClick={handleSubmit}>
-        <BsBagFill className={`w-4 h-4 mr-3 fill-white`} />
+      <Button onClick={handleSubmit} solid>
+        <BsBagFill
+          className={`w-4 h-4 mr-3 fill-white group-hover/button:fill-black transition-colors duration-75`}
+        />
         Agregar al carrito
-      </button>
+      </Button>
     </Form>
   );
 }
