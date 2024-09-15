@@ -25,14 +25,12 @@ export default function Cart({
   const cartRef = useRef<HTMLDivElement>(null);
   const [form] = Form.useForm();
 
-  const plural = items.length > 1 || items.some((i) => i.amount > 1);
-  const fabricCTA = `¿Ya elegiste la${plural ? "s" : ""} tela${
-    plural ? "s" : ""
-  } y color${plural ? "es" : ""} de tu${plural ? "s" : ""} producto${
-    plural ? "s" : ""
-  }?`;
-
   useEffect(() => {
+    const observations = window.localStorage.getItem("observations");
+    if (observations) {
+      form.setFieldValue("observations", JSON.parse(observations));
+    }
+
     // Listener to close the component when clicking outside of it
     const handleMouseDown = (e: any) => {
       if (
@@ -45,8 +43,18 @@ export default function Cart({
 
     document.addEventListener("mousedown", handleMouseDown);
 
-    return () => document.removeEventListener("mousedown", handleMouseDown);
+    return () => {
+      document.removeEventListener("mousedown", handleMouseDown);
+    };
   }, []);
+
+  useEffect(() => {
+    if (isOpen === false) {
+      const observations = form.getFieldValue("observations");
+      window.localStorage.setItem("observations", JSON.stringify(observations));
+      console.log("Me ejecute");
+    }
+  }, [isOpen]);
 
   return (
     <>
@@ -74,7 +82,7 @@ export default function Cart({
         </div>
         <ul className={`cart-sheet-ul`}>
           {items?.length > 0 ? (
-            items.map((p) => <CartItem {...p} />)
+            items.map((p) => <CartItem {...p} key={p._id} />)
           ) : (
             <div className="flex-1 w-full flex-col-center opacity-50 gap-10">
               <BsBag size={50} className="text-black" />
@@ -84,22 +92,21 @@ export default function Cart({
             </div>
           )}
         </ul>
-        {items.length > 0 && (
-          <Form form={form} className="w-full">
-            <h5 className="text-sm font-bold my-2 w-full">
-              Oberservaciones
-              {/* <span className=" font-regular"> Comentanos abajo:</span> */}
-            </h5>
-            <Form.Item name={"fabric"}>
-              <Input.TextArea
-                className="h-[43px] w-full"
-                size="small"
-                id="cart-textarea"
-                placeholder='EJ: tela pana lisa color "Azul/ Pan"'
-              />
-            </Form.Item>
-          </Form>
-        )}
+        <Form form={form} className="w-full">
+          <h5 className="text-sm font-bold my-2 w-full">
+            Oberservaciones
+            {/* <span className=" font-regular"> Comentanos abajo:</span> */}
+          </h5>
+          <Form.Item name={"observations"}>
+            <Input.TextArea
+              disabled={items.length === 0}
+              className="h-[43px] w-full"
+              size="small"
+              id="cart-textarea"
+              placeholder='EJ: tela pana lisa color "Azul/ Pan"'
+            />
+          </Form.Item>
+        </Form>
         <div className="cart-sheet-bottom">
           <h4 className="flex justify-between w-full h-fit ">
             <span className="font-bold">TOTAL:</span>
@@ -108,7 +115,7 @@ export default function Cart({
           <button
             className="contact-button w-full hover:bg-black hover:text-white transition-all duration-150"
             onClick={() => {
-              checkout(form.getFieldValue("fabric"));
+              checkout(form.getFieldValue("observations"));
             }}
           >
             CHECKOUT

@@ -124,7 +124,7 @@ export function CartProvider({
   const checkout = async (fabric?: string) => {
     if (cart) {
       if (fabric) await updateFabric(cart.id, fabric);
-      return window.open(cart.checkoutUrl);
+      return window.open(cart?.checkoutUrl);
     }
   };
 
@@ -136,14 +136,17 @@ export function CartProvider({
     } else {
       const updatedCart = await getShopifyCart(savedCartId);
       if (updatedCart) setCart(updatedCart);
-      else if (updatedCart === null) createShopifyCart();
+      else if (updatedCart === null) {
+        window.localStorage.removeItem("observations");
+        createShopifyCart();
+      }
     }
   };
 
   const createShopifyCart = async () => {
     const updatedCart = await createCart();
     if (updatedCart) {
-      window.localStorage.setItem("cartId", updatedCart.id);
+      window.localStorage.setItem("cartId", updatedCart?.id);
       setCart(updatedCart);
     }
   };
@@ -156,7 +159,7 @@ export function CartProvider({
     if (cart) {
       if (cart?.lines) setCartItems(parseCartItem(cart.lines));
       setCount(cart?.totalQuantity ?? 0);
-      setTotal(Number(cart.cost.totalAmount.amount) ?? 0);
+      setTotal(Number(cart?.cost?.totalAmount.amount) ?? 0);
     }
   }, [cart]);
 
