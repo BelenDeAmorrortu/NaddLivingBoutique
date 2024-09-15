@@ -131,7 +131,6 @@ const NavItemsSm = () => {
   useEffect(() => {
     // Listener to close the component when clicking outside of it
     const handleMouseDown = (e: any) => {
-      console.log(e.target, open);
       if (
         !e.target.id.includes("menu2") &&
         !navRef?.current?.contains(e.target) &&
