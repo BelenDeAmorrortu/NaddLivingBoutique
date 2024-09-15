@@ -51,8 +51,11 @@ export default function Cart({
   useEffect(() => {
     if (isOpen === false) {
       const observations = form.getFieldValue("observations");
-      window.localStorage.setItem("observations", JSON.stringify(observations));
-      console.log("Me ejecute");
+      if (observations)
+        window.localStorage.setItem(
+          "observations",
+          JSON.stringify(observations)
+        );
     }
   }, [isOpen]);
 
