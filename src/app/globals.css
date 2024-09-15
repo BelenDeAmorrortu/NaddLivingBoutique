@@ -217,6 +217,7 @@
   height: 43px !important;
 }
 
+.ant-select,
 .ant-select-selection-item {
   display: flex !important;
   align-items: center !important;
