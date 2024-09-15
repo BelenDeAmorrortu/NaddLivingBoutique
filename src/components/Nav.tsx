@@ -78,7 +78,7 @@ export default function Nav() {
       </nav>
       <div className="announcement-bar-2">
         <p className="text-white text-[10px] md:text-xs">
-          3 y 6 Cuotas sin interes/ 35% OFF por transferencia
+          3 y 6 Cuotas sin interés/ 35% OFF por transferencia
         </p>
       </div>
       <CategoriesNav
