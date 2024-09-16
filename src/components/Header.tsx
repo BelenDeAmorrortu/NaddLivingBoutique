@@ -1,11 +1,17 @@
+"use client";
 import Image from "next/image";
 import instagram from "react-useanimations/lib/instagram";
 import arrowDown from "react-useanimations/lib/arrowDown";
 import { CascadeReveal } from "@/transitions";
 import AnimatedIcon from "./AnimatedIcon";
 import Paris from "../../public/Paris.webp";
+import { useRef } from "react";
+import { useInView } from "framer-motion";
 
 export default function Header() {
+  const ref = useRef(null);
+
+  const isInView = useInView(ref, { once: true });
   return (
     <section className="relative w-full max-w-full h-screen max-h-[100vh] flex-center overflow-hidden">
       <Image
@@ -22,7 +28,21 @@ export default function Header() {
         </CascadeReveal>
         <CascadeReveal position={1}>
           <h3 className="title-1 text-white my-3">
-            The Perfect <span className="text-red">Style</span>
+            The Perfect{" "}
+            <span
+              ref={ref}
+              className={`text-highlight`}
+              data-text={"Style"}
+              style={
+                {
+                  "--highlight-width": isInView ? "100%" : "0%",
+                  "--highlight-color": `rgba(var(--red))`,
+                  "--text-color": `rgba(var(--white))`,
+                } as React.CSSProperties
+              }
+            >
+              Style
+            </span>
           </h3>
         </CascadeReveal>
         <a

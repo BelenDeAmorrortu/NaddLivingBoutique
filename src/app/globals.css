@@ -509,6 +509,26 @@
   .photo-grid-item {
     @apply relative min-h-[35vh] flex items-end rounded-sm overflow-hidden;
   }
+
+  /* Highlight */
+
+  .text-highlight {
+    position: relative;
+    color: var(--text-color, rgba(var(--white)));
+  }
+
+  .text-highlight::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    width: var(--highlight-width, 0%);
+    height: 100%;
+    color: var(--highlight-color, rgba(var(--red)));
+    overflow: hidden;
+    -webkit-text-stroke: 1px var(--highlight-color, rgba(var(--red)));
+    transition: all 0.4s cubic-bezier(0.32, 0.94, 1, 0.54);
+    transition-delay: 0.5s;
+  }
 }
 
 @layer utilities {
