@@ -1,6 +1,7 @@
 "use client";
 import { useInView } from "framer-motion";
-import React, { useRef } from "react";
+import React, { use, useEffect, useRef } from "react";
+import "../app/globals.css";
 
 interface IProps {
   children: string;
@@ -17,11 +18,15 @@ export default function Highlight({
 }: IProps) {
   const ref = useRef(null);
 
-  const isInView = useInView(ref, { once: true });
+  const isInView = useInView(ref, { once: false });
+  useEffect(() => {
+    console.log("ref", ref.current);
+    console.log({ isInView });
+  }, []);
   return (
     <span
       ref={ref}
-      className={`text-highlight`}
+      className="text-highlight"
       data-text={children}
       style={
         {
