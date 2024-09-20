@@ -4,11 +4,9 @@ import { HiChevronRight } from "react-icons/hi";
 import { navigation } from "@/constants";
 import Reveal from "@/transitions/Reveal";
 import CascadeReveal from "@/transitions/CascadeReveal";
-import { getSpotlight } from "@/requests";
+import { Product } from "@/types/Product";
 
-export default async function Spotlight() {
-  const products = await getSpotlight();
-
+export default function Spotlight({ products }: { products: Product[] }) {
   return (
     <section className="flex-col-center w-full h-fit">
       <Reveal tailwindStyles="flex-col-center">
