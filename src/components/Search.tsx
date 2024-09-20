@@ -53,11 +53,11 @@ export default function Search({ visible, setSearchOpen }: IProps) {
       setCategoriesSearch(
         categories
           .filter(
-            (i) =>
+            (i: ICategory) =>
               removeAccents(i.nombre).startsWith(removeAccents(search)) ||
               removeAccents(i.nombre).includes(removeAccents(search))
           )
-          .map((i) => {
+          .map((i: ICategory) => {
             return {
               name: i.nombre,
               url: navigation.productos + "?filter=" + i.nombre,

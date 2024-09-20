@@ -1,0 +1,3 @@
+interface ICategory {
+  nombre: string;
+}

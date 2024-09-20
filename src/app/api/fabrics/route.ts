@@ -39,8 +39,6 @@ export async function GET() {
 
     const colorsValues = await Promise.all(colorsPromises);
 
-    console.log("colors", colorsValues);
-
     const fabrics = metaobjectsValues.map((f) => {
       const colors = colorsValues.filter((c) => c.tipo_tela === f.id);
       return {
@@ -48,8 +46,6 @@ export async function GET() {
         colores: colors,
       };
     });
-
-    console.log("fabrics", fabrics);
 
     return NextResponse.json(fabrics);
   } catch (e) {

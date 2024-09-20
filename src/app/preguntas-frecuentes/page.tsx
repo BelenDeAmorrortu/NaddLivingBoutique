@@ -5,6 +5,7 @@ import { Collapse } from "antd";
 import { useEffect, useState } from "react";
 import useFetch from "@/hooks/useFetch";
 import { getMetaobjects } from "@/requests";
+import { Faq } from "@/types/Faq";
 
 export default function Page() {
   const { data, isLoading } = useFetch(
@@ -17,7 +18,7 @@ export default function Page() {
   useEffect(() => {
     if (data) {
       setItems(
-        data?.map((q) => {
+        data?.map((q: Faq) => {
           return {
             key: q.id,
             label: q.titulo,

@@ -42,7 +42,7 @@ export default function Filters({
       </ul>
       <h4 className="title-4">Categoría</h4>
       <ul className="border-b border-grey pb-3 w-full">
-        {categoriesData?.map((f, i) => (
+        {categoriesData?.map((f: ICategory, i: number) => (
           <li
             onClick={() => addFilter(f.nombre)}
             className=" text-black cursor-pointer capitalize hover:text-red w-fit"
