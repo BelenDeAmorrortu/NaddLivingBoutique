@@ -89,9 +89,9 @@ export default function Carousel({ images, lqip }: Props) {
                         className="object-contain object-center"
                         width={1000}
                         height={1000}
-                        src={placeholderImage}
+                        src={lqip[index]}
                         placeholder="blur"
-                        blurDataURL={placeholderImage}
+                        blurDataURL={lqip[index]}
                       />
                     }
                   />

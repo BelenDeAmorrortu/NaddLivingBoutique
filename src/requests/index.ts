@@ -1,11 +1,7 @@
 import { Product } from "@/types/Product";
-import { storefront } from "@/utils/storefront";
-import { queries } from "./queries";
-import { isJsonString } from "@/utils/isJsonString";
-import { getMinPrice } from "@/utils/getMinPrice";
 import { ICartItem } from "@/types/CartItem";
 import { Fabric } from "@/types/Fabric";
-import { placeholderBlurParams } from "@/constants";
+import { axiosInstance } from "@/app/api/(helpers)/axiosInstance";
 
 export const getProducts = async (
   filters: string[],
@@ -13,35 +9,11 @@ export const getProducts = async (
   cursor: string | undefined
 ): Promise<Product[]> => {
   try {
-    const { data } = await storefront(queries.products, {
-      cursor: cursor ?? null,
-      filter:
-        filters.length > 0
-          ? filters
-              .map((f) => `tag:${f}`)
-              .join(" OR ")
-              .concat(search ? ` AND (title:${search}* OR tag:${search}*)` : "")
-          : search
-          ? `(tag:${search}* OR title:${search}*)`
-          : null,
-    });
-    const products = data.products.edges.map((p: any) => {
-      const { title, id, handle, images, descriptionHtml, variants, tags } =
-        p.node;
+    const { data } = await axiosInstance.get(
+      "/products" + `?filters=${filters}${search ? `&search=${search}` : ""}`
+    );
 
-      return {
-        _id: id,
-        images: images.edges.map((i: any) => i.node.url),
-        category: tags,
-        description: descriptionHtml,
-        url: handle,
-        name: title,
-        lqip: images.edges.map((i: any) => i.node.url + placeholderBlurParams),
-        price: getMinPrice(variants.nodes),
-      };
-    });
-
-    return products;
+    return data;
   } catch (e) {
     console.log("ERROR", e);
     return [];
@@ -50,29 +22,9 @@ export const getProducts = async (
 
 export const getProduct = async (handle: string): Promise<Product> => {
   try {
-    const { data } = await storefront(queries.product, { handle });
+    const { data } = await axiosInstance.get("/products/" + handle);
 
-    const { title, id, tags, images, descriptionHtml, variants } =
-      data.productByHandle;
-
-    const parseVariants = variants.nodes.map((v: any) => {
-      return {
-        ...v,
-        price: v.price.amount,
-      };
-    });
-
-    return {
-      _id: id,
-      images: images.edges.map((i: any) => i.node.url),
-      category: tags,
-      description: descriptionHtml,
-      url: handle,
-      name: title,
-      lqip: images.edges.map((i: any) => i.node.url + placeholderBlurParams),
-      price: getMinPrice(variants.nodes),
-      variants: parseVariants,
-    };
+    return data;
   } catch (e) {
     console.log("ERROR", e);
     return {
@@ -90,25 +42,9 @@ export const getProduct = async (handle: string): Promise<Product> => {
 
 export const getSpotlight = async (): Promise<Product[]> => {
   try {
-    const { data } = await storefront(queries.spotlight, {
-      collection: "Spotlight",
-    });
+    const { data } = await axiosInstance.get("/spotlight");
 
-    return data.collectionByHandle.products.edges.map((p: any) => {
-      const { title, id, tags, handle, images, descriptionHtml, variants } =
-        p.node;
-
-      return {
-        _id: id,
-        images: images.edges.map((i: any) => i.node.url),
-        category: tags,
-        description: descriptionHtml,
-        url: handle,
-        name: title,
-        lqip: images.edges.map((i: any) => i.node.url + placeholderBlurParams),
-        price: getMinPrice(variants.nodes),
-      };
-    });
+    return data;
   } catch (e) {
     console.log("ERROR", e);
     return [];
@@ -117,19 +53,9 @@ export const getSpotlight = async (): Promise<Product[]> => {
 
 export const getMetaobject = async (id: string) => {
   try {
-    const { data } = await storefront(queries.metaobject, { id });
+    const { data } = await axiosInstance.get("/metaobject/" + id);
 
-    const values = data.metaobject.fields.reduce(
-      (acc: any, current: any) => {
-        acc[current.key] = isJsonString(current.value)
-          ? JSON.parse(current.value)
-          : current.value;
-        return acc;
-      },
-      { id: data.metaobject.id }
-    );
-
-    return values;
+    return data;
   } catch (e) {
     console.log("ERROR", e);
     return "0";
@@ -138,13 +64,9 @@ export const getMetaobject = async (id: string) => {
 
 export const getMetaobjects = async (type: string) => {
   try {
-    const { data } = await storefront(queries.metaobjects, { type });
-    const metaobjectsValuesPromises = data.metaobjects.edges.map((o: any) => {
-      return getMetaobject(o.node.id);
-    });
+    const { data } = await axiosInstance.get("/metaobjects/" + type);
 
-    const metaobjectsValues = await Promise.all(metaobjectsValuesPromises);
-    return metaobjectsValues;
+    return data;
   } catch (e) {
     console.log("ERROR", e);
   }
@@ -152,8 +74,8 @@ export const getMetaobjects = async (type: string) => {
 
 export const getImageUrl = async (id: string) => {
   try {
-    const { data } = await storefront(queries.imageReferenceURL, { id });
-    return data.node.image.url;
+    const { data } = await axiosInstance.get("/images/" + id);
+    return data.url;
   } catch (e) {
     console.log("ERROR", e);
   }
@@ -161,36 +83,8 @@ export const getImageUrl = async (id: string) => {
 
 export const getFabrics = async (): Promise<Fabric[]> => {
   try {
-    const { data } = await storefront(queries.metaobjects, { type: "telas" });
-    const metaobjectsValuesPromises = data.metaobjects.edges.map((o: any) => {
-      return getMetaobject(o.node.id);
-    });
-
-    const metaobjectsValues = await Promise.all(metaobjectsValuesPromises);
-
-    const { data: colors } = await storefront(queries.metaobjects, {
-      type: "color_tela",
-    });
-    const colorsPromises = colors.metaobjects.edges.map(async (o: any) => {
-      const data = await getMetaobject(o.node.id);
-      const image = await getImageUrl(data.foto);
-      return {
-        ...data,
-        foto: image,
-      };
-    });
-
-    const colorsValues = await Promise.all(colorsPromises);
-
-    const fabrics = metaobjectsValues.map((f) => {
-      const colors = colorsValues.filter((c) => c.tipo_tela === f.id);
-      return {
-        ...f,
-        colores: colors,
-      };
-    });
-
-    return fabrics;
+    const { data } = await axiosInstance.get("/fabrics");
+    return data;
   } catch (e) {
     console.log("ERROR", e);
     return [];
@@ -199,12 +93,9 @@ export const getFabrics = async (): Promise<Fabric[]> => {
 
 export const createCart = async () => {
   try {
-    const { data } = await storefront(queries.createCart, {
-      products: [],
-      attributes: [{ key: "custom.fabric", value: "-" }],
-    });
+    const { data } = await axiosInstance.post("/cart/create");
 
-    return data.cartCreate.cart;
+    return data;
   } catch (e) {
     console.log("ERROR", e);
   }
@@ -212,11 +103,9 @@ export const createCart = async () => {
 
 export const getCart = async (id: string) => {
   try {
-    const { data } = await storefront(queries.getCart, {
-      id,
-    });
+    const { data } = await axiosInstance.get("/cart/" + id);
 
-    return data.cart;
+    return data;
   } catch (e) {
     console.log("ERROR", e);
   }
@@ -230,12 +119,13 @@ export const addCartItems = async (id: string, cartItems: ICartItem[]) => {
         merchandiseId: i.variant.id,
       };
     });
-    const { data } = await storefront(queries.addCart, {
+
+    const { data } = await axiosInstance.post("/cart/add", {
       id,
       products,
     });
 
-    return data.cartLinesAdd.cart;
+    return data;
   } catch (e) {
     console.log("ERROR", e);
   }
@@ -249,12 +139,13 @@ export const updateCartItems = async (id: string, cartItems: ICartItem[]) => {
         id: i._id,
       };
     });
-    const { data } = await storefront(queries.updateCart, {
+
+    const { data } = await axiosInstance.put("/cart/update", {
       id,
       products,
     });
 
-    return data.cartLinesUpdate.cart;
+    return data;
   } catch (e) {
     console.log("ERROR", e);
   }
@@ -262,25 +153,25 @@ export const updateCartItems = async (id: string, cartItems: ICartItem[]) => {
 
 export const removeCartItems = async (id: string, productIds: string[]) => {
   try {
-    const { data } = await storefront(queries.removeCart, {
+    const { data } = await axiosInstance.put("/cart/remove", {
       id,
       productIds,
     });
 
-    return data.cartLinesRemove.cart;
+    return data;
   } catch (e) {
     console.log("ERROR", e);
   }
 };
 
-export const updateFabric = async (id: string, fabric?: string) => {
+export const updateFabric = async (id: string, observations?: string) => {
   try {
-    const { data } = await storefront(queries.updateCartAttributes, {
+    const { data } = await axiosInstance.put("/cart/observations", {
       id,
-      attributes: [{ key: "custom.fabric", value: fabric ?? "-" }],
+      observations,
     });
 
-    return true;
+    return data;
   } catch (e) {
     console.log("ERROR", e);
   }
