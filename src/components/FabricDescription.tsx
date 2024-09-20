@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { Divider } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
-import { placeholderBlurParams } from "@/constants";
+import { placeholderImage } from "@/constants";
 
 interface IProps {
   fabric: Fabric;
@@ -13,38 +13,6 @@ interface IProps {
   setPreview: (arg: boolean) => void;
   setSelectedFabricColors: (arg: Color[]) => void;
   setActiveColorIndex: (arg: number) => void;
-}
-
-function sortColors(colors: Color[]): Color[] {
-  // Helper function to extract the base name of the color
-  const getBaseName = (nombre: string): string => {
-    const index = nombre.lastIndexOf("-");
-    return index !== -1 ? nombre.substring(0, index).trim() : nombre.trim();
-  };
-
-  // Group colors by their base name
-  const groupedColors: { [key: string]: Color[] } = colors.reduce(
-    (acc, color: Color) => {
-      const baseName = getBaseName(color?.nombre);
-      if (!acc[baseName]) {
-        acc[baseName] = [];
-      }
-      acc[baseName].push(color);
-      return acc;
-    },
-    {} as { [key: string]: Color[] }
-  );
-
-  // Sort each group and combine the groups
-  const sortedColors: Color[] = Object.values(groupedColors).reduce(
-    (acc, group) => {
-      group.sort((a, b) => a?.nombre?.localeCompare(b?.nombre));
-      return acc.concat(group);
-    },
-    [] as Color[]
-  );
-
-  return sortedColors;
 }
 
 export default function FabricDescription({
@@ -81,7 +49,7 @@ export default function FabricDescription({
               className="flex-col-center gap-3 max-w-[90px] md:max-w-[100px]"
             >
               <button
-                className="relative group w-[90px] h-[90px] md:w-[100px] md:h-[100px] rounded-full overflow-hidden"
+                className="relative group/color w-[90px] h-[90px] md:w-[100px] md:h-[100px] rounded-full overflow-hidden"
                 onClick={() => {
                   setSelectedFabricColors(fabric.colores);
                   setPreview(true);
@@ -95,9 +63,9 @@ export default function FabricDescription({
                   height={100}
                   className="object-contain object-center"
                   placeholder="blur"
-                  blurDataURL={c.foto + placeholderBlurParams}
+                  blurDataURL={placeholderImage}
                 />
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-75 absolute h-full w-full bg-black/50 flex-row-center top-0">
+                <div className="opacity-0 group-hover/color:opacity-100 transition-opacity duration-75 absolute h-full w-full bg-black/50 flex-row-center top-0">
                   <EyeOutlined style={{ color: "white", fontSize: 18 }} />
                 </div>
               </button>

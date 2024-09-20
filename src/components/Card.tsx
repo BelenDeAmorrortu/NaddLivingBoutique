@@ -1,4 +1,4 @@
-import { navigation } from "@/constants";
+import { navigation, placeholderImage } from "@/constants";
 import { Product } from "@/types/Product";
 import { formatPrice } from "@/utils/formatPrice";
 import Image from "next/image";
@@ -35,7 +35,7 @@ export default function Card({
               height={500}
               className="object-cover h-full rounded-sm"
               placeholder="blur"
-              blurDataURL={lqip[0]}
+              blurDataURL={placeholderImage}
             />
             {images.length > 1 ? (
               <div className="card-image second-image absolute opacity-0 hover:opacity-100">
@@ -46,7 +46,7 @@ export default function Card({
                   height={500}
                   className="object-cover h-full rounded-sm"
                   placeholder="blur"
-                  blurDataURL={lqip[1]}
+                  blurDataURL={placeholderImage}
                 />
               </div>
             ) : null}
