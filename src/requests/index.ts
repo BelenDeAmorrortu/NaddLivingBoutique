@@ -53,7 +53,9 @@ export const getSpotlight = async (): Promise<Product[]> => {
 
 export const getMetaobject = async (id: string) => {
   try {
-    const { data } = await axiosInstance.get("/metaobject/" + id);
+    const { data } = await axiosInstance.get(
+      `metaobject?id=${encodeURIComponent(id)}`
+    );
 
     return data;
   } catch (e) {
@@ -74,7 +76,9 @@ export const getMetaobjects = async (type: string) => {
 
 export const getImageUrl = async (id: string) => {
   try {
-    const { data } = await axiosInstance.get("/images/" + id);
+    const { data } = await axiosInstance.get(
+      "/images?id=" + encodeURIComponent(id)
+    );
     return data.url;
   } catch (e) {
     console.log("ERROR", e);
@@ -103,7 +107,9 @@ export const createCart = async () => {
 
 export const getCart = async (id: string) => {
   try {
-    const { data } = await axiosInstance.get("/cart/" + id);
+    const { data } = await axiosInstance.get(
+      "/cart?id=" + encodeURIComponent(id)
+    );
 
     return data;
   } catch (e) {

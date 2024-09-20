@@ -1,7 +1,8 @@
 import { storefront } from "@/app/api/(helpers)/storefront";
 import { queries } from "@/app/api/(helpers)/queries";
 import { NextResponse } from "next/server";
-import { axiosInstance } from "../../(helpers)/axiosInstance";
+import { axiosInstance } from "@/app/api/(helpers)/axiosInstance";
+import axios from "axios";
 
 export async function GET(
   request: Request,
@@ -14,7 +15,10 @@ export async function GET(
 
     const metaobjectsValuesPromises = data.metaobjects.edges.map(
       async (o: any) => {
-        return await axiosInstance.get("/metaobject/" + o.node.id);
+        const { data } = await axiosInstance.get(
+          "/metaobject?id=" + encodeURIComponent(o.node.id)
+        );
+        return data;
       }
     );
 

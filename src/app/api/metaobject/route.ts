@@ -3,14 +3,15 @@ import { queries } from "@/app/api/(helpers)/queries";
 import { isJsonString } from "@/utils/isJsonString";
 import { NextResponse } from "next/server";
 
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
-  const { id } = params;
-
+export async function GET(request: Request) {
   try {
-    const { data } = await storefront(queries.metaobject, { id });
+    const { searchParams } = new URL(request.url);
+
+    const id = decodeURIComponent(searchParams.get("id") ?? "");
+
+    const { data } = await storefront(queries.metaobject, {
+      id,
+    });
 
     const values = data.metaobject.fields.reduce(
       (acc: any, current: any) => {

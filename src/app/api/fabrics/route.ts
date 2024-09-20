@@ -10,7 +10,9 @@ export async function GET() {
     const { data } = await storefront(queries.metaobjects, { type: "telas" });
     const metaobjectsValuesPromises = data.metaobjects.edges.map(
       async (o: any) => {
-        const { data } = await axiosInstance.get("/metaobject/" + o.node.id);
+        const { data } = await axiosInstance.get(
+          "/metaobject?id=" + encodeURIComponent(o.node.id)
+        );
         return data;
       }
     );
@@ -21,8 +23,12 @@ export async function GET() {
       type: "color_tela",
     });
     const colorsPromises = colors.metaobjects.edges.map(async (o: any) => {
-      const { data } = await axios.get("/metaobject/" + o.node.id);
-      const { data: image } = await axios.get("/images/" + data.foto);
+      const { data } = await axios.get(
+        "/metaobject?id=" + encodeURIComponent(o.node.id)
+      );
+      const { data: image } = await axios.get(
+        "/images?id=" + encodeURIComponent(data.foto)
+      );
       const lqip = await getLqip([image]);
       return {
         ...data,
@@ -33,6 +39,8 @@ export async function GET() {
 
     const colorsValues = await Promise.all(colorsPromises);
 
+    console.log("colors", colorsValues);
+
     const fabrics = metaobjectsValues.map((f) => {
       const colors = colorsValues.filter((c) => c.tipo_tela === f.id);
       return {
@@ -40,6 +48,8 @@ export async function GET() {
         colores: colors,
       };
     });
+
+    console.log("fabrics", fabrics);
 
     return NextResponse.json(fabrics);
   } catch (e) {
