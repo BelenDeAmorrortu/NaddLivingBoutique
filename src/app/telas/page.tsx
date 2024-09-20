@@ -2,12 +2,31 @@ import { Fabrics2 } from "@/assets/images";
 import { AnimatedIcon } from "@/components";
 import FabricsNavigator from "@/components/FabricsNavigator";
 import { navigation } from "@/constants";
+import { getFabrics } from "@/requests";
 import { CascadeReveal, Reveal } from "@/transitions";
 import Image from "next/image";
 import Link from "next/link";
 import arrowDown from "react-useanimations/lib/arrowDown";
 
-export default function Page() {
+export async function generateMetadata() {
+  return {
+    title: "Telas",
+    description:
+      "En NADD Living Boutique nos encanta que cada cliente sea parte del proceso creativo de su próximo mueble. Por eso ofrecemos una gran variedad de telas para que tu mueble refleje tu estilo único.",
+    alternates: {
+      canonical: `/${navigation.telas}`,
+    },
+    openGraph: {
+      title: "Telas",
+      description:
+        "En NADD Living Boutique nos encanta que cada cliente sea parte del proceso creativo de su próximo mueble. Por eso ofrecemos una gran variedad de telas para que tu mueble refleje tu estilo único.",
+    },
+  };
+}
+
+export default async function Page() {
+  const fabrics = await getFabrics();
+
   return (
     <div className="h-fit pt-[92px]">
       <div className="h-fit md:h-[85vh] w-full">
@@ -43,6 +62,7 @@ export default function Page() {
               autoPlay
               placeholder=""
               preload="auto"
+              controls={false}
             />
           </CascadeReveal>
           <CascadeReveal position={3} twStyles="photo-grid-item">
@@ -62,11 +82,12 @@ export default function Page() {
               autoPlay
               placeholder=""
               preload="auto"
+              controls={false}
             />
           </CascadeReveal>
         </div>
       </div>
-      <FabricsNavigator />
+      <FabricsNavigator fabrics={fabrics} />
     </div>
   );
 }

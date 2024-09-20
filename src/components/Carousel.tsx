@@ -1,15 +1,16 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Thumbs } from "swiper";
+import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-import { Image as Img } from "antd";
+import { Image as Img, Spin } from "antd";
 import Image from "next/image";
 import { SwiperRef } from "swiper/react";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import { Reveal } from "@/transitions";
+import { placeholderImage } from "@/constants";
 
 type Props = {
   images: string[];
@@ -88,9 +89,9 @@ export default function Carousel({ images, lqip }: Props) {
                         className="object-contain object-center"
                         width={1000}
                         height={1000}
-                        src={lqip[index]}
+                        src={placeholderImage}
                         placeholder="blur"
-                        blurDataURL={lqip[index]}
+                        blurDataURL={placeholderImage}
                       />
                     }
                   />
@@ -107,7 +108,6 @@ export default function Carousel({ images, lqip }: Props) {
         >
           <IoChevronBack size={25} />
         </button>
-
         {images &&
           images.map((_, index) => {
             return (
@@ -131,6 +131,11 @@ export default function Carousel({ images, lqip }: Props) {
           <IoChevronForward size={25} />
         </button>
       </div>
+      {preview && (
+        <div className="fixed z-[1010] flex-col-center w-screen h-screen top-0 left-0">
+          <Spin size="large" />
+        </div>
+      )}
       <div style={{ display: "none" }}>
         <Img.PreviewGroup
           preview={{

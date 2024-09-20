@@ -8,18 +8,18 @@
   /* -- Colors --------------------------------------------------------------- */
 
   :root {
-    --black: 15, 15, 15, 1;
+    --black: 15, 15, 15;
     --black-hover: 15, 15, 15, 0.6;
-    --white: 255, 255, 255, 1;
+    --white: 255, 255, 255;
     --white-hover: 255, 255, 255, 0.47;
-    --red: 181, 7, 6, 1;
-    --dark-red: 136, 136, 136, 1;
-    --grey: 179, 179, 179, 1;
+    --red: 181, 7, 6;
+    --dark-red: 136, 136, 136;
+    --grey: 179, 179, 179;
     --grey-hover: 179, 179, 179, 0.4;
-    --dark-grey: 136, 136, 136, 1;
+    --dark-grey: 136, 136, 136;
     --transparen: transparent;
-    --whatsapp: 49, 184, 70, 1;
-    --instagram: 186, 14, 89, 1;
+    --whatsapp: 49, 184, 70;
+    --instagram: 186, 14, 89;
   }
 
   li {
@@ -326,6 +326,12 @@
 
 .ant-notification-notice {
   padding: 15px !important;
+}
+
+/* Ant Spin */
+
+.ant-spin-dot-item {
+  color: rgba(var(--black));
 }
 
 /* -- Components ------------------------------------------------------- */
