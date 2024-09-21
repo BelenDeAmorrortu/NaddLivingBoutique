@@ -2,7 +2,6 @@ import { storefront } from "@/app/api/(helpers)/storefront";
 import { queries } from "@/app/api/(helpers)/queries";
 import { NextResponse } from "next/server";
 import { axiosInstance } from "@/app/api/(helpers)/axiosInstance";
-import axios from "axios";
 
 export async function GET(
   request: Request,

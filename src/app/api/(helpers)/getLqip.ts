@@ -8,9 +8,9 @@ export async function getLqip(imageUrls: string[]): Promise<string[]> {
   const lqipPromises = imageUrls.map(async (url) => {
     const response = await fetch(url);
     const arrayBuffer = await response.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer); // Convertir a Buffer de Node.js
+    const buffer = Buffer.from(arrayBuffer);
     const lqipBuffer = await sharp(buffer)
-      .resize({ width: 10, height: 10 }) // Cambiar tamaño según sea necesario
+      .resize({ width: 10, height: 10 })
       .toBuffer();
     return bufferToBase64(lqipBuffer);
   });
