@@ -5,24 +5,21 @@ import { navigation } from "@/constants";
 import Reveal from "@/transitions/Reveal";
 import CascadeReveal from "@/transitions/CascadeReveal";
 import { Product } from "@/types/Product";
+import { TbSofaOff } from "react-icons/tb";
 
 export default function Spotlight({ products }: { products: Product[] }) {
-  return (
+  return products?.length > 0 ? (
     <section className="flex-col-center w-full h-fit">
       <Reveal tailwindStyles="flex-col-center">
         <h4 className="subtitle-1 text-black/80">Nuestros Productos</h4>
         <h3 className="title-2 uppercase m-3 mb-16">Destacados</h3>
       </Reveal>
       <div className="mb-10 grid grid-cols-1 gap-[70px] md:grid-cols-2 min-[1080px]:grid-cols-3 min-[640px]:gap-[2vw]">
-        {products?.length === 0 ? (
-          <p>No hay productos destacados</p>
-        ) : (
-          products?.map((p, i) => (
-            <CascadeReveal position={i} key={i}>
-              <Card {...p} key={p._id} />
-            </CascadeReveal>
-          ))
-        )}
+        {products?.map((p, i) => (
+          <CascadeReveal position={i} key={i}>
+            <Card {...p} key={p._id} />
+          </CascadeReveal>
+        ))}
       </div>
       <Link
         href={navigation.productos}
@@ -31,5 +28,7 @@ export default function Spotlight({ products }: { products: Product[] }) {
         Ver catálogo completo <HiChevronRight className="w-5 h-5 ml-2" />
       </Link>
     </section>
+  ) : (
+    <></>
   );
 }

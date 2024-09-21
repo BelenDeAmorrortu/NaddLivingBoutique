@@ -13,7 +13,7 @@ export default async function Home() {
     <>
       <Header />
       <Banner />
-      {spotlight.length > 0 && <Spotlight products={spotlight} />}
+      <Spotlight products={spotlight} />
       <OurShop />
       <ContactForm />
     </>
