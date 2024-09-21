@@ -172,7 +172,7 @@ export const removeCartItems = async (id: string, productIds: string[]) => {
 
 export const updateFabric = async (id: string, observations?: string) => {
   try {
-    const { data } = await axiosInstance.put("/cart/observations", {
+    const { data } = await axiosInstance.put("/cart/update/observations", {
       id,
       observations,
     });
