@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { storefront } from "@/app/api/(helpers)/storefront";
 import { queries } from "@/app/api/(helpers)/queries";
-import axios from "axios";
 import { getLqip } from "@/app/api/(helpers)/getLqip";
 import { axiosInstance } from "@/app/api/(helpers)/axiosInstance";
+import { getImageUrl, getMetaobject } from "@/requests";
 
 export async function GET() {
   try {
@@ -23,15 +23,11 @@ export async function GET() {
       type: "color_tela",
     });
     const colorsPromises = colors.metaobjects.edges.map(async (o: any) => {
-      const { data } = await axios.get(
-        "/metaobject?id=" + encodeURIComponent(o.node.id)
-      );
-      const { data: image } = await axios.get(
-        "/images?id=" + encodeURIComponent(data.foto)
-      );
+      const object = await getMetaobject(o.node.id);
+      const image = await getImageUrl(object.foto);
       const lqip = await getLqip([image]);
       return {
-        ...data,
+        ...object,
         foto: image,
         lqip: lqip[0],
       };
@@ -40,6 +36,7 @@ export async function GET() {
     const colorsValues = await Promise.all(colorsPromises);
 
     const fabrics = metaobjectsValues.map((f) => {
+      console.log("color 1", colorsValues[0]);
       const colors = colorsValues.filter((c) => c.tipo_tela === f.id);
       return {
         ...f,
