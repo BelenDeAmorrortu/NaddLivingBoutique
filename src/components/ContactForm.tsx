@@ -176,8 +176,13 @@ export default function ContactForm() {
                 className="ant-textarea"
               />
             </Form.Item>
-            <Button tailwindStyles="w-full h-[42px]" solid type="submit">
-              {loading ? <Loader color="white" size="xsmall" /> : "Enviar"}
+            <Button
+              tailwindStyles="w-full h-[42px]"
+              solid
+              type="submit"
+              loading={loading}
+            >
+              Enviar
             </Button>
           </Form>
         </div>

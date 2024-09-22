@@ -16,4 +16,5 @@ export interface ICartProvider {
   isOpen: boolean;
   setIsOpen: (arg: boolean) => void;
   checkout: (fabric?: string) => void;
+  loading: boolean;
 }

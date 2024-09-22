@@ -24,6 +24,7 @@ const CartContext = React.createContext<ICartProvider>({
   setIsOpen: () => {},
   checkout: (fabric?: string) => {},
   isOpen: false,
+  loading: false,
 });
 
 export function useCart() {
@@ -35,6 +36,7 @@ export function CartProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState<any>();
   const [cartItems, setCartItems] = useState<ICartItem[]>([]);
   const [total, setTotal] = useState<number>(0);
@@ -68,6 +70,7 @@ export function CartProvider({
     amount: number
   ) => {
     if (cart) {
+      setLoading(true);
       const findItem = cartItems.find(
         (i) => i.productId === product._id && i.variant.id === variant.id
       );
@@ -92,6 +95,7 @@ export function CartProvider({
         };
         const updatedCart = await addCartItems(cart.id, [item]);
         if (updatedCart) setCart(updatedCart);
+        setLoading(false);
         setIsOpen(true);
       }
     }
@@ -106,6 +110,7 @@ export function CartProvider({
 
   const updateAmount = async (id: string, amount: number) => {
     if (cart) {
+      setLoading(true);
       const updated = cartItems.map((i) => {
         if (i._id === id) {
           return {
@@ -118,12 +123,15 @@ export function CartProvider({
       });
       const updatedCart = await updateCartItems(cart.id, updated);
       if (updatedCart) setCart(updatedCart);
+      setLoading(false);
     }
   };
 
   const checkout = async (fabric?: string) => {
     if (cart) {
+      setLoading(true);
       if (fabric) await updateFabric(cart.id, fabric);
+      setLoading(false);
       return window.open(cart?.checkoutUrl);
     }
   };
@@ -173,12 +181,14 @@ export function CartProvider({
     updateAmount,
     count,
     checkout,
+    loading,
   };
 
   return (
     <CartContext.Provider value={values}>
       {providerChildren}
       <Cart
+        loading={loading}
         isOpen={isOpen}
         close={() => {
           setIsOpen(false);
