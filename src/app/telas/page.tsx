@@ -25,6 +25,7 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
+  const fabrics = await getFabrics();
   return (
     <div className="h-fit pt-[92px]">
       <div className="h-fit md:h-[85vh] w-full">
@@ -85,7 +86,7 @@ export default async function Page() {
           </CascadeReveal>
         </div>
       </div>
-      <FabricsNavigator />
+      <FabricsNavigator fabrics={fabrics} />
     </div>
   );
 }

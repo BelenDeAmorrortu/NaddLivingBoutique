@@ -1,28 +1,25 @@
 "use client";
-import useFetch from "@/hooks/useFetch";
-import { getFabrics } from "@/requests";
 import React, { useEffect, useRef, useState } from "react";
 import FabricDescription from "./FabricDescription";
 import { Image as Img, Spin } from "antd";
-import { Color } from "@/types/Fabric";
-import Loader from "./Loader";
+import { Color, Fabric } from "@/types/Fabric";
 import { HiOutlineSwatch } from "react-icons/hi2";
 
-export default function FabricsNavigator() {
+interface IProps {
+  fabrics: Fabric[];
+}
+
+export default function FabricsNavigator({ fabrics }: IProps) {
   const [preview, setPreview] = useState<boolean>(false);
   const [selectedFabricColors, setSelectedFabricColors] = useState<Color[]>([]);
   const [activeColorIndex, setActiveColorIndex] = useState<any>(undefined);
   const [activeFabric, setActiveFabric] = useState<string>();
-  const { data, isLoading } = useFetch(
-    "fabrics",
-    async () => await getFabrics()
-  );
 
   useEffect(() => {
-    if (data && data.length > 0) {
-      setActiveFabric(data[0].id);
+    if (fabrics && fabrics.length > 0) {
+      setActiveFabric(fabrics[0].id);
     }
-  }, [data]);
+  }, [fabrics]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -69,18 +66,11 @@ export default function FabricsNavigator() {
       className="h-fit p-5 md:p-10 my-10 grid grid-cols-1 md:grid-cols-4"
       id="telas"
     >
-      {isLoading ? (
-        <div className="col-span-4 flex-col-center  min-h-[80vh] gap-5">
-          <Loader color="black" size="large" />
-          <p className="text-dark-grey">
-            Cargando telas. Aguarde un instante...
-          </p>
-        </div>
-      ) : data && data.length > 0 ? (
+      {fabrics && fabrics.length > 0 ? (
         <>
           <div className="hidden md:flex h-[80vh] col-span-1 flex-col justify-center items-start lg:mx-5 gap-5 border-l border-l-black-hover sticky top-28">
-            {data &&
-              data.map((i) => {
+            {fabrics &&
+              fabrics.map((i) => {
                 return (
                   <button
                     onClick={() => handleNavigateTo(i.id)}
@@ -100,7 +90,7 @@ export default function FabricsNavigator() {
             className="col-span-3 min-h-[80vh] flex-col-center"
             ref={containerRef}
           >
-            {data.map((i) => {
+            {fabrics.map((i) => {
               return (
                 <FabricDescription
                   key={i.id}

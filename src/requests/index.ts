@@ -51,35 +51,11 @@ export const getSpotlight = async (): Promise<Product[]> => {
   }
 };
 
-export const getMetaobject = async (id: string) => {
-  try {
-    const { data } = await axiosInstance.get(
-      `metaobject?id=${encodeURIComponent(id)}`
-    );
-
-    return data;
-  } catch (e) {
-    console.log("ERROR", e);
-    return "0";
-  }
-};
-
 export const getMetaobjects = async (type: string) => {
   try {
     const { data } = await axiosInstance.get("/metaobjects/" + type);
 
     return data;
-  } catch (e) {
-    console.log("ERROR", e);
-  }
-};
-
-export const getImageUrl = async (id: string) => {
-  try {
-    const { data } = await axiosInstance.get(
-      "/images?id=" + encodeURIComponent(id)
-    );
-    return data.url;
   } catch (e) {
     console.log("ERROR", e);
   }
