@@ -394,7 +394,7 @@
   }
 
   .navmd-li {
-    @apply title-4 text-white border-grey-hover py-3 w-[80vw] md:w-[350px] hover:text-white-hover cursor-pointer;
+    @apply flex title-4 text-white border-grey-hover py-3 w-[80vw] md:w-[350px] hover:text-white-hover cursor-pointer;
   }
 
   .navmd-li-collapse {
@@ -475,7 +475,7 @@
   }
 
   .cart-sheet-li {
-    @apply my-3 first:mt-6 flex justify-between items-center w-full h-16 h-fit relative;
+    @apply my-3 first:mt-6 flex justify-between items-center w-full h-max relative gap-2;
   }
 
   .cart-sheet-img {

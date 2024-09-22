@@ -25,13 +25,19 @@ export default function CartItem({
           alt={`Imagén del Producto`}
           width={500}
           height={500}
-          className={`object-cover h-full rounded-sm`}
+          className={`object-cover h-auto w-14 aspect-square md:w-auto rounded-sm`}
         />
       </div>
-      <div className="md:max-w-[145px] flex flex-col justify-start items-start ">
-        <h4 className=" font-bold uppercase text-sm md:text-[14px]">{name}</h4>
-        <h4 className="uppercase text-[11px] h-[22px]">Color a eleccion</h4>
-        <h4 className="uppercase text-[11px] h-[22px]">{variant.title}</h4>
+      <div className="w-3/5 md:max-w-[145px] flex flex-col justify-start items-start">
+        <h4 className=" font-bold uppercase text-[12px] md:text-[14px]">
+          {name}
+        </h4>
+        <h4 className="uppercase text-[8px] md:text-[11px] leading-tight">
+          Color a eleccion
+        </h4>
+        <h4 className="uppercase text-[8px] md:text-[11px] leading-tight">
+          {variant.title}
+        </h4>
         <h4 className="text-sm uppercase md:text-[14px] font-bold">
           {"$" + formatPrice(String(variant.price * amount))}
         </h4>
