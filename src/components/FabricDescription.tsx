@@ -63,7 +63,7 @@ export default function FabricDescription({
                   height={100}
                   className="object-contain object-center"
                   placeholder="blur"
-                  blurDataURL={c.lqip}
+                  blurDataURL={placeholderImage}
                 />
                 <div className="opacity-0 group-hover/color:opacity-100 transition-opacity duration-75 absolute h-full w-full bg-black/50 flex-row-center top-0">
                   <EyeOutlined style={{ color: "white", fontSize: 18 }} />

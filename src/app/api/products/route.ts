@@ -25,26 +25,39 @@ export async function GET(request: Request) {
           : null,
     });
 
-    const products = await Promise.all(
-      data.products.edges.map(async (p: any) => {
-        const { title, id, handle, images, descriptionHtml, variants, tags } =
-          p.node;
-        const imageUrls = images.edges.map((i: any) => i.node.url);
-        const lqip = await getLqip(imageUrls);
-
-        return {
-          _id: id,
-          images: imageUrls,
-          category: tags,
-          description: descriptionHtml,
-          url: handle,
-          name: title,
-          lqip,
-          price: getMinPrice(variants.nodes),
-        };
-      })
+    const imageUrls = data.products.edges.flatMap((p: any) =>
+      p.node.images.edges.slice(0, 2).map((i: any) => i.node.url)
     );
 
+    const lqip = await getLqip(imageUrls);
+
+    let lqipIndex = 0;
+
+    const products = data.products.edges.map((p: any) => {
+      const { title, id, handle, images, descriptionHtml, variants, tags } =
+        p.node;
+
+      const productImages = images.edges
+        .slice(0, 2)
+        .map((i: any) => i.node.url);
+
+      const productLqip = lqip.slice(
+        lqipIndex,
+        lqipIndex + productImages.length
+      );
+      lqipIndex += productImages.length;
+
+      return {
+        _id: id,
+        images: productImages,
+        category: tags,
+        description: descriptionHtml,
+        url: handle,
+        name: title,
+        lqip: productLqip,
+        price: getMinPrice(variants.nodes),
+      };
+    });
     return NextResponse.json(products);
   } catch (error) {
     return NextResponse.json(

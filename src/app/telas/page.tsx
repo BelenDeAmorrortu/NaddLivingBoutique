@@ -25,8 +25,6 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
-  const fabrics = await getFabrics();
-
   return (
     <div className="h-fit pt-[92px]">
       <div className="h-fit md:h-[85vh] w-full">
@@ -36,7 +34,7 @@ export default async function Page() {
           </h1>
           <p className="md:max-w-[900px] text-center">
             En NADD Living Boutique nos encanta que cada cliente sea parte del
-            proceso creativo de su próximo mueble. Por eso ofrecemos una gran
+            proceso creativo de su próximo mueble. Por eso, ofrecemos una gran
             variedad de telas para que tu mueble refleje tu estilo único.
           </p>
           <Link
@@ -87,7 +85,7 @@ export default async function Page() {
           </CascadeReveal>
         </div>
       </div>
-      <FabricsNavigator fabrics={fabrics} />
+      <FabricsNavigator />
     </div>
   );
 }
