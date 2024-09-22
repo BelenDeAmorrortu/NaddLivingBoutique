@@ -26,7 +26,8 @@ export default function Whatsapp() {
     if (
       isVisible &&
       !firstDisplayExecuted &&
-      window.location.pathname === "/"
+      window.location.pathname === "/" &&
+      window.innerWidth >= 768
     ) {
       setIsDialogVisible(true);
       setFirstDisplayExecuted(true);
@@ -52,7 +53,7 @@ export default function Whatsapp() {
         className={`${
           isDialogVisible
             ? "-translate-x-0 opacity-100"
-            : "-translate-x-full opacity-0"
+            : "-translate-x-full opacity-0 pointer-events-none"
         } whatsapp-dialog`}
       >
         <div className="whatsapp-dialog-header">
@@ -98,8 +99,11 @@ export default function Whatsapp() {
         </div>
       </div>
       <button
-        className="whatsapp-button"
-        style={{ opacity: isVisible || isDialogVisible ? "1" : "0" }}
+        className={`whatsapp-button ${
+          isVisible || isDialogVisible
+            ? "opacity-100"
+            : "opacity-0 pointer-events-none"
+        }`}
         onClick={() => setIsDialogVisible(!isDialogVisible)}
         aria-label="Whatsapp"
         name="Whatsapp"
