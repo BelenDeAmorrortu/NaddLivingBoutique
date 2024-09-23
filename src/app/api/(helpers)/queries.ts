@@ -15,7 +15,7 @@ export const queries = {
                   tags,
                   handle,
                   descriptionHtml,
-                  variants(first: 12){
+                  variants(first: 100){
                     nodes {
                       title,
                       price{
@@ -44,7 +44,7 @@ export const queries = {
             tags,
             handle,
             descriptionHtml,
-            variants(first: 12){
+            variants(first: 100){
               nodes {
                 title,
                 price{
@@ -80,7 +80,7 @@ export const queries = {
                 productType
                 tags
                 handle
-                variants(first: 12){
+                variants(first: 100){
                   nodes {
                     title,
                     price{
