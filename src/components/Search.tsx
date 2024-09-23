@@ -1,199 +1,241 @@
 "use client";
-import { useEffect, useState } from "react";
-import { getProducts } from "../sanity/requests/sanity-requests";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-import { Autocomplete, Popper } from "@mui/material";
-import SearchInput from "./SearchInput";
-import { makeStyles } from "@mui/styles";
-import { useRouter } from "next/navigation";
-import { categories } from "@/utils/categories";
-import { navigation } from "@/utils/navigation";
-const queryClient = new QueryClient();
+import { getMetaobjects, getProducts } from "@/requests";
+import { Product } from "@/types/Product";
+import { Form, Input } from "antd";
+import React, { useEffect, useRef, useState } from "react";
+import { navigation } from "@/constants";
+import { HiMagnifyingGlass } from "react-icons/hi2";
+import { IoClose } from "react-icons/io5";
+import Link from "next/link";
+import Card from "./Card";
+import Image from "next/image";
+import { removeAccents } from "@/utils/removeAccents";
+import Loader from "./Loader";
+import CardSkeleton from "./CardSkeleton";
+import useFetch from "@/hooks/useFetch";
 
-export default function Search() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Content />
-    </QueryClientProvider>
-  );
+interface IProps {
+  visible: boolean;
+  setSearchOpen: (arg: boolean) => void;
 }
 
-const useStyles = makeStyles(() => ({
-  root: {
-    "& .MuiAutocomplete-listbox": {
-      background: "#0f0f0f",
-      color: "#ffff",
-      textTransform: "capitalize",
-      padding: 25,
-      borderRadius: 0,
-      "& li": {
-        borderBottom: "1px solid #9ca3af66",
-        margin: "10px 0",
-        padding: "8px 0",
-        "@media(max-width: 640px)": {
-          fontSize: "13px",
-          padding: "5px 0",
-        },
-        "@media(max-width: 500px)": {
-          fontSize: "15.5px",
-        },
-        "&:hover": {
-          borderBottom: "1px solid #ffff",
-          transition: "border 0.2s linear",
-        },
-      },
-    },
-    "& .MuiAutocomplete-noOptions": {
-      background: "#0f0f0f",
-      color: "#ffff",
-      textTransform: "capitalize",
-      padding: 25,
-      minHeight: 70,
-      paddingTop: 40,
-    },
-    "& .MuiAutocomplete-paper": {
-      borderRadius: 3,
-      left: -21,
-      position: "absolute",
-      width: "26vw",
-      "@media(max-width: 1024px)": {
-        width: "28.5vw",
-        left: -15,
-      },
-      "@media(max-width: 768px)": {
-        width: "31vw",
-        left: -20,
-      },
-      "@media(max-width: 640px)": {
-        width: "37vw",
-        left: -30,
-      },
-      "@media(max-width: 500px)": {
-        width: "100vw",
-        left: "0",
-      },
-    },
-    "& .MuiAutocomplete-endAdornment": {
-      "& .MuiSvgIcon-root": {
-        fill: "#ffff",
-      },
-      "& .MuiAutocomplete-popupIndicator": {
-        display: "none",
-      },
-    },
-  },
-}));
+export default function Search({ visible, setSearchOpen }: IProps) {
+  const [results, setResults] = useState<Product[]>([]);
+  const [categoriesSearch, setCategoriesSearch] = useState<
+    { name: string; url: string }[]
+  >([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [form] = Form.useForm();
+  const search = Form.useWatch("search", form);
+  const inputRef = useRef<any>(null);
 
-function Content() {
-  const router = useRouter();
-  const classes = useStyles();
-  const [width, setWidth] = useState<number>(0);
+  const { data: categories } = useFetch(
+    "categories",
+    async () => await getMetaobjects("categoria")
+  );
 
-  const { isPlaceholderData, error, data } = useQuery({
-    queryFn: async () => await getProducts([], undefined),
-    placeholderData: [],
-  });
-
-  const handleData = data ?? [];
-
-  const options = [
-    ...categories.map((c) => {
-      return {
-        category: ["Ver categoría:"],
-        name: c,
-        url: c,
-      };
-    }),
-    ...handleData,
-  ];
-
-  const [input, setInput] = useState("");
-
-  useEffect(() => {
-    const handleEvent = () => {
-      setWidth(document?.body.clientWidth);
-    };
-
-    handleEvent();
-
-    window.addEventListener("resize", handleEvent);
-
-    () => window.removeEventListener("resize", handleEvent);
-  }, []);
-
-  const CustomPopper = (props: any) => {
-    return (
-      <Popper
-        {...props}
-        style={{
-          width:
-            width < 1024 && width > 500
-              ? "35vw"
-              : width < 500
-              ? "100vw"
-              : "26vw",
-          zIndex: width < 500 ? 100 : 10,
-          position: "absolute",
-        }}
-        className={classes?.root}
-        open={true}
-        placement="bottom"
-      />
-    );
+  const handleSearch = async () => {
+    setIsLoading(true);
+    const searchProducts = await getProducts([], search, undefined);
+    setResults(searchProducts);
+    setIsLoading(false);
   };
 
+  const closeAndReset = () => {
+    form.resetFields();
+    setSearchOpen(false);
+  };
+
+  useEffect(() => {
+    if (search && categories) {
+      handleSearch();
+
+      setCategoriesSearch(
+        categories
+          .filter(
+            (i: ICategory) =>
+              removeAccents(i.nombre).startsWith(removeAccents(search)) ||
+              removeAccents(i.nombre).includes(removeAccents(search))
+          )
+          .map((i: ICategory) => {
+            return {
+              name: i.nombre,
+              url: navigation.productos + "?filter=" + i.nombre,
+            };
+          })
+      );
+    }
+  }, [search, categories]);
+
+  useEffect(() => {
+    if (inputRef.current && visible) {
+      inputRef.current.focus();
+    }
+  }, [visible]);
+
   return (
-    <div className="flex-col-center align-se items-align w-[22vw] hover:w-[55vw] focus:w-[55vw] sm:hover:w-[22vw]  static transition-[width] duration-150 lg:absolute lg:left-8">
-      <Autocomplete
-        className={classes.root}
-        freeSolo={input.length > 0 ? false : true}
-        noOptionsText={`Buscar: "${input}"`}
-        options={options && input.length > 0 ? options : []}
-        getOptionLabel={(o) =>
-          typeof o === "string" ? o : `${o.category.join(" ")} ${o.name}`
-        }
-        renderInput={(props) => (
-          <SearchInput
-            props={props}
-            input={input}
-            setInput={setInput}
-            width={width}
+    <div
+      className={`z-[29] w-full h-screen min-[640px]:h-fit flex-col items-center fixed top-14 left-0 lg:top-16 bg-black gap-5 transition-all duration-300 ${
+        visible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
+      <Form
+        form={form}
+        className="w-full h-14 md:h-16 flex-row-center px-10"
+        initialValues={{ search: undefined }}
+      >
+        <button>
+          <HiMagnifyingGlass
+            className={`w-5 h-5 md:w-6 md:h-6 fill-white-hover`}
           />
-        )}
-        filterOptions={(options, { inputValue }) => {
-          const input = inputValue.toLowerCase();
-          return options.filter((o) => {
-            if (
-              !o.category.includes("Ver categoría:") &&
-              (o.category.some((c) => c.toLowerCase().includes(input)) ||
-                o.name.toLowerCase().includes(input))
-            )
-              return true;
-            else if (
-              o.category.includes("Ver categoría:") &&
-              o.name.toLowerCase().includes(input)
-            )
-              return true;
-            else return false;
-          });
-        }}
-        value={input}
-        onChange={(e, value) => {
-          if (value && typeof value !== "string") {
-            if (value.category.includes("Ver categoría:")) {
-              setInput("");
-
-              router.push(`${navigation.productos}?filter=${value.url}`);
-            } else {
-              setInput("");
-
-              router.push(`productos/${value.url}`);
+        </button>
+        <Form.Item
+          name="search"
+          className="w-full h-fit flex flex-col "
+          style={{ margin: 0 }}
+        >
+          <Input
+            ref={inputRef}
+            placeholder="Búsqueda..."
+            size="large"
+            className="search"
+            onPressEnter={() =>
+              (window.location.href =
+                navigation.productos + "?search=" + search)
             }
-          }
-        }}
-        autoComplete
-        PopperComponent={CustomPopper}
-      />
+          />
+        </Form.Item>
+        <button onClick={closeAndReset}>
+          <IoClose size={25} className="fill-white" />
+        </button>
+      </Form>
+      <div
+        className={`${
+          search
+            ? "opacity-100 relative"
+            : "opacity-0 -translate-y-[200%] absolute"
+        } -z-10 w-full bg-black min-h-[50vh] grid grid-cols-4 gap-10 px-10 transition-opacity duration-300`}
+      >
+        <div className="order-2 col-span-4 min-[640px]:order-1 min-[640px]:col-span-2 min-[1080px]:col-span-1">
+          <div className="border-b p-3 border-b-white-hover flex justify-between items-center">
+            <h5 className="text-white-hover font-bold uppercase text-sm">
+              Categorías
+            </h5>
+            {categoriesSearch.length > 0 && (
+              <Link
+                onClick={closeAndReset}
+                href={
+                  navigation.productos +
+                  `?${categoriesSearch
+                    .map((i) => "filter=" + i.name)
+                    .join("&")}`
+                }
+                className="text-white text-sm"
+              >
+                Ver todo
+              </Link>
+            )}
+          </div>
+          <ul className="flex flex-col gap-5 my-5">
+            {categoriesSearch.length > 0 ? (
+              categoriesSearch?.map((i) => {
+                return (
+                  <li className="">
+                    <Link
+                      href={i.url}
+                      className="text-white uppercase hover:text-white-hover"
+                      onClick={closeAndReset}
+                    >
+                      {i.name}
+                    </Link>
+                  </li>
+                );
+              })
+            ) : (
+              <li className="text-white-hover">Sin Resultados</li>
+            )}
+          </ul>
+        </div>
+        <div className="col-span-4 order-1 min-[640px]:order-2 min-[640px]:col-span-2 min-[1080px]:col-span-3">
+          <div className=" p-3 border-b border-b-white-hover flex justify-between items-start">
+            <h5 className="text-white-hover font-bold uppercase text-sm">
+              {"Resultados" + ` (${results.length})`}
+            </h5>
+            {results.length > 0 && (
+              <Link
+                href={navigation.productos + "?search=" + search}
+                className="text-white text-sm"
+                onClick={closeAndReset}
+              >
+                Ver todo
+              </Link>
+            )}
+          </div>
+          <ul className="hidden min-[1080px]:grid min-[1080px]:grid-cols-3 my-5">
+            {isLoading ? (
+              Array(3)
+                .fill("")
+                .map((_, i) => {
+                  return (
+                    <li onClick={closeAndReset} key={i + "search"}>
+                      <CardSkeleton />;
+                    </li>
+                  );
+                })
+            ) : results.length > 0 ? (
+              results.slice(0, 3).map((i) => {
+                return (
+                  <li onClick={closeAndReset} key={i._id + "search"}>
+                    <Card {...i} color="white" />;
+                  </li>
+                );
+              })
+            ) : (
+              <li className="text-white-hover">Sin Resultados</li>
+            )}
+          </ul>
+          <ul className="flex flex-col min-[1080px]:hidden gap-3 py-3">
+            {isLoading ? (
+              <li className="flex-col-center flex-1 h-full py-5">
+                <Loader color="white" size="medium" />
+              </li>
+            ) : results.length > 0 ? (
+              results.slice(0, 3).map((i) => {
+                return (
+                  <li>
+                    <Link
+                      href={navigation.productos + "/" + i.url}
+                      className="flex flex-row-center w-full gap-3"
+                      onClick={closeAndReset}
+                    >
+                      <div className="aspect-[3/2] w-24 h-auto relative rounded-sm">
+                        <Image
+                          src={i.images[0]}
+                          placeholder={"blur"}
+                          blurDataURL={i.lqip[0]}
+                          alt="Imagen producto"
+                          className=" object-cover absolute w-full h-full"
+                          fill
+                        />
+                      </div>
+                      <div className="h-fit w-full flex flex-col">
+                        <h6 className="text-white uppercase m-0 p-0 text-xs">
+                          {i.name}
+                        </h6>
+                        <h6 className="text-white-hover m-0 p-0 text-xs">
+                          {i.category.join(" - ")}
+                        </h6>
+                      </div>
+                    </Link>
+                  </li>
+                );
+              })
+            ) : (
+              <li className="text-white-hover">Sin Resultados</li>
+            )}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }

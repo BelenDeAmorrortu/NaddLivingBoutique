@@ -5,6 +5,23 @@
 /* -- Base -----------------------------------------------------------------*/
 
 @layer base {
+  /* -- Colors --------------------------------------------------------------- */
+
+  :root {
+    --black: 15, 15, 15;
+    --black-hover: 15, 15, 15, 0.6;
+    --white: 255, 255, 255;
+    --white-hover: 255, 255, 255, 0.47;
+    --red: 181, 7, 6;
+    --dark-red: 136, 136, 136;
+    --grey: 179, 179, 179;
+    --grey-hover: 179, 179, 179, 0.4;
+    --dark-grey: 136, 136, 136;
+    --transparen: transparent;
+    --whatsapp: 49, 184, 70;
+    --instagram: 186, 14, 89;
+  }
+
   li {
     @apply text-sm lg:text-base list-none;
   }
@@ -26,12 +43,7 @@
   }
 
   section {
-    @apply my-24;
-  }
-
-  section:last-child,
-  section:first-child {
-    @apply my-0;
+    @apply px-10 py-16;
   }
 
   footer ul {
@@ -58,7 +70,7 @@
   }
 
   .faq p {
-    @apply text-sm lg:text-base text-dark-grey px-7;
+    @apply text-sm lg:text-base text-black-hover px-7;
   }
 
   .loader.white {
@@ -92,6 +104,36 @@
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
+  width: 95vw !important;
+  height: 40vh !important;
+}
+
+@media (min-width: 500px) {
+  .swiperSlide {
+    height: 450px !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .swiperSlide {
+    width: 50vw !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .swiperSlide {
+    height: 70vh !important;
+  }
+}
+
+@media (min-width: 1243px) {
+  .swiperSlide {
+    width: 45vw !important;
+  }
+}
+
+.swiper.swiper-initialized.swiper-horizontal {
+  padding: 0 !important;
 }
 
 .swiper-thumbs .swiper-slide {
@@ -122,7 +164,10 @@
   @apply left-0;
 }
 
-.ant-image-preview-operations {
+/* -- Image Preview -------------------------------------------------------------- */
+
+.ant-image-preview-operations,
+.ant-image-preview-close {
   @apply bg-black;
 }
 
@@ -136,6 +181,17 @@
 .ant-image-preview-operations-progress {
   @apply max-[500px]:left-[35px];
 }
+
+.ant-image-preview-switch-left,
+.ant-image-preview-switch-right {
+  @apply lg:bg-black lg:mx-[100px] scale-125;
+}
+
+.ant-image-preview-operations-wrapper .anticon {
+  @apply fill-white;
+}
+
+/* -- Collapse -------------------------------------------------------------- */
 
 .ant-collapse {
   @apply w-[90vw] sm:w-[80vw] border-none bg-transparent rounded-none;
@@ -166,14 +222,123 @@
   place-items: center !important;
 }
 
-.MuiAutocomplete-listbox::-webkit-scrollbar-track,
-.MuiAutocomplete-listbox::-webkit-scrollbar-track-piece {
-  background: transparent !important;
+/* -- Select -------------------------------------------------------------- */
+
+.ant-select-selector,
+:where(.css-dev-only-do-not-override-14wwjjs).ant-select-single:not(
+    .ant-select-customize-input
+  )
+  .ant-select-selector {
+  border-radius: 0 !important;
+  border: 2px #0f0f0f solid !important;
+  height: 43px !important;
+}
+
+.ant-select,
+.ant-select-selection-item {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.ant-select-dropdown,
+.ant-select-item.ant-select-item-option {
+  border-radius: 0 !important;
+  align-items: center !important;
+}
+
+.ant-select-item.ant-select-item-option {
+  align-items: center !important;
+}
+
+.ant-select-item.ant-select-item-option.ant-select-item-option-selected {
+  background-color: #0f0f0f2c !important;
+}
+
+.ant-select-selection-item {
+  font-weight: 500 !important;
+}
+
+/* -- Input Number -------------------------------------------------------------- */
+
+.ant-input-number-input {
+  padding: 0px !important;
+  text-align: center !important;
+}
+
+:where(.css-dev-only-do-not-override-f7vrd6).ant-input-number-sm
+  input.ant-input-number-input,
+:where(.css-f7vrd6).ant-input-number-sm input.ant-input-number-input {
+  height: 30px !important;
+}
+
+/* -- Input ---------------------------------------------------------------------- */
+
+.ant-input {
+  @apply bg-transparent border-black border-2 rounded-none min-h-[43px] hover:border-dark-grey focus:border-dark-grey;
+}
+
+#contacto textarea.ant-input {
+  @apply min-h-[110px] flex-col-center;
+}
+
+#cart-textarea {
+  @apply border-black/50;
+}
+
+.ant-form-item label {
+  color: #000000 !important;
+}
+
+.ant-input::placeholder {
+  @apply text-black-hover;
+}
+
+.contact-form .ant-form.ant-form-vertical {
+  margin: 0px !important;
+}
+
+/* Pop Confirm */
+
+.ant-popconfirm-buttons .ant-btn-primary.ant-btn-sm {
+  @apply bg-red;
+}
+
+.ant-popconfirm-buttons .ant-btn-primary.ant-btn-sm:hover {
+  @apply bg-red/75;
+}
+
+.ant-popover-inner,
+.ant-popconfirm-buttons .ant-btn-primary.ant-btn-sm,
+.ant-popconfirm-buttons .ant-btn-default.ant-btn-sm {
+  border-radius: 2px !important;
+}
+
+.ant-popconfirm-buttons .ant-btn-default.ant-btn-sm:hover,
+.ant-popconfirm-buttons .ant-btn-default.ant-btn-sm:focus {
+  @apply border-dark-grey text-dark-grey;
+}
+
+/* Notification */
+
+.ant-notification-notice-wrapper {
+  border-radius: 2px !important;
+}
+
+.ant-notification-notice {
+  padding: 15px !important;
+}
+
+/* Ant Spin */
+
+.ant-spin-dot-item {
+  color: rgba(var(--black));
 }
 
 /* -- Components ------------------------------------------------------- */
 
 @layer components {
+  /* Titles */
+
   .title-1 {
     @apply text-[29px] sm:text-3xl md:text-4xl lg:text-5xl uppercase tracking-[1vw] text-center font-extra-bold;
   }
@@ -187,39 +352,168 @@
   }
 
   .title-4 {
-    @apply text-[12px] sm:text-sm md:text-base uppercase font-extra-bold;
+    @apply text-[12px] sm:text-sm md:text-base uppercase font-bold;
   }
 
   .subtitle-1 {
-    @apply text-lg sm:text-xl uppercase font-bold;
+    @apply text-lg sm:text-2xl uppercase font-bold;
+  }
+
+  /* Nav */
+
+  .announcement-bar {
+    @apply fixed bg-dark-red h-7 w-full top-16 z-[28] flex-row-center;
+  }
+
+  .announcement-bar-2 {
+    @apply hidden min-[340px]:fixed bg-[#680807] h-6 md:h-7 w-full top-14 md:top-16 z-[28] flex-row-center;
   }
 
   .nav-item {
-    @apply font-semi-bold text-white hover:text-white-hover cursor-pointer text-[13.5px];
+    @apply font-semi-bold text-white cursor-pointer text-[13.5px] h-fit min-[1220px]:h-16;
+  }
+
+  .navlg {
+    @apply hidden min-[1220px]:flex text-center w-fit flex-row justify-start items-center h-16 flex-1 gap-10;
+  }
+
+  .navlg-categories {
+    @apply z-[29] fixed flex-row-center top-0 left-0 text-center w-full h-fit py-7 space-x-5 border-t-[1.5px] border-grey-hover bg-black transition-all duration-300 ease-out;
+  }
+
+  .navlg-categories-li {
+    @apply nav-item rounded-sm flex justify-center items-center relative w-fit h-fit;
+  }
+
+  .navlg-categories-img {
+    @apply object-cover h-full rounded-sm brightness-50 ease-in transition-all duration-700;
+  }
+
+  .navmd {
+    @apply bg-black w-screen md:w-[400px] h-screen flex flex-col justify-start items-center py-16 space-y-10 absolute top-14 md:top-16 left-0 transition-all duration-700;
   }
 
   .navmd-li {
-    @apply title-4 text-white border-grey-hover py-3 w-[80vw] md:w-[50vw] hover:text-white-hover cursor-pointer;
+    @apply flex title-4 text-white border-grey-hover py-3 w-[80vw] md:w-[350px] hover:text-white-hover cursor-pointer;
   }
 
+  .navmd-li-collapse {
+    @apply space-y-10 overflow-hidden transition-all duration-200 ease-linear;
+  }
+
+  .navmd-li-collapse-span {
+    @apply flex-row-center border-y border-grey-hover text-center block border-b-0;
+  }
+
+  /* Search */
+
+  .ant-input.search {
+    @apply text-white bg-transparent border-none active:shadow-none focus:shadow-none active:bg-transparent focus:bg-transparent placeholder:text-white-hover text-lg;
+  }
+
+  /* Card */
+
+  .card-image {
+    @apply w-[80vw] sm:w-[65vw] md:w-[25vw] min-[1080px]:w-[20vw] aspect-[3/2] overflow-hidden flex justify-center items-center;
+  }
   .second-image {
     transition: opacity 0.3s linear;
   }
 
-  .footer-icon {
-    @apply w-4 h-4 mr-3 fill-grey group-hover:fill-white;
+  .cards-container {
+    @apply grid gap-[70px] mb-20 md:grid-cols-2 min-[1080px]:grid-cols-3 md:gap-[2vw] justify-center;
   }
 
-  .card-image {
-    @apply max-[370px]:w-[220px] w-[160px] md:w-[200px] lg:w-[280px] aspect-[3/2] overflow-hidden flex justify-center items-center;
+  /* Whatsapp */
+
+  .whatsapp-container {
+    @apply z-10 fixed bottom-7 left-7 flex flex-col justify-end items-start;
+  }
+
+  .whatsapp-button {
+    @apply min-w-[50px] min-h-[50px] rounded-full bg-whatsapp flex items-center justify-center hover:scale-105 transition-all duration-100;
+  }
+  .whatsapp-dialog {
+    @apply w-[300px] h-[350px] shadow-lg rounded-lg my-5 flex-col-center overflow-hidden transition-all duration-300 ease-in-out;
+  }
+  .whatsapp-dialog-header {
+    @apply w-full h-16 bg-whatsapp flex justify-between items-center px-2;
+  }
+  .whatsapp-dialog-chat {
+    @apply flex flex-col flex-1 w-full justify-start items-start bg-white brightness-95;
+  }
+  .whatsapp-dialog-message {
+    @apply p-2 mx-2 my-4 bg-[#c1c1c1] rounded-lg rounded-tl-none text-black font-semi-bold text-xs w-[80%];
+  }
+  .whatsapp-dialog-bottom-bar {
+    @apply flex justify-between items-center w-full h-10 p-2 bg-white gap-3;
+  }
+  .whatsapp-dialog-text-input {
+    @apply flex flex-1 h-full border-none outline-none bg-transparent text-sm justify-center items-center;
+  }
+
+  /* Cart */
+
+  .veil {
+    @apply w-full h-screen bg-black-hover z-50 fixed top-0 left-0 flex justify-end items-start;
+  }
+
+  .cart-sheet {
+    @apply z-[55] w-full md:w-[400px] h-screen px-5 bg-white flex flex-col justify-center items-start fixed right-0 top-0;
+  }
+
+  .cart-sheet-header {
+    @apply w-full h-[65px] flex justify-between items-center border-b border-black;
+  }
+
+  .cart-sheet-ul {
+    @apply flex w-full flex-1 flex-col justify-start items-start overflow-y-scroll px-1;
+  }
+
+  .cart-sheet-ul::-webkit-scrollbar {
+    @apply w-[5px];
+  }
+
+  .cart-sheet-li {
+    @apply my-3 first:mt-6 flex justify-between items-center w-full h-max relative gap-2;
+  }
+
+  .cart-sheet-img {
+    @apply w-[100px] aspect-square overflow-hidden flex justify-center items-center;
+  }
+
+  .cart-sheet-bottom {
+    @apply flex flex-col w-full justify-center items-center gap-5 py-5 border-t border-t-black;
+  }
+
+  /* Other */
+
+  .footer-icon {
+    @apply w-4 h-4 mr-3 fill-grey group-hover:fill-white;
   }
 
   .loader {
     animation: 1s loader linear infinite;
   }
 
-  .contact-button {
-    @apply flex-row-center text-sm lg:text-base w-full md:w-[49%] p-2 border-2 uppercase font-bold transition-all duration-200;
+  .button-outline {
+    @apply flex-row-center text-sm lg:text-base w-full p-2 border-2 bg-white uppercase font-bold transition-all duration-200 relative hover:text-white hover:before:text-white before:absolute before:top-0 before:left-0 before:flex before:w-full before:h-0 before:mb-0 before:transition-all before:duration-200 before:ease-out before:transform before:translate-y-0 hover:before:h-full before:opacity-100 before:bg-[var(--animation-color)] hover:border-[var(--animation-color)];
+  }
+
+  .button-solid {
+    @apply flex-row-center text-sm lg:text-base w-full p-2 text-white border-2 uppercase font-bold transition-all duration-200 relative hover:text-black hover:before:text-black before:absolute before:top-0 before:left-0 before:flex before:w-full before:h-0 before:mb-0 before:transition-all before:duration-200 before:ease-out before:transform before:translate-y-0 before:bg-white hover:before:h-full before:opacity-100 border-[var(--animation-color)] bg-[var(--animation-color)];
+  }
+
+  .button-outline::before {
+    background-color: var(--animation-color);
+  }
+
+  .photo-grid {
+    @apply grid grid-cols-1 sm:grid-cols-3 md:h-[65vh] w-full relative gap-1 px-1;
+  }
+
+  .photo-grid-item {
+    @apply relative min-h-[35vh] flex items-end rounded-sm overflow-hidden;
   }
 }
 
@@ -235,6 +529,56 @@
   .flex-col-center {
     @apply flex flex-col justify-center items-center;
   }
+
+  .skeleton {
+    @apply relative overflow-hidden;
+  }
+}
+
+/* Highlight */
+
+.text-highlight {
+  position: relative;
+  color: var(--text-color, rgba(var(--white)));
+}
+
+.text-highlight::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: var(--highlight-width, 0%);
+  height: 100%;
+  color: var(--highlight-color, rgba(var(--red)));
+  overflow: hidden;
+  -webkit-text-stroke: 0.9px var(--highlight-color, rgba(var(--red)));
+  transition: all 0.4s ease-in;
+  transition-delay: 0.5s;
+}
+
+.skeleton {
+  animation: shimmer 2s linear infinite;
+}
+
+.skeleton::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: -100%;
+  z-index: -1;
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.03) 20%,
+    rgba(255, 255, 255, 0.07) 50%,
+    rgba(255, 255, 255, 0.03) 80%,
+    rgba(255, 255, 255, 0)
+  );
+  animation-name: shimmer;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  content: "";
+  width: 60px;
 }
 
 @keyframes loader {
@@ -243,5 +587,15 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 30%;
+  }
+  50% {
+    opacity: 100%;
   }
 }

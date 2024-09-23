@@ -1,5 +1,3 @@
-import { PortableTextBlock } from "sanity";
-
 export type Product = {
   _id: string;
   name: string;
@@ -7,5 +5,7 @@ export type Product = {
   url: string;
   lqip: string[];
   images: string[];
-  description: PortableTextBlock[];
+  description: string;
+  price: string;
+  variants?: any;
 };

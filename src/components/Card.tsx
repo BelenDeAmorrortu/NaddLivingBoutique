@@ -1,7 +1,12 @@
-import { navigation } from "@/utils/navigation";
+import { navigation, placeholderImage } from "@/constants";
+import { Product } from "@/types/Product";
+import { formatPrice } from "@/utils/formatPrice";
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "../types/Product";
+
+interface IProps extends Product {
+  color?: "black" | "white";
+}
 
 export default function Card({
   _id,
@@ -10,12 +15,16 @@ export default function Card({
   url,
   images,
   lqip,
-}: Product) {
+  price,
+  color,
+}: IProps) {
   if (_id && name && category && url && images && lqip) {
     return (
       <div
         key={_id}
-        className="flex flex-col items-center justify-start w-[160px] max-[370px]:w-[220px] min-h-[185px] md:w-[200px] md:min-h-[225px] lg:w-[250px] lg:min-h-[255px] my-6 m-2 md:m-4 lg:m-10"
+        className={
+          "flex flex-col items-center justify-start w-[80vw] sm:w-[65vw] min-h-[185px] md:w-[25vw] min-[1080px]:w-[20vw] md:min-h-[225px] lg:min-h-[255px]"
+        }
       >
         <Link href={`${navigation.productos}/${url}`}>
           <div className="card-image">
@@ -43,8 +52,27 @@ export default function Card({
             ) : null}
           </div>
         </Link>
-        <h4 className="mt-4 mb-2 title-4 text-center">{name}</h4>
-        <h5 className="capitalize text-xs">{category.join(" - ")}</h5>
+        <div className="flex-col-center w-full my-4 gap-2">
+          <h4
+            className={`title-4 text-sm text-${
+              color ?? "black"
+            } w-full text-start`}
+          >
+            {name}
+          </h4>
+          <div className="flex justify-between items-end w-full">
+            <h5 className={`capitalize text-xs text-${color ?? "black"}`}>
+              {category.join(" - ")}
+            </h5>
+            <h4
+              className={`text-sm font-bold flex flex-col justify-center items-end ${
+                color ? `text-${color}/80` : "text-black/80"
+              }`}
+            >
+              {"$" + formatPrice(price)}
+            </h4>
+          </div>
+        </div>
       </div>
     );
   }

@@ -1,38 +1,34 @@
 import Link from "next/link";
-import { getSpotlight } from "../sanity/requests/sanity-requests";
 import Card from "./Card";
-import { ChevronRightIcon } from "@heroicons/react/24/solid";
-import { navigation } from "@/utils/navigation";
+import { HiChevronRight } from "react-icons/hi";
+import { navigation } from "@/constants";
+import Reveal from "@/transitions/Reveal";
+import CascadeReveal from "@/transitions/CascadeReveal";
+import { Product } from "@/types/Product";
+import { TbSofaOff } from "react-icons/tb";
 
-export default function Spotlight() {
-  return (
-    <>
-      {/* @ts-expect-error Server Component */}
-      <Component />
-    </>
-  );
-}
-
-async function Component() {
-  let products = await getSpotlight();
-
-  return (
+export default function Spotlight({ products }: { products: Product[] }) {
+  return products?.length > 0 ? (
     <section className="flex-col-center w-full h-fit">
-      <h4 className="subtitle-1">Nuestros Productos</h4>
-      <h3 className="title-3 m-3 mb-16">Destacados</h3>
-      <div className="mb-7 flex-center flex-wrap w-[95%] md:w-[80%]">
-        {products.length > 0 ? (
-          products.map((p) => <Card {...p} key={p._id} />)
-        ) : (
-          <p>There are no products</p>
-        )}
+      <Reveal tailwindStyles="flex-col-center">
+        <h4 className="subtitle-1 text-black/80">Nuestros Productos</h4>
+        <h3 className="title-2 uppercase m-3 mb-16">Destacados</h3>
+      </Reveal>
+      <div className="mb-10 grid grid-cols-1 gap-[70px] md:grid-cols-2 min-[1080px]:grid-cols-3 min-[640px]:gap-[2vw]">
+        {products?.map((p, i) => (
+          <CascadeReveal position={i} key={i}>
+            <Card {...p} key={p._id} />
+          </CascadeReveal>
+        ))}
       </div>
       <Link
         href={navigation.productos}
         className="flex-row-center text-red font-bold hover:underline underline-offset-4 cursor-pointer"
       >
-        Ver catálogo completo <ChevronRightIcon className="w-5 h-5 ml-2" />
+        Ver catálogo completo <HiChevronRight className="w-5 h-5 ml-2" />
       </Link>
     </section>
+  ) : (
+    <></>
   );
 }
