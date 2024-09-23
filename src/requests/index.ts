@@ -1,7 +1,7 @@
 import { Product } from "@/types/Product";
 import { ICartItem } from "@/types/CartItem";
 import { Fabric } from "@/types/Fabric";
-import { axiosInstance } from "@/app/api/(helpers)/axiosInstance";
+import { axiosInstance } from "./axiosInstance";
 
 export const getProducts = async (
   filters: string[],

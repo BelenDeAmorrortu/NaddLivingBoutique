@@ -1,6 +1,7 @@
 import { storefront } from "@/app/api/(helpers)/storefront";
 import { queries } from "@/app/api/(helpers)/queries";
 import { NextResponse } from "next/server";
+import { parseMetaobjects } from "../../(helpers)/parseMetaobjects";
 
 export async function GET(
   request: Request,
@@ -11,23 +12,7 @@ export async function GET(
   try {
     const { data } = await storefront(queries.metaobjects, { type });
 
-    const metaobjectsValues = data.metaobjects.edges.map((metaobject: any) => {
-      const mappedFields = metaobject.node.fields.reduce(
-        (acc: any, field: any) => {
-          acc[field.key] =
-            field.reference && field.reference.image?.url
-              ? field.reference.image.url
-              : field.value;
-          return acc;
-        },
-        {}
-      );
-
-      return {
-        id: metaobject.node.id,
-        ...mappedFields,
-      };
-    });
+    const metaobjectsValues = parseMetaobjects(data);
 
     return NextResponse.json(metaobjectsValues);
   } catch (error) {

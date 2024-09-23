@@ -1,18 +1,29 @@
 import { NextResponse } from "next/server";
-import { axiosInstance } from "@/app/api/(helpers)/axiosInstance";
+import { storefront } from "../(helpers)/storefront";
+import { queries } from "../(helpers)/queries";
+import { parseMetaobjects } from "../(helpers)/parseMetaobjects";
 
 export async function GET() {
   try {
-    const { data: fabricsData } = await axiosInstance.get("/metaobjects/telas");
-    const { data: colorsData } = await axiosInstance.get(
-      "/metaobjects/color_tela"
-    );
+    const [fabricsResponse, colorsResponse] = await Promise.all([
+      storefront(queries.metaobjects, { type: "telas" }),
+      storefront(queries.metaobjects, { type: "color_tela" }),
+    ]);
+    const fabricsData = parseMetaobjects(fabricsResponse.data);
+    const colorsData = parseMetaobjects(colorsResponse.data);
+
+    const groupByFabric = colorsData.reduce((acc: any, color: any) => {
+      if (!acc[color.tipo_tela]) {
+        acc[color.tipo_tela] = [];
+      }
+      acc[color.tipo_tela].push(color);
+      return acc;
+    }, {});
 
     const fabrics = fabricsData.map((f: any) => {
-      const relatedColors = colorsData.filter((c: any) => c.tipo_tela === f.id);
       return {
         ...f,
-        colores: relatedColors,
+        colores: groupByFabric[f.id] ?? [],
       };
     });
 
