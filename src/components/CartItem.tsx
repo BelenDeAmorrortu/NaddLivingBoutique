@@ -28,14 +28,14 @@ export default function CartItem({
           className={`object-cover h-auto w-14 aspect-square md:w-auto rounded-sm`}
         />
       </div>
-      <div className="w-3/5 md:max-w-[145px] flex flex-col justify-start items-start">
-        <h4 className=" font-bold uppercase text-[12px] md:text-[14px]">
+      <div className="w-3/5 md:max-w-[145px] flex flex-col justify-start items-start md:gap-1">
+        <h4 className=" font-bold uppercase text-[12px] md:text-[14px] leading-snug">
           {name}
         </h4>
-        <h4 className="uppercase text-[8px] md:text-[11px] leading-tight">
+        <h4 className="uppercase text-[8px] md:text-[11px] leading-tight md:leading-normal">
           Color a eleccion
         </h4>
-        <h4 className="uppercase text-[8px] md:text-[11px] leading-tight">
+        <h4 className="uppercase text-[8px] md:text-[11px] leading-tight md:leading-normal">
           {variant.title}
         </h4>
         <h4 className="text-sm uppercase md:text-[14px] font-bold">
