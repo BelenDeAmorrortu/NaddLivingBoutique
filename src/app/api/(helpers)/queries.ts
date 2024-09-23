@@ -102,15 +102,26 @@ export const queries = {
           }
         }
       }`,
-  metaobjects: `query Metaobjects($type: String!){
-        metaobjects(first:250, type: $type){
-          edges {
-            node {
-              id
+  metaobjects: `query Metaobjects($type: String!) {
+  metaobjects(first: 250, type: $type) {
+    edges {
+      node {
+        id
+        fields {
+          key
+          value
+          reference {
+            ... on MediaImage {
+              image {
+                url
+              }
             }
           }
         }
-      }`,
+      }
+    }
+  }
+}`,
   metaobject: `query Metaobject($id: ID!){
         metaobject(id:$id) {
                 id
@@ -311,14 +322,4 @@ export const queries = {
     }
   }
 }`,
-  imageReferenceURL: `query ImageUrl($id: ID!){
-  node(id: $id) {
-    ... on MediaImage {
-      image {
-        url
-      }
-    }
-  }
-}
-`,
 };

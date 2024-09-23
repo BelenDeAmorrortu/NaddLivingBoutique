@@ -4,8 +4,8 @@ import { IoClose } from "react-icons/io5";
 import { BsBag } from "react-icons/bs";
 import { formatPrice } from "@/utils/formatPrice";
 import { ICartItem } from "@/types/CartItem";
-import { Form, Input } from "antd";
-import { Button, CartItem } from "@/components";
+import { Form, Input, Spin } from "antd";
+import { Button, CartItem, Loader } from "@/components";
 
 interface IProps {
   isOpen: boolean;
@@ -13,6 +13,7 @@ interface IProps {
   items: ICartItem[];
   total: number;
   checkout: (fabric?: string) => void;
+  loading: boolean;
 }
 
 export default function Cart({
@@ -21,6 +22,7 @@ export default function Cart({
   items,
   total,
   checkout,
+  loading,
 }: IProps) {
   const cartRef = useRef<HTMLDivElement>(null);
   const [form] = Form.useForm();
@@ -79,8 +81,13 @@ export default function Cart({
             className=" border-none bg-transparent p-0 m-0"
             name="Cerrar"
             aria-label="Cerrar carrito"
+            disabled={loading}
           >
-            <IoClose size={25} />
+            {loading ? (
+              <Loader size="xsmall" color="black" />
+            ) : (
+              <IoClose size={25} />
+            )}
           </button>
         </div>
         <ul className={`cart-sheet-ul`}>

@@ -89,9 +89,9 @@ export default function Carousel({ images, lqip }: Props) {
                         className="object-contain object-center"
                         width={1000}
                         height={1000}
-                        src={placeholderImage}
+                        src={lqip[index]}
                         placeholder="blur"
-                        blurDataURL={placeholderImage}
+                        blurDataURL={lqip[index]}
                       />
                     }
                   />
@@ -132,7 +132,7 @@ export default function Carousel({ images, lqip }: Props) {
         </button>
       </div>
       {preview && (
-        <div className="fixed z-[1010] flex-col-center w-screen h-screen top-0 left-0">
+        <div className="fixed z-[1000] flex-col-center w-screen h-screen top-0 left-0">
           <Spin size="large" />
         </div>
       )}

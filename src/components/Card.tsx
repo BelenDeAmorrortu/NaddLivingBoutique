@@ -35,7 +35,7 @@ export default function Card({
               height={500}
               className="object-cover h-full rounded-sm"
               placeholder="blur"
-              blurDataURL={placeholderImage}
+              blurDataURL={lqip[0]}
             />
             {images.length > 1 ? (
               <div className="card-image second-image absolute opacity-0 hover:opacity-100">
@@ -46,7 +46,7 @@ export default function Card({
                   height={500}
                   className="object-cover h-full rounded-sm"
                   placeholder="blur"
-                  blurDataURL={placeholderImage}
+                  blurDataURL={lqip[1]}
                 />
               </div>
             ) : null}

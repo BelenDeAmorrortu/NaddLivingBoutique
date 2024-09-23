@@ -1,9 +1,10 @@
 interface Props {
   color: "white" | "black";
   size: "large" | "medium" | "small" | "xsmall";
+  tailwindStyles?: string;
 }
 
-export default function Loader({ color, size }: Props) {
+export default function Loader({ color, size, tailwindStyles }: Props) {
   return (
     <div
       className={"loader rounded-[100%] relative "
@@ -16,7 +17,8 @@ export default function Loader({ color, size }: Props) {
             : size === "xsmall"
             ? " h-5 w-5 p-[2px]"
             : " h-10 w-10 p-[3px]"
-        )}
+        )
+        .concat(tailwindStyles ? " " + tailwindStyles : "")}
     >
       <div
         className={"w-full h-full rounded-[100%]".concat(

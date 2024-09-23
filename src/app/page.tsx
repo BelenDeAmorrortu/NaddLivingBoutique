@@ -5,13 +5,15 @@ import {
   OurShop,
   ContactForm,
 } from "@/components/index";
+import { getSpotlight } from "@/requests";
 
-export default function Home() {
+export default async function Home() {
+  const spotlight = await getSpotlight();
   return (
     <>
       <Header />
       <Banner />
-      <Spotlight />
+      <Spotlight products={spotlight} />
       <OurShop />
       <ContactForm />
     </>

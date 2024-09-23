@@ -1,13 +1,15 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import FabricDescription from "./FabricDescription";
-import { Image as Img, Skeleton, Spin } from "antd";
+import { Image as Img, Spin } from "antd";
 import { Color, Fabric } from "@/types/Fabric";
 import { HiOutlineSwatch } from "react-icons/hi2";
-import { placeholderBlurParams } from "@/constants";
-import Loader from "./Loader";
 
-export default function FabricsNavigator({ fabrics }: { fabrics: Fabric[] }) {
+interface IProps {
+  fabrics: Fabric[];
+}
+
+export default function FabricsNavigator({ fabrics }: IProps) {
   const [preview, setPreview] = useState<boolean>(false);
   const [selectedFabricColors, setSelectedFabricColors] = useState<Color[]>([]);
   const [activeColorIndex, setActiveColorIndex] = useState<any>(undefined);

@@ -18,11 +18,7 @@ export default function Highlight({
 }: IProps) {
   const ref = useRef(null);
 
-  const isInView = useInView(ref, { once: false });
-  useEffect(() => {
-    console.log("ref", ref.current);
-    console.log({ isInView });
-  }, []);
+  const isInView = useInView(ref, { once: true });
   return (
     <span
       ref={ref}

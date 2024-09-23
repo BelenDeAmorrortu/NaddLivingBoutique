@@ -2,7 +2,7 @@ import axios from "axios";
 export const storefront = async (query: string, variables = {}) => {
   try {
     const { data } = await axios.post(
-      process.env.NEXT_PUBLIC_API_URL ?? "",
+      process.env.NEXT_PUBLIC_SHOPIFY_API_URL ?? "",
       JSON.stringify({ query, variables }),
       {
         method: "POST",

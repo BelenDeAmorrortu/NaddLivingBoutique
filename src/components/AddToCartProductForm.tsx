@@ -18,7 +18,7 @@ export default function AddToCartProductForm({ product }: IProps) {
   const variant = Form.useWatch("variant", form);
   const amount = Form.useWatch("amount", form);
 
-  const { addToCart } = useCart();
+  const { addToCart, loading } = useCart();
 
   const initialValues = {
     variant: product?.variants?.find((v: Variant) => v.price === product.price)
@@ -112,7 +112,7 @@ export default function AddToCartProductForm({ product }: IProps) {
           </h6>
         </div>
       </div>
-      <Button onClick={handleSubmit} solid>
+      <Button onClick={handleSubmit} solid loading={loading}>
         <BsBagFill
           className={`w-4 h-4 mr-3 fill-white group-hover/button:fill-black transition-colors duration-75`}
         />

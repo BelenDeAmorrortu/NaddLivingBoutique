@@ -2,6 +2,7 @@ export interface Color {
   id: string;
   nombre: string;
   foto: string;
+  lqip: string;
   tipo_tela: string;
 }
 

@@ -201,7 +201,9 @@ const NavItemsSm = () => {
                   }`}
                 >
                   {!item.categories ? (
-                    <Link href={item.href}>{item.name}</Link>
+                    <Link className="w-full h-full" href={item.href}>
+                      {item.name}
+                    </Link>
                   ) : (
                     <>
                       <span
@@ -220,7 +222,7 @@ const NavItemsSm = () => {
                           <li className="nav-item" key={i}>
                             <Link
                               href={p.href}
-                              className="capitalize opacity-95 font-regular"
+                              className="capitalize opacity-95 font-regular w-full h-full"
                             >
                               {p.name}
                             </Link>

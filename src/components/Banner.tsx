@@ -15,7 +15,7 @@ export default function Banner() {
           className=" brightness-110 w-[78%]"
         />
       </div>
-      <div className="w-[85%] md:w-[60%]">
+      <div className="w-full md:w-[60%]">
         <h3 className="title-2 text-center md:text-left">
           Nuestro compromiso, la <span className="text-red">excelencia</span>.
         </h3>
