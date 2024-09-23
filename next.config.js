@@ -2,6 +2,7 @@
 
 const nextConfig = {
   output: "standalone",
+  staticPageGenerationTimeout: 120,
   images: {
     dangerouslyAllowSVG: true,
     remotePatterns: [
