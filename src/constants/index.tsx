@@ -1,5 +1,7 @@
 import { Almohadones2, Sillon, Sofas, Todo } from "@/assets/images";
 
+export const domain = process.env.NEXT_PUBLIC_PAGE_DOMAIN;
+
 export const navigation: Record<string, string> = {
   home: "/",
   productos: "/productos",

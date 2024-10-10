@@ -5,7 +5,7 @@ import { getProducts as getShopifyProducts } from "../../requests/index";
 import { Product } from "../../types/Product";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { navigation } from "@/constants";
+import { domain, navigation } from "@/constants";
 import { BiErrorCircle } from "react-icons/bi";
 import { CascadeReveal } from "@/transitions";
 import useFetch from "@/hooks/useFetch";
@@ -14,6 +14,7 @@ import { CiCreditCard1 } from "react-icons/ci";
 import { RiBankFill } from "react-icons/ri";
 import { IoCashOutline } from "react-icons/io5";
 import { TbSofaOff } from "react-icons/tb";
+import { Helmet } from "react-helmet";
 
 export default function Page() {
   const router = useRouter();
@@ -105,6 +106,11 @@ export default function Page() {
 
   return (
     <div className="min-h-[60vh] py-36 w-full flex flex-col items-center md:flex-row md:justify-between px-10 md:items-start">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Productos | NADD Living Boutique</title>
+        <link rel="canonical" href={`${domain}${navigation.productos}`} />
+      </Helmet>
       <div className="flex flex-col w-[85vw] sm:w-[70vw] mb-20 md:w-60 md:mb-0 md:sticky md:top-36">
         <Filters
           filters={filters}

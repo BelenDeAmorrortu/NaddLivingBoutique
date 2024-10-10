@@ -20,3 +20,4 @@ export { default as CartItem } from "./CartItem";
 export { default as CustomSelect } from "./CustomSelect";
 export { default as CustomNumberInput } from "./CustomNumberInput";
 export { default as AddToCartProductForm } from "./AddToCartProductForm";
+export { default as Collapse } from "./Collapse";

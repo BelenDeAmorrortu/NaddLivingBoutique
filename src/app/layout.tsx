@@ -2,6 +2,7 @@ import { Montserrat, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { BackToTop, Footer, Nav, Whatsapp } from "@/components";
 import { CartProvider } from "@/contexts/CartContext";
+import { domain } from "@/constants";
 
 const montserrat = Montserrat({
   weight: ["300", "400", "600", "700"],
@@ -20,7 +21,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://naddlivingboutique.com"),
+  metadataBase: new URL(domain ?? ""),
   title: {
     default: "NADD Living Boutique",
     template: `%s | NADD Living Boutique`,
@@ -32,6 +33,9 @@ export const metadata = {
       template: `%s | NADD Living Boutique`,
     },
     description: "Fabricantes de muebles y sillones de primera calidad",
+  },
+  alternates: {
+    canonical: domain,
   },
 };
 
