@@ -39,7 +39,7 @@ export default async function page({ params }: Props) {
       <div className="description flex flex-col md:flex-row h-fit mb-10 gap-10 justify-between items-center">
         {/* check styles from global.css when modifying this dimensions*/}
         <div className="mb-12 w-[95vw] sm:mb-0 md:w-[50vw] md:sticky md:top-36 min-[1243px]:w-[45vw] md:self-baseline">
-          <Carousel images={product.images} lqip={product.lqip} />
+          <Carousel images={product.images} lqip={product?.lqip ?? []} />
         </div>
         <div className="w-[90vw] md:w-[45vw] flex flex-col justify-center">
           <h1 className="title-3 text-red">{product.name}</h1>

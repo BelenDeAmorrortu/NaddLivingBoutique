@@ -2,7 +2,7 @@ import { storefront } from "@/app/api/(helpers)/storefront";
 import { queries } from "@/app/api/(helpers)/queries";
 import { getMinPrice } from "@/utils/getMinPrice";
 import { NextResponse } from "next/server";
-import { getLqip } from "@/app/api/(helpers)/getLqip";
+// import { getLqip } from "@/app/api/(helpers)/getLqip";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -25,13 +25,13 @@ export async function GET(request: Request) {
           : null,
     });
 
-    const imageUrls = data.products.edges.flatMap((p: any) =>
-      p.node.images.edges.slice(0, 2).map((i: any) => i.node.url)
-    );
+    // const imageUrls = data.products.edges.flatMap((p: any) =>
+    //   p.node.images.edges.slice(0, 2).map((i: any) => i.node.url)
+    // );
 
-    const lqip = await getLqip(imageUrls);
+    // const lqip = await getLqip(imageUrls);
 
-    let lqipIndex = 0;
+    // let lqipIndex = 0;
 
     const products = data.products.edges.map((p: any) => {
       const { title, id, handle, images, descriptionHtml, variants, tags } =
@@ -41,11 +41,11 @@ export async function GET(request: Request) {
         .slice(0, 2)
         .map((i: any) => i.node.url);
 
-      const productLqip = lqip.slice(
-        lqipIndex,
-        lqipIndex + productImages.length
-      );
-      lqipIndex += productImages.length;
+      // const productLqip = lqip.slice(
+      //   lqipIndex,
+      //   lqipIndex + productImages.length
+      // );
+      // lqipIndex += productImages.length;
 
       return {
         _id: id,
@@ -54,7 +54,7 @@ export async function GET(request: Request) {
         description: descriptionHtml,
         url: handle,
         name: title,
-        lqip: productLqip,
+        // lqip: productLqip,
         price: getMinPrice(variants.nodes),
       };
     });

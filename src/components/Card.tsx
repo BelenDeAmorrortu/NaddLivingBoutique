@@ -18,7 +18,7 @@ export default function Card({
   price,
   color,
 }: IProps) {
-  if (_id && name && category && url && images && lqip) {
+  if (_id && name && category && url && images) {
     return (
       <div
         key={_id}
@@ -35,7 +35,7 @@ export default function Card({
               height={500}
               className="object-cover h-full rounded-sm"
               placeholder="blur"
-              blurDataURL={lqip[0]}
+              blurDataURL={placeholderImage}
             />
             {images.length > 1 ? (
               <div className="card-image second-image absolute opacity-0 hover:opacity-100">
@@ -46,7 +46,7 @@ export default function Card({
                   height={500}
                   className="object-cover h-full rounded-sm"
                   placeholder="blur"
-                  blurDataURL={lqip[1]}
+                  blurDataURL={placeholderImage}
                 />
               </div>
             ) : null}

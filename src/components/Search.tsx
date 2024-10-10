@@ -3,7 +3,7 @@ import { getMetaobjects, getProducts } from "@/requests";
 import { Product } from "@/types/Product";
 import { Form, Input } from "antd";
 import React, { useEffect, useRef, useState } from "react";
-import { navigation } from "@/constants";
+import { navigation, placeholderImage } from "@/constants";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { IoClose } from "react-icons/io5";
 import Link from "next/link";
@@ -212,7 +212,7 @@ export default function Search({ visible, setSearchOpen }: IProps) {
                         <Image
                           src={i.images[0]}
                           placeholder={"blur"}
-                          blurDataURL={i.lqip[0]}
+                          blurDataURL={placeholderImage}
                           alt="Imagen producto"
                           className=" object-cover absolute w-full h-full"
                           fill

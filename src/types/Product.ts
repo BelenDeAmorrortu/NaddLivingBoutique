@@ -3,7 +3,7 @@ export type Product = {
   name: string;
   category: string[];
   url: string;
-  lqip: string[];
+  lqip?: string[];
   images: string[];
   description: string;
   price: string;
